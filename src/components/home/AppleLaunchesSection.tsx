@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, Sparkles, ChevronRight } from "lucide-react";
+import { MessageCircle, ChevronRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { createWhatsAppLink } from "@/utils/whatsapp";
 
@@ -21,10 +21,6 @@ export const AppleLaunchesSection: React.FC = () => {
       <Container size="large" className="space-y-8 sm:space-y-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#D2D2D7] text-xs font-semibold text-[#1D1D1F] shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#0071E3]" />
-            <span>Lançamentos Apple 2026 · Pré-Venda Oficial</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1D1D1F] font-display">
             A nova geração da Apple chegou.
           </h2>
