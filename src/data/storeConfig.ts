@@ -15,8 +15,8 @@ export const storeConfig = {
     googleMapsUrl: "https://maps.google.com/?q=R.+Santa+Ifig%C3%Aania,+361+-+Lj+24+-+Santa+Ifig%C3%Aania,+S%C3%A3o+Paulo+-+SP",
   },
   contact: {
-    whatsapp: "5511961053353",
-    whatsappFormatted: "(11) 96105-3353",
+    whatsapp: "5511970225652",
+    whatsappFormatted: "(11) 97022-5652",
     instagramHandle: "@mundoapple_delivery",
     instagramUrl: "https://www.instagram.com/mundoapple_delivery/",
     website: "https://mundoappledelivery.com",
