@@ -1,0 +1,2376 @@
+{
+  "brands": [
+    {
+      "id": "brand-apple",
+      "name": "Apple",
+      "slug": "apple",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    }
+  ],
+  "deviceModels": [
+    {
+      "id": "model-iphone-11",
+      "brandId": "brand-apple",
+      "name": "iPhone 11",
+      "slug": "iphone-11",
+      "family": "iPhone",
+      "generation": "11",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-11-pro",
+      "brandId": "brand-apple",
+      "name": "iPhone 11 Pro",
+      "slug": "iphone-11-pro",
+      "family": "iPhone",
+      "generation": "11",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-11-pro-max",
+      "brandId": "brand-apple",
+      "name": "iPhone 11 Pro Max",
+      "slug": "iphone-11-pro-max",
+      "family": "iPhone",
+      "generation": "11",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-12",
+      "brandId": "brand-apple",
+      "name": "iPhone 12",
+      "slug": "iphone-12",
+      "family": "iPhone",
+      "generation": "12",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-12-mini",
+      "brandId": "brand-apple",
+      "name": "iPhone 12 mini",
+      "slug": "iphone-12-mini",
+      "family": "iPhone",
+      "generation": "12",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-12-pro",
+      "brandId": "brand-apple",
+      "name": "iPhone 12 Pro",
+      "slug": "iphone-12-pro",
+      "family": "iPhone",
+      "generation": "12",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-12-pro-max",
+      "brandId": "brand-apple",
+      "name": "iPhone 12 Pro Max",
+      "slug": "iphone-12-pro-max",
+      "family": "iPhone",
+      "generation": "12",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-13",
+      "brandId": "brand-apple",
+      "name": "iPhone 13",
+      "slug": "iphone-13",
+      "family": "iPhone",
+      "generation": "13",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-13-mini",
+      "brandId": "brand-apple",
+      "name": "iPhone 13 mini",
+      "slug": "iphone-13-mini",
+      "family": "iPhone",
+      "generation": "13",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-13-pro",
+      "brandId": "brand-apple",
+      "name": "iPhone 13 Pro",
+      "slug": "iphone-13-pro",
+      "family": "iPhone",
+      "generation": "13",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-13-pro-max",
+      "brandId": "brand-apple",
+      "name": "iPhone 13 Pro Max",
+      "slug": "iphone-13-pro-max",
+      "family": "iPhone",
+      "generation": "13",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-14",
+      "brandId": "brand-apple",
+      "name": "iPhone 14",
+      "slug": "iphone-14",
+      "family": "iPhone",
+      "generation": "14",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-14-plus",
+      "brandId": "brand-apple",
+      "name": "iPhone 14 Plus",
+      "slug": "iphone-14-plus",
+      "family": "iPhone",
+      "generation": "14",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-14-pro",
+      "brandId": "brand-apple",
+      "name": "iPhone 14 Pro",
+      "slug": "iphone-14-pro",
+      "family": "iPhone",
+      "generation": "14",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-14-pro-max",
+      "brandId": "brand-apple",
+      "name": "iPhone 14 Pro Max",
+      "slug": "iphone-14-pro-max",
+      "family": "iPhone",
+      "generation": "14",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-15",
+      "brandId": "brand-apple",
+      "name": "iPhone 15",
+      "slug": "iphone-15",
+      "family": "iPhone",
+      "generation": "15",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-15-plus",
+      "brandId": "brand-apple",
+      "name": "iPhone 15 Plus",
+      "slug": "iphone-15-plus",
+      "family": "iPhone",
+      "generation": "15",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-15-pro",
+      "brandId": "brand-apple",
+      "name": "iPhone 15 Pro",
+      "slug": "iphone-15-pro",
+      "family": "iPhone",
+      "generation": "15",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-15-pro-max",
+      "brandId": "brand-apple",
+      "name": "iPhone 15 Pro Max",
+      "slug": "iphone-15-pro-max",
+      "family": "iPhone",
+      "generation": "15",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-16",
+      "brandId": "brand-apple",
+      "name": "iPhone 16",
+      "slug": "iphone-16",
+      "family": "iPhone",
+      "generation": "16",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-16e",
+      "brandId": "brand-apple",
+      "name": "iPhone 16e",
+      "slug": "iphone-16e",
+      "family": "iPhone",
+      "generation": "16",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-16-plus",
+      "brandId": "brand-apple",
+      "name": "iPhone 16 Plus",
+      "slug": "iphone-16-plus",
+      "family": "iPhone",
+      "generation": "16",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-16-pro",
+      "brandId": "brand-apple",
+      "name": "iPhone 16 Pro",
+      "slug": "iphone-16-pro",
+      "family": "iPhone",
+      "generation": "16",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-16-pro-max",
+      "brandId": "brand-apple",
+      "name": "iPhone 16 Pro Max",
+      "slug": "iphone-16-pro-max",
+      "family": "iPhone",
+      "generation": "16",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-17",
+      "brandId": "brand-apple",
+      "name": "iPhone 17",
+      "slug": "iphone-17",
+      "family": "iPhone",
+      "generation": "17",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-17-air",
+      "brandId": "brand-apple",
+      "name": "iPhone 17 Air",
+      "slug": "iphone-17-air",
+      "family": "iPhone",
+      "generation": "17",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-17-pro",
+      "brandId": "brand-apple",
+      "name": "iPhone 17 Pro",
+      "slug": "iphone-17-pro",
+      "family": "iPhone",
+      "generation": "17",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "model-iphone-17-pro-max",
+      "brandId": "brand-apple",
+      "name": "iPhone 17 Pro Max",
+      "slug": "iphone-17-pro-max",
+      "family": "iPhone",
+      "generation": "17",
+      "active": true,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    }
+  ],
+  "storageOptions": [
+    {
+      "id": "storage-64gb",
+      "capacityGb": 64,
+      "displayName": "64GB",
+      "createdAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "storage-128gb",
+      "capacityGb": 128,
+      "displayName": "128GB",
+      "createdAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "storage-256gb",
+      "capacityGb": 256,
+      "displayName": "256GB",
+      "createdAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "storage-512gb",
+      "capacityGb": 512,
+      "displayName": "512GB",
+      "createdAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "storage-1024gb",
+      "capacityGb": 1024,
+      "displayName": "1TB",
+      "createdAt": "2026-08-18T17:10:54.798Z"
+    },
+    {
+      "id": "storage-2048gb",
+      "capacityGb": 2048,
+      "displayName": "2TB",
+      "createdAt": "2026-08-18T17:10:54.798Z"
+    }
+  ],
+  "deviceVariants": [
+    {
+      "id": "variant-model-iphone-11-storage-64gb",
+      "deviceModelId": "model-iphone-11",
+      "storageOptionId": "storage-64gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-11-storage-128gb",
+      "deviceModelId": "model-iphone-11",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-11-storage-256gb",
+      "deviceModelId": "model-iphone-11",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-11-pro-storage-64gb",
+      "deviceModelId": "model-iphone-11-pro",
+      "storageOptionId": "storage-64gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-11-pro-max-storage-128gb",
+      "deviceModelId": "model-iphone-11-pro-max",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-storage-64gb",
+      "deviceModelId": "model-iphone-12",
+      "storageOptionId": "storage-64gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-storage-128gb",
+      "deviceModelId": "model-iphone-12",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-storage-256gb",
+      "deviceModelId": "model-iphone-12",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-mini-storage-128gb",
+      "deviceModelId": "model-iphone-12-mini",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-mini-storage-256gb",
+      "deviceModelId": "model-iphone-12-mini",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-pro-storage-128gb",
+      "deviceModelId": "model-iphone-12-pro",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-pro-storage-256gb",
+      "deviceModelId": "model-iphone-12-pro",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-pro-storage-512gb",
+      "deviceModelId": "model-iphone-12-pro",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-pro-max-storage-128gb",
+      "deviceModelId": "model-iphone-12-pro-max",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-12-pro-max-storage-256gb",
+      "deviceModelId": "model-iphone-12-pro-max",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-storage-128gb",
+      "deviceModelId": "model-iphone-13",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-storage-256gb",
+      "deviceModelId": "model-iphone-13",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-mini-storage-128gb",
+      "deviceModelId": "model-iphone-13-mini",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-pro-storage-128gb",
+      "deviceModelId": "model-iphone-13-pro",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-pro-storage-256gb",
+      "deviceModelId": "model-iphone-13-pro",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-pro-storage-512gb",
+      "deviceModelId": "model-iphone-13-pro",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-pro-storage-1024gb",
+      "deviceModelId": "model-iphone-13-pro",
+      "storageOptionId": "storage-1024gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-pro-max-storage-128gb",
+      "deviceModelId": "model-iphone-13-pro-max",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-pro-max-storage-256gb",
+      "deviceModelId": "model-iphone-13-pro-max",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-pro-max-storage-512gb",
+      "deviceModelId": "model-iphone-13-pro-max",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-13-pro-max-storage-1024gb",
+      "deviceModelId": "model-iphone-13-pro-max",
+      "storageOptionId": "storage-1024gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-storage-128gb",
+      "deviceModelId": "model-iphone-14",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-storage-256gb",
+      "deviceModelId": "model-iphone-14",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-plus-storage-128gb",
+      "deviceModelId": "model-iphone-14-plus",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-plus-storage-256gb",
+      "deviceModelId": "model-iphone-14-plus",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-pro-storage-128gb",
+      "deviceModelId": "model-iphone-14-pro",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-pro-storage-256gb",
+      "deviceModelId": "model-iphone-14-pro",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-pro-storage-512gb",
+      "deviceModelId": "model-iphone-14-pro",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-pro-storage-1024gb",
+      "deviceModelId": "model-iphone-14-pro",
+      "storageOptionId": "storage-1024gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-pro-max-storage-128gb",
+      "deviceModelId": "model-iphone-14-pro-max",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-pro-max-storage-256gb",
+      "deviceModelId": "model-iphone-14-pro-max",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-pro-max-storage-512gb",
+      "deviceModelId": "model-iphone-14-pro-max",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-14-pro-max-storage-1024gb",
+      "deviceModelId": "model-iphone-14-pro-max",
+      "storageOptionId": "storage-1024gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-storage-128gb",
+      "deviceModelId": "model-iphone-15",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-storage-256gb",
+      "deviceModelId": "model-iphone-15",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-storage-512gb",
+      "deviceModelId": "model-iphone-15",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-plus-storage-128gb",
+      "deviceModelId": "model-iphone-15-plus",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-plus-storage-256gb",
+      "deviceModelId": "model-iphone-15-plus",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-plus-storage-512gb",
+      "deviceModelId": "model-iphone-15-plus",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-pro-storage-128gb",
+      "deviceModelId": "model-iphone-15-pro",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-pro-storage-256gb",
+      "deviceModelId": "model-iphone-15-pro",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-pro-storage-512gb",
+      "deviceModelId": "model-iphone-15-pro",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-pro-max-storage-256gb",
+      "deviceModelId": "model-iphone-15-pro-max",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-pro-max-storage-512gb",
+      "deviceModelId": "model-iphone-15-pro-max",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-15-pro-max-storage-1024gb",
+      "deviceModelId": "model-iphone-15-pro-max",
+      "storageOptionId": "storage-1024gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-storage-128gb",
+      "deviceModelId": "model-iphone-16",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-storage-256gb",
+      "deviceModelId": "model-iphone-16",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-storage-512gb",
+      "deviceModelId": "model-iphone-16",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16e-storage-128gb",
+      "deviceModelId": "model-iphone-16e",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-plus-storage-128gb",
+      "deviceModelId": "model-iphone-16-plus",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-plus-storage-256gb",
+      "deviceModelId": "model-iphone-16-plus",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-pro-storage-128gb",
+      "deviceModelId": "model-iphone-16-pro",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-pro-storage-256gb",
+      "deviceModelId": "model-iphone-16-pro",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-pro-storage-512gb",
+      "deviceModelId": "model-iphone-16-pro",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-pro-storage-1024gb",
+      "deviceModelId": "model-iphone-16-pro",
+      "storageOptionId": "storage-1024gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-pro-max-storage-128gb",
+      "deviceModelId": "model-iphone-16-pro-max",
+      "storageOptionId": "storage-128gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-pro-max-storage-256gb",
+      "deviceModelId": "model-iphone-16-pro-max",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-pro-max-storage-512gb",
+      "deviceModelId": "model-iphone-16-pro-max",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-16-pro-max-storage-1024gb",
+      "deviceModelId": "model-iphone-16-pro-max",
+      "storageOptionId": "storage-1024gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-17-storage-256gb",
+      "deviceModelId": "model-iphone-17",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-17-air-storage-256gb",
+      "deviceModelId": "model-iphone-17-air",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-17-pro-storage-256gb",
+      "deviceModelId": "model-iphone-17-pro",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-17-pro-storage-512gb",
+      "deviceModelId": "model-iphone-17-pro",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-17-pro-max-storage-256gb",
+      "deviceModelId": "model-iphone-17-pro-max",
+      "storageOptionId": "storage-256gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-17-pro-max-storage-512gb",
+      "deviceModelId": "model-iphone-17-pro-max",
+      "storageOptionId": "storage-512gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-17-pro-max-storage-1024gb",
+      "deviceModelId": "model-iphone-17-pro-max",
+      "storageOptionId": "storage-1024gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "variant-model-iphone-17-pro-max-storage-2048gb",
+      "deviceModelId": "model-iphone-17-pro-max",
+      "storageOptionId": "storage-2048gb",
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    }
+  ],
+  "priceBooks": [
+    {
+      "id": "pb-main",
+      "name": "Mundo Apple Principal",
+      "active": true,
+      "priority": 100,
+      "createdAt": "2026-08-18T17:10:54.798Z",
+      "updatedAt": "2026-08-18T17:10:54.798Z"
+    }
+  ],
+  "purchasePrices": [
+    {
+      "id": "price-pb-main-variant-model-iphone-11-storage-64gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-11-storage-64gb",
+      "basePrice": 510,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-11-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-11-storage-128gb",
+      "basePrice": 700,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-11-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-11-storage-256gb",
+      "basePrice": 799,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-11-pro-storage-64gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-11-pro-storage-64gb",
+      "basePrice": 850,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-11-pro-max-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-11-pro-max-storage-128gb",
+      "basePrice": 1145,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-storage-64gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-storage-64gb",
+      "basePrice": 720,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-storage-128gb",
+      "basePrice": 830,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-storage-256gb",
+      "basePrice": 999,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-mini-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-mini-storage-128gb",
+      "basePrice": 650,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-mini-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-mini-storage-256gb",
+      "basePrice": 699,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-pro-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-pro-storage-128gb",
+      "basePrice": 1145,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-pro-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-pro-storage-256gb",
+      "basePrice": 1280,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-pro-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-pro-storage-512gb",
+      "basePrice": 1330,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-pro-max-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-pro-max-storage-128gb",
+      "basePrice": 1360,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-12-pro-max-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-12-pro-max-storage-256gb",
+      "basePrice": 1550,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-storage-128gb",
+      "basePrice": 1050,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-storage-256gb",
+      "basePrice": 1299,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-mini-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-mini-storage-128gb",
+      "basePrice": 850,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-pro-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-pro-storage-128gb",
+      "basePrice": 1400,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-pro-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-pro-storage-256gb",
+      "basePrice": 1600,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-pro-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-pro-storage-512gb",
+      "basePrice": 2000,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-pro-storage-1024gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-pro-storage-1024gb",
+      "basePrice": 1950,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-pro-max-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-pro-max-storage-128gb",
+      "basePrice": 1880,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-pro-max-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-pro-max-storage-256gb",
+      "basePrice": 1600,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-pro-max-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-pro-max-storage-512gb",
+      "basePrice": 2400,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-13-pro-max-storage-1024gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-13-pro-max-storage-1024gb",
+      "basePrice": 2300,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-storage-128gb",
+      "basePrice": 1230,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-storage-256gb",
+      "basePrice": 1450,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-plus-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-plus-storage-128gb",
+      "basePrice": 1400,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-plus-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-plus-storage-256gb",
+      "basePrice": 1600,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-pro-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-pro-storage-128gb",
+      "basePrice": 2050,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-pro-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-pro-storage-256gb",
+      "basePrice": 2100,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-pro-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-pro-storage-512gb",
+      "basePrice": 2500,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-pro-storage-1024gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-pro-storage-1024gb",
+      "basePrice": 3050,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-pro-max-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-pro-max-storage-128gb",
+      "basePrice": 2300,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-pro-max-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-pro-max-storage-256gb",
+      "basePrice": 2530,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-pro-max-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-pro-max-storage-512gb",
+      "basePrice": 2900,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-14-pro-max-storage-1024gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-14-pro-max-storage-1024gb",
+      "basePrice": 3050,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-storage-128gb",
+      "basePrice": 1820,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-storage-256gb",
+      "basePrice": 2000,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-storage-512gb",
+      "basePrice": 2390,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-plus-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-plus-storage-128gb",
+      "basePrice": 2000,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-plus-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-plus-storage-256gb",
+      "basePrice": 2200,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-plus-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-plus-storage-512gb",
+      "basePrice": 2350,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-pro-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-pro-storage-128gb",
+      "basePrice": 2450,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-pro-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-pro-storage-256gb",
+      "basePrice": 2745,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-pro-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-pro-storage-512gb",
+      "basePrice": 3000,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-pro-max-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-pro-max-storage-256gb",
+      "basePrice": 3000,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-pro-max-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-pro-max-storage-512gb",
+      "basePrice": 3390,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-15-pro-max-storage-1024gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-15-pro-max-storage-1024gb",
+      "basePrice": 3500,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-storage-128gb",
+      "basePrice": 2580,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-storage-256gb",
+      "basePrice": 3250,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-storage-512gb",
+      "basePrice": 3450,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16e-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16e-storage-128gb",
+      "basePrice": 1890,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-plus-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-plus-storage-128gb",
+      "basePrice": 2950,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-plus-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-plus-storage-256gb",
+      "basePrice": 3450,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-pro-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-pro-storage-128gb",
+      "basePrice": 3100,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-pro-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-pro-storage-256gb",
+      "basePrice": 3700,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-pro-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-pro-storage-512gb",
+      "basePrice": 3920,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-pro-storage-1024gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-pro-storage-1024gb",
+      "basePrice": 4000,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-pro-max-storage-128gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-pro-max-storage-128gb",
+      "basePrice": 4250,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-pro-max-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-pro-max-storage-256gb",
+      "basePrice": 3950,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-pro-max-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-pro-max-storage-512gb",
+      "basePrice": 4480,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-16-pro-max-storage-1024gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-16-pro-max-storage-1024gb",
+      "basePrice": 4150,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-17-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-17-storage-256gb",
+      "basePrice": 3600,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-17-air-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-17-air-storage-256gb",
+      "basePrice": 4200,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-17-pro-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-17-pro-storage-256gb",
+      "basePrice": 5150,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-17-pro-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-17-pro-storage-512gb",
+      "basePrice": 6150,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-17-pro-max-storage-256gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-17-pro-max-storage-256gb",
+      "basePrice": 5780,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-17-pro-max-storage-512gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-17-pro-max-storage-512gb",
+      "basePrice": 6550,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-17-pro-max-storage-1024gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-17-pro-max-storage-1024gb",
+      "basePrice": 8200,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "price-pb-main-variant-model-iphone-17-pro-max-storage-2048gb",
+      "priceBookId": "pb-main",
+      "deviceVariantId": "variant-model-iphone-17-pro-max-storage-2048gb",
+      "basePrice": 8600,
+      "minimumPrice": 0,
+      "active": true,
+      "effectiveFrom": "2026-01-01T00:00:00.000Z",
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    }
+  ],
+  "deflators": [
+    {
+      "id": "def-screen-perfect",
+      "code": "SCREEN_PERFECT",
+      "name": "Tela Perfeita",
+      "category": "TELA",
+      "description": "Sem marcas ou riscos.",
+      "type": "PERCENTAGE",
+      "value": 0,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-screen-light-scratches",
+      "code": "SCREEN_LIGHT_SCRATCHES",
+      "name": "Tela com riscos leves",
+      "category": "TELA",
+      "description": "Pequenos riscos visíveis.",
+      "type": "PERCENTAGE",
+      "value": 3,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-screen-heavy-scratches",
+      "code": "SCREEN_HEAVY_SCRATCHES",
+      "name": "Tela com riscos fortes",
+      "category": "TELA",
+      "description": "Riscos profundos.",
+      "type": "PERCENTAGE",
+      "value": 7,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-screen-cracked",
+      "code": "SCREEN_CRACKED",
+      "name": "Tela trincada com imagem e touch funcionando",
+      "category": "TELA",
+      "description": "Trincos superficiais.",
+      "type": "PERCENTAGE",
+      "value": 18,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-screen-heavily-broken",
+      "code": "SCREEN_HEAVILY_BROKEN",
+      "name": "Tela muito quebrada",
+      "category": "TELA",
+      "description": "Vidro frontal estilhaçado.",
+      "type": "PERCENTAGE",
+      "value": 22,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-screen-spots",
+      "code": "SCREEN_SPOTS",
+      "name": "Tela com manchas",
+      "category": "TELA",
+      "description": "Manchas pretas ou amarelas.",
+      "type": "PERCENTAGE",
+      "value": 27,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-screen-lines",
+      "code": "SCREEN_LINES",
+      "name": "Tela com linhas",
+      "category": "TELA",
+      "description": "Linhas verdes, brancas ou coloridas.",
+      "type": "PERCENTAGE",
+      "value": 28,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-screen-touch-failure",
+      "code": "SCREEN_TOUCH_FAILURE",
+      "name": "Tela com falha no touch",
+      "category": "TELA",
+      "description": "Zonas mortas ou toque fantasma.",
+      "type": "PERCENTAGE",
+      "value": 28,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-screen-no-image",
+      "code": "SCREEN_NO_IMAGE",
+      "name": "Tela sem imagem",
+      "category": "TELA",
+      "description": "Display apagado.",
+      "type": "PERCENTAGE",
+      "value": 32,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-body-light-marks",
+      "code": "BODY_LIGHT_MARKS",
+      "name": "Carcaça Impecável/Marcas leves",
+      "category": "BODY",
+      "description": "Sem marcas graves.",
+      "type": "PERCENTAGE",
+      "value": 0,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-body-heavy-scratches",
+      "code": "BODY_HEAVY_SCRATCHES",
+      "name": "Carcaça com riscos fortes",
+      "category": "BODY",
+      "description": "Riscos profundos nas laterais.",
+      "type": "PERCENTAGE",
+      "value": 5,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-body-dented",
+      "code": "BODY_DENTED",
+      "name": "Carcaça com amassados",
+      "category": "BODY",
+      "description": "Pequenos amassados nos cantos.",
+      "type": "PERCENTAGE",
+      "value": 8,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-back-glass-cracked",
+      "code": "BACK_GLASS_CRACKED",
+      "name": "Vidro traseiro trincado",
+      "category": "BODY",
+      "description": "Fissuras na tampa traseira.",
+      "type": "PERCENTAGE",
+      "value": 9,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-back-glass-broken",
+      "code": "BACK_GLASS_BROKEN",
+      "name": "Vidro traseiro quebrado",
+      "category": "BODY",
+      "description": "Vidro traseiro quebrado.",
+      "type": "PERCENTAGE",
+      "value": 12,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-body-severely-damaged",
+      "code": "BODY_SEVERELY_DAMAGED",
+      "name": "Carcaça muito danificada",
+      "category": "BODY",
+      "description": "Estrutura torta ou quebras graves.",
+      "type": "PERCENTAGE",
+      "value": 18,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-battery-90-plus",
+      "code": "BATTERY_90_PLUS",
+      "name": "Saúde 90% ou mais",
+      "category": "BATTERY",
+      "description": "Bateria excelente.",
+      "type": "FIXED",
+      "value": 0,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-battery-85-89",
+      "code": "BATTERY_85_89",
+      "name": "Saúde 85% a 89%",
+      "category": "BATTERY",
+      "description": "Bateria boa.",
+      "type": "FIXED",
+      "value": 0,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-battery-80-84",
+      "code": "BATTERY_80_84",
+      "name": "Saúde 80% a 84%",
+      "category": "BATTERY",
+      "description": "Bateria regular.",
+      "type": "FIXED",
+      "value": 100,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-battery-75-79",
+      "code": "BATTERY_75_79",
+      "name": "Saúde 75% a 79%",
+      "category": "BATTERY",
+      "description": "Bateria fraca.",
+      "type": "FIXED",
+      "value": 250,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-battery-below-75",
+      "code": "BATTERY_BELOW_75",
+      "name": "Saúde abaixo de 75%",
+      "category": "BATTERY",
+      "description": "Bateria em manutenção.",
+      "type": "FIXED",
+      "value": 300,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-battery-service",
+      "code": "BATTERY_SERVICE_WARNING",
+      "name": "Aviso de manutenção de bateria",
+      "category": "BATTERY",
+      "description": "Aviso de manutenção nas configurações.",
+      "type": "FIXED",
+      "value": 300,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-battery-unknown",
+      "code": "BATTERY_UNKNOWN_PART",
+      "name": "Aviso de peça desconhecida na bateria",
+      "category": "BATTERY",
+      "description": "Bateria não original ou sem chip reconhecido.",
+      "type": "FIXED",
+      "value": 350,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-face-id-working",
+      "code": "FACE_ID_WORKING",
+      "name": "Face ID funcionando",
+      "category": "BIOMETRICS",
+      "description": "Desbloqueio normal.",
+      "type": "PERCENTAGE",
+      "value": 0,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-face-id-fail",
+      "code": "FACE_ID_NOT_WORKING",
+      "name": "Face ID não funciona",
+      "category": "BIOMETRICS",
+      "description": "Sensor inativo.",
+      "type": "PERCENTAGE",
+      "value": 18,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-face-id-unknown",
+      "code": "FACE_ID_UNKNOWN",
+      "name": "Face ID não sei",
+      "category": "BIOMETRICS",
+      "description": "Necessita verificação presencial.",
+      "type": "PERCENTAGE",
+      "value": 0,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-camera-lens-light",
+      "code": "CAMERA_LENS_LIGHT_SCRATCH",
+      "name": "Lente da câmera com risco leve",
+      "category": "CAMERA",
+      "description": "Riscos superficiais nas lentes.",
+      "type": "PERCENTAGE",
+      "value": 3,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-camera-lens-broken",
+      "code": "CAMERA_LENS_BROKEN",
+      "name": "Vidro da câmera quebrado",
+      "category": "CAMERA",
+      "description": "Tampa da câmera quebrada.",
+      "type": "PERCENTAGE",
+      "value": 6,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-camera-stabilization",
+      "code": "CAMERA_FOCUS_STABILIZATION",
+      "name": "Problema de foco / estabilização",
+      "category": "CAMERA",
+      "description": "Câmera trêmula ou fora de foco.",
+      "type": "PERCENTAGE",
+      "value": 10,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-camera-one-fail",
+      "code": "CAMERA_ONE_NOT_WORKING",
+      "name": "Uma das câmeras não funciona",
+      "category": "CAMERA",
+      "description": "Lente traseira ou frontal inativa.",
+      "type": "PERCENTAGE",
+      "value": 15,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-camera-system-fail",
+      "code": "CAMERA_SYSTEM_SEVERE_FAILURE",
+      "name": "Falha grave no sistema de câmeras",
+      "category": "CAMERA",
+      "description": "Nenhuma câmera abre.",
+      "type": "PERCENTAGE",
+      "value": 20,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-speaker-fail",
+      "code": "SPEAKER_PROBLEM",
+      "name": "Problema no alto-falante",
+      "category": "AUDIO",
+      "description": "Som baixo, rouco ou inativo.",
+      "type": "PERCENTAGE",
+      "value": 5,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-microphone-fail",
+      "code": "MICROPHONE_PROBLEM",
+      "name": "Problema no microfone",
+      "category": "AUDIO",
+      "description": "Sem captação de áudio.",
+      "type": "PERCENTAGE",
+      "value": 6,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-charge-intermittent",
+      "code": "CHARGING_PORT_INTERMITTENT",
+      "name": "Conector com mau contato",
+      "category": "CHARGE",
+      "description": "Falhas intermitentes ao carregar.",
+      "type": "PERCENTAGE",
+      "value": 7,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-charge-fail",
+      "code": "CHARGING_PORT_NOT_WORKING",
+      "name": "Conector não funciona",
+      "category": "CHARGE",
+      "description": "Não recebe carga.",
+      "type": "PERCENTAGE",
+      "value": 12,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-bluetooth-fail",
+      "code": "BLUETOOTH_PROBLEM",
+      "name": "Problema no Bluetooth",
+      "category": "CONNECT",
+      "description": "Bluetooth não ativa ou não conecta.",
+      "type": "PERCENTAGE",
+      "value": 8,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-wifi-fail",
+      "code": "WIFI_PROBLEM",
+      "name": "Problema no Wi-Fi",
+      "category": "CONNECT",
+      "description": "Sinal de Wi-Fi fraco ou inativo.",
+      "type": "PERCENTAGE",
+      "value": 12,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-gps-fail",
+      "code": "GPS_LOCATION_PROBLEM",
+      "name": "Problema no GPS",
+      "category": "CONNECT",
+      "description": "Localização imprecisa.",
+      "type": "PERCENTAGE",
+      "value": 8,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-cellular-fail",
+      "code": "CELLULAR_SIGNAL_PROBLEM",
+      "name": "Problema de sinal da operadora",
+      "category": "CONNECT",
+      "description": "Não reconhece chip ou sem sinal.",
+      "type": "PERCENTAGE",
+      "value": 20,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-button-fail",
+      "code": "BUTTON_PROBLEM",
+      "name": "Problema nos botões",
+      "category": "COMPONENTS",
+      "description": "Botões de volume ou energia travados.",
+      "type": "PERCENTAGE",
+      "value": 4,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-vibe-fail",
+      "code": "TAPTIC_VIBRATION_PROBLEM",
+      "name": "Problema no motor de vibração",
+      "category": "COMPONENTS",
+      "description": "Taptic Engine inativo.",
+      "type": "PERCENTAGE",
+      "value": 4,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-sensor-fail",
+      "code": "SENSOR_PROBLEM",
+      "name": "Problema de sensor",
+      "category": "COMPONENTS",
+      "description": "Giroscópio ou proximidade com falha.",
+      "type": "PERCENTAGE",
+      "value": 6,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-replaced-bat-ok",
+      "code": "BATTERY_ORIGINAL_RECOGNIZED",
+      "name": "Bateria original reconhecida",
+      "category": "REPLACED",
+      "description": "Substituída por original Apple.",
+      "type": "PERCENTAGE",
+      "value": 0,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-replaced-scr-ok",
+      "code": "SCREEN_ORIGINAL_RECOGNIZED",
+      "name": "Tela original reconhecida",
+      "category": "REPLACED",
+      "description": "Substituída por original Apple.",
+      "type": "PERCENTAGE",
+      "value": 2,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-replaced-cam-ok",
+      "code": "CAMERA_ORIGINAL_RECOGNIZED",
+      "name": "Câmera original reconhecida",
+      "category": "REPLACED",
+      "description": "Substituída por original Apple.",
+      "type": "PERCENTAGE",
+      "value": 2,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-replaced-scr-fake",
+      "code": "SCREEN_NON_ORIGINAL",
+      "name": "Tela não original",
+      "category": "REPLACED",
+      "description": "Display paralelo sem True Tone.",
+      "type": "PERCENTAGE",
+      "value": 12,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-replaced-bat-fake",
+      "code": "BATTERY_NON_ORIGINAL",
+      "name": "Bateria não original",
+      "category": "REPLACED",
+      "description": "Bateria paralela instalada.",
+      "type": "PERCENTAGE",
+      "value": 6,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-replaced-cam-fake",
+      "code": "CAMERA_NON_ORIGINAL",
+      "name": "Câmera não original",
+      "category": "REPLACED",
+      "description": "Módulo de câmera paralelo.",
+      "type": "PERCENTAGE",
+      "value": 8,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-replaced-housing",
+      "code": "HOUSING_REPLACED",
+      "name": "Carcaça trocada",
+      "category": "REPLACED",
+      "description": "Chassi paralelo instalado.",
+      "type": "PERCENTAGE",
+      "value": 5,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-unknown-warning",
+      "code": "UNKNOWN_PART_WARNING",
+      "name": "Aviso de peça desconhecida",
+      "category": "REPLACED",
+      "description": "Mensagem de aviso nas configurações.",
+      "type": "PERCENTAGE",
+      "value": 8,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-liquid-damage",
+      "code": "LIQUID_DAMAGE",
+      "name": "Oxidação / Contato com líquido",
+      "category": "GRAVE",
+      "description": "Aparelho molhado.",
+      "type": "PERCENTAGE",
+      "value": 25,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-board-problem",
+      "code": "BOARD_PROBLEM",
+      "name": "Problema de placa",
+      "category": "GRAVE",
+      "description": "Consumos de corrente altos.",
+      "type": "PERCENTAGE",
+      "value": 30,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    },
+    {
+      "id": "def-not-staying-on",
+      "code": "DEVICE_NOT_STAYING_ON",
+      "name": "Aparelho reiniciando",
+      "category": "GRAVE",
+      "description": "Desliga sozinho em poucos minutos.",
+      "type": "PERCENTAGE",
+      "value": 0,
+      "active": true,
+      "createdAt": "2026-08-20T17:45:57.710Z",
+      "updatedAt": "2026-08-20T17:45:57.710Z"
+    }
+  ],
+  "priceBookDeflators": [],
+  "sellQuotes": [],
+  "quoteAnswers": [],
+  "quoteDeflators": [],
+  "customers": [],
+  "inspections": [],
+  "inspectionIssues": [],
+  "auditLogs": []
+}
