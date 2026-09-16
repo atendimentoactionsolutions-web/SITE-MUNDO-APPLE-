@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Product } from "@/types/product";
 import { formatBRL, formatConditionLabel } from "@/utils/formatters";
 import { getWhatsAppProductUrl } from "@/utils/whatsapp";
@@ -15,17 +15,40 @@ interface ProductDetailOptionsProps {
 
 export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ product }) => {
   const [selectedStorage, setSelectedStorage] = useState<string>(
-    product.storage?.[0] || ""
+    product.variants?.[0]?.storage || product.storage?.[0] || ""
   );
   const [selectedColor, setSelectedColor] = useState<string>(
-    product.colors?.[0] || ""
+    product.variants?.[0]?.color || product.colors?.[0] || ""
   );
+
+  // Dynamic price calculation based on selected storage and color
+  const activeVariant = useMemo(() => {
+    if (!product.variants || product.variants.length === 0) return null;
+
+    // 1. Direct match: storage and color
+    const direct = product.variants.find(
+      (v) =>
+        (!selectedStorage || v.storage === selectedStorage) &&
+        (!selectedColor || v.color === selectedColor)
+    );
+    if (direct) return direct;
+
+    // 2. Storage match
+    const storageMatch = product.variants.find(
+      (v) => !selectedStorage || v.storage === selectedStorage
+    );
+    if (storageMatch) return storageMatch;
+
+    return product.variants[0];
+  }, [product.variants, selectedStorage, selectedColor]);
+
+  const currentPrice = activeVariant?.price || product.priceFrom || 0;
 
   const whatsappUrl = getWhatsAppProductUrl(
     product.name,
     selectedStorage,
     selectedColor,
-    product.priceFrom
+    currentPrice
   );
 
   return (
@@ -62,7 +85,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
       <div className="p-6 rounded-3xl bg-apple-gray/60 border border-apple-border/60 space-y-1">
         <span className="text-xs text-apple-muted block">Preço à vista ou Pix</span>
         <div className="text-3xl sm:text-4xl font-bold text-apple-dark tracking-tight">
-          {formatBRL(product.priceFrom)}
+          {currentPrice > 0 ? formatBRL(currentPrice) : "Sob Consulta"}
         </div>
         <p className="text-xs text-apple-muted pt-1">
           Aceitamos pagamento na entrega ou retirada na loja na Santa Ifigênia.
@@ -81,7 +104,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
                 key={stg}
                 type="button"
                 onClick={() => setSelectedStorage(stg)}
-                className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all ${
+                className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all cursor-pointer ${
                   selectedStorage === stg
                     ? "bg-apple-dark text-white border-apple-dark shadow-sm"
                     : "bg-white text-apple-dark border-apple-border hover:bg-gray-100"
@@ -94,28 +117,45 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         </div>
       )}
 
-      {/* Colors Options */}
+      {/* Colors Options with dynamic price hints */}
       {product.colors && product.colors.length > 0 && (
         <div className="space-y-2">
-          <label className="block text-xs font-semibold uppercase tracking-wider text-apple-dark">
-            Cor Selecionada: <span className="text-apple-blue font-bold">{selectedColor}</span>
-          </label>
+          <div className="flex items-center justify-between">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-apple-dark">
+              Cor Selecionada: <span className="text-apple-blue font-bold">{selectedColor}</span>
+            </label>
+          </div>
           <div className="flex items-center gap-2.5 flex-wrap">
-            {product.colors.map((color) => (
-              <button
-                key={color}
-                type="button"
-                onClick={() => setSelectedColor(color)}
-                className={`px-4 py-2 rounded-xl text-xs font-medium border flex items-center gap-1.5 transition-all ${
-                  selectedColor === color
-                    ? "bg-apple-blue/10 text-apple-blue border-apple-blue font-semibold"
-                    : "bg-white text-apple-dark border-apple-border hover:bg-gray-100"
-                }`}
-              >
-                {selectedColor === color && <Check className="w-3.5 h-3.5 text-apple-blue" />}
-                <span>{color}</span>
-              </button>
-            ))}
+            {product.colors.map((color) => {
+              const isSelected = selectedColor === color;
+              const variantMatch = product.variants?.find(
+                (v) =>
+                  (!selectedStorage || v.storage === selectedStorage) &&
+                  v.color === color
+              );
+              const vPrice = variantMatch?.price;
+
+              return (
+                <button
+                  key={color}
+                  type="button"
+                  onClick={() => setSelectedColor(color)}
+                  className={`px-4 py-2 rounded-xl text-xs font-medium border flex items-center gap-2 transition-all cursor-pointer ${
+                    isSelected
+                      ? "bg-apple-blue/10 text-apple-blue border-apple-blue font-semibold shadow-2xs"
+                      : "bg-white text-apple-dark border-apple-border hover:bg-gray-100"
+                  }`}
+                >
+                  {isSelected && <Check className="w-3.5 h-3.5 text-apple-blue" />}
+                  <span>{color}</span>
+                  {vPrice && vPrice > 0 && (
+                    <span className="text-[11px] opacity-75 font-normal">
+                      ({formatBRL(vPrice)})
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
@@ -143,7 +183,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
           external
           variant="whatsapp"
           size="lg"
-          className="w-full"
+          className="w-full font-bold"
           icon={<MessageCircle className="w-5 h-5" />}
         >
           Comprar pelo WhatsApp

@@ -1,5 +1,5 @@
 import React from "react";
-import { products } from "@/data/products";
+import { getProducts } from "@/lib/data";
 import { Hero } from "@/components/home/Hero";
 import { MarqueeTicker } from "@/components/home/MarqueeTicker";
 import { CategoryCardsGrid } from "@/components/home/CategoryCardsGrid";
@@ -10,10 +10,10 @@ import { FAQSection } from "@/components/home/FAQSection";
 import { TrustSection } from "@/components/home/TrustSection";
 import { StoreLocationSection } from "@/components/home/StoreLocationSection";
 
-export const revalidate = 60; // ISR 60s
+export const dynamic = "force-dynamic";
 
-export default function HomePage() {
-  const activeProducts = products.filter((p) => p.active && p.condition === "new");
+export default async function HomePage() {
+  const activeProducts = await getProducts({ condition: "new" });
 
   // Order for iPhones
   const iphoneOrder = [
@@ -29,7 +29,7 @@ export default function HomePage() {
     "iphone-15",
   ];
 
-  // Filter products by category directly from database (Only new lacrados)
+  // Filter products by category (Only new lacrados with live pricing)
   const iphoneProducts = activeProducts
     .filter((p) => p.category === "iphone")
     .sort((a, b) => {
