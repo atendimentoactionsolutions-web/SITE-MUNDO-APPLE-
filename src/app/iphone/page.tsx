@@ -3,7 +3,6 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductGrid } from "@/components/products/ProductGrid";
 
-export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "iPhones Novos e Lacrados | Mundo Apple Delivery",

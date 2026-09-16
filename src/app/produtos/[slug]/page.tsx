@@ -7,7 +7,6 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { ShieldCheck, Truck, Store, RefreshCw, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{

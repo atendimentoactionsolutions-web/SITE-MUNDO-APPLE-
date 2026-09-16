@@ -5,7 +5,6 @@ import { ProductGrid } from "@/components/products/ProductGrid";
 import { Cpu, BatteryCharging, ShieldCheck, Laptop } from "lucide-react";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
 
 interface PageProps {
   searchParams: Promise<{

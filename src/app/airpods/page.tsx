@@ -4,7 +4,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductGrid } from "@/components/products/ProductGrid";
 import { Music, ShieldCheck, Zap } from "lucide-react";
 
-export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "AirPods Novos Lacrados | Mundo Apple Delivery",

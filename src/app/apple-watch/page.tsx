@@ -5,7 +5,6 @@ import { ProductGrid } from "@/components/products/ProductGrid";
 import { HeartPulse, Compass, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
-export const dynamic = "force-dynamic";
 
 interface PageProps {
   searchParams: Promise<{

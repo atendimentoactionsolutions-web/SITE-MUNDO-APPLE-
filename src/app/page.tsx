@@ -10,7 +10,8 @@ import { FAQSection } from "@/components/home/FAQSection";
 import { TrustSection } from "@/components/home/TrustSection";
 import { StoreLocationSection } from "@/components/home/StoreLocationSection";
 
-export const dynamic = "force-dynamic";
+
+
 
 export default async function HomePage() {
   const activeProducts = await getProducts({ condition: "new" });
