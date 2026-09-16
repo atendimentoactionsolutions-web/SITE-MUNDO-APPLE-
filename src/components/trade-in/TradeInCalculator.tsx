@@ -118,15 +118,33 @@ export const TradeInCalculator: React.FC = () => {
 
   // 2. Desired New Sealed Product for Upgrade (ONLY NEW)
   const [selectedUpgradeCategory, setSelectedUpgradeCategory] = useState<string>("iphone");
+  const [liveCatalog, setLiveCatalog] = useState<Product[]>(products);
+
+  // Fetch live prices on client mount for real-time trade-in upgrade pricing
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/products/live")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data && Array.isArray(data.products) && data.products.length > 0) {
+          setLiveCatalog(data.products);
+        }
+      })
+      .catch((err) => console.warn("Fallback to static products in TradeInCalculator:", err));
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const newProductsInCategory = useMemo(() => {
-    return products.filter(
+    return liveCatalog.filter(
       (p) =>
         p.category.toLowerCase() === selectedUpgradeCategory.toLowerCase() &&
         p.condition === "new" &&
         p.active
     );
-  }, [selectedUpgradeCategory]);
+  }, [selectedUpgradeCategory, liveCatalog]);
 
   const [selectedNewProduct, setSelectedNewProduct] = useState<Product>(
     newProductsInCategory[0] || products[0]

@@ -4,6 +4,7 @@ import { technicalServices } from "@/data/services";
 import { Product } from "@/types/product";
 import { Category } from "@/types/category";
 import { TechnicalService } from "@/types/service";
+import { getLiveEnrichedProducts } from "@/lib/pricing/live-pricing";
 
 // Abstraction layer for Data Access.
 // In the storefront, only "new" products are displayed for sale.
@@ -15,10 +16,13 @@ export async function getProducts(options?: {
   featured?: boolean;
   searchQuery?: string;
 }): Promise<Product[]> {
-  // 1. Filter active
-  let list = products.filter((p) => p.active);
+  // 1. Get live-enriched products with supplier rates & owner margins
+  const liveList = await getLiveEnrichedProducts(products);
 
-  // 2. Filter condition: default to "new" for storefront sales unless "all" or "used" explicitly specified
+  // 2. Filter active
+  let list = liveList.filter((p) => p.active);
+
+  // 3. Filter condition: default to "new" for storefront sales unless "all" or "used" explicitly specified
   if (options?.condition === "all") {
     // Keep all
   } else if (options?.condition === "used") {
@@ -28,19 +32,19 @@ export async function getProducts(options?: {
     list = list.filter((p) => p.condition === "new");
   }
 
-  // 3. Filter category
+  // 4. Filter category
   if (options?.category) {
     const rawCat = options.category.toLowerCase();
     const cat = rawCat === "acessorios" ? "accessories" : rawCat;
     list = list.filter((p) => p.category.toLowerCase() === cat);
   }
 
-  // 4. Filter featured
+  // 5. Filter featured
   if (options?.featured !== undefined) {
     list = list.filter((p) => p.featured === options.featured);
   }
 
-  // 5. Filter search query
+  // 6. Filter search query
   if (options?.searchQuery) {
     const query = options.searchQuery.toLowerCase();
     list = list.filter(
@@ -51,7 +55,7 @@ export async function getProducts(options?: {
     );
   }
 
-  // 6. Sort by exact model hierarchy ordering (launches first)
+  // 7. Sort by exact model hierarchy ordering (launches first)
   const modelOrder = [
     "iphone-duo",
     "iphone-18-pro-max",
@@ -93,7 +97,8 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const product = products.find((p) => p.slug === slug && p.active);
+  const liveList = await getLiveEnrichedProducts(products);
+  const product = liveList.find((p) => p.slug === slug && p.active);
   return product || null;
 }
 
