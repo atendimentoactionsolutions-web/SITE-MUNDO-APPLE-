@@ -4,11 +4,14 @@
  * matches prices for existing store products per variant (including color differentiation),
  * and applies the user-defined profit margins:
  *   - iPhones: + R$ 750,00
- *   - MacBooks / Mac / iMac: + R$ 1.300,00
+ *   - MacBook Air: + R$ 1.000,00
+ *   - MacBook Pro / Mac Mini / iMac: + R$ 1.300,00
+ *   - iPad 11ª Geração: + R$ 450,00
+ *   - iPad Air: + R$ 750,00
+ *   - iPad Pro: + R$ 850,00
  *   - AirPods: + R$ 500,00
  *   - Apple Watch: + R$ 500,00
  *   - Accessories: DO NOT TOUCH (static catalog prices)
- *   - iPads: DO NOT TOUCH (static catalog prices)
  */
 
 import { Product, ProductVariant } from "@/types/product";
@@ -20,9 +23,69 @@ export const CATEGORY_MARGINS: Record<string, number> = {
   imac: 1300,
   airpods: 500,
   watch: 500,
-  // accessories: DO NOT TOUCH
-  // ipad: DO NOT TOUCH
 };
+
+/**
+ * Returns the exact margin for a given product based on owner specifications:
+ * - MacBook Air: R$ 1.000,00
+ * - Other Macs (MacBook Pro, iMac, Mac mini): R$ 1.300,00
+ * - iPad 11: R$ 450,00
+ * - iPad Air: R$ 750,00
+ * - iPad Pro: R$ 850,00
+ * - iPhone: R$ 750,00
+ * - AirPods: R$ 500,00
+ * - Apple Watch: R$ 500,00
+ * - Accessories: undefined (no margin / do not touch)
+ */
+export function getProductMargin(product: Product): number | null {
+  const cat = product.category.toLowerCase();
+  const slug = product.slug.toLowerCase();
+  const name = product.name.toLowerCase();
+
+  // Accessories: DO NOT TOUCH
+  if (cat === "accessories" || cat === "acessorios") {
+    return null;
+  }
+
+  // iPhones: R$ 750,00
+  if (cat === "iphone") {
+    return 750;
+  }
+
+  // Macs & MacBooks
+  if (cat === "mac") {
+    if (slug.includes("air") || name.includes("air")) {
+      return 1000; // MacBook Air: R$ 1.000,00
+    }
+    return 1300; // MacBook Pro, iMac, Mac mini, MacBook Neo: R$ 1.300,00
+  }
+
+  // iPads
+  if (cat === "ipad") {
+    if (slug.includes("11") || name.includes("11")) {
+      return 450; // iPad 11: R$ 450,00
+    }
+    if (slug.includes("air") || name.includes("air")) {
+      return 750; // iPad Air: R$ 750,00
+    }
+    if (slug.includes("pro") || name.includes("pro")) {
+      return 850; // iPad Pro: R$ 850,00
+    }
+    return 450; // default for other basic iPads
+  }
+
+  // Apple Watch: R$ 500,00
+  if (cat === "watch") {
+    return 500;
+  }
+
+  // AirPods: R$ 500,00
+  if (cat === "airpods") {
+    return 500;
+  }
+
+  return null;
+}
 
 export interface RenderSupplierItem {
   id: string;
@@ -164,14 +227,15 @@ function findBestSupplierPrice(
   const prodSlug = product.slug.toLowerCase();
   const prodCat = product.category.toLowerCase();
 
-  // If accessory or ipad, owner instructed not to touch
-  if (prodCat === "accessories" || prodCat === "ipad") {
+  // If accessory, owner instructed not to touch
+  if (prodCat === "accessories" || prodCat === "acessorios") {
     return null;
   }
 
   const vStorage = normalizeStorage(variant?.storage);
   const vColor = normalizeColor(variant?.color);
   const vSize = normalizeSize(variant?.size || variant?.screenSize);
+  const vChip = variant?.chip ? variant.chip.toLowerCase() : "";
 
   // Filter candidates from supplier list
   const candidates = supplierItems.filter((item) => {
@@ -232,7 +296,6 @@ function findBestSupplierPrice(
 
       if (prodSlug === "imac-24-m4") {
         if (!itemName.includes("IMAC M4 24")) return false;
-        // Check 4-saidas distinction if present in chip
         if (variant?.chip?.includes("4 Saídas") && !itemName.includes("4 SAIDAS")) return false;
         if (variant?.chip?.includes("2 Portas") && itemName.includes("4 SAIDAS")) return false;
       } else if (prodSlug === "mac-mini-m4") {
@@ -264,7 +327,32 @@ function findBestSupplierPrice(
       return true;
     }
 
-    // 3. APPLE WATCH
+    // 3. IPAD
+    if (prodCat === "ipad") {
+      if (item.category !== "IPAD") return false;
+
+      if (prodSlug === "ipad-11") {
+        if (!itemName.includes("IPAD 11")) return false;
+      } else if (prodSlug === "ipad-pro-m5") {
+        if (!itemName.includes("IPAD PRO M5")) return false;
+        if (vSize && !itemName.includes(vSize.replace(/["\s]/g, ""))) return false;
+        // Match Cellular vs Wifi
+        if (vChip.includes("cellular") && !itemName.includes("CELULAR")) return false;
+        if (!vChip.includes("cellular") && itemName.includes("CELULAR")) return false;
+      } else {
+        return false;
+      }
+
+      // Check storage match
+      if (vStorage && normalizeStorage(item.storage) !== vStorage) return false;
+
+      // Check color match if supplier has color
+      if (vColor && item.color && normalizeColor(item.color) !== vColor) return false;
+
+      return true;
+    }
+
+    // 4. APPLE WATCH
     if (prodCat === "watch") {
       if (item.category !== "RLG") return false;
 
@@ -286,7 +374,7 @@ function findBestSupplierPrice(
       return true;
     }
 
-    // 4. AIRPODS
+    // 5. AIRPODS
     if (prodCat === "airpods") {
       if (item.category !== "PODS") return false;
 
@@ -330,10 +418,10 @@ export function applyLivePrices(
   }
 
   return baseProducts.map((product) => {
-    const margin = CATEGORY_MARGINS[product.category.toLowerCase()];
+    const margin = getProductMargin(product);
 
-    // If no margin rule or product is seminovo / accessory / ipad, preserve static data
-    if (margin === undefined || product.condition === "used") {
+    // If no margin rule or product is seminovo / accessory, preserve static data
+    if (margin === null || margin === undefined || product.condition === "used") {
       return product;
     }
 
