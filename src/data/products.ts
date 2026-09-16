@@ -211,19 +211,17 @@ export const products: Product[] = [
     category: "iphone",
     subcategory: "iPhone 17 Series",
     image: "/images/products/iphone/iphone-17-generic.png",
-    priceFrom: 3990,
+    priceFrom: 4400,
     condition: "new",
-    storage: ["128GB", "256GB"],
+    storage: ["256GB", "512GB"],
     colors: ["Soft Pink", "Black", "White"],
     variants: [
-      // 128GB
-      { storage: "128GB", color: "Soft Pink", price: 3990, available: true },
-      { storage: "128GB", color: "Black", price: 3990, available: true },
-      { storage: "128GB", color: "White", price: 4090, available: true },
       // 256GB
-      { storage: "256GB", color: "Soft Pink", price: 4390, available: true },
-      { storage: "256GB", color: "Black", price: 4490, available: true },
-      { storage: "256GB", color: "White", price: 4490, available: true },
+      { storage: "256GB", color: "Soft Pink", price: 4400, available: true },
+      { storage: "256GB", color: "Black", price: 4409, available: true },
+      { storage: "256GB", color: "White", price: 4400, available: true },
+      // 512GB
+      { storage: "512GB", color: "Black", price: 5200, available: true },
     ],
     description: "A essência da linha iPhone 17 combinada com excelente custo-benefício e tela espetacular.",
     warranty: "1 ano de garantia oficial Apple",
