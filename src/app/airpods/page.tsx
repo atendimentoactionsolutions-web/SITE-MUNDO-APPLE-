@@ -4,6 +4,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductGrid } from "@/components/products/ProductGrid";
 import { Music, ShieldCheck, Zap } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "AirPods Novos Lacrados | Mundo Apple Delivery",
   description: "AirPods 4, AirPods 4 ANC, AirPods Pro 3 e AirPods Max 2 com cancelamento de ruído e áudio espacial.",

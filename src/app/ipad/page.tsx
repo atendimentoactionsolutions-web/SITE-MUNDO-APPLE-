@@ -5,6 +5,8 @@ import { ProductGrid } from "@/components/products/ProductGrid";
 import { Tablet, PenTool, ShieldCheck, Zap } from "lucide-react";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   searchParams: Promise<{
     subcategoria?: string;

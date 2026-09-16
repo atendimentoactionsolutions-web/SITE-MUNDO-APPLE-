@@ -4,6 +4,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductGrid } from "@/components/products/ProductGrid";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   searchParams: Promise<{
     categoria?: string;
