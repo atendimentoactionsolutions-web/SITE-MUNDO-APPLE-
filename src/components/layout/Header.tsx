@@ -169,7 +169,7 @@ export const Header: React.FC = () => {
                 pathname === "/vender" ? "text-emerald-700 bg-emerald-50 font-bold" : "hover:text-emerald-700 hover:bg-emerald-50"
               }`}
             >
-              Vender iPhone
+              Vender Produto Apple
             </Link>
 
             <Link
@@ -237,7 +237,7 @@ export const Header: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2.5 text-lg font-bold text-emerald-700 border-b border-slate-100 flex items-center justify-between"
               >
-                <span>⚡ Vender meu iPhone (PIX na Hora)</span>
+                <span>⚡ Vender meu Produto Apple (PIX na Hora)</span>
                 <ArrowRight className="w-4 h-4 text-emerald-700" />
               </Link>
               <Link

@@ -41,7 +41,7 @@ export const Hero: React.FC = () => {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-sm sm:text-base rounded-full border border-[#D2D2D7] shadow-2xs active:scale-95 transition-all duration-200 tracking-tight"
               >
                 <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
-                <span>Vender Aparelho (PIX)</span>
+                <span>Vender meu Produto Apple</span>
               </Link>
             </div>
 
