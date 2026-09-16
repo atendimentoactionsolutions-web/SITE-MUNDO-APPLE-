@@ -119,7 +119,7 @@ export const AppleLaunchesSection: React.FC = () => {
 
             <div className="relative w-full h-[240px] sm:h-[280px] my-4 flex items-center justify-center">
               <Image
-                src="/images/products/iphone/iphone-duo-official.png"
+                src="/images/products/iphone/iphone-duo-v2.png"
                 alt="iPhone Duo"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
@@ -170,7 +170,7 @@ export const AppleLaunchesSection: React.FC = () => {
 
             <div className="relative w-full h-[240px] sm:h-[280px] my-4 flex items-center justify-center">
               <Image
-                src="/images/products/watch/apple-watch-s12-official.png"
+                src="/images/products/watch/apple-watch-s12-v2.png"
                 alt="Apple Watch Series 12"
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
