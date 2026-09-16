@@ -128,7 +128,7 @@ export const Header: React.FC = () => {
 
               {/* Dropdown Menu */}
               {catalogDropdownOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 bg-white/98 backdrop-blur-2xl border border-[#D2D2D7]/80 rounded-3xl p-3 shadow-2xl space-y-1 animate-in fade-in zoom-in-95 duration-150">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 bg-white border border-[#D2D2D7]/80 rounded-3xl p-3 shadow-[0_8px_40px_rgba(0,0,0,0.15)] space-y-1 animate-in fade-in zoom-in-95 duration-150 z-[9999]">
                   <div className="px-3 py-1.5 text-[10px] uppercase tracking-wider text-[#86868B] font-semibold border-b border-[#E5E5E7] mb-1">
                     Linha Apple Completa
                   </div>
