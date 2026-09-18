@@ -119,16 +119,44 @@ async function runSync() {
     process.exit(1);
   }
 
-  // Filter out CPO, AS IS, and price <= 0
+  // Filter strictly ONLY 100% NEW LACRADOS DE FÁBRICA (exclude all seminovos, vitrines, swaps, grades, CPO, AS IS)
   const supplierItems = rawSupplierItems.filter(p => {
     if (!p.price || p.price <= 0) return false;
+    if (p.isSeminovo === true || p.condition === "SEMINOVO") return false;
+
+    const cat = normalizeStr(p.category);
     const name = normalizeStr(p.name);
     const desc = normalizeStr(p.description);
-    const cat = normalizeStr(p.category);
-    if (name.includes("AS IS") || desc.includes("AS IS") || cat.includes("AS IS")) return false;
-    if (name.includes("CPO") || desc.includes("CPO") || cat.includes("CPO")) return false;
+    const reg = normalizeStr(p.region);
+
+    if (
+      cat === "SEMI" ||
+      name.includes("SEMI") ||
+      name.includes("USADO") ||
+      name.includes("VITRINE") ||
+      name.includes("GRADE A") ||
+      name.includes("GRADE B") ||
+      name.includes("GRADE C") ||
+      name.includes("SWAP") ||
+      name.includes("SWP") ||
+      name.includes("RECONDICIONADO") ||
+      desc.includes("SEMI") ||
+      desc.includes("USADO") ||
+      desc.includes("VITRINE") ||
+      desc.includes("GRADE") ||
+      desc.includes("SWAP") ||
+      reg.includes("SEMI")
+    ) {
+      return false;
+    }
+
+    if (name.includes("AS IS") || desc.includes("AS IS") || cat.includes("AS IS") || reg.includes("AS IS")) return false;
+    if (name.includes("CPO") || desc.includes("CPO") || cat.includes("CPO") || reg.includes("CPO")) return false;
+
     return true;
   });
+
+  console.log(`🔒 Filtro 100% Novos Lacrados: ${supplierItems.length} ofertas válidas selecionadas (todos os seminovos/vitrine foram descartados).`);
 
   // 2. Fetch Store Margins
   console.log("📥 Buscando margens de lucro oficiais...");

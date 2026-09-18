@@ -105,13 +105,13 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Bordô",
-        "price": 13400,
+        "price": 13600,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Prateado",
-        "price": 13500,
+        "price": 13550,
         "available": true
       },
       {
@@ -240,7 +240,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 9340,
+        "price": 9349,
         "available": true
       },
       {
@@ -325,7 +325,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 7390,
+        "price": 7400,
         "available": true
       },
       {
@@ -423,7 +423,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Light Gold",
-        "price": 6680,
+        "price": 6690,
         "available": true
       },
       {
@@ -447,7 +447,7 @@ export const products: Product[] = [
       {
         "storage": "1TB",
         "color": "Cloud White",
-        "price": 7748,
+        "price": 7749,
         "available": true
       },
       {
@@ -480,7 +480,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-generic.png",
-    "priceFrom": 4030,
+    "priceFrom": 4250,
     "condition": "new",
     "storage": [
       "256GB",
@@ -495,7 +495,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 4030,
+        "price": 4340,
         "available": true
       },
       {
@@ -691,7 +691,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 4395,
+        "price": 4385,
         "available": true
       },
       {
@@ -746,7 +746,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 13290,
+    "priceFrom": 13145,
     "condition": "new",
     "screenSizes": [
       "14\""
@@ -775,7 +775,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 13290,
+        "price": 13145,
         "available": true
       },
       {
@@ -784,7 +784,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 13450,
+        "price": 13300,
         "available": true
       }
     ],
@@ -841,7 +841,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 16545,
+        "price": 16390,
         "available": true
       },
       {
@@ -850,7 +850,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 19300,
+        "price": 18200,
         "available": true
       },
       {
@@ -859,7 +859,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Silver",
-        "price": 20800,
+        "price": 17100,
         "available": true
       },
       {
@@ -868,7 +868,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 18900,
+        "price": 18700,
         "available": true
       },
       {
@@ -877,7 +877,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 18900,
+        "price": 18800,
         "available": true
       }
     ],
@@ -973,7 +973,7 @@ export const products: Product[] = [
       "Silver": "/images/products/mac/macbook-air-silver.png",
       "Sky Blue": "/images/products/mac/macbook-air-spacegray.png"
     },
-    "priceFrom": 9599,
+    "priceFrom": 9360,
     "condition": "new",
     "screenSizes": [
       "13\"",
@@ -999,7 +999,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 9599,
+        "price": 9360,
         "available": true
       },
       {
@@ -1007,7 +1007,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Sky Blue",
-        "price": 9599,
+        "price": 9470,
         "available": true
       },
       {
@@ -1023,7 +1023,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 9899,
+        "price": 9800,
         "available": true
       },
       {
@@ -1047,7 +1047,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 11099,
+        "price": 11000,
         "available": true
       }
     ],
@@ -1195,7 +1195,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 8190,
+        "price": 6799.99,
         "available": true
       },
       {
@@ -1203,7 +1203,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 13300,
+        "price": 6799.99,
         "available": true
       }
     ],
@@ -1290,7 +1290,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 17990,
+        "price": 17950,
         "available": true
       }
     ],
