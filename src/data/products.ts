@@ -78,7 +78,6 @@ export const products: Product[] = [
     },
     "priceFrom": 13330,
     "condition": "new",
-    "availability": "pre_order",
     "storage": [
       "256GB",
       "512GB",
@@ -166,7 +165,6 @@ export const products: Product[] = [
     },
     "priceFrom": 11100,
     "condition": "new",
-    "availability": "pre_order",
     "storage": [
       "256GB"
     ],
@@ -748,7 +746,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 13000,
+    "priceFrom": 13290,
     "condition": "new",
     "screenSizes": [
       "14\""
@@ -775,18 +773,9 @@ export const products: Product[] = [
         "screenSize": "14\"",
         "chip": "M5",
         "ram": "16GB",
-        "storage": "512GB",
-        "color": "Space Black",
-        "price": 13000,
-        "available": true
-      },
-      {
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "16GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 13145,
+        "price": 13290,
         "available": true
       },
       {
@@ -795,61 +784,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 13300,
-        "available": true
-      },
-      {
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Space Black",
-        "price": 13145,
-        "available": true
-      },
-      {
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 13300,
-        "available": true
-      },
-      {
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "32GB",
-        "storage": "1TB",
-        "color": "Space Black",
-        "price": 13145,
-        "available": true
-      },
-      {
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "32GB",
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 13300,
-        "available": true
-      },
-      {
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "24GB",
-        "storage": "2TB",
-        "color": "Silver",
-        "price": 19300,
-        "available": true
-      },
-      {
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "24GB",
-        "storage": "2TB",
-        "color": "Space Black",
-        "price": 19299,
+        "price": 13450,
         "available": true
       }
     ],
@@ -906,7 +841,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 16390,
+        "price": 16545,
         "available": true
       },
       {
@@ -915,7 +850,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 18200,
+        "price": 19300,
         "available": true
       },
       {
@@ -924,7 +859,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Silver",
-        "price": 17100,
+        "price": 20800,
         "available": true
       },
       {
@@ -933,7 +868,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 18700,
+        "price": 18900,
         "available": true
       },
       {
@@ -942,25 +877,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 18800,
-        "available": true
-      },
-      {
-        "screenSize": "16\"",
-        "chip": "M5 Pro",
-        "ram": "48GB",
-        "storage": "1TB",
-        "color": "Space Black",
-        "price": 18800,
-        "available": true
-      },
-      {
-        "screenSize": "16\"",
-        "chip": "M5 Pro",
-        "ram": "48GB",
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 18700,
+        "price": 18900,
         "available": true
       }
     ],
@@ -1036,24 +953,6 @@ export const products: Product[] = [
         "color": "Silver",
         "price": 29200,
         "available": true
-      },
-      {
-        "screenSize": "16\"",
-        "chip": "M5 Max",
-        "ram": "48GB",
-        "storage": "2TB",
-        "color": "Space Black",
-        "price": 29200,
-        "available": true
-      },
-      {
-        "screenSize": "16\"",
-        "chip": "M5 Max",
-        "ram": "48GB",
-        "storage": "2TB",
-        "color": "Silver",
-        "price": 29200,
-        "available": true
       }
     ],
     "description": "O ápice do poder de processamento gráfico e computacional da Apple. Chip M5 Max com até 48GB de memória unificada.",
@@ -1074,7 +973,7 @@ export const products: Product[] = [
       "Silver": "/images/products/mac/macbook-air-silver.png",
       "Sky Blue": "/images/products/mac/macbook-air-spacegray.png"
     },
-    "priceFrom": 9360,
+    "priceFrom": 9599,
     "condition": "new",
     "screenSizes": [
       "13\"",
@@ -1100,7 +999,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 9360,
+        "price": 9599,
         "available": true
       },
       {
@@ -1108,7 +1007,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Sky Blue",
-        "price": 9470,
+        "price": 9599,
         "available": true
       },
       {
@@ -1124,79 +1023,15 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 9800,
+        "price": 9899,
         "available": true
       },
       {
-        "screenSize": "13\"",
+        "screenSize": "15\"",
         "ram": "16GB",
-        "storage": "1TB",
-        "color": "Midnight",
-        "price": 10100,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "ram": "16GB",
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 10400,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "ram": "16GB",
-        "storage": "1TB",
+        "storage": "512GB",
         "color": "Sky Blue",
-        "price": 9950,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "ram": "16GB",
-        "storage": "1TB",
-        "color": "Starlight",
-        "price": 10400,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 13512.5,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Midnight",
-        "price": 13800,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Starlight",
-        "price": 13800,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "16GB",
-        "storage": "512GB",
-        "color": "Starlight",
-        "price": 11000,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "16GB",
-        "storage": "512GB",
-        "color": "Silver",
-        "price": 11100,
+        "price": 10999,
         "available": true
       },
       {
@@ -1211,72 +1046,8 @@ export const products: Product[] = [
         "screenSize": "15\"",
         "ram": "16GB",
         "storage": "512GB",
-        "color": "Sky Blue",
-        "price": 10999,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "16GB",
-        "storage": "1TB",
-        "color": "Midnight",
-        "price": 11950,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "16GB",
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 11950,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "16GB",
-        "storage": "1TB",
-        "color": "Sky Blue",
-        "price": 11950,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "16GB",
-        "storage": "1TB",
         "color": "Starlight",
-        "price": 11950,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Midnight",
-        "price": 14605,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 14605,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Starlight",
-        "price": 14605,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "24GB",
-        "storage": "1TB",
-        "color": "Sky Blue",
-        "price": 14892.5,
+        "price": 11099,
         "available": true
       }
     ],
@@ -1298,7 +1069,7 @@ export const products: Product[] = [
       "Blush": "/images/products/mac/macbook-neo-blush.png",
       "Silver": "/images/products/mac/macbook-neo-silver.png"
     },
-    "priceFrom": 5740,
+    "priceFrom": 5680,
     "condition": "new",
     "screenSizes": [
       "13\""
@@ -1319,66 +1090,66 @@ export const products: Product[] = [
     "variants": [
       {
         "screenSize": "13\"",
-        "storage": "256GB",
         "ram": "8GB",
+        "storage": "256GB",
         "color": "Citrus",
-        "price": 5740,
+        "price": 5680,
         "available": true
       },
       {
         "screenSize": "13\"",
-        "storage": "256GB",
         "ram": "8GB",
+        "storage": "256GB",
         "color": "Blush",
-        "price": 5749,
+        "price": 5680,
         "available": true
       },
       {
         "screenSize": "13\"",
-        "storage": "256GB",
         "ram": "8GB",
+        "storage": "256GB",
         "color": "Indigo",
-        "price": 5750,
+        "price": 5680,
         "available": true
       },
       {
         "screenSize": "13\"",
+        "ram": "8GB",
         "storage": "256GB",
-        "ram": "8GB",
         "color": "Silver",
-        "price": 5900,
+        "price": 5680,
         "available": true
       },
       {
         "screenSize": "13\"",
-        "storage": "512GB",
         "ram": "8GB",
+        "storage": "512GB",
         "color": "Citrus",
-        "price": 6450,
+        "price": 6199,
         "available": true
       },
       {
         "screenSize": "13\"",
-        "storage": "512GB",
         "ram": "8GB",
+        "storage": "512GB",
         "color": "Blush",
-        "price": 6490,
+        "price": 6199,
         "available": true
       },
       {
         "screenSize": "13\"",
-        "storage": "512GB",
         "ram": "8GB",
+        "storage": "512GB",
         "color": "Indigo",
-        "price": 6490,
+        "price": 6199,
         "available": true
       },
       {
         "screenSize": "13\"",
-        "storage": "512GB",
         "ram": "8GB",
+        "storage": "512GB",
         "color": "Silver",
-        "price": 6490,
+        "price": 6199,
         "available": true
       }
     ],
@@ -1424,15 +1195,15 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6799.99,
+        "price": 8190,
         "available": true
       },
       {
-        "chip": "M4",
+        "chip": "M4 Pro",
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6799.99,
+        "price": 13300,
         "available": true
       }
     ],
@@ -1509,15 +1280,6 @@ export const products: Product[] = [
         "chip": "4 Saídas",
         "ram": "16GB",
         "storage": "512GB",
-        "color": "Silver",
-        "price": 17950,
-        "available": true
-      },
-      {
-        "screenSize": "24\"",
-        "chip": "4 Saídas",
-        "ram": "16GB",
-        "storage": "512GB",
         "color": "Pink",
         "price": 17890,
         "available": true
@@ -1525,10 +1287,10 @@ export const products: Product[] = [
       {
         "screenSize": "24\"",
         "chip": "4 Saídas",
-        "ram": "24GB",
+        "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 17950,
+        "price": 17990,
         "available": true
       }
     ],

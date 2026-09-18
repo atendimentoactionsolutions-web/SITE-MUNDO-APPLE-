@@ -12,7 +12,7 @@ export const AppleLaunchesSection: React.FC = () => {
 
   const getReserveLink = (productName: string) => {
     return createWhatsAppLink(
-      `Olá! Vim pelo site da Mundo Apple Delivery e gostaria de garantir minha reserva na Pré-Venda oficial do *${productName}*. Podem me passar a prioridade e detalhes?`
+      `Olá! Vim pelo site da Mundo Apple Delivery e gostaria de atendimento sobre o *${productName}*. Podem me passar a disponibilidade e condições?`
     );
   };
 
@@ -25,7 +25,7 @@ export const AppleLaunchesSection: React.FC = () => {
             A nova geração da Apple chegou.
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-[#6E6E73] font-normal max-w-2xl mx-auto leading-relaxed">
-            Reserve seu modelo com prioridade exclusiva de entrega, nota fiscal e 1 ano de garantia mundial Apple.
+            Adquira seu modelo com nota fiscal, 1 ano de garantia mundial Apple e entrega rápida em São Paulo.
           </p>
         </div>
 
@@ -59,18 +59,18 @@ export const AppleLaunchesSection: React.FC = () => {
             <div className="absolute inset-0 p-6 sm:p-10 md:p-14 flex flex-col justify-end max-w-2xl space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs font-semibold text-white w-fit">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>Pré-Venda Aberta</span>
+                <span>Disponível a Pronta Entrega</span>
               </div>
 
               <div className="space-y-2">
                 <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white font-display leading-[1.08]">
-                  iPhone 18 Pro
+                  iPhone 18 Pro & Pro Max
                 </h3>
                 <p className="text-base sm:text-xl text-zinc-200 font-medium leading-relaxed">
                   Titânio escovado grau 5, chip A20 Pro e sistema teleobjetiva periscópica revolucionário.
                 </p>
                 <p className="text-xs sm:text-sm text-zinc-400">
-                  Cores: Preto, Bordô, Glacier e Prateado · 256GB, 512GB, 1TB e 2TB
+                  Cores: Preto, Bordô, Glacier e Prateado · 256GB, 512GB, 1TB e 2TB · A partir de R$ 11.100 no PIX
                 </p>
               </div>
 
@@ -80,10 +80,10 @@ export const AppleLaunchesSection: React.FC = () => {
                   href={getReserveLink("iPhone 18 Pro")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold text-sm sm:text-base shadow-lg hover:shadow-indigo-500/25 active:scale-95 transition-all"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#00C853] hover:bg-[#00B048] text-white font-semibold text-sm sm:text-base shadow-lg hover:shadow-emerald-500/25 active:scale-95 transition-all"
                 >
                   <MessageCircle className="w-4 h-4 fill-current" />
-                  <span>Garantir Reserva na Pré-Venda</span>
+                  <span>Comprar no WhatsApp</span>
                 </a>
 
                 <a
@@ -97,6 +97,7 @@ export const AppleLaunchesSection: React.FC = () => {
             </div>
           </div>
         </div>
+
 
         {/* 2. Grid for the Other 3 Big Launches: iPhone Duo, Apple Watch Series 12 & AirPods 5 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

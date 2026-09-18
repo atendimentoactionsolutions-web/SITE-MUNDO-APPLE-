@@ -300,21 +300,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     if (currentStorage) details.push(`Armazenamento: ${currentStorage}`);
     if (currentColor) details.push(`Cor: ${currentColor}`);
 
-    let messageText = isPreOrder
-      ? `Olá! Gostaria de reservar o novo *${product.name}* na PRÉ-VENDA (Lançamento Apple)`
-      : `Olá! Tenho interesse no *${product.name}*`;
+    let messageText = `Olá! Tenho interesse no *${product.name}*`;
 
     if (details.length > 0) {
       messageText += ` (${details.join(", ")})`;
     }
     if (currentPrice > 0) {
       messageText += ` no valor de ${formatCurrency(currentPrice)} no PIX`;
-    } else if (isPreOrder) {
-      messageText += `.\nPrevisão: Primeiro Lote de Lançamento\nCondição: Novo e lacrado com 1 ano de garantia Apple`;
+    } else {
+      messageText += `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado com 1 ano de garantia Apple"}\nGostaria de consultar os valores atualizados, disponibilidade e prazo de entrega.`;
     }
-    messageText += isPreOrder
-      ? `\nGostaria de garantir minha vaga na lista de espera / pré-venda e saber as condições de pagamento e previsão.`
-      : `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado de fábrica"}\nGostaria de consultar disponibilidade e condições de pagamento.`;
+    if (currentPrice > 0) {
+      messageText += `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado de fábrica"}\nGostaria de consultar disponibilidade e condições de pagamento.`;
+    }
 
     const link = createWhatsAppLink(messageText);
     window.open(link, "_blank", "noopener,noreferrer");
@@ -544,36 +542,36 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               </div>
             )}
 
-            {/* Live Dynamic Price Display OR Pre-Order Showcase */}
-            {isPreOrder ? (
+            {/* Live Dynamic Price Display OR Under Consultation */}
+            {currentPrice === 0 || isPreOrder ? (
               <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-2">
                 <div className="flex items-baseline justify-between">
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-purple-700 block leading-none mb-1">
-                      Lançamento Oficial Apple
+                    <span className="text-[10px] uppercase font-bold text-[#0071E3] block leading-none mb-1">
+                      Disponibilidade
                     </span>
-                    <span className="text-base sm:text-lg font-bold text-[#1D1D1F] font-display tracking-[-0.02em]">
-                      Preço sob consulta
+                    <span className="text-sm sm:text-base font-bold text-[#1D1D1F] font-display tracking-[-0.02em]">
+                      Consultar valores e disponibilidade
                     </span>
                   </div>
-                  <span className="text-[10px] text-purple-700 font-bold bg-purple-50 px-2.5 py-1 rounded-full border border-purple-200/80 inline-block">
-                    1º Lote
+                  <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/80 inline-block">
+                    Sob Consulta
                   </span>
                 </div>
 
                 <p className="text-[11px] text-[#6E6E73] leading-tight">
-                  Reserve com prioridade de entrega no lançamento oficial.
+                  Consulte valores atualizados e prazo de entrega direto com nossos especialistas.
                 </p>
 
-                {/* Trade-In Fast Trigger for Pre-Order */}
+                {/* Trade-In Fast Trigger */}
                 {isTradeInEligible && (
                   <Link
                     href={`/troca?categoria=${product.category}&produto=${encodeURIComponent(product.name)}`}
-                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-purple-50/70 hover:bg-purple-100/90 border border-purple-200/60 text-purple-700 transition-all duration-200 text-[11px] font-medium group/trade cursor-pointer shadow-2xs hover:shadow-sm"
+                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-blue-50/70 hover:bg-blue-100/90 border border-blue-200/60 text-[#0071E3] transition-all duration-200 text-[11px] font-medium group/trade cursor-pointer shadow-2xs hover:shadow-sm"
                   >
-                    <RefreshCw className="w-3.5 h-3.5 text-purple-600 group-hover/trade:rotate-180 transition-transform duration-500 shrink-0" />
+                    <RefreshCw className="w-3.5 h-3.5 text-[#0071E3] group-hover/trade:rotate-180 transition-transform duration-500 shrink-0" />
                     <span className="truncate">
-                      Tem aparelho usado? <strong className="font-bold underline underline-offset-2">Dar de entrada na pré-venda</strong>
+                      Tem aparelho usado? <strong className="font-bold underline underline-offset-2">Simular abatimento na troca</strong>
                     </span>
                   </Link>
                 )}
@@ -636,14 +634,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             type="button"
             onClick={handleWhatsAppRedirect}
-            className={`w-full inline-flex items-center justify-center gap-2 py-3 px-4 active:scale-[0.98] text-white font-extrabold text-xs sm:text-sm rounded-full shadow-sm hover:shadow transition-all duration-200 cursor-pointer ${
-              isPreOrder
-                ? "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-purple-500/20"
-                : "bg-[#00C853] hover:bg-[#00B048]"
-            }`}
+            className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 active:scale-[0.98] text-white font-extrabold text-xs sm:text-sm rounded-full shadow-sm hover:shadow transition-all duration-200 cursor-pointer bg-[#00C853] hover:bg-[#00B048]"
           >
             <MessageCircle className="w-4 h-4 fill-white shrink-0" />
-            <span>{isPreOrder ? "Garantir Reserva na Pré-Venda" : "Consultar Disponibilidade"}</span>
+            <span>
+              {currentPrice > 0 ? "Consultar Disponibilidade" : "Consultar Valores e Disponibilidade"}
+            </span>
           </button>
         </div>
       </div>
