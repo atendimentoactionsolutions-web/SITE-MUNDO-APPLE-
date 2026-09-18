@@ -84,15 +84,15 @@ export const products: Product[] = [
       "1TB"
     ],
     "colors": [
-      "Preto",
+      "Black",
       "Glacier",
-      "Bordô",
-      "Prateado"
+      "Burgundy",
+      "Silver"
     ],
     "variants": [
       {
         "storage": "256GB",
-        "color": "Preto",
+        "color": "Black",
         "price": 13330,
         "available": true
       },
@@ -104,19 +104,19 @@ export const products: Product[] = [
       },
       {
         "storage": "256GB",
-        "color": "Bordô",
-        "price": 13600,
+        "color": "Burgundy",
+        "price": 13400,
         "available": true
       },
       {
         "storage": "256GB",
-        "color": "Prateado",
-        "price": 13550,
+        "color": "Silver",
+        "price": 13500,
         "available": true
       },
       {
         "storage": "512GB",
-        "color": "Preto",
+        "color": "Black",
         "price": 14900,
         "available": true
       },
@@ -128,19 +128,19 @@ export const products: Product[] = [
       },
       {
         "storage": "512GB",
-        "color": "Bordô",
+        "color": "Burgundy",
         "price": 15150,
         "available": true
       },
       {
         "storage": "512GB",
-        "color": "Prateado",
+        "color": "Silver",
         "price": 15300,
         "available": true
       },
       {
         "storage": "1TB",
-        "color": "Bordô",
+        "color": "Burgundy",
         "price": 18100,
         "available": true
       }
@@ -169,14 +169,14 @@ export const products: Product[] = [
       "256GB"
     ],
     "colors": [
-      "Preto",
+      "Black",
       "Glacier",
-      "Bordô"
+      "Burgundy"
     ],
     "variants": [
       {
         "storage": "256GB",
-        "color": "Preto",
+        "color": "Black",
         "price": 11100,
         "available": true
       },
@@ -188,7 +188,7 @@ export const products: Product[] = [
       },
       {
         "storage": "256GB",
-        "color": "Bordô",
+        "color": "Burgundy",
         "price": 11100,
         "available": true
       }
@@ -240,7 +240,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 9349,
+        "price": 9340,
         "available": true
       },
       {
@@ -325,7 +325,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 7400,
+        "price": 7390,
         "available": true
       },
       {
@@ -423,7 +423,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Light Gold",
-        "price": 6690,
+        "price": 6680,
         "available": true
       },
       {
@@ -447,7 +447,7 @@ export const products: Product[] = [
       {
         "storage": "1TB",
         "color": "Cloud White",
-        "price": 7749,
+        "price": 7748,
         "available": true
       },
       {
@@ -480,7 +480,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-generic.png",
-    "priceFrom": 4250,
+    "priceFrom": 4030,
     "condition": "new",
     "storage": [
       "256GB",
@@ -495,7 +495,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 4340,
+        "price": 4030,
         "available": true
       },
       {
@@ -691,7 +691,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 4385,
+        "price": 4395,
         "available": true
       },
       {
@@ -746,7 +746,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 13145,
+    "priceFrom": 13290,
     "condition": "new",
     "screenSizes": [
       "14\""
@@ -775,7 +775,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 13145,
+        "price": 13290,
         "available": true
       },
       {
@@ -784,7 +784,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 13300,
+        "price": 13450,
         "available": true
       }
     ],
@@ -822,8 +822,8 @@ export const products: Product[] = [
       "2TB"
     ],
     "colors": [
-      "Space Black",
-      "Silver"
+      "Silver",
+      "Space Black"
     ],
     "variants": [
       {
@@ -841,7 +841,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 16390,
+        "price": 16545,
         "available": true
       },
       {
@@ -850,7 +850,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 18200,
+        "price": 19300,
         "available": true
       },
       {
@@ -859,7 +859,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Silver",
-        "price": 17100,
+        "price": 20800,
         "available": true
       },
       {
@@ -868,7 +868,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 18700,
+        "price": 18900,
         "available": true
       },
       {
@@ -877,7 +877,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 18800,
+        "price": 18900,
         "available": true
       }
     ],
@@ -914,8 +914,8 @@ export const products: Product[] = [
       "2TB"
     ],
     "colors": [
-      "Space Black",
-      "Silver"
+      "Silver",
+      "Space Black"
     ],
     "variants": [
       {
@@ -973,7 +973,7 @@ export const products: Product[] = [
       "Silver": "/images/products/mac/macbook-air-silver.png",
       "Sky Blue": "/images/products/mac/macbook-air-spacegray.png"
     },
-    "priceFrom": 9360,
+    "priceFrom": 9599,
     "condition": "new",
     "screenSizes": [
       "13\"",
@@ -988,10 +988,10 @@ export const products: Product[] = [
       "1TB"
     ],
     "colors": [
-      "Midnight",
       "Starlight",
-      "Silver",
-      "Sky Blue"
+      "Sky Blue",
+      "Midnight",
+      "Silver"
     ],
     "variants": [
       {
@@ -999,7 +999,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 9360,
+        "price": 9599,
         "available": true
       },
       {
@@ -1007,7 +1007,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Sky Blue",
-        "price": 9470,
+        "price": 9599,
         "available": true
       },
       {
@@ -1023,7 +1023,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 9800,
+        "price": 9899,
         "available": true
       },
       {
@@ -1047,7 +1047,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 11000,
+        "price": 11099,
         "available": true
       }
     ],
@@ -1083,8 +1083,8 @@ export const products: Product[] = [
     ],
     "colors": [
       "Citrus",
-      "Indigo",
       "Blush",
+      "Indigo",
       "Silver"
     ],
     "variants": [
@@ -1195,7 +1195,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6799.99,
+        "price": 8190,
         "available": true
       },
       {
@@ -1203,7 +1203,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6799.99,
+        "price": 13300,
         "available": true
       }
     ],
@@ -1244,8 +1244,8 @@ export const products: Product[] = [
     "colors": [
       "Blue",
       "Green",
-      "Pink",
-      "Silver"
+      "Silver",
+      "Pink"
     ],
     "variants": [
       {
@@ -1290,7 +1290,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 17950,
+        "price": 17990,
         "available": true
       }
     ],
@@ -1321,9 +1321,7 @@ export const products: Product[] = [
     ],
     "storage": [
       "256GB",
-      "512GB",
-      "1TB",
-      "2TB"
+      "1TB"
     ],
     "colors": [
       "Space Black",
@@ -1332,7 +1330,7 @@ export const products: Product[] = [
     "variants": [
       {
         "screenSize": "11\"",
-        "chip": "Wi-Fi",
+        "chip": "WiFi",
         "storage": "256GB",
         "color": "Space Black",
         "price": 7480,
@@ -1340,122 +1338,58 @@ export const products: Product[] = [
       },
       {
         "screenSize": "11\"",
-        "chip": "Wi-Fi",
+        "chip": "WiFi",
         "storage": "256GB",
         "color": "Silver",
         "price": 7480,
         "available": true
       },
       {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi",
-        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "WiFi",
+        "storage": "256GB",
         "color": "Space Black",
-        "price": 9100,
+        "price": 9090,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "WiFi",
+        "storage": "256GB",
+        "color": "Silver",
+        "price": 9090,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Celular",
+        "storage": "256GB",
+        "color": "Space Black",
+        "price": 9590,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Celular",
+        "storage": "256GB",
+        "color": "Silver",
+        "price": 9590,
         "available": true
       },
       {
         "screenSize": "11\"",
-        "chip": "Wi-Fi",
+        "chip": "WiFi",
         "storage": "1TB",
         "color": "Silver",
         "price": 11650,
         "available": true
       },
       {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi + Cellular",
-        "storage": "256GB",
-        "color": "Silver",
-        "price": 7480,
-        "available": true
-      },
-      {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi + Cellular",
-        "storage": "256GB",
-        "color": "Space Black",
-        "price": 7480,
-        "available": true
-      },
-      {
         "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "256GB",
-        "color": "Space Black",
-        "price": 8400,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "256GB",
-        "color": "Silver",
-        "price": 8500,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "512GB",
-        "color": "Space Black",
-        "price": 9850,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "512GB",
-        "color": "Silver",
-        "price": 9900,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
+        "chip": "WiFi",
         "storage": "1TB",
         "color": "Silver",
         "price": 13090,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "1TB",
-        "color": "Space Black",
-        "price": 11700,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "2TB",
-        "color": "Space Black",
-        "price": 12000,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi + Cellular",
-        "storage": "256GB",
-        "color": "Space Black",
-        "price": 8400,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi + Cellular",
-        "storage": "256GB",
-        "color": "Silver",
-        "price": 8500,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi + Cellular",
-        "storage": "2TB",
-        "color": "Silver",
-        "price": 13800,
         "available": true
       }
     ],
@@ -1484,12 +1418,24 @@ export const products: Product[] = [
       "256GB"
     ],
     "colors": [
-      "Yellow",
       "Blue",
       "Pink",
+      "Yellow",
       "Silver"
     ],
     "variants": [
+      {
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 3160,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "color": "Pink",
+        "price": 3160,
+        "available": true
+      },
       {
         "storage": "128GB",
         "color": "Yellow",
@@ -1498,38 +1444,32 @@ export const products: Product[] = [
       },
       {
         "storage": "128GB",
-        "color": "Blue",
+        "color": "Silver",
         "price": 3160,
         "available": true
       },
       {
-        "storage": "128GB",
-        "color": "Pink",
-        "price": 3180,
-        "available": true
-      },
-      {
-        "storage": "128GB",
-        "color": "Silver",
-        "price": 3200,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Pink",
-        "price": 3849,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Silver",
-        "price": 3849,
-        "available": true
-      },
-      {
         "storage": "256GB",
         "color": "Blue",
-        "price": 3849,
+        "price": 3890,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Pink",
+        "price": 3890,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Yellow",
+        "price": 3890,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Silver",
+        "price": 3890,
         "available": true
       }
     ],
@@ -1698,66 +1638,58 @@ export const products: Product[] = [
       "46mm"
     ],
     "colors": [
+      "Jet Black",
       "Rose Gold",
       "Space Gray",
-      "Jet Black",
       "Silver"
     ],
     "variants": [
       {
         "size": "42mm",
-        "storage": "",
+        "color": "Jet Black",
+        "price": 2450,
+        "available": true
+      },
+      {
+        "size": "42mm",
         "color": "Rose Gold",
         "price": 2450,
         "available": true
       },
       {
         "size": "42mm",
-        "storage": "",
         "color": "Space Gray",
         "price": 2470,
         "available": true
       },
       {
         "size": "42mm",
-        "storage": "",
-        "color": "Jet Black",
-        "price": 2450,
-        "available": true
-      },
-      {
-        "size": "42mm",
-        "storage": "",
         "color": "Silver",
         "price": 2495,
         "available": true
       },
       {
         "size": "46mm",
-        "storage": "",
-        "color": "Rose Gold",
-        "price": 2649,
-        "available": true
-      },
-      {
-        "size": "46mm",
-        "storage": "",
         "color": "Space Gray",
         "price": 2640,
         "available": true
       },
       {
         "size": "46mm",
-        "storage": "",
-        "color": "Jet Black",
-        "price": 2670,
+        "color": "Rose Gold",
+        "price": 2649,
         "available": true
       },
       {
         "size": "46mm",
-        "storage": "",
         "color": "Silver",
         "price": 2660,
+        "available": true
+      },
+      {
+        "size": "46mm",
+        "color": "Jet Black",
+        "price": 2670,
         "available": true
       }
     ],
@@ -1785,21 +1717,19 @@ export const products: Product[] = [
       "49mm"
     ],
     "colors": [
-      "Natural",
-      "Black"
+      "Black Titanium",
+      "Natural Titanium"
     ],
     "variants": [
       {
         "size": "49mm",
-        "storage": "",
-        "color": "Black",
+        "color": "Black Titanium",
         "price": 4749,
         "available": true
       },
       {
         "size": "49mm",
-        "storage": "",
-        "color": "Natural",
+        "color": "Natural Titanium",
         "price": 4950,
         "available": true
       }
@@ -1834,28 +1764,24 @@ export const products: Product[] = [
     "variants": [
       {
         "size": "40mm",
-        "storage": "",
         "color": "Midnight",
         "price": 1935,
         "available": true
       },
       {
         "size": "40mm",
-        "storage": "",
         "color": "Starlight",
         "price": 2045,
         "available": true
       },
       {
         "size": "44mm",
-        "storage": "",
         "color": "Midnight",
         "price": 2090,
         "available": true
       },
       {
         "size": "44mm",
-        "storage": "",
         "color": "Starlight",
         "price": 2120,
         "available": true
@@ -1957,41 +1883,36 @@ export const products: Product[] = [
     "priceFrom": 3099,
     "condition": "new",
     "colors": [
-      "Blue",
       "Purple",
+      "Midnight",
       "Orange",
-      "Starlight",
-      "Midnight"
+      "Blue",
+      "Starlight"
     ],
     "variants": [
       {
-        "storage": "",
-        "color": "Blue",
-        "price": 3100,
-        "available": true
-      },
-      {
-        "storage": "",
         "color": "Purple",
         "price": 3099,
         "available": true
       },
       {
-        "storage": "",
+        "color": "Midnight",
+        "price": 3099,
+        "available": true
+      },
+      {
         "color": "Orange",
         "price": 3099,
         "available": true
       },
       {
-        "storage": "",
-        "color": "Starlight",
-        "price": 3149,
+        "color": "Blue",
+        "price": 3100,
         "available": true
       },
       {
-        "storage": "",
-        "color": "Midnight",
-        "price": 3099,
+        "color": "Starlight",
+        "price": 3149,
         "available": true
       }
     ],
@@ -2010,7 +1931,7 @@ export const products: Product[] = [
       "White": "/images/products/accessories/magic-mouse-white.png",
       "Black": "/images/products/accessories/magic-mouse-3-black.png"
     },
-    "priceFrom": 590,
+    "priceFrom": 600,
     "condition": "new",
     "colors": [
       "White",
@@ -2018,15 +1939,13 @@ export const products: Product[] = [
     ],
     "variants": [
       {
-        "storage": "",
         "color": "White",
-        "price": 590,
+        "price": 600,
         "available": true
       },
       {
-        "storage": "",
         "color": "Black",
-        "price": 590,
+        "price": 670,
         "available": true
       }
     ],
@@ -2054,15 +1973,13 @@ export const products: Product[] = [
     ],
     "variants": [
       {
-        "storage": "",
         "color": "White",
         "price": 590,
         "available": true
       },
       {
-        "storage": "",
         "color": "Black",
-        "price": 590,
+        "price": 670,
         "available": true
       }
     ],
