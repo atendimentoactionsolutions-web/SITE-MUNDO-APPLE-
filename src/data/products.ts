@@ -71,10 +71,10 @@ export const products: Product[] = [
     "subcategory": "iPhone 18 Series",
     "image": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
     "colorImages": {
-      "Preto": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Bordô": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
+      "Black": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Glacier": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Prateado": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
+      "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
+      "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
     "priceFrom": 13330,
     "condition": "new",
@@ -158,10 +158,9 @@ export const products: Product[] = [
     "subcategory": "iPhone 18 Series",
     "image": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
     "colorImages": {
-      "Preto": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Bordô": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
+      "Black": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Glacier": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Prateado": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
+      "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
     "priceFrom": 11100,
     "condition": "new",
@@ -666,7 +665,10 @@ export const products: Product[] = [
     "image": "/images/products/iphone/iphone-15-black.png",
     "colorImages": {
       "Black": "/images/products/iphone/iphone-15-black.png",
-      "Blue": "/images/products/iphone/iphone-15-blue.png"
+      "Blue": "/images/products/iphone/iphone-15-blue.png",
+      "Pink": "/images/products/iphone/iphone-15-black.png",
+      "Green": "/images/products/iphone/iphone-15-black.png",
+      "Yellow": "/images/products/iphone/iphone-15-black.png"
     },
     "priceFrom": 4300,
     "condition": "new",
@@ -1625,11 +1627,10 @@ export const products: Product[] = [
     "subcategory": "Apple Watch Series 11",
     "image": "/images/products/watch/apple-watch-s11-black.png",
     "colorImages": {
-      "Jet Black": "/images/products/watch/apple-watch-s11-black.png",
-      "Black": "/images/products/watch/apple-watch-s11-black.png",
+      "Jet Black": "/images/products/watch/apple-watch-s11-jetblack.png",
       "Rose Gold": "/images/products/watch/apple-watch-s11-rosegold.png",
-      "Silver": "/images/products/watch/apple-watch-s11-silver.png",
-      "Space Gray": "/images/products/watch/apple-watch-s11-black.png"
+      "Space Gray": "/images/products/watch/apple-watch-s11-spacegray.png",
+      "Silver": "/images/products/watch/apple-watch-s11-silver.png"
     },
     "priceFrom": 2450,
     "condition": "new",
@@ -1706,10 +1707,8 @@ export const products: Product[] = [
     "subcategory": "Apple Watch Ultra 3",
     "image": "/images/products/watch/apple-watch-ultra-natural.png",
     "colorImages": {
-      "Natural Titanium": "/images/products/watch/apple-watch-ultra-natural.png",
-      "Black Titanium": "/images/products/watch/apple-watch-ultra-black.png",
-      "Natural": "/images/products/watch/apple-watch-ultra-natural.png",
-      "Black": "/images/products/watch/apple-watch-ultra-black.png"
+      "Black Titanium": "/images/products/watch/apple-watch-ultra-3.png",
+      "Natural Titanium": "/images/products/watch/apple-watch-ultra-3.png"
     },
     "priceFrom": 4749,
     "condition": "new",
@@ -1747,9 +1746,8 @@ export const products: Product[] = [
     "subcategory": "Apple Watch SE 3",
     "image": "/images/products/watch/apple-watch-se-midnight.png",
     "colorImages": {
-      "Midnight": "/images/products/watch/apple-watch-se-midnight.png",
-      "Starlight": "/images/products/watch/apple-watch-se-starlight.png",
-      "Silver": "/images/products/watch/apple-watch-se-silver.png"
+      "Midnight": "/images/products/watch/apple-watch-se3-midnight.png",
+      "Starlight": "/images/products/watch/apple-watch-se3-starlight.png"
     },
     "priceFrom": 1935,
     "condition": "new",
