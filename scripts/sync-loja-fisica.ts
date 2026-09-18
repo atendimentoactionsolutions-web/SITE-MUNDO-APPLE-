@@ -13,6 +13,8 @@ interface RenderSupplierItem {
   description?: string;
   region?: string;
   isActive?: boolean;
+  isSeminovo?: boolean;
+  condition?: string;
 }
 
 const COLOR_MAP: Record<string, string[]> = {

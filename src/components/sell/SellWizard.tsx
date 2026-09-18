@@ -7,22 +7,19 @@ import {
   Check,
   CheckCircle2,
   AlertCircle,
-  HelpCircle,
-  Loader2,
-  MessageCircle,
-  RotateCcw,
-  Search,
   ShieldCheck,
   Smartphone,
-  Sparkles,
+  RotateCcw,
+  Search,
+  MessageCircle,
+  Loader2,
+  Lock,
   BatteryCharging,
   Camera,
   Wifi,
-  Volume2,
-  Lock,
-  Sliders,
+  Sparkles,
+  Zap,
 } from "lucide-react";
-import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { storeConfig } from "@/data/storeConfig";
 import { formatCurrency } from "@/utils/formatters";
@@ -46,8 +43,8 @@ interface SellWizardProps {
   onCancel?: () => void;
 }
 
-export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
-  const totalSteps = 10;
+export const SellWizard: React.FC<SellWizardProps> = () => {
+  const totalSteps = 15;
   const [step, setStep] = useState(1);
 
   // Data loaded from database
@@ -58,45 +55,24 @@ export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
   const [storageOptions, setStorageOptions] = useState<StorageOption[]>([]);
   const [loadingStorages, setLoadingStorages] = useState(false);
 
-  // Form State
+  // Form State — NO PRE-SELECTION (all default to empty string)
   const [selectedModel, setSelectedModel] = useState<ModelOption | null>(null);
   const [selectedStorage, setSelectedStorage] = useState<StorageOption | null>(null);
   const [deviceColor, setDeviceColor] = useState("");
 
-  // 13 Evaluation Criteria State
-  // 1. Funcionamento Inicial
-  const [powerOnStatus, setPowerOnStatus] = useState<string>("normal");
-  // 13. Bloqueio iCloud
-  const [icloudStatus, setIcloudStatus] = useState<string>("unlocked");
-
-  // 2. Condição da Tela
-  const [screenGlass, setScreenGlass] = useState<string>("perfect");
-  const [screenDisplay, setScreenDisplay] = useState<string>("perfect");
-
-  // 3. Estado da Carcaça
-  const [bodyBackGlass, setBodyBackGlass] = useState<string>("perfect");
-  const [bodySides, setBodySides] = useState<string>("perfect");
-
-  // 4. Câmeras & 5. Face ID
-  const [cameraFront, setCameraFront] = useState<string>("perfect");
-  const [cameraRear, setCameraRear] = useState<string>("perfect");
-  const [cameraGlass, setCameraGlass] = useState<string>("perfect");
-  const [faceId, setFaceId] = useState<string>("perfect");
-
-  // Saúde da Bateria & 9. Carregamento
-  const [batteryHealth, setBatteryHealth] = useState<string>("good");
-  const [charging, setCharging] = useState<string>("perfect");
-
-  // 7. Áudio & 8. Conectividade
-  const [audioSpeakers, setAudioSpeakers] = useState<string>("perfect");
-  const [audioMicrophone, setAudioMicrophone] = useState<string>("perfect");
-  const [networkWifi, setNetworkWifi] = useState<string>("perfect");
-  const [networkCellular, setNetworkCellular] = useState<string>("perfect");
-
-  // 10. Histórico Tela, 11. Bateria & 12. Outros Reparos
-  const [screenHistory, setScreenHistory] = useState<string>("original");
-  const [batteryHistory, setBatteryHistory] = useState<string>("never");
-  const [otherRepairs, setOtherRepairs] = useState<string[]>(["none"]);
+  // Single Question Answers (empty by default)
+  const [powerOnStatus, setPowerOnStatus] = useState<string>("");
+  const [icloudStatus, setIcloudStatus] = useState<string>("");
+  const [screenGlass, setScreenGlass] = useState<string>("");
+  const [screenDisplay, setScreenDisplay] = useState<string>("");
+  const [bodyBackGlass, setBodyBackGlass] = useState<string>("");
+  const [bodySides, setBodySides] = useState<string>("");
+  const [cameraRear, setCameraRear] = useState<string>("");
+  const [faceId, setFaceId] = useState<string>("");
+  const [batteryHealth, setBatteryHealth] = useState<string>("");
+  const [charging, setCharging] = useState<string>("");
+  const [networkWifi, setNetworkWifi] = useState<string>("");
+  const [screenHistory, setScreenHistory] = useState<string>("");
 
   // Customer Data
   const [customerName, setCustomerName] = useState("");
@@ -145,18 +121,17 @@ export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
         const list = data.storageOptions || data.storages || [];
         if (Array.isArray(list) && list.length > 0) {
           setStorageOptions(list);
-          if (!list.some((s: StorageOption) => s.id === selectedStorage?.id)) {
-            setSelectedStorage(list[0]);
-          }
+          setSelectedStorage(null); // NO PRE-SELECTION
         } else {
           const fallback = [
             { id: "storage-64gb", displayName: "64GB", capacityGb: 64 },
             { id: "storage-128gb", displayName: "128GB", capacityGb: 128 },
             { id: "storage-256gb", displayName: "256GB", capacityGb: 256 },
             { id: "storage-512gb", displayName: "512GB", capacityGb: 512 },
+            { id: "storage-1tb", displayName: "1TB", capacityGb: 1024 },
           ];
           setStorageOptions(fallback);
-          setSelectedStorage(fallback[0]);
+          setSelectedStorage(null);
         }
       } catch (err) {
         console.error("Erro ao carregar armazenamentos:", err);
@@ -196,22 +171,7 @@ export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
     return models.filter((m) => m.name.toLowerCase().includes(q));
   }, [models, modelSearch]);
 
-  const toggleOtherRepair = (item: string) => {
-    if (item === "none") {
-      setOtherRepairs(["none"]);
-      return;
-    }
-    let next = otherRepairs.filter((r) => r !== "none");
-    if (next.includes(item)) {
-      next = next.filter((r) => r !== item);
-    } else {
-      next.push(item);
-    }
-    if (next.length === 0) next = ["none"];
-    setOtherRepairs(next);
-  };
-
-  // Step Validation Checkers
+  // Step Validation Checkers — Requires user to actually answer
   const isStepValid = useMemo(() => {
     switch (step) {
       case 1:
@@ -219,20 +179,30 @@ export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
       case 2:
         return !!selectedStorage;
       case 3:
-        return !!powerOnStatus && !!icloudStatus;
+        return !!powerOnStatus;
       case 4:
-        return !!screenGlass && !!screenDisplay;
+        return !!icloudStatus;
       case 5:
-        return !!bodyBackGlass && !!bodySides;
+        return !!screenGlass;
       case 6:
-        return !!cameraFront && !!cameraRear && !!faceId;
+        return !!screenDisplay;
       case 7:
-        return !!batteryHealth && !!charging;
+        return !!bodyBackGlass;
       case 8:
-        return !!networkWifi && !!networkCellular;
+        return !!bodySides;
       case 9:
-        return !!screenHistory && !!batteryHistory && otherRepairs.length > 0;
+        return !!cameraRear;
       case 10:
+        return !!faceId;
+      case 11:
+        return !!batteryHealth;
+      case 12:
+        return !!charging;
+      case 13:
+        return !!networkWifi;
+      case 14:
+        return !!screenHistory;
+      case 15:
         return (
           customerName.trim().length >= 2 &&
           customerWhatsapp.replace(/\D/g, "").length >= 10
@@ -250,19 +220,12 @@ export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
     screenDisplay,
     bodyBackGlass,
     bodySides,
-    cameraFront,
     cameraRear,
-    cameraGlass,
     faceId,
     batteryHealth,
     charging,
-    audioSpeakers,
-    audioMicrophone,
     networkWifi,
-    networkCellular,
     screenHistory,
-    batteryHistory,
-    otherRepairs,
     customerName,
     customerWhatsapp,
   ]);
@@ -284,19 +247,19 @@ export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
           screenDisplay,
           bodyBackGlass,
           bodySides,
-          cameraFront,
+          cameraFront: "perfect",
           cameraRear,
-          cameraGlass,
+          cameraGlass: "perfect",
           faceId,
           batteryHealth,
-          audioSpeakers,
-          audioMicrophone,
+          audioSpeakers: "perfect",
+          audioMicrophone: "perfect",
           networkWifi,
-          networkCellular,
+          networkCellular: networkWifi,
           charging,
           screenHistory,
-          batteryHistory,
-          otherRepairs,
+          batteryHistory: "never",
+          otherRepairs: ["none"],
           customerName: customerName.trim(),
           customerWhatsapp: customerWhatsapp.trim(),
           customerCep: customerCep.trim(),
@@ -333,25 +296,18 @@ export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
     setSelectedModel(null);
     setSelectedStorage(null);
     setDeviceColor("");
-    setPowerOnStatus("normal");
-    setIcloudStatus("unlocked");
-    setScreenGlass("perfect");
-    setScreenDisplay("perfect");
-    setBodyBackGlass("perfect");
-    setBodySides("perfect");
-    setCameraFront("perfect");
-    setCameraRear("perfect");
-    setCameraGlass("perfect");
-    setFaceId("perfect");
-    setBatteryHealth("good");
-    setCharging("perfect");
-    setAudioSpeakers("perfect");
-    setAudioMicrophone("perfect");
-    setNetworkWifi("perfect");
-    setNetworkCellular("perfect");
-    setScreenHistory("original");
-    setBatteryHistory("never");
-    setOtherRepairs(["none"]);
+    setPowerOnStatus("");
+    setIcloudStatus("");
+    setScreenGlass("");
+    setScreenDisplay("");
+    setBodyBackGlass("");
+    setBodySides("");
+    setCameraRear("");
+    setFaceId("");
+    setBatteryHealth("");
+    setCharging("");
+    setNetworkWifi("");
+    setScreenHistory("");
     setQuoteResult(null);
     setCustomerName("");
     setCustomerWhatsapp("");
@@ -370,6 +326,14 @@ export const SellWizard: React.FC<SellWizardProps> = ({ onCancel }) => {
     if (step > 1) {
       setStep(step - 1);
     }
+  };
+
+  // Helper to select and auto-advance
+  const selectOptionAndAdvance = (setter: (val: string) => void, val: string) => {
+    setter(val);
+    setTimeout(() => {
+      setStep((prev) => (prev < totalSteps ? prev + 1 : prev));
+    }, 200);
   };
 
   // WhatsApp formatted string
@@ -413,34 +377,54 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
     customerCep,
   ]);
 
-  // Option Radio Card Component
-  const OptionRadioCard: React.FC<{
+  // Option Click Card Component
+  const OptionCard: React.FC<{
     selected: boolean;
     onClick: () => void;
     title: string;
     subtitle?: string;
-  }> = ({ selected, onClick, title, subtitle }) => {
+    icon?: React.ReactNode;
+    badge?: string;
+  }> = ({ selected, onClick, title, subtitle, icon, badge }) => {
     return (
       <button
         type="button"
         onClick={onClick}
-        className={`w-full p-4 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all ${
+        className={`w-full p-4 sm:p-5 rounded-2xl border text-left flex items-center justify-between gap-4 transition-all duration-200 cursor-pointer ${
           selected
-            ? "bg-apple-blue/5 border-apple-blue shadow-sm ring-1 ring-apple-blue/30"
-            : "bg-white border-apple-border hover:bg-apple-gray/30"
+            ? "bg-blue-50/80 border-[#0071E3] shadow-md ring-2 ring-[#0071E3]/30 scale-[1.01]"
+            : "bg-white border-[#D2D2D7] hover:border-[#86868B] hover:bg-[#F5F5F7] shadow-xs"
         }`}
       >
-        <div className="space-y-0.5">
-          <div className="font-semibold text-apple-dark text-sm sm:text-base leading-snug">
-            {title}
+        <div className="flex items-center gap-3.5">
+          {icon && (
+            <div
+              className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                selected ? "bg-[#0071E3] text-white" : "bg-[#F5F5F7] text-[#1D1D1F]"
+              }`}
+            >
+              {icon}
+            </div>
+          )}
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-[#1D1D1F] text-sm sm:text-base leading-snug">
+                {title}
+              </span>
+              {badge && (
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                  {badge}
+                </span>
+              )}
+            </div>
+            {subtitle && <p className="text-xs text-[#6E6E73] leading-relaxed">{subtitle}</p>}
           </div>
-          {subtitle && <p className="text-xs text-apple-muted leading-relaxed">{subtitle}</p>}
         </div>
 
-        <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <div
-            className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${
-              selected ? "bg-apple-blue border-apple-blue text-white" : "border-apple-border bg-white"
+            className={`w-6 h-6 rounded-full flex items-center justify-center border transition-all ${
+              selected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7] bg-white"
             }`}
           >
             {selected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -457,11 +441,10 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
     const isBlocked = quoteResult.calculation?.blocked;
     const isManual = quoteResult.calculation?.manualReview;
     const finalVal = quoteResult.calculation?.finalPrice || 0;
-    const baseVal = quoteResult.calculation?.basePrice || 0;
 
     return (
       <div className="w-full max-w-2xl mx-auto py-4 px-4 sm:px-0 animate-in fade-in duration-300">
-        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-apple-border space-y-8 text-center">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-[#D2D2D7] space-y-8 text-center">
           {/* Header */}
           <div className="flex flex-col items-center space-y-2">
             <div
@@ -482,14 +465,14 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
               )}
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-apple-gray text-xs font-semibold text-apple-dark border border-apple-border">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F5F5F7] text-xs font-semibold text-[#1D1D1F] border border-[#D2D2D7]">
               <span>Cotação de Venda:</span>
-              <strong className="text-apple-blue font-bold tracking-wider">
+              <strong className="text-[#0071E3] font-bold tracking-wider">
                 {quoteResult.quote?.publicCode}
               </strong>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-bold text-apple-dark">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F]">
               {isBlocked
                 ? "Aparelho Não Elegível para Compra"
                 : isManual
@@ -497,7 +480,7 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
                 : "Proposta de Compra Concluída!"}
             </h2>
 
-            <p className="text-xs sm:text-sm text-apple-muted max-w-md">
+            <p className="text-xs sm:text-sm text-[#6E6E73] max-w-md">
               {isBlocked
                 ? "Identificamos que o aparelho possui restrição ou bloqueio de iCloud ativo."
                 : isManual
@@ -513,20 +496,19 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
                 <span>Política de Segurança — Bloqueio de iCloud</span>
               </div>
               <p className="text-xs sm:text-sm text-red-700 leading-relaxed">
-                Por diretrizes rigorosas de conformidade e segurança da Mundo Apple, não compramos nem aceitamos na troca aparelhos com bloqueio de ativação do iCloud ou sem acesso à senha original.
+                Por diretrizes rigorosas de conformidade e segurança da Mundo Apple, não compramos aparelhos com bloqueio de ativação do iCloud ou sem acesso à senha original.
               </p>
             </div>
           ) : (
             <div className="space-y-6 text-left">
-              {/* Card Preço PIX */}
-              <div className="bg-gradient-to-br from-[#F5F5F7] via-white to-[#F5F5F7] rounded-3xl p-6 sm:p-8 border border-apple-border shadow-sm text-center space-y-3">
-                <span className="text-xs font-bold text-apple-muted uppercase tracking-wider block">
+              <div className="bg-gradient-to-br from-[#F5F5F7] via-white to-[#F5F5F7] rounded-3xl p-6 sm:p-8 border border-[#D2D2D7] shadow-sm text-center space-y-3">
+                <span className="text-xs font-bold text-[#6E6E73] uppercase tracking-wider block">
                   Valor da Proposta com Pagamento no Pix:
                 </span>
                 <div className="text-4xl sm:text-5xl font-extrabold text-emerald-600 tracking-tight">
                   {formatCurrency(finalVal)}
                 </div>
-                <p className="text-xs text-apple-muted">
+                <p className="text-xs text-[#6E6E73]">
                   {selectedModel?.name} · {selectedStorage?.displayName} · Cor: {deviceColor || "Padrão"}
                 </p>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
@@ -554,7 +536,7 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
               type="button"
               variant="secondary"
               onClick={handleReset}
-              className="py-4 px-6 rounded-2xl font-bold border-apple-border text-apple-dark hover:bg-apple-gray transition-all"
+              className="py-4 px-6 rounded-2xl font-bold border-[#D2D2D7] text-[#1D1D1F] hover:bg-[#F5F5F7] transition-all"
             >
               <RotateCcw className="w-4 h-4 mr-2" />
               <span>Nova Cotação</span>
@@ -569,77 +551,77 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
     <div className="w-full max-w-2xl mx-auto py-4 px-4 sm:px-0">
       {/* Wizard Progress Bar */}
       <div className="mb-6 space-y-2">
-        <div className="flex items-center justify-between text-xs font-semibold text-apple-muted">
-          <span>Etapa {step} de {totalSteps}</span>
+        <div className="flex items-center justify-between text-xs font-semibold text-[#6E6E73]">
+          <span>Pergunta {step} de {totalSteps}</span>
           <span>{Math.round((step / totalSteps) * 100)}% concluído</span>
         </div>
-        <div className="w-full h-2 bg-apple-gray rounded-full overflow-hidden">
+        <div className="w-full h-2 bg-[#E5E5E7] rounded-full overflow-hidden">
           <div
-            className="h-full bg-apple-blue transition-all duration-300 rounded-full"
+            className="h-full bg-[#0071E3] transition-all duration-300 rounded-full"
             style={{ width: `${(step / totalSteps) * 100}%` }}
           />
         </div>
       </div>
 
-      <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-apple-border space-y-6">
+      <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-[#D2D2D7] space-y-6">
         {/* ----------------------------------------------------
             ETAPA 1 — MODELO DO APARELHO
         ---------------------------------------------------- */}
         {step === 1 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 1: Modelo</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 1: Modelo</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
                 Qual iPhone você quer vender?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Selecione o modelo do aparelho para obter a cotação de compra imediata.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Selecione o modelo do seu iPhone para iniciar a avaliação.
               </p>
             </div>
 
             <div className="relative">
-              <Search className="w-4 h-4 text-apple-muted absolute left-4 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={modelSearch}
                 onChange={(e) => setModelSearch(e.target.value)}
-                placeholder="Buscar modelo (ex: iPhone 13 Pro, iPhone 16...)"
-                className="w-full pl-11 pr-4 py-3.5 bg-apple-gray/40 rounded-2xl text-sm font-medium border border-apple-border focus:border-apple-blue focus:bg-white focus:outline-none transition-all"
+                placeholder="Buscar modelo (ex: iPhone 14 Pro, iPhone 13...)"
+                className="w-full pl-10 pr-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0071E3] focus:bg-white transition-all text-[#1D1D1F]"
               />
             </div>
 
             {loadingCatalog ? (
-              <div className="py-12 flex flex-col items-center justify-center text-apple-muted space-y-3">
-                <Loader2 className="w-8 h-8 animate-spin text-apple-blue" />
-                <span className="text-xs font-medium">Carregando catálogo de modelos...</span>
+              <div className="py-12 flex flex-col items-center justify-center space-y-3 text-[#6E6E73]">
+                <Loader2 className="w-8 h-8 animate-spin text-[#0071E3]" />
+                <p className="text-xs font-semibold">Carregando catálogo de modelos...</p>
               </div>
             ) : (
-              <div className="max-h-80 overflow-y-auto space-y-2 pr-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
                 {filteredModels.map((m) => {
-                  const isSelected = selectedModel?.id === m.id;
+                  const isSel = selectedModel?.id === m.id;
                   return (
                     <button
                       key={m.id}
                       type="button"
                       onClick={() => {
                         setSelectedModel(m);
-                        setStep(2);
+                        setTimeout(() => setStep(2), 150);
                       }}
-                      className={`w-full p-3.5 rounded-2xl border text-left flex items-center justify-between transition-all ${
-                        isSelected
-                          ? "bg-apple-blue/10 border-apple-blue shadow-sm"
-                          : "bg-white border-apple-border hover:bg-apple-gray/30 hover:border-apple-dark/20"
+                      className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
+                        isSel
+                          ? "bg-blue-50/80 border-[#0071E3] shadow-sm ring-1 ring-[#0071E3]/30"
+                          : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-apple-gray flex items-center justify-center text-apple-dark">
-                          <Smartphone className="w-5 h-5" />
+                        <div className="w-8 h-8 rounded-xl bg-[#F5F5F7] flex items-center justify-center text-[#1D1D1F]">
+                          <Smartphone className="w-4 h-4" />
                         </div>
-                        <span className="font-semibold text-apple-dark text-sm sm:text-base">
+                        <span className="font-bold text-[#1D1D1F] text-xs sm:text-sm">
                           {m.name}
                         </span>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-apple-muted" />
+                      {isSel && <Check className="w-4 h-4 text-[#0071E3]" />}
                     </button>
                   );
                 })}
@@ -654,797 +636,637 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
         {step === 2 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 2: Capacidade e Cor</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                Qual a capacidade e cor do seu {selectedModel?.name}?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 2: Capacidade</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                Qual é a capacidade de memória?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Informe o armazenamento interno e a cor do aparelho.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                {selectedModel?.name} — selecione a memória interna do seu iPhone.
               </p>
             </div>
 
-            {loadingStorages ? (
-              <div className="py-8 flex justify-center text-apple-muted">
-                <Loader2 className="w-6 h-6 animate-spin text-apple-blue" />
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {storageOptions.map((so) => {
-                  const isSelected = selectedStorage?.id === so.id;
-                  return (
-                    <button
-                      key={so.id}
-                      type="button"
-                      onClick={() => setSelectedStorage(so)}
-                      className={`py-4 px-3 rounded-2xl border text-center font-bold text-base sm:text-lg transition-all ${
-                        isSelected
-                          ? "bg-apple-dark text-white border-apple-dark shadow-md scale-[1.02]"
-                          : "bg-white text-apple-dark border-apple-border hover:border-apple-dark/40 hover:bg-apple-gray/30"
-                      }`}
-                    >
-                      {so.displayName}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {storageOptions.map((st) => {
+                const isSel = selectedStorage?.id === st.id;
+                return (
+                  <button
+                    key={st.id}
+                    type="button"
+                    onClick={() => {
+                      setSelectedStorage(st);
+                      setTimeout(() => setStep(3), 150);
+                    }}
+                    className={`py-4 px-4 rounded-2xl border text-center font-bold text-sm sm:text-base transition-all cursor-pointer ${
+                      isSel
+                        ? "bg-[#0071E3] text-white border-[#0071E3] shadow-md ring-2 ring-[#0071E3]/30"
+                        : "bg-white border-[#D2D2D7] text-[#1D1D1F] hover:bg-[#F5F5F7]"
+                    }`}
+                  >
+                    {st.displayName}
+                  </button>
+                );
+              })}
+            </div>
 
-            <div className="space-y-2 pt-2 border-t border-apple-border/60">
-              <label className="block text-sm font-bold text-apple-dark">
-                Qual a cor do aparelho?
+            <div className="space-y-2 pt-2 border-t border-[#E5E5E7]">
+              <label className="text-xs font-semibold text-[#1D1D1F] block">
+                Cor do aparelho (opcional):
               </label>
               <input
                 type="text"
                 value={deviceColor}
                 onChange={(e) => setDeviceColor(e.target.value)}
-                placeholder="Ex: Meia-noite, Estelar, Azul, Titânio Natural, Preto Espacial..."
-                className="w-full px-4 py-3.5 bg-white rounded-2xl text-sm font-medium border border-apple-border focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/20 focus:outline-none transition-all"
+                placeholder="Ex: Preto, Azul, Dourado, Branco..."
+                className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
               />
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 3 — 1. FUNCIONAMENTO INICIAL & 13. ICLOUD
+            ETAPA 3 — FUNCIONAMENTO INICIAL
         ---------------------------------------------------- */}
         {step === 3 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 3: Inicialização &amp; Conta</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                Como está o funcionamento inicial e a conta iCloud?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 3: Funcionamento</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                O iPhone liga e funciona normalmente?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                1. Funcionamento Inicial e Bloqueio de iCloud da Tabela Oficial.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Responda sobre o estado geral de inicialização do aparelho.
               </p>
             </div>
 
-            {/* 1. Funcionamento Inicial */}
-            <div className="space-y-2.5">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Funcionamento Inicial do Aparelho
-              </label>
-              <OptionRadioCard
+            <div className="space-y-3">
+              <OptionCard
                 selected={powerOnStatus === "normal"}
-                onClick={() => setPowerOnStatus("normal")}
-                title="Sim, liga e funciona normalmente"
-                subtitle="Inicializa perfeitamente e opera sem travamentos ou reinicializações."
+                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "normal")}
+                title="Liga perfeitamente e acessa a tela inicial"
+                subtitle="Sistema inicia normalmente sem travamentos ou reinicializações."
+                icon={<Zap className="w-5 h-5" />}
+                badge="100% Funcional"
               />
-              <OptionRadioCard
+              <OptionCard
                 selected={powerOnStatus === "glitches"}
-                onClick={() => setPowerOnStatus("glitches")}
-                title="Liga, mas apresenta falhas ou reinicializações"
-                subtitle="Reinicia sozinho em poucos minutos ou trava durante o uso."
+                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "glitches")}
+                title="Liga, mas reinicia ou trava com frequência"
+                subtitle="Apresenta desligamento repentino ou travamento ocasional."
+                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
               />
-              <OptionRadioCard
-                selected={powerOnStatus === "recovery"}
-                onClick={() => setPowerOnStatus("recovery")}
-                title="Está travado na tela da Apple / modo de recuperação"
-                subtitle="Travado no loop de logo da maçã ou tela de cabo do iTunes."
-              />
-              <OptionRadioCard
+              <OptionCard
                 selected={powerOnStatus === "no_power"}
-                onClick={() => setPowerOnStatus("no_power")}
-                title="Não liga"
-                subtitle="Não dá sinal de vida ao conectar ao carregador ou pressionar botões."
-              />
-            </div>
-
-            {/* 13. Bloqueio iCloud */}
-            <div className="space-y-2.5 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider flex items-center gap-1">
-                <Lock className="w-3.5 h-3.5 text-apple-blue" />
-                Bloqueio de iCloud
-              </label>
-              <OptionRadioCard
-                selected={icloudStatus === "unlocked"}
-                onClick={() => setIcloudStatus("unlocked")}
-                title="Aparelho totalmente desbloqueado e pronto para restauração"
-                subtitle="Você possui o login e senha e o Buscar iPhone pode ser desativado."
-              />
-              <OptionRadioCard
-                selected={icloudStatus === "locked"}
-                onClick={() => setIcloudStatus("locked")}
-                title="Aparelho bloqueado no iCloud ou sem senha"
-                subtitle="NÃO COMPRAMOS / AVALIAÇÃO RECUSADA."
+                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "no_power")}
+                title="Não liga ou fica preso na maçã"
+                subtitle="Aparelho não dá sinal de imagem ou travado em modo de recuperação."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
               />
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 4 — 2. CONDIÇÃO DA TELA (VIDRO + DISPLAY)
+            ETAPA 4 — CONTA ICLOUD
         ---------------------------------------------------- */}
         {step === 4 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 4: Tela</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                Como está a tela do seu iPhone?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 4: Segurança</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                A conta do iCloud está liberada para remoção?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Avalie o vidro frontal e a imagem interna do display.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Você possui a senha para desvincular o iCloud e formatar o aparelho na entrega?
               </p>
             </div>
 
-            {/* Vidro da tela */}
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Como está o vidro frontal da tela?
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <OptionRadioCard
-                  selected={screenGlass === "perfect"}
-                  onClick={() => setScreenGlass("perfect")}
-                  title="Perfeito, sem riscos"
-                />
-                <OptionRadioCard
-                  selected={screenGlass === "light_scratches"}
-                  onClick={() => setScreenGlass("light_scratches")}
-                  title="Arranhões leves"
-                  subtitle="Marcas superficiais visíveis sob luz."
-                />
-                <OptionRadioCard
-                  selected={screenGlass === "moderate_scratches"}
-                  onClick={() => setScreenGlass("moderate_scratches")}
-                  title="Arranhões moderados"
-                  subtitle="Marcas visíveis durante o uso."
-                />
-                <OptionRadioCard
-                  selected={screenGlass === "deep_scratches"}
-                  onClick={() => setScreenGlass("deep_scratches")}
-                  title="Arranhões profundos"
-                  subtitle="Perceptíveis ao passar a unha."
-                />
-              </div>
-              <OptionRadioCard
-                selected={screenGlass === "cracked"}
-                onClick={() => setScreenGlass("cracked")}
-                title="Vidro trincado ou quebrado"
-                subtitle="Fissuras, rachaduras ou vidro estilhaçado."
+            <div className="space-y-3">
+              <OptionCard
+                selected={icloudStatus === "unlocked"}
+                onClick={() => selectOptionAndAdvance(setIcloudStatus, "unlocked")}
+                title="Sim, iCloud desbloqueado / tenho a senha"
+                subtitle="O aparelho pode ser desvinculado e formatado de fábrica normalmente."
+                icon={<Lock className="w-5 h-5 text-emerald-600" />}
+                badge="Elegível"
               />
-            </div>
-
-            {/* Imagem do Display */}
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Como está a imagem do display interno?
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={screenDisplay === "perfect"}
-                  onClick={() => setScreenDisplay("perfect")}
-                  title="Perfeita, cores e toque 100%"
-                />
-                <OptionRadioCard
-                  selected={screenDisplay === "spots"}
-                  onClick={() => setScreenDisplay("spots")}
-                  title="Possui manchas"
-                  subtitle="Pontos pretos, manchas roxas ou amarelas no painel."
-                />
-                <OptionRadioCard
-                  selected={screenDisplay === "lines"}
-                  onClick={() => setScreenDisplay("lines")}
-                  title="Possui linhas / listras"
-                  subtitle="Linhas verticais ou horizontais (verdes, brancas ou coloridas)."
-                />
-                <OptionRadioCard
-                  selected={screenDisplay === "dead_pixels"}
-                  onClick={() => setScreenDisplay("dead_pixels")}
-                  title="Possui pixels mortos"
-                  subtitle="Pontinhos pretos fixos na tela."
-                />
-                <OptionRadioCard
-                  selected={screenDisplay === "burn_in"}
-                  onClick={() => setScreenDisplay("burn_in")}
-                  title="Possui burn-in / imagem marcada"
-                  subtitle="Sombras de ícones ou teclado fixadas no fundo."
-                />
-                <OptionRadioCard
-                  selected={screenDisplay === "no_image"}
-                  onClick={() => setScreenDisplay("no_image")}
-                  title="Não apresenta imagem"
-                  subtitle="Tela totalmente preta / apagada."
-                />
-              </div>
-
-              <div className="p-3 bg-apple-gray/50 rounded-xl text-[11px] text-apple-muted flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-apple-blue flex-shrink-0" />
-                <span>
-                  <strong>Regra Anti-Duplicação:</strong> Caso o vidro e display apresentem danos simultâneos que exijam a troca do conjunto, aplicamos apenas o maior abatimento.
-                </span>
-              </div>
+              <OptionCard
+                selected={icloudStatus === "locked"}
+                onClick={() => selectOptionAndAdvance(setIcloudStatus, "locked")}
+                title="Não, possui bloqueio de ativação ou não sei a senha"
+                subtitle="Aparelho bloqueado por conta iCloud anterior ou sem senha."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
+              />
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 5 — 3. ESTADO DA CARCAÇA E ACABAMENTO
+            ETAPA 5 — VIDRO FRONTAL DA TELA
         ---------------------------------------------------- */}
         {step === 5 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 5: Carcaça</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                Como está a tampa traseira e as laterais?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 5: Vidro Frontal</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                Como está o vidro frontal da tela?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Avalie o acabamento estético exterior do aparelho.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Avalie o estado do vidro touch exterior da tela.
               </p>
             </div>
 
-            {/* Tampa traseira */}
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Como está a tampa traseira?
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={bodyBackGlass === "perfect"}
-                  onClick={() => setBodyBackGlass("perfect")}
-                  title="Perfeita, sem marcas"
-                />
-                <OptionRadioCard
-                  selected={bodyBackGlass === "light_marks"}
-                  onClick={() => setBodyBackGlass("light_marks")}
-                  title="Marcas de uso leves"
-                  subtitle="Marcas suaves de capinha."
-                />
-                <OptionRadioCard
-                  selected={bodyBackGlass === "heavy_marks"}
-                  onClick={() => setBodyBackGlass("heavy_marks")}
-                  title="Marcas fortes ou descascados"
-                />
-                <OptionRadioCard
-                  selected={bodyBackGlass === "cracked"}
-                  onClick={() => setBodyBackGlass("cracked")}
-                  title="Trincada"
-                  subtitle="Fissuras ou trincados no vidro traseiro."
-                />
-                <OptionRadioCard
-                  selected={bodyBackGlass === "broken"}
-                  onClick={() => setBodyBackGlass("broken")}
-                  title="Quebrada com perda de material"
-                  subtitle="Vidro estilhaçado com partes soltas."
-                />
-              </div>
-            </div>
-
-            {/* Laterais */}
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Como estão as laterais (bordas)?
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={bodySides === "perfect"}
-                  onClick={() => setBodySides("perfect")}
-                  title="Perfeitas"
-                />
-                <OptionRadioCard
-                  selected={bodySides === "light_scratches"}
-                  onClick={() => setBodySides("light_scratches")}
-                  title="Pequenos arranhões ou descascados"
-                />
-                <OptionRadioCard
-                  selected={bodySides === "impact_marks"}
-                  onClick={() => setBodySides("impact_marks")}
-                  title="Marcas fortes de impacto"
-                />
-                <OptionRadioCard
-                  selected={bodySides === "dents"}
-                  onClick={() => setBodySides("dents")}
-                  title="Amassados ou batidas visíveis"
-                />
-                <OptionRadioCard
-                  selected={bodySides === "bent"}
-                  onClick={() => setBodySides("bent")}
-                  title="Estrutura empenada ou torta"
-                />
-              </div>
+            <div className="space-y-3">
+              <OptionCard
+                selected={screenGlass === "perfect"}
+                onClick={() => selectOptionAndAdvance(setScreenGlass, "perfect")}
+                title="Perfeito, sem riscos ou trincados"
+                subtitle="Vidro impecável, sem arranhões visíveis."
+                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
+              />
+              <OptionCard
+                selected={screenGlass === "light_scratches"}
+                onClick={() => selectOptionAndAdvance(setScreenGlass, "light_scratches")}
+                title="Riscos leves superficiais"
+                subtitle="Pequenas marcas de uso perceptíveis apenas contra a luz."
+                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
+              />
+              <OptionCard
+                selected={screenGlass === "deep_scratches"}
+                onClick={() => selectOptionAndAdvance(setScreenGlass, "deep_scratches")}
+                title="Riscos profundos"
+                subtitle="Arranhões mais evidentes sentidos ao passar a unha."
+                icon={<Smartphone className="w-5 h-5 text-amber-600" />}
+              />
+              <OptionCard
+                selected={screenGlass === "cracked"}
+                onClick={() => selectOptionAndAdvance(setScreenGlass, "cracked")}
+                title="Vidro trincado ou quebrado"
+                subtitle="Fissuras, rachaduras ou vidro quebrado."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
+              />
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 6 — 4. CÂMERAS & 5. FACE ID
+            ETAPA 6 — DISPLAY E TOUCH
         ---------------------------------------------------- */}
         {step === 6 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 6: Câmeras &amp; Biometria</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                Como estão as câmeras e o Face ID?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 6: Imagem e Touch</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                A imagem e o toque (touch) da tela estão perfeitos?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Avaliação de fotos, foco, lentes externas e sensor facial.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Verifique se o display não possui manchas, linhas ou toques fantasmas.
               </p>
             </div>
 
-            {/* Câmera Frontal */}
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Câmera Frontal (Selfie)
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <OptionRadioCard
-                  selected={cameraFront === "perfect"}
-                  onClick={() => setCameraFront("perfect")}
-                  title="Funciona perfeitamente"
-                />
-                <OptionRadioCard
-                  selected={cameraFront === "spots"}
-                  onClick={() => setCameraFront("spots")}
-                  title="Apresenta manchas"
-                />
-                <OptionRadioCard
-                  selected={cameraFront === "focus"}
-                  onClick={() => setCameraFront("focus")}
-                  title="Problemas de foco"
-                />
-                <OptionRadioCard
-                  selected={cameraFront === "broken"}
-                  onClick={() => setCameraFront("broken")}
-                  title="Não funciona / tela preta"
-                />
-              </div>
-            </div>
-
-            {/* Câmeras Traseiras */}
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Câmeras Traseiras
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={cameraRear === "perfect"}
-                  onClick={() => setCameraRear("perfect")}
-                  title="Funcionam perfeitamente (todas as lentes)"
-                />
-                <OptionRadioCard
-                  selected={cameraRear === "spots"}
-                  onClick={() => setCameraRear("spots")}
-                  title="Manchas na imagem"
-                />
-                <OptionRadioCard
-                  selected={cameraRear === "focus"}
-                  onClick={() => setCameraRear("focus")}
-                  title="Problemas de foco"
-                />
-                <OptionRadioCard
-                  selected={cameraRear === "shaking"}
-                  onClick={() => setCameraRear("shaking")}
-                  title="Câmera tremendo ao abrir (estabilizador)"
-                />
-                <OptionRadioCard
-                  selected={cameraRear === "one_broken"}
-                  onClick={() => setCameraRear("one_broken")}
-                  title="Uma das câmeras não funciona"
-                />
-                <OptionRadioCard
-                  selected={cameraRear === "all_broken"}
-                  onClick={() => setCameraRear("all_broken")}
-                  title="Nenhuma câmera funciona"
-                />
-              </div>
-            </div>
-
-            {/* Face ID */}
-
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Reconhecimento Facial (Face ID)
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={faceId === "perfect"}
-                  onClick={() => setFaceId("perfect")}
-                  title="Funciona normalmente"
-                />
-                <OptionRadioCard
-                  selected={faceId === "glitches"}
-                  onClick={() => setFaceId("glitches")}
-                  title="Apresenta falhas intermitentes"
-                />
-                <OptionRadioCard
-                  selected={faceId === "broken"}
-                  onClick={() => setFaceId("broken")}
-                  title="Não funciona"
-                />
-              </div>
+            <div className="space-y-3">
+              <OptionCard
+                selected={screenDisplay === "perfect"}
+                onClick={() => selectOptionAndAdvance(setScreenDisplay, "perfect")}
+                title="Display 100% perfeito e touch respondendo perfeitamente"
+                subtitle="Sem manchas escuras, linhas coloridas ou falhas de toque."
+                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
+              />
+              <OptionCard
+                selected={screenDisplay === "spots"}
+                onClick={() => selectOptionAndAdvance(setScreenDisplay, "spots")}
+                title="Possui manchas escuras ou pixels mortos"
+                subtitle="Pequenos pontos pretos ou vazamento de cristal líquido."
+                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
+              />
+              <OptionCard
+                selected={screenDisplay === "lines"}
+                onClick={() => selectOptionAndAdvance(setScreenDisplay, "lines")}
+                title="Possui listras verticais/horizontais ou touch falhando"
+                subtitle="Linhas coloridas na imagem ou partes da tela que não respondem ao toque."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
+              />
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 7 — 6. BATERIA & 9. CARREGAMENTO
+            ETAPA 7 — VIDRO TRASEIRO
         ---------------------------------------------------- */}
         {step === 7 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 7: Bateria &amp; Carga</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                Qual a saúde da bateria e como está o conector de carga?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 7: Traseira</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                Como está o vidro ou acabamento da tampa traseira?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Consulte em Ajustes &gt; Bateria &gt; Saúde da Bateria.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Avalie o verso do seu aparelho.
               </p>
             </div>
 
-            {/* Saúde da Bateria */}
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider flex items-center gap-1.5">
-                <BatteryCharging className="w-3.5 h-3.5 text-apple-blue" />
-                Saúde da Bateria
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={batteryHealth === "good"}
-                  onClick={() => setBatteryHealth("good")}
-                  title="85% a 100%"
-                  subtitle="Excelente capacidade e autonomia normal."
-                />
-                <OptionRadioCard
-                  selected={batteryHealth === "below_85"}
-                  onClick={() => setBatteryHealth("below_85")}
-                  title="Abaixo de 85%"
-                  subtitle="Bateria desgastada por tempo de uso."
-                />
-                <OptionRadioCard
-                  selected={batteryHealth === "service_unknown"}
-                  onClick={() => setBatteryHealth("service_unknown")}
-                  title="Mensagem de manutenção / Não é possível consultar a saúde"
-                />
-              </div>
-            </div>
-
-            {/* 9. Carregamento e Conector */}
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Carregamento e Conector
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={charging === "perfect"}
-                  onClick={() => setCharging("perfect")}
-                  title="Carrega normalmente"
-                />
-                <OptionRadioCard
-                  selected={charging === "specific_positions"}
-                  onClick={() => setCharging("specific_positions")}
-                  title="Carrega apenas em determinadas posições"
-                />
-                <OptionRadioCard
-                  selected={charging === "bad_contact"}
-                  onClick={() => setCharging("bad_contact")}
-                  title="Apresenta mau contato frequente"
-                />
-                <OptionRadioCard
-                  selected={charging === "broken"}
-                  onClick={() => setCharging("broken")}
-                  title="Não carrega"
-                />
-              </div>
+            <div className="space-y-3">
+              <OptionCard
+                selected={bodyBackGlass === "perfect"}
+                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "perfect")}
+                title="Traseira impecável, sem marcas ou trincados"
+                subtitle="Vidro traseiro e logo da Apple em perfeito estado."
+                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
+              />
+              <OptionCard
+                selected={bodyBackGlass === "light_marks"}
+                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "light_marks")}
+                title="Marcas leves de uso ou capinha"
+                subtitle="Pequenas marcas normais de atrito do dia a dia."
+                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
+              />
+              <OptionCard
+                selected={bodyBackGlass === "cracked"}
+                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "cracked")}
+                title="Vidro traseiro trincado ou quebrado"
+                subtitle="Fissuras ou quebras na tampa traseira."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
+              />
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 8 — 7. ÁUDIO & 8. REDE E CONECTIVIDADE
+            ETAPA 8 — LATERAIS E CARCAÇA
         ---------------------------------------------------- */}
         {step === 8 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 8: Conectividade</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                Como está a conectividade do seu iPhone?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 8: Laterais</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                Como estão as laterais e quinas do iPhone?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Conexão Wi-Fi estável e sinal de rede móvel da operadora.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Verifique a borda de alumínio ou titânio do aparelho.
               </p>
             </div>
 
-            {/* Wi-Fi */}
-
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Conexão Wi-Fi
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <OptionRadioCard
-                  selected={networkWifi === "perfect"}
-                  onClick={() => setNetworkWifi("perfect")}
-                  title="Conecta normalmente"
-                />
-                <OptionRadioCard
-                  selected={networkWifi === "glitches"}
-                  onClick={() => setNetworkWifi("glitches")}
-                  title="Quedas / sinal fraco"
-                />
-                <OptionRadioCard
-                  selected={networkWifi === "broken"}
-                  onClick={() => setNetworkWifi("broken")}
-                  title="Não ativa / conecta"
-                />
-              </div>
-            </div>
-
-            {/* 8. Rede Móvel / Chip */}
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Rede Móvel (Chip / eSIM)
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={networkCellular === "perfect"}
-                  onClick={() => setNetworkCellular("perfect")}
-                  title="Sinal normal (4G/5G estável)"
-                />
-                <OptionRadioCard
-                  selected={networkCellular === "glitches"}
-                  onClick={() => setNetworkCellular("glitches")}
-                  title="Falhas de sinal frequentes"
-                />
-                <OptionRadioCard
-                  selected={networkCellular === "no_sim"}
-                  onClick={() => setNetworkCellular("no_sim")}
-                  title="Não reconhece chip físico ou eSIM"
-                />
-                <OptionRadioCard
-                  selected={networkCellular === "no_signal"}
-                  onClick={() => setNetworkCellular("no_signal")}
-                  title="Sem sinal de operadora constante (Sem Serviço)"
-                />
-              </div>
+            <div className="space-y-3">
+              <OptionCard
+                selected={bodySides === "perfect"}
+                onClick={() => selectOptionAndAdvance(setBodySides, "perfect")}
+                title="Laterais impecáveis, sem amassados ou riscos"
+                subtitle="Estrutura 100% íntegra, sem amassados de queda."
+                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
+              />
+              <OptionCard
+                selected={bodySides === "light_scratches"}
+                onClick={() => selectOptionAndAdvance(setBodySides, "light_scratches")}
+                title="Pequenos riscos ou marcas leves"
+                subtitle="Marcas de uso superficiais nas bordas."
+                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
+              />
+              <OptionCard
+                selected={bodySides === "dents"}
+                onClick={() => selectOptionAndAdvance(setBodySides, "dents")}
+                title="Amassados ou marcas de queda nas quinas"
+                subtitle="Batidas evidentes ou carcaça empenada."
+                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
+              />
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 9 — 10. HISTÓRICO TELA, 11. BATERIA & 12. OUTROS REPAROS
+            ETAPA 9 — CÂMERAS
         ---------------------------------------------------- */}
         {step === 9 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 9: Manutenções Anteriores</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                O aparelho já passou por trocas de peças ou reparos?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 9: Câmeras</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                As câmeras e lentes traseiras estão funcionando?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Consulte em Ajustes &gt; Geral &gt; Sobre &gt; Histórico de Peças.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Foco, zoom de 0.5x a 5x e vidro das câmeras.
               </p>
             </div>
 
-            {/* Histórico da Tela */}
-            <div className="space-y-2">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Histórico da Tela
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={screenHistory === "original"}
-                  onClick={() => setScreenHistory("original")}
-                  title="Tela original de fábrica"
-                />
-                <OptionRadioCard
-                  selected={screenHistory === "apple_genuine"}
-                  onClick={() => setScreenHistory("apple_genuine")}
-                  title="Tela trocada genuína Apple (autorizada)"
-                />
-                <OptionRadioCard
-                  selected={screenHistory === "original_pulled"}
-                  onClick={() => setScreenHistory("original_pulled")}
-                  title="Tela trocada original retirada de outro aparelho"
-                />
-                <OptionRadioCard
-                  selected={screenHistory === "parallel"}
-                  onClick={() => setScreenHistory("parallel")}
-                  title="Tela trocada paralela / primeira linha"
-                />
-                <OptionRadioCard
-                  selected={screenHistory === "unknown"}
-                  onClick={() => setScreenHistory("unknown")}
-                  title="Não sabe informar"
-                />
-              </div>
-            </div>
-
-            {/* Histórico da Bateria */}
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Histórico da Bateria
-              </label>
-              <div className="space-y-2">
-                <OptionRadioCard
-                  selected={batteryHistory === "never"}
-                  onClick={() => setBatteryHistory("never")}
-                  title="Bateria nunca trocada (original de fábrica)"
-                />
-                <OptionRadioCard
-                  selected={batteryHistory === "apple_genuine"}
-                  onClick={() => setBatteryHistory("apple_genuine")}
-                  title="Trocada por genuína Apple (autorizada)"
-                />
-                <OptionRadioCard
-                  selected={batteryHistory === "original_pulled"}
-                  onClick={() => setBatteryHistory("original_pulled")}
-                  title="Trocada por original retirada"
-                />
-                <OptionRadioCard
-                  selected={batteryHistory === "parallel"}
-                  onClick={() => setBatteryHistory("parallel")}
-                  title="Trocada por bateria paralela"
-                />
-                <OptionRadioCard
-                  selected={batteryHistory === "unknown"}
-                  onClick={() => setBatteryHistory("unknown")}
-                  title="Não sabe informar"
-                />
-              </div>
-            </div>
-
-            {/* 12. Outros Reparos Já Realizados */}
-            <div className="space-y-2 pt-3 border-t border-apple-border/60">
-              <label className="block text-xs font-bold text-apple-muted uppercase tracking-wider">
-                Outros Reparos Já Realizados
-              </label>
-              <div className="space-y-2">
-                {[
-                  { id: "none", title: "Nenhum outro reparo" },
-                  { id: "back_glass", title: "Tampa traseira já reparada" },
-                  { id: "rear_camera", title: "Câmera traseira já reparada" },
-                  { id: "front_camera", title: "Câmera frontal já reparada" },
-                  { id: "charging_port", title: "Conector de carga já reparado" },
-                  { id: "speaker", title: "Alto-falante já reparado" },
-                  { id: "microphone", title: "Microfone já reparado" },
-                  { id: "motherboard", title: "Placa-mãe já reparada" },
-                  { id: "other", title: "Outro reparo não listado" },
-                ].map((rep) => {
-                  const isChecked = otherRepairs.includes(rep.id);
-                  return (
-                    <OptionRadioCard
-                      key={rep.id}
-                      selected={isChecked}
-                      onClick={() => toggleOtherRepair(rep.id)}
-                      title={rep.title}
-                      
-                    />
-                  );
-                })}
-              </div>
+            <div className="space-y-3">
+              <OptionCard
+                selected={cameraRear === "perfect"}
+                onClick={() => selectOptionAndAdvance(setCameraRear, "perfect")}
+                title="Câmeras e lentes 100% perfeitas"
+                subtitle="Foco rápido, fotos nítidas e vidro das lentes sem riscos."
+                icon={<Camera className="w-5 h-5 text-emerald-600" />}
+              />
+              <OptionCard
+                selected={cameraRear === "spots"}
+                onClick={() => selectOptionAndAdvance(setCameraRear, "spots")}
+                title="Manchas pretas ou foco tremendo"
+                subtitle="Fotos saem com pequenas manchas ou vibração no foco."
+                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
+              />
+              <OptionCard
+                selected={cameraRear === "broken"}
+                onClick={() => selectOptionAndAdvance(setCameraRear, "broken")}
+                title="Lente trincada ou câmera não abre"
+                subtitle="Vidro da câmera quebrado ou tela preta ao abrir a câmera."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
+              />
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 10 — DADOS DO CLIENTE & CALCULAR
+            ETAPA 10 — FACE ID / BIOMETRIA
         ---------------------------------------------------- */}
         {step === 10 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider">Passo 10: Seus Dados</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-apple-dark">
-                Onde enviamos a sua cotação de compra no Pix?
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 10: Face ID</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                O Face ID (desbloqueio facial) está funcionando?
               </h2>
-              <p className="text-xs sm:text-sm text-apple-muted">
-                Preencha seus dados para gerar o código exclusivo e receber nossa equipe com pagamento na hora.
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Sensor de reconhecimento facial original da Apple.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <OptionCard
+                selected={faceId === "perfect"}
+                onClick={() => selectOptionAndAdvance(setFaceId, "perfect")}
+                title="Face ID funciona perfeitamente"
+                subtitle="Desbloqueia instantaneamente com o rosto."
+                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
+              />
+              <OptionCard
+                selected={faceId === "broken"}
+                onClick={() => selectOptionAndAdvance(setFaceId, "broken")}
+                title="Face ID não funciona ou apresenta erro"
+                subtitle="Aparece 'Face ID indisponível' nos ajustes."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ----------------------------------------------------
+            ETAPA 11 — SAÚDE DA BATERIA
+        ---------------------------------------------------- */}
+        {step === 11 && (
+          <div className="space-y-6 animate-in fade-in duration-200 text-left">
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 11: Bateria</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                Qual é a saúde da bateria em Ajustes &gt; Bateria?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Verifique a porcentagem de capacidade máxima nos Ajustes do iOS.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <OptionCard
+                selected={batteryHealth === "good"}
+                onClick={() => selectOptionAndAdvance(setBatteryHealth, "good")}
+                title="Excelente — 85% a 100%"
+                subtitle="Saúde ótima com capacidade de desempenho máxima."
+                icon={<BatteryCharging className="w-5 h-5 text-emerald-600" />}
+                badge="Alta Saúde"
+              />
+              <OptionCard
+                selected={batteryHealth === "below_85"}
+                onClick={() => selectOptionAndAdvance(setBatteryHealth, "below_85")}
+                title="Intermediária — 80% a 84%"
+                subtitle="Bateria original ainda em funcionamento sem aviso de serviço."
+                icon={<BatteryCharging className="w-5 h-5 text-blue-600" />}
+              />
+              <OptionCard
+                selected={batteryHealth === "service_unknown"}
+                onClick={() => selectOptionAndAdvance(setBatteryHealth, "service_unknown")}
+                title="Abaixo de 80% ou mensagem de 'Manutenção'"
+                subtitle="Necessita de troca ou apresenta aviso de peça desconhecida."
+                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ----------------------------------------------------
+            ETAPA 12 — CARREGAMENTO
+        ---------------------------------------------------- */}
+        {step === 12 && (
+          <div className="space-y-6 animate-in fade-in duration-200 text-left">
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 12: Conector</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                O conector de carga e carregamento funcionam bem?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Entrada Lightning / USB-C e carregamento sem fio.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <OptionCard
+                selected={charging === "perfect"}
+                onClick={() => selectOptionAndAdvance(setCharging, "perfect")}
+                title="Carrega normalmente pelo cabo e sem fio"
+                subtitle="Encaixe firme e carregamento contínuo sem mau contato."
+                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
+              />
+              <OptionCard
+                selected={charging === "bad_contact"}
+                onClick={() => selectOptionAndAdvance(setCharging, "bad_contact")}
+                title="Possui mau contato no cabo"
+                subtitle="Precisa posicionar o cabo em uma posição específica para carregar."
+                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
+              />
+              <OptionCard
+                selected={charging === "broken"}
+                onClick={() => selectOptionAndAdvance(setCharging, "broken")}
+                title="Não carrega de jeito nenhum"
+                subtitle="Entrada danificada ou conector rompido."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ----------------------------------------------------
+            ETAPA 13 — CONECTIVIDADE (WI-FI & CHIP)
+        ---------------------------------------------------- */}
+        {step === 13 && (
+          <div className="space-y-6 animate-in fade-in duration-200 text-left">
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 13: Conexões</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                Wi-Fi, Bluetooth e sinal de operadora funcionam normais?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Conexão com redes sem fio e sinal 4G/5G do chip.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <OptionCard
+                selected={networkWifi === "perfect"}
+                onClick={() => selectOptionAndAdvance(setNetworkWifi, "perfect")}
+                title="Tudo funciona perfeitamente (Wi-Fi, Bluetooth e 4G/5G)"
+                subtitle="Conecta em redes e faz chamadas normalmente."
+                icon={<Wifi className="w-5 h-5 text-emerald-600" />}
+              />
+              <OptionCard
+                selected={networkWifi === "broken"}
+                onClick={() => selectOptionAndAdvance(setNetworkWifi, "broken")}
+                title="Possui falha no Wi-Fi, Bluetooth ou sinal de operadora"
+                subtitle="Wi-Fi desabilitado (cinza) ou 'Sem Serviço' permanente."
+                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ----------------------------------------------------
+            ETAPA 14 — HISTÓRICO DE REPAROS
+        ---------------------------------------------------- */}
+        {step === 14 && (
+          <div className="space-y-6 animate-in fade-in duration-200 text-left">
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 14: Histórico</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                A tela ou bateria já foram trocadas alguma vez?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Peças originais de fábrica garantem maior valorização na compra.
+              </p>
+            </div>
+
+            <div className="space-y-3">
+              <OptionCard
+                selected={screenHistory === "original"}
+                onClick={() => selectOptionAndAdvance(setScreenHistory, "original")}
+                title="Nunca foi aberto — Todas as peças originais de fábrica"
+                subtitle="Aparelho 100% original sem trocas de tela, bateria ou carcaça."
+                icon={<ShieldCheck className="w-5 h-5 text-emerald-600" />}
+                badge="Máxima Valorização"
+              />
+              <OptionCard
+                selected={screenHistory === "apple_genuine"}
+                onClick={() => selectOptionAndAdvance(setScreenHistory, "apple_genuine")}
+                title="Já teve peça trocada em Autorizada Apple (Original)"
+                subtitle="Substituição oficial com registro nos Ajustes do iOS."
+                icon={<CheckCircle2 className="w-5 h-5 text-blue-600" />}
+              />
+              <OptionCard
+                selected={screenHistory === "parallel"}
+                onClick={() => selectOptionAndAdvance(setScreenHistory, "parallel")}
+                title="Já teve peça trocada em assistência comum / paralela"
+                subtitle="Tela ou bateria trocada de primeira linha ou paralela."
+                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ----------------------------------------------------
+            ETAPA 15 — DADOS DO CLIENTE
+        ---------------------------------------------------- */}
+        {step === 15 && (
+          <div className="space-y-6 animate-in fade-in duration-200 text-left">
+            <div className="space-y-1">
+              <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Último Passo: Seus Dados</span>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
+                Para onde enviamos sua cotação Pix na hora?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#6E6E73]">
+                Preencha seu nome e WhatsApp para ver o valor final e agendar o pagamento.
               </p>
             </div>
 
             <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-apple-dark uppercase tracking-wider mb-1.5">
-                  Seu Nome Completo *
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-[#1D1D1F] block">
+                  Seu Nome Completo: <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  placeholder="Digite seu nome"
-                  className="w-full px-4 py-3.5 bg-white rounded-2xl text-sm font-medium border border-apple-border focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/20 focus:outline-none transition-all"
+                  placeholder="Ex: João da Silva"
+                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-apple-dark uppercase tracking-wider mb-1.5">
-                  WhatsApp com DDD *
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-[#1D1D1F] block">
+                  WhatsApp com DDD: <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
                   value={customerWhatsapp}
                   onChange={handlePhoneChange}
                   placeholder="(11) 99999-9999"
-                  className="w-full px-4 py-3.5 bg-white rounded-2xl text-sm font-medium border border-apple-border focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/20 focus:outline-none transition-all"
+                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-apple-dark uppercase tracking-wider mb-1.5">
-                  CEP ou Cidade (Opcional)
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-[#1D1D1F] block">
+                  CEP ou Bairro em SP (opcional para agendamento):
                 </label>
                 <input
                   type="text"
                   value={customerCep}
                   onChange={handleCepChange}
-                  placeholder="00000-000"
-                  className="w-full px-4 py-3.5 bg-white rounded-2xl text-sm font-medium border border-apple-border focus:border-apple-blue focus:ring-2 focus:ring-apple-blue/20 focus:outline-none transition-all"
+                  placeholder="01202-000"
+                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
                 />
-              </div>
-            </div>
-
-            <div className="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100 flex items-center gap-3">
-              <ShieldCheck className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-              <div className="text-xs text-emerald-800">
-                Pagamento garantido via PIX imediatamente após a conferência do aparelho. Sem intermediários.
               </div>
             </div>
           </div>
         )}
 
-        {/* Wizard Footer Navigation */}
-        <div className="flex items-center justify-between pt-6 border-t border-apple-border/70">
+        {/* ----------------------------------------------------
+            NAVIGATION BUTTONS
+        ---------------------------------------------------- */}
+        <div className="pt-4 border-t border-[#E5E5E7] flex items-center justify-between gap-3">
           {step > 1 ? (
-            <Button
+            <button
               type="button"
-              variant="secondary"
               onClick={handleBack}
-              disabled={submitting}
-              className="py-3 px-5 rounded-2xl font-bold border-apple-border text-apple-dark hover:bg-apple-gray"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-[#D2D2D7] text-xs font-bold text-[#1D1D1F] hover:bg-[#F5F5F7] transition-all cursor-pointer"
             >
-              <ArrowLeft className="w-4 h-4 mr-1.5" />
-              Voltar
-            </Button>
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Voltar</span>
+            </button>
           ) : (
             <div />
           )}
 
-          <Button
+          <button
             type="button"
             onClick={handleNext}
             disabled={!isStepValid || submitting}
-            className={`py-3 px-7 rounded-2xl font-bold text-white transition-all shadow-md ${
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-white shadow-md transition-all cursor-pointer ${
               isStepValid && !submitting
-                ? "bg-apple-dark hover:bg-black scale-[1.01]"
-                : "bg-apple-dark/40 cursor-not-allowed"
+                ? "bg-[#0071E3] hover:bg-[#0077ED] active:scale-95"
+                : "bg-gray-300 cursor-not-allowed opacity-60"
             }`}
           >
             {submitting ? (
-              <span className="flex items-center gap-2">
+              <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                Gerando Cotação...
-              </span>
+                <span>Calculando Cotação Pix...</span>
+              </>
             ) : step === totalSteps ? (
-              <span className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4" />
-                Calcular Cotação PIX
-              </span>
-            ) : (
-              <span className="flex items-center gap-1.5">
-                Avançar
+              <>
+                <span>Ver Cotação no Pix</span>
                 <ArrowRight className="w-4 h-4" />
-              </span>
+              </>
+            ) : (
+              <>
+                <span>Continuar</span>
+                <ArrowRight className="w-4 h-4" />
+              </>
             )}
-          </Button>
+          </button>
         </div>
       </div>
     </div>

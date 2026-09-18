@@ -2,8 +2,8 @@ export type ConditionType = "new" | "used";
 export type AvailabilityType = "available" | "out_of_stock" | "on_request" | "pre_order";
 
 export interface ProductVariant {
-  storage: string;
-  color: string;
+  storage?: string;
+  color?: string;
   price: number;
   available: boolean;
   image?: string;
