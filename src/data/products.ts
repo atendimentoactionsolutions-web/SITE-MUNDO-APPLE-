@@ -1627,9 +1627,9 @@ export const products: Product[] = [
     "subcategory": "Apple Watch Series 11",
     "image": "/images/products/watch/apple-watch-s11-black.png",
     "colorImages": {
-      "Jet Black": "/images/products/watch/apple-watch-s11-jetblack.png",
+      "Jet Black": "/images/products/watch/apple-watch-s11-black.png",
       "Rose Gold": "/images/products/watch/apple-watch-s11-rosegold.png",
-      "Space Gray": "/images/products/watch/apple-watch-s11-spacegray.png",
+      "Space Gray": "/images/products/watch/apple-watch-s11-black.png",
       "Silver": "/images/products/watch/apple-watch-s11-silver.png"
     },
     "priceFrom": 2450,
@@ -1707,8 +1707,8 @@ export const products: Product[] = [
     "subcategory": "Apple Watch Ultra 3",
     "image": "/images/products/watch/apple-watch-ultra-natural.png",
     "colorImages": {
-      "Black Titanium": "/images/products/watch/apple-watch-ultra-3.png",
-      "Natural Titanium": "/images/products/watch/apple-watch-ultra-3.png"
+      "Black Titanium": "/images/products/watch/apple-watch-ultra-black.png",
+      "Natural Titanium": "/images/products/watch/apple-watch-ultra-natural.png"
     },
     "priceFrom": 4749,
     "condition": "new",
@@ -1746,8 +1746,8 @@ export const products: Product[] = [
     "subcategory": "Apple Watch SE 3",
     "image": "/images/products/watch/apple-watch-se-midnight.png",
     "colorImages": {
-      "Midnight": "/images/products/watch/apple-watch-se3-midnight.png",
-      "Starlight": "/images/products/watch/apple-watch-se3-starlight.png"
+      "Midnight": "/images/products/watch/apple-watch-se-midnight.png",
+      "Starlight": "/images/products/watch/apple-watch-se-starlight.png"
     },
     "priceFrom": 1935,
     "condition": "new",
