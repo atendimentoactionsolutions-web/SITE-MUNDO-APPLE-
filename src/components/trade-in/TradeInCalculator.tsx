@@ -483,9 +483,6 @@ export const TradeInCalculator: React.FC = () => {
 
   const selectOptionAndAdvance = (setter: (val: string) => void, val: string) => {
     setter(val);
-    setTimeout(() => {
-      setStep((prev) => (prev < totalSteps ? prev + 1 : prev));
-    }, 200);
   };
 
   // Option Click Card Component
@@ -783,7 +780,6 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                     type="button"
                     onClick={() => {
                       setSelectedNewProduct(p);
-                      setTimeout(() => setStep(2), 150);
                     }}
                     className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
                       isSel
@@ -937,7 +933,6 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                       type="button"
                       onClick={() => {
                         setSelectedModel(m);
-                        setTimeout(() => setStep(4), 150);
                       }}
                       className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
                         isSel
@@ -986,7 +981,6 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                     type="button"
                     onClick={() => {
                       setSelectedStorage(st);
-                      setTimeout(() => setStep(5), 150);
                     }}
                     className={`py-4 px-4 rounded-2xl border text-center font-bold text-sm sm:text-base transition-all cursor-pointer ${
                       isSel
@@ -1535,19 +1529,6 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                   value={customerWhatsapp}
                   onChange={handlePhoneChange}
                   placeholder="(11) 99999-9999"
-                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#1D1D1F] block">
-                  CEP ou Bairro em SP (opcional para agendamento):
-                </label>
-                <input
-                  type="text"
-                  value={customerCep}
-                  onChange={handleCepChange}
-                  placeholder="01202-000"
                   className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
                 />
               </div>
