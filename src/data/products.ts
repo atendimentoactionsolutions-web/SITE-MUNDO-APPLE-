@@ -76,7 +76,7 @@ export const products: Product[] = [
       "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
-    "priceFrom": 12750,
+    "priceFrom": 12700,
     "condition": "new",
     "storage": [
       "256GB",
@@ -93,7 +93,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 12750,
+        "price": 12700,
         "available": true
       },
       {
