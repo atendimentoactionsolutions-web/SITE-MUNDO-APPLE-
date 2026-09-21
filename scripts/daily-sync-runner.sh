@@ -6,7 +6,7 @@
 PROJECT_DIR="/Users/imac27/Desktop/PROJETO MUNDO APPLE "
 LOG_FILE="$PROJECT_DIR/scripts/sync.log"
 
-export PATH="/usr/local/bin:/opt/homebrew/bin:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -n 1)/bin:$PATH"
+export PATH="/Users/imac27/.gemini/antigravity/bin:/Users/imac27/Library/Application Support/Antigravity/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -n 1)/bin:$PATH"
 
 echo "==================================================" >> "$LOG_FILE"
 echo "⏰ Iniciando sincronização: $(date)" >> "$LOG_FILE"
@@ -14,7 +14,8 @@ echo "==================================================" >> "$LOG_FILE"
 
 cd "$PROJECT_DIR" || exit 1
 
-# 1. Puxar possíveis alterações remotas
+# 1. Limpar arquivos temporários de build e puxar alterações
+git checkout -- tsconfig.tsbuildinfo 2>/dev/null || true
 git pull origin main --rebase >> "$LOG_FILE" 2>&1
 
 # 2. Executar script de sincronização de preços
