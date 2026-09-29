@@ -8,9 +8,13 @@ export const Hero: React.FC = () => {
     <section className="relative pt-24 sm:pt-28 pb-8 sm:pb-12 bg-white overflow-hidden flex flex-col items-center">
       <Container size="large" className="w-full">
         {/* Main Hero Card Container — Apple Store Clean Editorial Layout */}
-        <div className="relative w-full rounded-3xl sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#FBFBFD] to-[#F5F5F7] text-[#1D1D1F] border border-[#D2D2D7]/70 shadow-[0_4px_24px_rgba(0,0,0,0.04)] px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20 flex flex-col items-center text-center gap-8 sm:gap-10">
+        <div className="relative w-full rounded-3xl sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#FBFBFD] via-[#F8F8FA] to-[#F5F5F7] text-[#1D1D1F] border border-[#E5E5EA] shadow-[0_4px_24px_rgba(0,0,0,0.03)] px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20 flex flex-col items-center text-center gap-8 sm:gap-10">
           
-
+          {/* Subtle Top Pill */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#D2D2D7]/60 text-xs font-semibold uppercase tracking-wider text-[#0071E3] shadow-2xs">
+            <span className="w-2 h-2 rounded-full bg-[#0071E3] animate-pulse" />
+            <span>Novidades & Catálogo Completo • Pronta Entrega SP</span>
+          </div>
 
           {/* Typography */}
           <div className="max-w-4xl space-y-4 sm:space-y-6">
@@ -24,31 +28,29 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col items-center gap-3 pt-1 w-full max-w-xl">
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-              {/* Ver Catálogo (Primary Apple Blue) */}
-              <a
-                href="#catalogo"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-sm sm:text-base rounded-full shadow-sm hover:shadow active:scale-95 transition-all duration-200 group tracking-tight"
-              >
-                <span>Explorar Catálogo</span>
-                <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-              </a>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-1 w-full max-w-2xl">
+            {/* Ver Catálogo (Primary Apple Blue) */}
+            <a
+              href="#catalogo"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:px-8 sm:py-4 bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-sm sm:text-base rounded-full shadow-sm hover:shadow active:scale-95 transition-all duration-200 group tracking-tight"
+            >
+              <span>Explorar Catálogo</span>
+              <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+            </a>
 
-              {/* Vender meu iPhone (PIX na hora) */}
-              <Link
-                href="/vender"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-sm sm:text-base rounded-full border border-[#D2D2D7] shadow-2xs active:scale-95 transition-all duration-200 tracking-tight"
-              >
-                <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
-                <span>Vender meu Produto Apple</span>
-              </Link>
-            </div>
+            {/* Vender meu iPhone (PIX na hora) */}
+            <Link
+              href="/vender"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-sm sm:text-base rounded-full border border-[#D2D2D7] shadow-2xs active:scale-95 transition-all duration-200 tracking-tight"
+            >
+              <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
+              <span>Vender meu Apple</span>
+            </Link>
 
             {/* Simular Troca */}
             <Link
               href="/troca"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-7 sm:py-3.5 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-sm sm:text-base rounded-full border border-[#D2D2D7] shadow-2xs active:scale-95 transition-all duration-200 tracking-tight"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-7 sm:py-4 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-sm sm:text-base rounded-full border border-[#D2D2D7] shadow-2xs active:scale-95 transition-all duration-200 tracking-tight"
             >
               <RefreshCw className="w-4 h-4 text-[#0071E3]" />
               <span>Simular Upgrade</span>
