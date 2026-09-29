@@ -213,7 +213,7 @@ export const Header: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2.5 text-lg font-bold text-emerald-700 border-b border-slate-100 flex items-center justify-between"
               >
-                <span>⚡ Vender meu Produto Apple (PIX na Hora)</span>
+                <span>Vender meu Produto Apple</span>
                 <ArrowRight className="w-4 h-4 text-emerald-700" />
               </Link>
               <Link
