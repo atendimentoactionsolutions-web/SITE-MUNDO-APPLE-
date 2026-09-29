@@ -197,9 +197,17 @@ app.post("/reconnect", auth, async (req, res) => {
 
 // GET / — health check
 app.get("/", (req, res) => {
-  res.json({ service: "Mundo Apple WhatsApp Server", status: waStatus, version: "1.0.0" });
+  res.json({ service: "Mundo Apple WhatsApp Server", status: waStatus, user: waUser, version: "1.0.0" });
 });
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor WhatsApp rodando na porta ${PORT}`);
+
+  // Auto keep-alive: faz requisições periódicas a cada 8 minutos para impedir que o Render durma
+  const pingUrl = process.env.RENDER_EXTERNAL_URL || "https://mundo-apple-whatsapp.onrender.com";
+  setInterval(() => {
+    fetch(pingUrl)
+      .then(() => console.log(`[KEEP-ALIVE] Ping enviado para manter servidor acordado 24/7`))
+      .catch((err) => console.log(`[KEEP-ALIVE] Aviso:`, err.message));
+  }, 8 * 60 * 1000);
 });

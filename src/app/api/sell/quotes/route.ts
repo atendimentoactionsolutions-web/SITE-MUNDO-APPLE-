@@ -145,7 +145,8 @@ export async function POST(request: NextRequest) {
       db.quoteDeflators.push(newDefSnapshot);
     });
 
-    // 6. Automated WhatsApp message dispatch if WhatsApp service is connected
+    // 6. Automated WhatsApp message dispatch (Servidor Gratuito Render)
+    let waResult: any = null;
     if (custData && custData.whatsapp) {
       const model = db.deviceModels.find((dm) => dm.id === deviceModelId);
       const storage = db.storageOptions.find((so) => so.id === storageOptionId);
@@ -157,9 +158,11 @@ export async function POST(request: NextRequest) {
 
       try {
         const { sendWhatsAppMessage } = await import("@/lib/whatsapp/whatsapp-service");
-        await sendWhatsAppMessage(custData.whatsapp, autoMessage);
-      } catch (err) {
+        waResult = await sendWhatsAppMessage(custData.whatsapp, autoMessage);
+        console.log("[DISPATCH RESULT]:", waResult);
+      } catch (err: any) {
         console.error("Erro no disparo automático WhatsApp:", err);
+        waResult = { success: false, error: err?.message };
       }
     }
 
@@ -167,6 +170,7 @@ export async function POST(request: NextRequest) {
       success: true,
       quote: newQuote,
       calculation,
+      whatsappDispatched: waResult,
     });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });

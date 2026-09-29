@@ -191,74 +191,31 @@ export async function sendWhatsAppMessage(rawPhone: string, text: string): Promi
       clean = "55" + clean;
     }
 
-    // 1. Primary: Servidor WhatsApp gratuito (Render.com) via Baileys
-    const waServerUrl = process.env.WA_SERVER_URL;
+    // Servidor WhatsApp Gratuito (Render.com) via Baileys
+    const waServerUrl = process.env.WA_SERVER_URL || "https://mundo-apple-whatsapp.onrender.com";
     const waApiSecret = process.env.WA_API_SECRET || "mundoapple2024";
 
-    if (waServerUrl) {
-      try {
-        const res = await fetch(`${waServerUrl}/send`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": waApiSecret,
-          },
-          body: JSON.stringify({ phone: clean, message: text }),
-        });
+    console.log(`[WHATSAPP] Tentando envio para ${clean} via ${waServerUrl}...`);
 
-        const data = await res.json().catch(() => ({}));
-        if (res.ok && data.success) {
-          console.log("✅ Mensagem enviada via servidor WhatsApp gratuito");
-          return { success: true };
-        }
-        console.warn("Servidor WhatsApp retornou erro, tentando Z-API:", data);
-      } catch (serverErr) {
-        console.warn("Erro ao chamar servidor WhatsApp, tentando Z-API:", serverErr);
-      }
-    }
+    const res = await fetch(`${waServerUrl}/send`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": waApiSecret,
+      },
+      body: JSON.stringify({ phone: clean, message: text }),
+    });
 
-    // 2. Fallback: Z-API Cloud
-    const zapiUrl =
-      process.env.ZAPI_SEND_URL ||
-      "https://api.z-api.io/instances/3F9E51FF6AF2F1E0ED2E12D9859A8F8F/token/FEED870F6FB3C83895623031/send-text";
-    const clientToken = process.env.ZAPI_CLIENT_TOKEN || "Fb9680364c5be42b4a0ebc8e523f3b443S";
-
-    try {
-      const zapiRes = await fetch(zapiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Client-Token": clientToken,
-        },
-        body: JSON.stringify({ phone: clean, message: text }),
-      });
-
-      const zapiData = await zapiRes.json().catch(() => ({}));
-      if (zapiRes.ok && (zapiData.zaapId || zapiData.messageId || zapiData.id)) {
-        console.log("✅ Mensagem enviada via Z-API:", zapiData);
-        return { success: true };
-      }
-      console.warn("Z-API retorno não-200, tentando Baileys local:", zapiData);
-    } catch (zapiErr) {
-      console.warn("Erro ao chamar Z-API, tentando Baileys local:", zapiErr);
-    }
-
-    // 3. Último recurso: Baileys local (só funciona localmente)
-    const jid = `${clean}@s.whatsapp.net`;
-
-    if (!global.__waSocket || global.__waStatus !== "CONNECTED") {
-      const sock = await initWhatsApp().catch(() => null);
-      if (!sock || global.__waStatus !== "CONNECTED") {
-        return { success: false, error: "Nenhum método de envio disponível." };
-      }
-      await sock.sendMessage(jid, { text });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.success) {
+      console.log(`[WHATSAPP] ✅ Mensagem entregue com sucesso para ${clean}`);
       return { success: true };
     }
 
-    await global.__waSocket.sendMessage(jid, { text });
-    return { success: true };
+    console.error(`[WHATSAPP] ❌ Erro ao enviar pelo servidor Render:`, data);
+    return { success: false, error: data?.error || "Erro no servidor WhatsApp" };
   } catch (err: any) {
-    console.error("Erro ao enviar mensagem WhatsApp:", err);
+    console.error("[WHATSAPP] ❌ Exceção ao enviar mensagem:", err);
     return { success: false, error: err?.message || "Erro interno ao enviar mensagem" };
   }
 }
