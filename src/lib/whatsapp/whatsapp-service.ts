@@ -191,12 +191,42 @@ export async function sendWhatsAppMessage(rawPhone: string, text: string): Promi
       clean = "55" + clean;
     }
 
+    // 1. Primary Dispatch via Z-API Cloud Instance (Works 24/7 on Vercel & Production)
+    const zapiUrl =
+      process.env.ZAPI_SEND_URL ||
+      "https://api.z-api.io/instances/3F9E51FF6AF2F1E0ED2E12D9859A8F8F/token/FEED870F6FB3C83895623031/send-text";
+    const clientToken = process.env.ZAPI_CLIENT_TOKEN || "Fb9680364c5be42b4a0ebc8e523f3b443S";
+
+    try {
+      const zapiRes = await fetch(zapiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Client-Token": clientToken,
+        },
+        body: JSON.stringify({
+          phone: clean,
+          message: text,
+        }),
+      });
+
+      const zapiData = await zapiRes.json().catch(() => ({}));
+      if (zapiRes.ok && (zapiData.zaapId || zapiData.messageId || zapiData.id)) {
+        console.log("Mensagem WhatsApp enviada com sucesso via Z-API:", zapiData);
+        return { success: true };
+      }
+      console.warn("Z-API retorno não-200 ou sem ID, tentando fallback:", zapiData);
+    } catch (zapiErr) {
+      console.warn("Erro ao chamar Z-API, tentando fallback local:", zapiErr);
+    }
+
+    // 2. Fallback to Local Baileys Socket if running locally
     const jid = `${clean}@s.whatsapp.net`;
 
     if (!global.__waSocket || global.__waStatus !== "CONNECTED") {
-      const sock = await initWhatsApp();
-      if (global.__waStatus !== "CONNECTED") {
-        return { success: false, error: "WhatsApp da loja não está conectado. Escaneie o QR Code no painel." };
+      const sock = await initWhatsApp().catch(() => null);
+      if (!sock || global.__waStatus !== "CONNECTED") {
+        return { success: false, error: "Falha no envio via Z-API e socket local desconectado." };
       }
       await sock.sendMessage(jid, { text });
       return { success: true };
