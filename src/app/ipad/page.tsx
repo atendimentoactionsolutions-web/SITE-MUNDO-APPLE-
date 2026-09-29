@@ -32,6 +32,8 @@ export default async function IPadCategoryPage({ searchParams }: PageProps) {
   const subcategories = [
     { label: "Todos os iPads", slug: "" },
     { label: "iPad Pro M5", slug: "iPad Pro M5" },
+    { label: "iPad Air M4", slug: "iPad Air" },
+    { label: "iPad mini 7", slug: "iPad mini" },
     { label: "iPad 11ª Geração", slug: "iPad 11" },
   ];
 
@@ -41,7 +43,7 @@ export default async function IPadCategoryPage({ searchParams }: PageProps) {
         <SectionHeading
           eyebrow="Linha iPad"
           title="Sua tela mágica para tudo."
-          subtitle="iPad Pro com chip M5 e tela Ultra Retina XDR OLED, e novo iPad 11 em cores incríveis. 100% novos e lacrados."
+          subtitle="iPad Pro M5, iPad Air M4, iPad mini 7 e iPad 11ª Geração. 100% novos e lacrados com 1 ano de garantia Apple."
         />
 
         {/* Value Highlights */}

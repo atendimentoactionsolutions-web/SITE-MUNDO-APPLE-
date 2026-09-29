@@ -256,8 +256,16 @@ async function runSync() {
             if (!itemName.includes("IPHONE 17E") && !itemName.includes("IPH 17E")) return false;
           } else if (prodSlug === "iphone-17") {
             if ((!itemName.includes("IPHONE 17") && !itemName.includes("IPH 17")) || itemName.includes("PRO") || itemName.includes("AIR") || itemName.includes("17E")) return false;
+          } else if (prodSlug === "iphone-16-pro-max") {
+            if (!itemName.includes("IPHONE 16 PRO MAX") && !itemName.includes("IPH 16 PRO MAX")) return false;
+          } else if (prodSlug === "iphone-16-plus") {
+            if (!itemName.includes("IPHONE 16 PLUS") && !itemName.includes("IPH 16 PLUS")) return false;
+          } else if (prodSlug === "iphone-16e") {
+            if (!itemName.includes("IPHONE 16E") && !itemName.includes("IPH 16E")) return false;
           } else if (prodSlug === "iphone-16") {
             if ((!itemName.includes("IPHONE 16") && !itemName.includes("IPH 16")) || itemName.includes("PRO") || itemName.includes("16E") || itemName.includes("PLUS")) return false;
+          } else if (prodSlug === "iphone-15-plus") {
+            if (!itemName.includes("IPHONE 15 PLUS") && !itemName.includes("IPH 15 PLUS")) return false;
           } else if (prodSlug === "iphone-15") {
             if ((!itemName.includes("IPHONE 15") && !itemName.includes("IPH 15")) || itemName.includes("PRO") || itemName.includes("PLUS")) return false;
           } else if (prodSlug === "iphone-duo") {
@@ -282,6 +290,8 @@ async function runSync() {
             if (!itemName.includes("MAC MINI M4 PRO") && !itemName.includes("MINI M4 PRO")) return false;
           } else if (prodSlug === "mac-mini-m4") {
             if ((!itemName.includes("MAC MINI M4") && !itemName.includes("MINI M4")) || itemName.includes("PRO")) return false;
+          } else if (prodSlug === "macbook-neo-13") {
+            if (!itemName.includes("MACBOOK NEO") && !itemName.includes("NEO 13")) return false;
           } else if (prodSlug === "macbook-air-m5") {
             if (!itemName.includes("MACBOOK AIR M5") && !itemName.includes("AIR M5")) return false;
             if (vScreenSize && !itemName.includes(normalizeStorage(vScreenSize))) return false;
@@ -318,6 +328,12 @@ async function runSync() {
             if (!itemName.includes("IPAD 11")) return false;
           } else if (prodSlug === "ipad-mini-7") {
             if (!itemName.includes("MINI 7") && !itemName.includes("IPAD MINI 7")) return false;
+          } else if (prodSlug === "ipad-air-m4") {
+            if (!itemName.includes("IPAD AIR M4") && !itemName.includes("AIR M4")) return false;
+            if (vScreenSize && !itemName.includes(normalizeStorage(vScreenSize))) return false;
+            const isCellular = vChip && (normalizeStr(vChip).includes("CELULAR") || normalizeStr(vChip).includes("CELLULAR"));
+            if (isCellular && !itemName.includes("CELULAR")) return false;
+            if (!isCellular && itemName.includes("CELULAR")) return false;
           } else if (prodSlug === "ipad-pro-m5") {
             if (!itemName.includes("IPAD PRO M5") && !itemName.includes("PRO M5")) return false;
             if (vScreenSize && !itemName.includes(normalizeStorage(vScreenSize))) return false;
@@ -338,9 +354,14 @@ async function runSync() {
         if (prodCat === "watch") {
           if (itemCat !== "RLG") return false;
 
-          if (prodSlug === "apple-watch-s11") {
+          if (prodSlug === "apple-watch-s12") {
+            if (!itemName.includes("WATCH S12") && !itemName.includes("SERIES 12")) return false;
+            if (vScreenSize && !normalizeStorage(item.storage).includes(normalizeStorage(vScreenSize))) return false;
+          } else if (prodSlug === "apple-watch-s11") {
             if (!itemName.includes("WATCH S11") && !itemName.includes("SERIES 11")) return false;
             if (vScreenSize && !normalizeStorage(item.storage).includes(normalizeStorage(vScreenSize))) return false;
+          } else if (prodSlug === "apple-watch-ultra-4") {
+            if (!itemName.includes("WATCH ULTRA 4") && !itemName.includes("ULTRA 4")) return false;
           } else if (prodSlug === "apple-watch-ultra-3") {
             if (!itemName.includes("WATCH ULTRA 3") && !itemName.includes("ULTRA 3")) return false;
           } else if (prodSlug === "apple-watch-se-3") {
@@ -367,6 +388,8 @@ async function runSync() {
             if (itemName !== "AIRPODS 4 ANC") return false;
           } else if (prodSlug === "airpods-pro-3") {
             if (!itemName.includes("AIRPODS PRO 3") && !itemName.includes("PRO 3")) return false;
+          } else if (prodSlug === "airpods-pro-2") {
+            if (!itemName.includes("AIRPODS PRO 2") && !itemName.includes("PRO 2")) return false;
           } else if (prodSlug === "airpods-max-2") {
             if (!itemName.includes("AIRPODS MAX 2") && !itemName.includes("MAX 2")) return false;
           } else {

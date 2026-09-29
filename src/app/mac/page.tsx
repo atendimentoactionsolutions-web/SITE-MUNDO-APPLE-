@@ -36,6 +36,7 @@ export default async function MacCategoryPage({ searchParams }: PageProps) {
     { label: "MacBook Neo", slug: "MacBook Neo" },
     { label: "iMac 24\"", slug: "iMac" },
     { label: "Mac mini", slug: "Mac mini" },
+    { label: "Mac Studio", slug: "Mac Studio" },
   ];
 
   return (

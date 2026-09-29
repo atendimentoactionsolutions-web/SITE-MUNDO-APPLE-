@@ -271,6 +271,10 @@ function findBestSupplierPrice(
           itemName.includes("17E")
         )
           return false;
+      } else if (prodSlug === "iphone-16-pro-max") {
+        if (!itemName.includes("IPHONE 16 PRO MAX")) return false;
+      } else if (prodSlug === "iphone-16-plus") {
+        if (!itemName.includes("IPHONE 16 PLUS")) return false;
       } else if (prodSlug === "iphone-16e") {
         if (!itemName.includes("IPHONE 16E")) return false;
       } else if (prodSlug === "iphone-16") {
@@ -281,6 +285,8 @@ function findBestSupplierPrice(
           itemName.includes("PLUS")
         )
           return false;
+      } else if (prodSlug === "iphone-15-plus") {
+        if (!itemName.includes("IPHONE 15 PLUS")) return false;
       } else if (prodSlug === "iphone-15") {
         if (
           !itemName.includes("IPHONE 15") ||
@@ -316,7 +322,7 @@ function findBestSupplierPrice(
         if (variant?.chip?.includes("4 Saídas") && !itemName.includes("4 SAIDAS")) return false;
         if (variant?.chip?.includes("2 Portas") && itemName.includes("4 SAIDAS")) return false;
       } else if (prodSlug === "macbook-neo-13") {
-        if (!itemName.includes("MACBOOK NEO 13")) return false;
+        if (!itemName.includes("MACBOOK NEO 13") && !itemName.includes("NEO 13")) return false;
       } else if (prodSlug === "macbook-air-m5") {
         if (!itemName.includes("MACBOOK AIR M5")) return false;
         if (vSize && !itemName.includes(vSize.replace(/["\s]/g, ""))) return false;
@@ -353,6 +359,12 @@ function findBestSupplierPrice(
         if (!itemName.includes("IPAD 11")) return false;
       } else if (prodSlug === "ipad-mini-7") {
         if (!itemName.includes("MINI 7") && !itemName.includes("IPAD MINI 7")) return false;
+      } else if (prodSlug === "ipad-air-m4") {
+        if (!itemName.includes("IPAD AIR M4") && !itemName.includes("AIR M4")) return false;
+        if (vSize && !itemName.includes(vSize.replace(/["\s]/g, ""))) return false;
+        const isCellular = vChip.includes("celular") || vChip.includes("cellular");
+        if (isCellular && !itemName.includes("CELULAR")) return false;
+        if (!isCellular && itemName.includes("CELULAR")) return false;
       } else if (prodSlug === "ipad-pro-m5") {
         if (!itemName.includes("IPAD PRO M5") && !itemName.includes("PRO M5")) return false;
         if (vSize && !itemName.includes(vSize.replace(/["\s]/g, ""))) return false;
@@ -377,9 +389,14 @@ function findBestSupplierPrice(
     if (prodCat === "watch") {
       if (item.category !== "RLG") return false;
 
-      if (prodSlug === "apple-watch-s11") {
+      if (prodSlug === "apple-watch-s12") {
+        if (!itemName.includes("APPLE WATCH S12") && !itemName.includes("WATCH S12")) return false;
+        if (vSize && normalizeSize(item.storage) !== vSize) return false;
+      } else if (prodSlug === "apple-watch-s11") {
         if (!itemName.includes("APPLE WATCH S11")) return false;
         if (vSize && normalizeSize(item.storage) !== vSize) return false;
+      } else if (prodSlug === "apple-watch-ultra-4") {
+        if (!itemName.includes("APPLE WATCH ULTRA 4") && !itemName.includes("ULTRA 4")) return false;
       } else if (prodSlug === "apple-watch-ultra-3") {
         if (!itemName.includes("APPLE WATCH ULTRA 3")) return false;
       } else if (prodSlug === "apple-watch-se-3") {
@@ -407,6 +424,8 @@ function findBestSupplierPrice(
         if (itemName !== "AIRPODS 4 ANC") return false;
       } else if (prodSlug === "airpods-pro-3") {
         if (itemName !== "AIRPODS PRO 3") return false;
+      } else if (prodSlug === "airpods-pro-2") {
+        if (!itemName.includes("AIRPODS PRO 2") && !itemName.includes("PRO 2")) return false;
       } else if (prodSlug === "airpods-max-2") {
         if (itemName !== "AIRPODS MAX 2" && itemName !== "AIRPODS MAX SMART CASE") return false;
       } else {

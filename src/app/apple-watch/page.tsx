@@ -31,7 +31,9 @@ export default async function WatchCategoryPage({ searchParams }: PageProps) {
 
   const subcategories = [
     { label: "Todos os Watches", slug: "" },
+    { label: "Series 12", slug: "Series 12" },
     { label: "Series 11", slug: "Series 11" },
+    { label: "Ultra 4", slug: "Ultra 4" },
     { label: "Ultra 3", slug: "Ultra 3" },
     { label: "SE 3", slug: "SE 3" },
   ];
@@ -42,7 +44,7 @@ export default async function WatchCategoryPage({ searchParams }: PageProps) {
         <SectionHeading
           eyebrow="Linha Apple Watch"
           title="O dispositivo definitivo no seu pulso."
-          subtitle="Apple Watch Series 11, Ultra 3 e SE 3 para saúde, esportes, segurança e alta conectividade."
+          subtitle="Apple Watch Series 12, Series 11, Ultra e SE para saúde, esportes, segurança e alta conectividade."
         />
 
         {/* Value Highlights */}

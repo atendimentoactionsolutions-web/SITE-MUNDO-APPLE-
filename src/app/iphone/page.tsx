@@ -18,7 +18,10 @@ const iphoneOrder = [
   "iphone-17-air",
   "iphone-17e",
   "iphone-17",
+  "iphone-16-pro-max",
+  "iphone-16-plus",
   "iphone-16",
+  "iphone-16e",
   "iphone-15",
 ];
 
