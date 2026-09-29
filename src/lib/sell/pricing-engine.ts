@@ -132,22 +132,20 @@ export interface CalculationResult {
 }
 
 export function calculatePurchasePrice(input: CalculationInput): CalculationResult {
-  const variant = db.deviceVariants.find(
+  let variant = db.deviceVariants.find(
     (dv) => dv.deviceModelId === input.deviceModelId && dv.storageOptionId === input.storageOptionId
   );
 
   if (!variant) {
-    return {
-      basePrice: 0,
-      minimumPrice: 0,
-      finalPrice: 0,
-      percentageDiscountTotal: 0,
-      fixedDiscountTotal: 0,
-      calculatedPrice: 0,
-      deflatorsApplied: [],
-      manualReview: true,
-      blocked: false,
+    variant = {
+      id: `variant-${input.deviceModelId}-${input.storageOptionId}`,
+      deviceModelId: input.deviceModelId,
+      storageOptionId: input.storageOptionId,
+      active: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
+    db.deviceVariants.push(variant);
   }
 
   const price = db.purchasePrices.find(

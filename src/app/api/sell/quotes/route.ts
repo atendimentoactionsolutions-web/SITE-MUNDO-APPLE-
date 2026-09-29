@@ -30,15 +30,20 @@ export async function POST(request: NextRequest) {
       answers,
     });
 
-    const variant = db.deviceVariants.find(
+    let variant = db.deviceVariants.find(
       (dv) => dv.deviceModelId === deviceModelId && dv.storageOptionId === storageOptionId
     );
 
     if (!variant) {
-      return NextResponse.json(
-        { success: false, error: "Device variant not found" },
-        { status: 400 }
-      );
+      variant = {
+        id: `variant-${deviceModelId}-${storageOptionId}`,
+        deviceModelId,
+        storageOptionId,
+        active: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      db.deviceVariants.push(variant);
     }
 
     const now = new Date();
@@ -150,14 +155,12 @@ export async function POST(request: NextRequest) {
 
       const autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de venda/avaliação na Mundo Apple.\n\n📱 Aparelho: ${modelName} ${storageName}\n💵 Valor Estimado: ${valorFormatado} (Pagamento via PIX)\n📋 Código da Cotação: ${publicCode}\n\nNossa equipe já foi notificada e em instantes daremos continuidade ao seu atendimento!`;
 
-      // Dispatch asynchronously without blocking API response
-      import("@/lib/whatsapp/whatsapp-service")
-        .then(({ sendWhatsAppMessage }) => {
-          sendWhatsAppMessage(custData.whatsapp, autoMessage).catch((err) => {
-            console.error("Erro no disparo automático WhatsApp:", err);
-          });
-        })
-        .catch(() => {});
+      try {
+        const { sendWhatsAppMessage } = await import("@/lib/whatsapp/whatsapp-service");
+        await sendWhatsAppMessage(custData.whatsapp, autoMessage);
+      } catch (err) {
+        console.error("Erro no disparo automático WhatsApp:", err);
+      }
     }
 
     return NextResponse.json({
