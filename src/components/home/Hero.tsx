@@ -9,13 +9,6 @@ export const Hero: React.FC = () => {
       <Container size="large" className="w-full">
         {/* Main Hero Card Container — Apple Store Clean Editorial Layout */}
         <div className="relative w-full rounded-3xl sm:rounded-[36px] overflow-hidden bg-gradient-to-b from-[#FBFBFD] via-[#F8F8FA] to-[#F5F5F7] text-[#1D1D1F] border border-[#E5E5EA] shadow-[0_4px_24px_rgba(0,0,0,0.03)] px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20 flex flex-col items-center text-center gap-8 sm:gap-10">
-          
-          {/* Subtle Top Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#D2D2D7]/60 text-xs font-semibold uppercase tracking-wider text-[#0071E3] shadow-2xs">
-            <span className="w-2 h-2 rounded-full bg-[#0071E3] animate-pulse" />
-            <span>Novidades & Catálogo Completo • Pronta Entrega SP</span>
-          </div>
-
           {/* Typography */}
           <div className="max-w-4xl space-y-4 sm:space-y-6">
             <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-semibold text-[#1D1D1F] font-display tracking-[-0.035em] leading-[1.08]">
