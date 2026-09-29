@@ -5,8 +5,6 @@ import { MarqueeTicker } from "@/components/home/MarqueeTicker";
 import { CategoryCardsGrid } from "@/components/home/CategoryCardsGrid";
 import { TradeInBanner } from "@/components/home/TradeInBanner";
 import { ProductSection } from "@/components/products/ProductSection";
-import { FAQSection } from "@/components/home/FAQSection";
-import { TrustSection } from "@/components/home/TrustSection";
 import { StoreLocationSection } from "@/components/home/StoreLocationSection";
 
 
@@ -185,15 +183,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 12. Garantia & Diferenciais */}
-      <TrustSection />
-
-      {/* 13. Perguntas Frequentes (FAQ Accordion) */}
-      <div id="faq">
-        <FAQSection />
-      </div>
-
-      {/* 14. Localização Loja Física Santa Ifigênia */}
+      {/* 11. Localização Loja Física Santa Ifigênia */}
       <StoreLocationSection />
     </>
   );

@@ -102,15 +102,6 @@ export const Header: React.FC = () => {
               Home
             </Link>
 
-            <Link
-              href="/sobre"
-              className={`px-3 py-1.5 rounded-full transition-colors ${
-                pathname === "/sobre" ? "text-[#0071E3] bg-[#F5F5F7]" : "hover:text-[#0071E3] hover:bg-[#F5F5F7]"
-              }`}
-            >
-              Sobre nós
-            </Link>
-
             {/* Catálogos Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
@@ -155,15 +146,6 @@ export const Header: React.FC = () => {
             </div>
 
             <Link
-              href="/garantia"
-              className={`px-3 py-1.5 rounded-full transition-colors ${
-                pathname === "/garantia" ? "text-[#0071E3] bg-[#F5F5F7]" : "hover:text-[#0071E3] hover:bg-[#F5F5F7]"
-              }`}
-            >
-              Garantia
-            </Link>
-
-            <Link
               href="/vender"
               className={`px-3 py-1.5 rounded-full transition-colors ${
                 pathname === "/vender" ? "text-emerald-700 bg-emerald-50 font-bold" : "hover:text-emerald-700 hover:bg-emerald-50"
@@ -173,10 +155,12 @@ export const Header: React.FC = () => {
             </Link>
 
             <Link
-              href="/#faq"
-              className="px-3 py-1.5 rounded-full transition-colors hover:text-[#0071E3] hover:bg-[#F5F5F7]"
+              href="/sobre"
+              className={`px-3 py-1.5 rounded-full transition-colors ${
+                pathname === "/sobre" ? "text-[#0071E3] bg-[#F5F5F7]" : "hover:text-[#0071E3] hover:bg-[#F5F5F7]"
+              }`}
             >
-              FAQ
+              Sobre nós
             </Link>
           </nav>
 
@@ -225,14 +209,6 @@ export const Header: React.FC = () => {
                 <ArrowRight className="w-4 h-4 text-gray-400" />
               </Link>
               <Link
-                href="/sobre"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
-              >
-                <span>Sobre nós</span>
-                <ArrowRight className="w-4 h-4 text-gray-400" />
-              </Link>
-              <Link
                 href="/vender"
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2.5 text-lg font-bold text-emerald-700 border-b border-slate-100 flex items-center justify-between"
@@ -241,27 +217,19 @@ export const Header: React.FC = () => {
                 <ArrowRight className="w-4 h-4 text-emerald-700" />
               </Link>
               <Link
+                href="/sobre"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
+              >
+                <span>Sobre nós</span>
+                <ArrowRight className="w-4 h-4 text-gray-400" />
+              </Link>
+              <Link
                 href="/troca"
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
               >
                 <span>Troca de Aparelho (Trade-In)</span>
-                <ArrowRight className="w-4 h-4 text-gray-400" />
-              </Link>
-              <Link
-                href="/garantia"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
-              >
-                <span>Garantia & Procedência</span>
-                <ArrowRight className="w-4 h-4 text-gray-400" />
-              </Link>
-              <Link
-                href="/#faq"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
-              >
-                <span>Perguntas Frequentes (FAQ)</span>
                 <ArrowRight className="w-4 h-4 text-gray-400" />
               </Link>
             </nav>
