@@ -76,7 +76,7 @@ export const products: Product[] = [
       "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
-    "priceFrom": 10950,
+    "priceFrom": 10500,
     "condition": "new",
     "storage": [
       "256GB",
@@ -93,13 +93,13 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 10950,
+        "price": 10500,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Glacier",
-        "price": 10950,
+        "price": 10600,
         "available": true
       },
       {
@@ -111,37 +111,37 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 10950,
+        "price": 10850,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Black",
-        "price": 12400,
+        "price": 12000,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Glacier",
-        "price": 12400,
+        "price": 12050,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Burgundy",
-        "price": 13490,
+        "price": 13600,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 12400,
+        "price": 12050,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Burgundy",
-        "price": 17300,
+        "price": 15800,
         "available": true
       }
     ],
@@ -188,7 +188,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Burgundy",
-        "price": 9900,
+        "price": 9950,
         "available": true
       }
     ],
@@ -204,7 +204,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-pro-max.png",
-    "priceFrom": 7650,
+    "priceFrom": 7649.99,
     "condition": "new",
     "storage": [
       "256GB",
@@ -221,7 +221,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
-        "price": 7650,
+        "price": 7649.99,
         "available": true
       },
       {
@@ -233,7 +233,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 7850,
+        "price": 7800,
         "available": true
       },
       {
@@ -336,7 +336,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 8850,
+        "price": 8800,
         "available": true
       },
       {
@@ -574,7 +574,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 6000,
+        "price": 5950,
         "available": true
       },
       {
@@ -642,13 +642,13 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "White",
-        "price": 4929.99,
+        "price": 4919.99,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 4949.99,
+        "price": 4939.99,
         "available": true
       }
     ],
@@ -1206,7 +1206,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 7299,
+        "price": 7100,
         "available": true
       },
       {
@@ -1214,7 +1214,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 7299,
+        "price": 7100,
         "available": true
       }
     ],
@@ -1392,7 +1392,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/ipad/ipad-pro-spaceblack.png",
       "Silver": "/images/products/ipad/ipad-pro-silver.png"
     },
-    "priceFrom": 7300,
+    "priceFrom": 7650,
     "condition": "new",
     "screenSizes": [
       "11\"",
@@ -1404,7 +1404,9 @@ export const products: Product[] = [
     ],
     "storage": [
       "256GB",
-      "1TB"
+      "512GB",
+      "1TB",
+      "2TB"
     ],
     "colors": [
       "Space Black",
@@ -1413,70 +1415,374 @@ export const products: Product[] = [
     "variants": [
       {
         "screenSize": "11\"",
-        "chip": "WiFi",
+        "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Space Black",
-        "price": 7350,
+        "price": 7700,
         "available": true
       },
       {
         "screenSize": "11\"",
-        "chip": "WiFi",
+        "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Silver",
-        "price": 7300,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "WiFi",
-        "storage": "256GB",
-        "color": "Space Black",
-        "price": 8100,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "WiFi",
-        "storage": "256GB",
-        "color": "Silver",
-        "price": 8250,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Celular",
-        "storage": "256GB",
-        "color": "Space Black",
-        "price": 8100,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Celular",
-        "storage": "256GB",
-        "color": "Silver",
-        "price": 8250,
+        "price": 7650,
         "available": true
       },
       {
         "screenSize": "11\"",
-        "chip": "WiFi",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "256GB",
+        "color": "Space Black",
+        "price": 8450,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "256GB",
+        "color": "Silver",
+        "price": 8450,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "512GB",
+        "color": "Space Black",
+        "price": 8950,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 8950,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "512GB",
+        "color": "Space Black",
+        "price": 10440,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 10440,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 11600,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
         "storage": "1TB",
         "color": "Silver",
-        "price": 11650,
+        "price": 11600,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 12500,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "1TB",
+        "color": "Silver",
+        "price": 12500,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "2TB",
+        "color": "Space Black",
+        "price": 12150,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "2TB",
+        "color": "Silver",
+        "price": 12150,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "2TB",
+        "color": "Space Black",
+        "price": 13200,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "2TB",
+        "color": "Silver",
+        "price": 13200,
         "available": true
       },
       {
         "screenSize": "13\"",
-        "chip": "WiFi",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Space Black",
+        "price": 8450,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Silver",
+        "price": 8600,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "256GB",
+        "color": "Space Black",
+        "price": 9250,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "256GB",
+        "color": "Silver",
+        "price": 9250,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "512GB",
+        "color": "Space Black",
+        "price": 9950,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 9950,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "512GB",
+        "color": "Space Black",
+        "price": 10940,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 10940,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 11750,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
         "storage": "1TB",
         "color": "Silver",
-        "price": 11250,
+        "price": 11600,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 12500,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "1TB",
+        "color": "Silver",
+        "price": 12700,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "2TB",
+        "color": "Space Black",
+        "price": 12150,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "2TB",
+        "color": "Silver",
+        "price": 12150,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "2TB",
+        "color": "Space Black",
+        "price": 13200,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "2TB",
+        "color": "Silver",
+        "price": 13200,
         "available": true
       }
     ],
     "description": "Chip M5 revolucionário, tela Ultra Retina XDR OLED tandem de 11 ou 13 polegadas, acabamento ultrafino e conexão Wi-Fi 6E ou 5G Cellular.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "featured": true,
+    "active": true
+  },
+  {
+    "id": "ipad-mini-7",
+    "slug": "ipad-mini-7",
+    "name": "iPad mini 7",
+    "category": "ipad",
+    "subcategory": "iPad mini",
+    "image": "/images/products/ipad/ipad-11-colors.png",
+    "colorImages": {
+      "Space Gray": "/images/products/ipad/ipad-pro-spaceblack.png",
+      "Blue": "/images/products/ipad/ipad-11-blue.png",
+      "Purple": "/images/products/ipad/ipad-11-pink.png",
+      "Starlight": "/images/products/ipad/ipad-11-silver.png"
+    },
+    "priceFrom": 3950,
+    "condition": "new",
+    "screenSizes": [
+      "8.3\""
+    ],
+    "chips": [
+      "A17 Pro",
+      "Wi-Fi"
+    ],
+    "storage": [
+      "128GB",
+      "256GB",
+      "512GB"
+    ],
+    "colors": [
+      "Space Gray",
+      "Blue",
+      "Purple",
+      "Starlight"
+    ],
+    "variants": [
+      {
+        "storage": "128GB",
+        "color": "Space Gray",
+        "price": 3950,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 3950,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "color": "Purple",
+        "price": 3950,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "color": "Starlight",
+        "price": 3950,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Space Gray",
+        "price": 4650,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Blue",
+        "price": 4650,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Purple",
+        "price": 4650,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Starlight",
+        "price": 4650,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Space Gray",
+        "price": 5650,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Blue",
+        "price": 5650,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Purple",
+        "price": 5650,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Starlight",
+        "price": 5650,
+        "available": true
+      }
+    ],
+    "description": "Superpotência compacta com chip A17 Pro e Apple Intelligence. Tela Liquid Retina de 8.3 polegadas, suporte ao Apple Pencil Pro e conexão Wi-Fi 6E ultrarrápida.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
     "active": true
@@ -1741,7 +2047,7 @@ export const products: Product[] = [
       {
         "size": "42mm",
         "color": "Space Gray",
-        "price": 2550,
+        "price": 2500,
         "available": true
       },
       {
@@ -2087,7 +2393,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-2.png",
-    "priceFrom": 630,
+    "priceFrom": 575,
     "condition": "new",
     "description": "Precisão absoluta com fixação e recarga magnética na lateral do iPad, sensível à inclinação e pressão.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2107,13 +2413,40 @@ export const products: Product[] = [
     "active": true
   },
   {
+    "id": "airtag-1pack",
+    "slug": "airtag-1pack",
+    "name": "AirTag 1ª Geração — 1 Pack",
+    "category": "accessories",
+    "subcategory": "AirTag",
+    "image": "/images/products/accessories/airtag-1pack.png",
+    "priceFrom": 280,
+    "condition": "new",
+    "description": "Rastreie suas chaves, carteira, mala e pertences com máxima precisão pelo app Buscar na rede Apple.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "featured": true,
+    "active": true
+  },
+  {
+    "id": "airtag-4pack",
+    "slug": "airtag-4pack",
+    "name": "AirTag 1ª Geração — 4 Pack",
+    "category": "accessories",
+    "subcategory": "AirTag",
+    "image": "/images/products/accessories/airtag-4pack.png",
+    "priceFrom": 830,
+    "condition": "new",
+    "description": "Pacote com 4 unidades do AirTag de 1ª Geração para manter todos os seus itens protegidos e localizáveis.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
     "id": "airtag-2-1pack",
     "slug": "airtag-2-1pack",
     "name": "AirTag 2 — 1 Pack",
     "category": "accessories",
     "subcategory": "AirTag",
     "image": "/images/products/accessories/airtag-1pack.png",
-    "priceFrom": 280,
+    "priceFrom": 300,
     "condition": "new",
     "description": "Rastreie suas chaves, carteira, mala e pertences com máxima precisão pelo app Buscar.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2127,7 +2460,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "AirTag",
     "image": "/images/products/accessories/airtag-4pack.png",
-    "priceFrom": 580,
+    "priceFrom": 980,
     "condition": "new",
     "description": "Pacote com 4 unidades para proteger todos os seus itens mais importantes com a rede Buscar da Apple.",
     "warranty": "1 ano de garantia oficial Apple",

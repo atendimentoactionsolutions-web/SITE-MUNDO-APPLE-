@@ -14,6 +14,12 @@ interface ProductDetailOptionsProps {
 }
 
 export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ product }) => {
+  const [selectedScreenSize, setSelectedScreenSize] = useState<string>(
+    product.variants?.[0]?.screenSize || (product.variants?.[0] as any)?.size || product.screenSizes?.[0] || ""
+  );
+  const [selectedChip, setSelectedChip] = useState<string>(
+    product.variants?.[0]?.chip || product.chips?.[0] || ""
+  );
   const [selectedStorage, setSelectedStorage] = useState<string>(
     product.variants?.[0]?.storage || product.storage?.[0] || ""
   );
@@ -21,32 +27,50 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
     product.variants?.[0]?.color || product.colors?.[0] || ""
   );
 
-  // Dynamic price calculation based on selected storage and color
+  // Dynamic price calculation based on selected size, chip, storage and color
   const activeVariant = useMemo(() => {
     if (!product.variants || product.variants.length === 0) return null;
 
-    // 1. Direct match: storage and color
+    // 1. Direct match: size, chip, storage and color
     const direct = product.variants.find(
       (v) =>
+        (!selectedScreenSize || v.screenSize === selectedScreenSize || (v as any).size === selectedScreenSize) &&
+        (!selectedChip || v.chip === selectedChip) &&
         (!selectedStorage || v.storage === selectedStorage) &&
         (!selectedColor || v.color === selectedColor)
     );
     if (direct) return direct;
 
-    // 2. Storage match
+    // 2. Partial match: storage and color
+    const partial = product.variants.find(
+      (v) =>
+        (!selectedStorage || v.storage === selectedStorage) &&
+        (!selectedColor || v.color === selectedColor)
+    );
+    if (partial) return partial;
+
+    // 3. Storage match
     const storageMatch = product.variants.find(
       (v) => !selectedStorage || v.storage === selectedStorage
     );
     if (storageMatch) return storageMatch;
 
     return product.variants[0];
-  }, [product.variants, selectedStorage, selectedColor]);
+  }, [product.variants, selectedScreenSize, selectedChip, selectedStorage, selectedColor]);
 
   const currentPrice = activeVariant?.price || product.priceFrom || 0;
 
+  const optionDetails = [
+    selectedScreenSize,
+    selectedChip,
+    selectedStorage,
+  ]
+    .filter(Boolean)
+    .join(" • ");
+
   const whatsappUrl = getWhatsAppProductUrl(
     product.name,
-    selectedStorage,
+    optionDetails,
     selectedColor,
     currentPrice
   );
@@ -92,6 +116,56 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         </p>
       </div>
 
+      {/* Screen Size Options */}
+      {product.screenSizes && product.screenSizes.length > 1 && (
+        <div className="space-y-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-apple-dark">
+            Tamanho da Tela:
+          </label>
+          <div className="flex items-center gap-2.5 flex-wrap">
+            {product.screenSizes.map((size) => (
+              <button
+                key={size}
+                type="button"
+                onClick={() => setSelectedScreenSize(size)}
+                className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all cursor-pointer ${
+                  selectedScreenSize === size
+                    ? "bg-apple-dark text-white border-apple-dark shadow-sm"
+                    : "bg-white text-apple-dark border-apple-border hover:bg-gray-100"
+                }`}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Connectivity / Chip Options */}
+      {product.chips && product.chips.length > 1 && (
+        <div className="space-y-2">
+          <label className="block text-xs font-semibold uppercase tracking-wider text-apple-dark">
+            Conectividade / Versão:
+          </label>
+          <div className="flex items-center gap-2.5 flex-wrap">
+            {product.chips.map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                onClick={() => setSelectedChip(chip)}
+                className={`px-4 py-2.5 rounded-2xl text-xs font-semibold border transition-all cursor-pointer ${
+                  selectedChip === chip
+                    ? "bg-apple-dark text-white border-apple-dark shadow-sm"
+                    : "bg-white text-apple-dark border-apple-border hover:bg-gray-100"
+                }`}
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Storage Options */}
       {product.storage && product.storage.length > 0 && (
         <div className="space-y-2">
@@ -130,6 +204,8 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
               const isSelected = selectedColor === color;
               const variantMatch = product.variants?.find(
                 (v) =>
+                  (!selectedScreenSize || v.screenSize === selectedScreenSize || (v as any).size === selectedScreenSize) &&
+                  (!selectedChip || v.chip === selectedChip) &&
                   (!selectedStorage || v.storage === selectedStorage) &&
                   v.color === color
               );

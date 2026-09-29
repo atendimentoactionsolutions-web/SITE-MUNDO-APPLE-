@@ -237,11 +237,6 @@ function findBestSupplierPrice(
   const prodSlug = product.slug.toLowerCase();
   const prodCat = product.category.toLowerCase();
 
-  // If accessory, owner instructed not to touch
-  if (prodCat === "accessories" || prodCat === "acessorios") {
-    return null;
-  }
-
   const vStorage = normalizeStorage(variant?.storage);
   const vColor = normalizeColor(variant?.color);
   const vSize = normalizeSize(variant?.size || variant?.screenSize);
@@ -352,16 +347,19 @@ function findBestSupplierPrice(
 
     // 3. IPAD
     if (prodCat === "ipad") {
-      if (item.category !== "IPAD") return false;
+      if (item.category !== "IPAD" && item.category !== "IPD") return false;
 
       if (prodSlug === "ipad-11") {
         if (!itemName.includes("IPAD 11")) return false;
+      } else if (prodSlug === "ipad-mini-7") {
+        if (!itemName.includes("MINI 7") && !itemName.includes("IPAD MINI 7")) return false;
       } else if (prodSlug === "ipad-pro-m5") {
-        if (!itemName.includes("IPAD PRO M5")) return false;
+        if (!itemName.includes("IPAD PRO M5") && !itemName.includes("PRO M5")) return false;
         if (vSize && !itemName.includes(vSize.replace(/["\s]/g, ""))) return false;
         // Match Cellular vs Wifi
-        if (vChip.includes("cellular") && !itemName.includes("CELULAR")) return false;
-        if (!vChip.includes("cellular") && itemName.includes("CELULAR")) return false;
+        const isCellular = vChip.includes("celular") || vChip.includes("cellular");
+        if (isCellular && !itemName.includes("CELULAR")) return false;
+        if (!isCellular && itemName.includes("CELULAR")) return false;
       } else {
         return false;
       }
@@ -416,6 +414,35 @@ function findBestSupplierPrice(
       }
 
       if (vColor && item.color && normalizeColor(item.color) !== vColor) return false;
+
+      return true;
+    }
+
+    // 6. ACCESSORIES
+    if (prodCat === "accessories" || prodCat === "acessorios") {
+      if (item.category !== "ACSS") return false;
+
+      if (prodSlug === "airtag-1pack" || prodSlug === "airtag-1-pack") {
+        if (itemName !== "AIRTAG 1 PACK" && !itemName.includes("AIRTAG 1")) return false;
+        if (itemName.includes("AIRTAG 2")) return false;
+      } else if (prodSlug === "airtag-4pack" || prodSlug === "airtag-4-pack") {
+        if (itemName !== "AIRTAG 4 PACK" && !itemName.includes("AIRTAG 4")) return false;
+        if (itemName.includes("AIRTAG 2")) return false;
+      } else if (prodSlug === "airtag-2-1pack") {
+        if (!itemName.includes("AIRTAG 2 1 PACK") && !itemName.includes("AIRTAG 2 1PACK") && itemName !== "AIRTAG 2") return false;
+      } else if (prodSlug === "airtag-2-4pack") {
+        if (!itemName.includes("AIRTAG 2 4 PACK") && !itemName.includes("AIRTAG 2 4PACK")) return false;
+      } else if (prodSlug === "apple-pencil-pro") {
+        if (!itemName.includes("PENCIL PRO")) return false;
+      } else if (prodSlug === "apple-pencil-usbc") {
+        if (!itemName.includes("PENCIL USB-C") && !itemName.includes("PENCIL TYPE C")) return false;
+      } else if (prodSlug === "apple-pencil-2") {
+        if (!itemName.includes("PENCIL 2") && !itemName.includes("PENCIL 2A")) return false;
+      } else if (prodSlug.includes("magic-mouse")) {
+        if (!itemName.includes("MAGIC MOUSE")) return false;
+      } else {
+        return false;
+      }
 
       return true;
     }

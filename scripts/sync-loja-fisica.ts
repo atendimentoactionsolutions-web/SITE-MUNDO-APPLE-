@@ -191,6 +191,7 @@ async function runSync() {
   function getMargin(product: Product): number {
     const name = normalizeStr(product.name);
     const cat = normalizeStr(product.category);
+    const slug = product.slug.toLowerCase();
 
     if (name.includes("IPHONE 18") || name.includes("IPH 18")) return margins.IPH18 ?? 1100;
     if (cat === "IPHONE" || cat === "IPH" || name.includes("IPHONE")) return margins.IPH ?? 750;
@@ -199,10 +200,16 @@ async function runSync() {
       if (cat === "IMAC" || name.includes("IMAC")) return margins.IMAC ?? 1500;
       return margins.MCB_PRO ?? 1300;
     }
-    if (cat === "IPAD" || name.includes("IPAD")) return margins.IPAD ?? 500;
+    if (cat === "IPAD" || name.includes("IPAD")) {
+      if (slug.includes("pro") || name.includes("PRO")) return 850;
+      return margins.IPAD ?? 500;
+    }
     if (cat === "WATCH" || cat === "RLG" || name.includes("WATCH")) return margins.RLG ?? 500;
     if (cat === "AIRPODS" || cat === "PODS" || name.includes("AIRPOD")) return margins.PODS ?? 200;
-    if (cat === "ACCESSORIES" || cat === "ACSS" || name.includes("PENCIL") || name.includes("AIRTAG") || name.includes("MAGIC")) return margins.ACSS ?? 100;
+    if (cat === "ACCESSORIES" || cat === "ACSS" || name.includes("PENCIL") || name.includes("AIRTAG") || name.includes("MAGIC")) {
+      if (slug.includes("4pack") || slug.includes("4-pack") || name.includes("4 PACK")) return 350;
+      return margins.ACSS ?? 100;
+    }
     return 500;
   }
 
@@ -309,9 +316,14 @@ async function runSync() {
 
           if (prodSlug === "ipad-11") {
             if (!itemName.includes("IPAD 11")) return false;
+          } else if (prodSlug === "ipad-mini-7") {
+            if (!itemName.includes("MINI 7") && !itemName.includes("IPAD MINI 7")) return false;
           } else if (prodSlug === "ipad-pro-m5") {
             if (!itemName.includes("IPAD PRO M5") && !itemName.includes("PRO M5")) return false;
             if (vScreenSize && !itemName.includes(normalizeStorage(vScreenSize))) return false;
+            const isCellular = vChip && (normalizeStr(vChip).includes("CELULAR") || normalizeStr(vChip).includes("CELLULAR"));
+            if (isCellular && !itemName.includes("CELULAR")) return false;
+            if (!isCellular && itemName.includes("CELULAR")) return false;
           } else {
             return false;
           }
@@ -372,16 +384,22 @@ async function runSync() {
         if (prodCat === "accessories") {
           if (itemCat !== "ACSS") return false;
 
-          if (prodSlug === "apple-pencil-pro") {
+          if (prodSlug === "airtag-1pack" || prodSlug === "airtag-1-pack") {
+            if (itemName !== "AIRTAG 1 PACK" && !itemName.includes("AIRTAG 1")) return false;
+            if (itemName.includes("AIRTAG 2")) return false;
+          } else if (prodSlug === "airtag-4pack" || prodSlug === "airtag-4-pack") {
+            if (itemName !== "AIRTAG 4 PACK" && !itemName.includes("AIRTAG 4")) return false;
+            if (itemName.includes("AIRTAG 2")) return false;
+          } else if (prodSlug === "airtag-2-1pack") {
+            if (!itemName.includes("AIRTAG 2 1 PACK") && !itemName.includes("AIRTAG 2 1PACK") && itemName !== "AIRTAG 2") return false;
+          } else if (prodSlug === "airtag-2-4pack") {
+            if (!itemName.includes("AIRTAG 2 4 PACK") && !itemName.includes("AIRTAG 2 4PACK")) return false;
+          } else if (prodSlug === "apple-pencil-pro") {
             if (!itemName.includes("PENCIL PRO")) return false;
           } else if (prodSlug === "apple-pencil-usbc") {
             if (!itemName.includes("PENCIL USB-C") && !itemName.includes("PENCIL TYPE C")) return false;
           } else if (prodSlug === "apple-pencil-2") {
             if (!itemName.includes("PENCIL 2") && !itemName.includes("PENCIL 2A")) return false;
-          } else if (prodSlug === "airtag-2-1pack") {
-            if (!itemName.includes("AIRTAG 1") && !itemName.includes("AIRTAG 1 PACK")) return false;
-          } else if (prodSlug === "airtag-2-4pack") {
-            if (!itemName.includes("AIRTAG 4") && !itemName.includes("AIRTAG 4 PACK")) return false;
           } else if (prodSlug.includes("magic-mouse")) {
             if (!itemName.includes("MAGIC MOUSE")) return false;
           } else {
