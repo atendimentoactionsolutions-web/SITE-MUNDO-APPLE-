@@ -3,7 +3,6 @@ import { getProducts } from "@/lib/data";
 import { Hero } from "@/components/home/Hero";
 import { MarqueeTicker } from "@/components/home/MarqueeTicker";
 import { CategoryCardsGrid } from "@/components/home/CategoryCardsGrid";
-import { AppleLaunchesSection } from "@/components/home/AppleLaunchesSection";
 import { TradeInBanner } from "@/components/home/TradeInBanner";
 import { ProductSection } from "@/components/products/ProductSection";
 import { FAQSection } from "@/components/home/FAQSection";
@@ -98,10 +97,7 @@ export default async function HomePage() {
       {/* 2. Faixa Marquee Animada Infinita */}
       <MarqueeTicker />
 
-      {/* 3. Destaques de Lançamentos Apple 2026 (Material do Drive) */}
-      <AppleLaunchesSection />
-
-      {/* 4. Seção Categorias Rápidas */}
+      {/* 3. Seção Categorias Rápidas */}
       <CategoryCardsGrid />
 
       {/* 5. Banner de Troca / Trade-In */}
