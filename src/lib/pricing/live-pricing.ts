@@ -42,36 +42,46 @@ export function getProductMargin(product: Product): number | null {
   const slug = product.slug.toLowerCase();
   const name = product.name.toLowerCase();
 
-  // Accessories: DO NOT TOUCH
+  // Accessories
   if (cat === "accessories" || cat === "acessorios") {
-    return null;
+    if (slug.includes("airtag-pack") || name.includes("4 pack")) return 350;
+    if (slug.includes("airtag") || name.includes("airtag")) return 100;
+    if (slug.includes("pencil")) return 200;
+    if (slug.includes("magic-mouse") || name.includes("magic mouse")) return 430;
+    if (slug.includes("keyboard") || name.includes("magic keyboard")) return 400;
+    if (slug.includes("folio")) return 400;
+    if (slug.includes("apple-tv") || name.includes("apple tv")) return 500;
+    return 100;
   }
 
-  // iPhones: R$ 750,00
+  // iPhones
   if (cat === "iphone") {
-    return 750;
+    if (slug.includes("18") || name.includes("18")) {
+      return 1100; // iPhone 18 Series: + R$ 1.100
+    }
+    return 750; // iPhone 17 / 16 / 15: + R$ 750
   }
 
   // Macs & MacBooks
   if (cat === "mac") {
-    if (slug.includes("air") || name.includes("air")) {
-      return 1000; // MacBook Air: R$ 1.000,00
+    if (slug.includes("imac") || name.includes("imac")) {
+      return 1500; // iMac 24" M4: + R$ 1.500
     }
-    return 1300; // MacBook Pro, iMac, Mac mini, MacBook Neo: R$ 1.300,00
+    if (slug.includes("air") || name.includes("air")) {
+      return 1000; // MacBook Air: + R$ 1.000
+    }
+    return 1300; // MacBook Pro, Mac mini, MacBook Neo: + R$ 1.300
   }
 
   // iPads
   if (cat === "ipad") {
-    if (slug.includes("11") || name.includes("11")) {
-      return 450; // iPad 11: R$ 450,00
+    if (slug.includes("pro") || name.includes("pro")) {
+      return 850; // iPad Pro: + R$ 850
     }
     if (slug.includes("air") || name.includes("air")) {
-      return 750; // iPad Air: R$ 750,00
+      return 750; // iPad Air: + R$ 750
     }
-    if (slug.includes("pro") || name.includes("pro")) {
-      return 850; // iPad Pro: R$ 850,00
-    }
-    return 450; // default for other basic iPads
+    return 500; // iPad 11 / outros: + R$ 500
   }
 
   // Apple Watch: R$ 500,00
@@ -79,9 +89,9 @@ export function getProductMargin(product: Product): number | null {
     return 500;
   }
 
-  // AirPods: R$ 500,00
+  // AirPods
   if (cat === "airpods") {
-    return 500;
+    return 400;
   }
 
   return null;
@@ -179,10 +189,10 @@ export function normalizeSize(size?: string): string {
   return size.trim().toUpperCase().replace(/\s+/g, "");
 }
 
-// In-memory cache for fast, resilient serving
+// In-memory cache for fast, resilient serving (10 minutes)
 let cachedEnrichedProducts: Product[] | null = null;
 let lastFetchTimestamp = 0;
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes cache
+const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes cache
 
 /**
  * Fetch products from the Render Buscador API with timeout protection
@@ -194,7 +204,7 @@ export async function fetchRenderSupplierProducts(): Promise<RenderSupplierItem[
   try {
     const res = await fetch("https://mundo-apple-buscador.onrender.com/api/products", {
       signal: controller.signal,
-      next: { revalidate: 300 }, // Next.js ISR cache: 5 minutes
+      next: { revalidate: 600 }, // Next.js ISR cache: 10 minutes (600s)
     });
 
     clearTimeout(timeoutId);
