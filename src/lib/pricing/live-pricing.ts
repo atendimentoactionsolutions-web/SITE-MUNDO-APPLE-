@@ -199,10 +199,10 @@ const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes cache
  */
 export async function fetchRenderSupplierProducts(): Promise<RenderSupplierItem[]> {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout
+  const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
 
   try {
-    const res = await fetch("https://mundo-apple-buscador.onrender.com/api/products", {
+    const res = await fetch("https://mundo-apple-buscador.onrender.com/api/products?limit=10000", {
       signal: controller.signal,
       next: { revalidate: 600 }, // Next.js ISR cache: 10 minutes (600s)
     });
@@ -256,7 +256,11 @@ function findBestSupplierPrice(
       if (item.category !== "IPH") return false;
 
       // Match specific iPhone model
-      if (prodSlug === "iphone-17-pro-max") {
+      if (prodSlug === "iphone-18-pro-max") {
+        if (!itemName.includes("IPHONE 18 PRO MAX")) return false;
+      } else if (prodSlug === "iphone-18-pro") {
+        if (!itemName.includes("IPHONE 18 PRO") || itemName.includes("MAX")) return false;
+      } else if (prodSlug === "iphone-17-pro-max") {
         if (!itemName.includes("IPHONE 17 PRO MAX")) return false;
       } else if (prodSlug === "iphone-17-pro") {
         if (!itemName.includes("IPHONE 17 PRO") || itemName.includes("MAX")) return false;
@@ -272,6 +276,8 @@ function findBestSupplierPrice(
           itemName.includes("17E")
         )
           return false;
+      } else if (prodSlug === "iphone-16e") {
+        if (!itemName.includes("IPHONE 16E")) return false;
       } else if (prodSlug === "iphone-16") {
         if (
           !itemName.includes("IPHONE 16") ||
@@ -300,16 +306,20 @@ function findBestSupplierPrice(
       return true;
     }
 
-    // 2. MAC & MACBOOK & IMAC
+    // 2. MAC & MACBOOK & IMAC & MAC STUDIO
     if (prodCat === "mac") {
       if (item.category !== "MCB" && item.category !== "IMAC") return false;
 
-      if (prodSlug === "imac-24-m4") {
+      if (prodSlug === "mac-studio-m4-max") {
+        if (!itemName.includes("MAC STUDIO M4 MAX") && !itemName.includes("STUDIO M4 MAX")) return false;
+      } else if (prodSlug === "mac-mini-m4-pro") {
+        if (!itemName.includes("MAC MINI M4 PRO")) return false;
+      } else if (prodSlug === "mac-mini-m4") {
+        if (!itemName.includes("MAC MINI M4") || itemName.includes("PRO")) return false;
+      } else if (prodSlug === "imac-24-m4") {
         if (!itemName.includes("IMAC M4 24")) return false;
         if (variant?.chip?.includes("4 Saídas") && !itemName.includes("4 SAIDAS")) return false;
         if (variant?.chip?.includes("2 Portas") && itemName.includes("4 SAIDAS")) return false;
-      } else if (prodSlug === "mac-mini-m4") {
-        if (!itemName.includes("MAC MINI M4")) return false;
       } else if (prodSlug === "macbook-neo-13") {
         if (!itemName.includes("MACBOOK NEO 13")) return false;
       } else if (prodSlug === "macbook-air-m5") {
@@ -321,6 +331,9 @@ function findBestSupplierPrice(
       } else if (prodSlug === "macbook-pro-m5-max") {
         if (!itemName.includes("MACBOOK PRO M5 MAX")) return false;
         if (vSize && !itemName.includes(vSize.replace(/["\s]/g, ""))) return false;
+        // RAM differentiation (48GB vs 36GB)
+        if (variant?.ram === "48GB" && item.price < 35000) return false;
+        if (variant?.ram === "36GB" && item.price >= 35000) return false;
       } else if (prodSlug === "macbook-pro-m5") {
         if (!itemName.includes("MACBOOK PRO M5") || itemName.includes("PRO") || itemName.includes("MAX")) return false;
         if (vSize && !itemName.includes(vSize.replace(/["\s]/g, ""))) return false;

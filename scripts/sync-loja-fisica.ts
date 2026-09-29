@@ -111,7 +111,7 @@ async function runSync() {
   console.log("📥 Buscando dados de https://mundo-apple-buscador.onrender.com/api/products ...");
   let rawSupplierItems: RenderSupplierItem[] = [];
   try {
-    const res = await fetch("https://mundo-apple-buscador.onrender.com/api/products");
+    const res = await fetch("https://mundo-apple-buscador.onrender.com/api/products?limit=10000");
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     rawSupplierItems = data.data || [];
@@ -269,7 +269,13 @@ async function runSync() {
         if (prodCat === "mac") {
           if (itemCat !== "MCB" && itemCat !== "IMAC") return false;
 
-          if (prodSlug === "macbook-air-m5") {
+          if (prodSlug === "mac-studio-m4-max") {
+            if (!itemName.includes("MAC STUDIO M4 MAX") && !itemName.includes("STUDIO M4 MAX")) return false;
+          } else if (prodSlug === "mac-mini-m4-pro") {
+            if (!itemName.includes("MAC MINI M4 PRO") && !itemName.includes("MINI M4 PRO")) return false;
+          } else if (prodSlug === "mac-mini-m4") {
+            if ((!itemName.includes("MAC MINI M4") && !itemName.includes("MINI M4")) || itemName.includes("PRO")) return false;
+          } else if (prodSlug === "macbook-air-m5") {
             if (!itemName.includes("MACBOOK AIR M5") && !itemName.includes("AIR M5")) return false;
             if (vScreenSize && !itemName.includes(normalizeStorage(vScreenSize))) return false;
             if (vRam && vRam !== "16GB" && !normalizeStr(item.description || item.name).includes(normalizeStorage(vRam))) return false;
@@ -280,11 +286,11 @@ async function runSync() {
           } else if (prodSlug === "macbook-pro-m5-max") {
             if (!itemName.includes("MACBOOK PRO M5 MAX") && !itemName.includes("PRO M5 MAX")) return false;
             if (vScreenSize && !itemName.includes(normalizeStorage(vScreenSize))) return false;
+            if (vRam === "48GB" && item.price < 35000) return false;
+            if (vRam === "36GB" && item.price >= 35000) return false;
           } else if (prodSlug === "macbook-pro-m5") {
             if ((!itemName.includes("MACBOOK PRO M5") && !itemName.includes("PRO M5")) || itemName.includes("MAX") || itemName.includes("M5 PRO")) return false;
             if (vScreenSize && !itemName.includes(normalizeStorage(vScreenSize))) return false;
-          } else if (prodSlug === "mac-mini-m4") {
-            if (!itemName.includes("MAC MINI M4") && !itemName.includes("MINI M4")) return false;
           } else if (prodSlug === "imac-24-m4") {
             if (!itemName.includes("IMAC M4") && !itemName.includes("IMAC 24 M4")) return false;
           } else {
