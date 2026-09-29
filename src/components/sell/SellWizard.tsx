@@ -198,16 +198,26 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
 
   // Mask Phone Formatter
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 11) value = value.slice(0, 11);
-    if (value.length > 6) {
-      value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
-    } else if (value.length > 2) {
-      value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-    } else if (value.length > 0) {
-      value = `(${value}`;
+    const raw = e.target.value;
+    const digits = raw.replace(/\D/g, "").slice(0, 11);
+
+    if (!digits) {
+      setCustomerWhatsapp("");
+      return;
     }
-    setCustomerWhatsapp(value);
+
+    let formatted = digits;
+    if (digits.length <= 2) {
+      formatted = `(${digits}`;
+    } else if (digits.length <= 6) {
+      formatted = `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    } else if (digits.length <= 10) {
+      formatted = `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+    } else {
+      formatted = `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7, 11)}`;
+    }
+
+    setCustomerWhatsapp(formatted);
   };
 
   const filteredModels = useMemo(() => {
