@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, ShieldCheck, Sparkles, CreditCard, RefreshCw } from "lucide-react";
+import { MessageCircle, ShieldCheck, Sparkles, CreditCard } from "lucide-react";
 import { Product, ProductVariant } from "@/types/product";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
@@ -288,9 +288,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   // Calculate 18x installment preview
   const maxInstallment = currentPrice > 0 ? getMaxInstallment(currentPrice) : null;
 
-  // Check if eligible for Trade-In (iPhone, Mac & iPad)
-  const isTradeInEligible = product.category === "iphone" || product.category === "mac" || product.category === "ipad";
-
   // WhatsApp formatted lead
   const handleWhatsAppRedirect = () => {
     let details: string[] = [];
@@ -562,19 +559,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 <p className="text-[11px] text-[#6E6E73] leading-tight">
                   Consulte valores atualizados e prazo de entrega direto com nossos especialistas.
                 </p>
-
-                {/* Trade-In Fast Trigger */}
-                {isTradeInEligible && (
-                  <Link
-                    href={`/troca?categoria=${product.category}&produto=${encodeURIComponent(product.name)}`}
-                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-blue-50/70 hover:bg-blue-100/90 border border-blue-200/60 text-[#0071E3] transition-all duration-200 text-[11px] font-medium group/trade cursor-pointer shadow-2xs hover:shadow-sm"
-                  >
-                    <RefreshCw className="w-3.5 h-3.5 text-[#0071E3] group-hover/trade:rotate-180 transition-transform duration-500 shrink-0" />
-                    <span className="truncate">
-                      Tem aparelho usado? <strong className="font-bold underline underline-offset-2">Simular abatimento na troca</strong>
-                    </span>
-                  </Link>
-                )}
               </div>
             ) : currentPrice > 0 ? (
               <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-2">
@@ -610,19 +594,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                       <span>Ver parcelas</span>
                     </button>
                   </div>
-                )}
-
-                {/* Trade-In Fast Trigger (iPhone, Mac & iPad) */}
-                {isTradeInEligible && (
-                  <Link
-                    href={`/troca?categoria=${product.category}&produto=${encodeURIComponent(product.name)}`}
-                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-blue-50/70 hover:bg-blue-100/90 border border-blue-200/60 text-[#0071E3] transition-all duration-200 text-[11px] font-medium group/trade cursor-pointer shadow-2xs hover:shadow-sm"
-                  >
-                    <RefreshCw className="w-3.5 h-3.5 text-[#0071E3] group-hover/trade:rotate-180 transition-transform duration-500 shrink-0" />
-                    <span className="truncate">
-                      Tem aparelho usado? <strong className="font-bold underline underline-offset-2">Simular abatimento na troca</strong>
-                    </span>
-                  </Link>
                 )}
               </div>
             ) : null}

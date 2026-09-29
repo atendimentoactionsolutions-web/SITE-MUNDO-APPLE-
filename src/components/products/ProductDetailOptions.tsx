@@ -6,8 +6,7 @@ import { formatBRL, formatConditionLabel } from "@/utils/formatters";
 import { getWhatsAppProductUrl } from "@/utils/whatsapp";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { MessageCircle, ShieldCheck, FileText, RefreshCw, BatteryCharging, Check } from "lucide-react";
-import Link from "next/link";
+import { MessageCircle, ShieldCheck, FileText, BatteryCharging, Check } from "lucide-react";
 
 interface ProductDetailOptionsProps {
   product: Product;
@@ -253,7 +252,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
       </div>
 
       {/* Primary WhatsApp Action */}
-      <div className="space-y-3 pt-2">
+      <div className="pt-2">
         <Button
           href={whatsappUrl}
           external
@@ -264,20 +263,6 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         >
           Comprar pelo WhatsApp
         </Button>
-
-        {/* Trade in CTA Box */}
-        <div className="p-4 rounded-2xl bg-apple-gray border border-apple-border/60 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5 text-xs text-apple-dark">
-            <RefreshCw className="w-4 h-4 text-apple-blue shrink-0" />
-            <span>Tem um iPhone usado? Aceitamos na troca!</span>
-          </div>
-          <Link
-            href="/troca"
-            className="text-xs font-semibold text-apple-blue hover:underline whitespace-nowrap"
-          >
-            Avaliar meu iPhone
-          </Link>
-        </div>
       </div>
     </div>
   );
