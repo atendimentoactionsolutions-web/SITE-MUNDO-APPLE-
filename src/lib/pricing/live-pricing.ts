@@ -388,7 +388,9 @@ function findBestSupplierPrice(
     if (prodCat === "airpods") {
       if (item.category !== "PODS") return false;
 
-      if (prodSlug === "airpods-4") {
+      if (prodSlug === "airpods-5") {
+        if (!itemName.includes("AIRPODS 5") && !itemName.includes("PODS 5")) return false;
+      } else if (prodSlug === "airpods-4") {
         if (itemName !== "AIRPODS 4") return false;
       } else if (prodSlug === "airpods-4-anc") {
         if (itemName !== "AIRPODS 4 ANC") return false;

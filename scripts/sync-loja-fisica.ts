@@ -341,7 +341,11 @@ async function runSync() {
         if (prodCat === "airpods") {
           if (itemCat !== "PODS") return false;
 
-          if (prodSlug === "airpods-4") {
+          if (prodSlug === "airpods-5") {
+            if (!itemName.includes("AIRPODS 5") && !itemName.includes("PODS 5")) return false;
+            if (variant?.storage?.includes("ANC") && !itemName.includes("ANC")) return false;
+            if (!variant?.storage?.includes("ANC") && itemName.includes("ANC")) return false;
+          } else if (prodSlug === "airpods-4") {
             if (itemName !== "AIRPODS 4") return false;
           } else if (prodSlug === "airpods-4-anc") {
             if (itemName !== "AIRPODS 4 ANC") return false;
