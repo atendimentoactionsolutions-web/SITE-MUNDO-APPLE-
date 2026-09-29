@@ -140,6 +140,26 @@ export async function POST(request: NextRequest) {
       db.quoteDeflators.push(newDefSnapshot);
     });
 
+    // 6. Automated WhatsApp message dispatch if WhatsApp service is connected
+    if (custData && custData.whatsapp) {
+      const model = db.deviceModels.find((dm) => dm.id === deviceModelId);
+      const storage = db.storageOptions.find((so) => so.id === storageOptionId);
+      const modelName = model ? model.name : "iPhone";
+      const storageName = storage ? storage.displayName : "";
+      const valorFormatado = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(calculation.finalPrice);
+
+      const autoMessage = `Olá ${custData.name}! 🍏\n\nRecebemos sua solicitação de venda/avaliação na *Mundo Apple*.\n\n📱 *Aparelho:* ${modelName} ${storageName}\n💵 *Valor Estimado:* ${valorFormatado} (Pagamento via PIX)\n📋 *Código da Cotação:* ${publicCode}\n\nNossa equipe já foi notificada e em instantes daremos continuidade ao seu atendimento! 🚀`;
+
+      // Dispatch asynchronously without blocking API response
+      import("@/lib/whatsapp/whatsapp-service")
+        .then(({ sendWhatsAppMessage }) => {
+          sendWhatsAppMessage(custData.whatsapp, autoMessage).catch((err) => {
+            console.error("Erro no disparo automático WhatsApp:", err);
+          });
+        })
+        .catch(() => {});
+    }
+
     return NextResponse.json({
       success: true,
       quote: newQuote,

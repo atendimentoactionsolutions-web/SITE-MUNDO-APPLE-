@@ -118,7 +118,14 @@ export default function AdminQuotesPage() {
             <h1 className="text-3xl font-semibold tracking-tight">Cotações de venda</h1>
             <p className="text-sm text-apple-muted">Gerencie leads, ofertas e vistorias de iPhones usados.</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/admin/whatsapp"
+              className="px-4 py-2 bg-emerald-600 text-white text-xs font-semibold rounded-xl hover:bg-emerald-700 transition-colors flex items-center gap-1.5 shadow-sm"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
+              Conectar WhatsApp
+            </Link>
             <Link
               href="/admin/vendas/precos"
               className="px-4 py-2 bg-white border border-apple-border text-xs font-semibold rounded-xl hover:bg-apple-gray transition-colors"

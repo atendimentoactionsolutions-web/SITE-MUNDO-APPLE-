@@ -7,3 +7,4 @@ scripts/*.log
 *.tsbuildinfo
 .github
 /src/generated/prisma
+.whatsapp-session
