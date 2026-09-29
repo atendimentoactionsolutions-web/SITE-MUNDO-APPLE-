@@ -46,7 +46,8 @@ export default function WhatsAppAdminPage() {
 
   useEffect(() => {
     fetchStatus();
-    const interval = setInterval(fetchStatus, 3000);
+    // Fast polling every 1.5s to catch QR code update smoothly
+    const interval = setInterval(fetchStatus, 1500);
     return () => clearInterval(interval);
   }, []);
 
@@ -54,6 +55,7 @@ export default function WhatsAppAdminPage() {
   const handleConnect = async (forceReset = false) => {
     try {
       setActionLoading(true);
+      setStatus("CONNECTING");
       const res = await fetch("/api/whatsapp/connect", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
