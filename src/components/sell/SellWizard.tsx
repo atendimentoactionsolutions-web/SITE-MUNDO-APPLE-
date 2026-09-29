@@ -82,6 +82,7 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
   // Final Quote Submission
   const [submitting, setSubmitting] = useState(false);
   const [quoteSuccess, setQuoteSuccess] = useState(false);
+  const [quotePublicCode, setQuotePublicCode] = useState("");
 
   // 1. Load active models from API
   useEffect(() => {
@@ -313,47 +314,9 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
       });
 
       const data = await res.json();
-      setQuoteSuccess(true);
-
-      // WhatsApp direct redirect
       const publicCode = data.quote?.publicCode || "COT-AVAL";
-      const valorFinal = estimatedPrice ? formatCurrency(estimatedPrice) : "A consultar";
-
-      const batteryLabel =
-        batteryHealth === "90_plus"
-          ? "90% ou mais"
-          : batteryHealth === "85_89"
-          ? "85% a 89%"
-          : batteryHealth === "80_84"
-          ? "80% a 84%"
-          : "Abaixo de 80%";
-
-      const physicalLabel =
-        physicalCondition === "excellent"
-          ? "Excelente"
-          : physicalCondition === "very_good"
-          ? "Muito bom"
-          : physicalCondition === "good"
-          ? "Bom"
-          : `Com avarias (${damages.join(", ")})`;
-
-      const partsLabel =
-        replacedPartsStatus === "never"
-          ? "Nunca aberto"
-          : replacedPartsStatus === "unsure"
-          ? "Não tem certeza"
-          : `Peças trocadas: ${replacedParts.join(", ")}`;
-
-      const funcLabel =
-        functionalityStatus === "perfect"
-          ? "100% funcionando"
-          : `Problemas: ${malfunctions.join(", ")}`;
-
-      const msg = `Olá! Gostaria de vender meu *${selectedModel.name} ${selectedStorage.displayName}*.\n\n📋 *Código da Cotação:* ${publicCode}\n💵 *Valor Estimado:* ${valorFinal} no PIX\n\n📌 *Detalhes do Aparelho:*\n• Bateria: ${batteryLabel}\n• Estado Físico: ${physicalLabel}\n• Peças/Reparos: ${partsLabel}\n• Funcionamento: ${funcLabel}\n\n👤 *Nome:* ${customerName}\n📱 *WhatsApp:* ${customerWhatsapp}\n\nGostaria de agendar a avaliação e receber o pagamento!`;
-
-      const cleanPhone = storeConfig.contact.whatsapp.replace(/\D/g, "");
-      const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
-      window.open(waUrl, "_blank", "noopener,noreferrer");
+      setQuotePublicCode(publicCode);
+      setQuoteSuccess(true);
     } catch (err) {
       console.error("Erro ao gerar cotação:", err);
     } finally {
@@ -967,65 +930,113 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
               </span>
             </div>
 
-            {/* Client Form Section */}
-            <div className="p-6 rounded-3xl bg-white border border-[#E5E5E7] space-y-4">
-              <div className="text-left">
-                <h3 className="text-lg sm:text-xl font-extrabold text-[#1D1D1F] tracking-tight">
-                  Gostou da avaliação?
-                </h3>
-                <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
-                  Preencha seus dados para nossa equipe entrar em contato e finalizar a venda.
-                </p>
+            {/* Client Form Section or Success Confirmation */}
+            {quoteSuccess ? (
+              <div className="p-8 rounded-3xl bg-white border border-[#E5E5E7] text-center space-y-5 animate-in fade-in duration-300">
+                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#1D1D1F] tracking-tight">
+                    Solicitação Enviada!
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#6E6E73] max-w-md mx-auto leading-relaxed">
+                    Recebemos sua avaliação. O sistema da <strong>Mundo Apple</strong> acabou de enviar uma mensagem para o seu WhatsApp (<strong>{customerWhatsapp}</strong>) com todos os dados da sua cotação!
+                  </p>
+                </div>
+
+                <div className="bg-[#F5F5F7] p-4 rounded-2xl border border-[#E5E5E7] inline-block text-left max-w-sm w-full space-y-2 text-xs">
+                  <div className="flex justify-between border-b border-[#E5E5E7] pb-1.5">
+                    <span className="text-[#86868B]">Código da Cotação:</span>
+                    <span className="font-bold text-[#1D1D1F]">{quotePublicCode || "COT-AVAL"}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-[#E5E5E7] pb-1.5">
+                    <span className="text-[#86868B]">Aparelho:</span>
+                    <span className="font-medium text-[#1D1D1F]">
+                      {selectedModel?.name} {selectedStorage?.displayName}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[#86868B]">Valor Estimado:</span>
+                    <span className="font-bold text-emerald-600">
+                      {estimatedPrice ? formatCurrency(estimatedPrice) : ""} no PIX
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <p className="text-[11px] text-[#86868B] mb-3">
+                    Fique atento ao seu WhatsApp, nossa equipe já foi notificada.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={restart}
+                    className="px-6 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs sm:text-sm font-semibold rounded-full shadow-sm active:scale-95 transition-all cursor-pointer"
+                  >
+                    Fazer nova simulação
+                  </button>
+                </div>
               </div>
-
-              <form onSubmit={handleFinalSubmit} className="space-y-3.5 pt-1">
-                <div>
-                  <label className="block text-xs font-bold text-[#1D1D1F] mb-1">
-                    Nome Completo *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="Seu nome"
-                    className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
-                  />
+            ) : (
+              <div className="p-6 rounded-3xl bg-white border border-[#E5E5E7] space-y-4">
+                <div className="text-left">
+                  <h3 className="text-lg sm:text-xl font-extrabold text-[#1D1D1F] tracking-tight">
+                    Gostou da avaliação?
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
+                    Preencha seus dados para nossa equipe entrar em contato e finalizar a venda.
+                  </p>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-[#1D1D1F] mb-1">
-                    WhatsApp *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={customerWhatsapp}
-                    onChange={handlePhoneChange}
-                    placeholder="(11) 99999-9999"
-                    className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
-                  />
-                </div>
+                <form onSubmit={handleFinalSubmit} className="space-y-3.5 pt-1">
+                  <div>
+                    <label className="block text-xs font-bold text-[#1D1D1F] mb-1">
+                      Nome Completo *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      placeholder="Seu nome"
+                      className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
+                    />
+                  </div>
 
-                <button
-                  type="submit"
-                  disabled={!isStepValid || submitting}
-                  className="w-full py-4 bg-[#00C853] hover:bg-[#00B048] disabled:opacity-50 text-white font-extrabold text-sm sm:text-base rounded-full shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-4"
-                >
-                  {submitting ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      <span>Gerando proposta...</span>
-                    </>
-                  ) : (
-                    <>
-                      <MessageCircle className="w-5 h-5 fill-white" />
-                      <span>Quero vender</span>
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
+                  <div>
+                    <label className="block text-xs font-bold text-[#1D1D1F] mb-1">
+                      WhatsApp *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={customerWhatsapp}
+                      onChange={handlePhoneChange}
+                      placeholder="(11) 99999-9999"
+                      className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={!isStepValid || submitting}
+                    className="w-full py-4 bg-[#00C853] hover:bg-[#00B048] disabled:opacity-50 text-white font-extrabold text-sm sm:text-base rounded-full shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-4"
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Enviando proposta...</span>
+                      </>
+                    ) : (
+                      <>
+                        <MessageCircle className="w-5 h-5 fill-white" />
+                        <span>Quero vender</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            )}
 
             {/* Disclaimer Aviso */}
             <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-[#E5E5E7] text-left">
