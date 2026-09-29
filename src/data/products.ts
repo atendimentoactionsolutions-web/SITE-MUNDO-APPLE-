@@ -76,7 +76,7 @@ export const products: Product[] = [
       "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
-    "priceFrom": 10500,
+    "priceFrom": 10950,
     "condition": "new",
     "storage": [
       "256GB",
@@ -93,31 +93,31 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 10500,
+        "price": 10950,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Glacier",
-        "price": 10600,
+        "price": 10950,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Burgundy",
-        "price": 12050,
+        "price": 11900,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 10850,
+        "price": 10950,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Black",
-        "price": 12000,
+        "price": 12050,
         "available": true
       },
       {
@@ -135,7 +135,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 12050,
+        "price": 12400,
         "available": true
       },
       {
@@ -176,7 +176,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 9990,
+        "price": 9850,
         "available": true
       },
       {
@@ -204,7 +204,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-pro-max.png",
-    "priceFrom": 7649.99,
+    "priceFrom": 7600,
     "condition": "new",
     "storage": [
       "256GB",
@@ -221,13 +221,13 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
-        "price": 7649.99,
+        "price": 7600,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Deep Blue",
-        "price": 7650,
+        "price": 7600,
         "available": true
       },
       {
@@ -251,7 +251,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 9130,
+        "price": 9140,
         "available": true
       },
       {
@@ -342,7 +342,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 9000,
+        "price": 8950,
         "available": true
       },
       {
@@ -479,7 +479,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-generic.png",
-    "priceFrom": 4295,
+    "priceFrom": 4285,
     "condition": "new",
     "storage": [
       "256GB",
@@ -506,7 +506,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Soft Pink",
-        "price": 4295,
+        "price": 4285,
         "available": true
       },
       {
@@ -1373,7 +1373,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 17950,
+        "price": 17800,
         "available": true
       }
     ],
@@ -2035,7 +2035,7 @@ export const products: Product[] = [
       {
         "size": "42mm",
         "color": "Jet Black",
-        "price": 2500,
+        "price": 2490,
         "available": true
       },
       {
@@ -2182,32 +2182,11 @@ export const products: Product[] = [
     "name": "AirPods 5",
     "category": "airpods",
     "subcategory": "AirPods",
-    "image": "/images/apple-showcase/airpods-5.jpg",
-    "priceFrom": 0,
+    "image": "/images/products/airpods/airpods-5.png",
+    "priceFrom": 1750,
     "condition": "new",
-    "availability": "pre_order",
-    "storage": [
-      "Padrão",
-      "Com Cancelamento Ativo de Ruído (ANC)"
-    ],
-    "colors": [
-      "Branco"
-    ],
-    "variants": [
-      {
-        "storage": "Padrão",
-        "color": "Branco",
-        "price": 0,
-        "available": true
-      },
-      {
-        "storage": "Com Cancelamento Ativo de Ruído (ANC)",
-        "color": "Branco",
-        "price": 0,
-        "available": true
-      }
-    ],
-    "description": "Nova engenharia acústica com graves profundos e agudos cristalinos. Áudio Espacial personalizado com rastreamento dinâmico e opção com cancelamento ativo de ruído.",
+    "availability": "available",
+    "description": "Nova engenharia acústica com graves profundos e agudos cristalinos, Áudio Espacial Personalizado com rastreamento dinâmico e cancelamento ativo de ruído.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
     "active": true
