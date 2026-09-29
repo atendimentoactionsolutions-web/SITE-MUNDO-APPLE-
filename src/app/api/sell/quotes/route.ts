@@ -148,7 +148,7 @@ export async function POST(request: NextRequest) {
       const storageName = storage ? storage.displayName : "";
       const valorFormatado = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(calculation.finalPrice);
 
-      const autoMessage = `Olá ${custData.name}! 🍏\n\nRecebemos sua solicitação de venda/avaliação na *Mundo Apple*.\n\n📱 *Aparelho:* ${modelName} ${storageName}\n💵 *Valor Estimado:* ${valorFormatado} (Pagamento via PIX)\n📋 *Código da Cotação:* ${publicCode}\n\nNossa equipe já foi notificada e em instantes daremos continuidade ao seu atendimento! 🚀`;
+      const autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de venda/avaliação na Mundo Apple.\n\n📱 Aparelho: ${modelName} ${storageName}\n💵 Valor Estimado: ${valorFormatado} (Pagamento via PIX)\n📋 Código da Cotação: ${publicCode}\n\nNossa equipe já foi notificada e em instantes daremos continuidade ao seu atendimento!`;
 
       // Dispatch asynchronously without blocking API response
       import("@/lib/whatsapp/whatsapp-service")
