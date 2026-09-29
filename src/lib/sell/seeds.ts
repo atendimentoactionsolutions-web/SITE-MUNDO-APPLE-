@@ -384,6 +384,53 @@ export function runSeed() {
     // 13. BLOQUEIO DE ICLOUD
     { id: "def-icloud-unlocked", code: "ICLOUD_UNLOCKED", name: "Aparelho totalmente desbloqueado", category: "ICLOUD", description: "Pronto para restauração limpa.", type: "PERCENTAGE", value: 0, active: true },
     { id: "def-icloud-locked", code: "ICLOUD_LOCKED", name: "Aparelho bloqueado no iCloud (NÃO COMPRAR)", category: "ICLOUD", description: "Bloqueio de ativação ativo.", type: "PERCENTAGE", value: 100, active: true },
+
+    // --- NOVO FORMULÁRIO 6 ETAPAS ---
+    // ETAPA 3 — SAÚDE DA BATERIA
+    { id: "def-bat-90-plus", code: "BATTERY_HEALTH_90_PLUS", name: "Bateria: 90% ou mais", category: "BATTERY_HEALTH", description: "Bateria em ótimo estado.", type: "PERCENTAGE", value: 0, active: true },
+    { id: "def-bat-85-89", code: "BATTERY_HEALTH_85_89", name: "Bateria: 85% a 89%", category: "BATTERY_HEALTH", description: "Bateria com desgaste inicial.", type: "PERCENTAGE", value: 3, active: true },
+    { id: "def-bat-80-84", code: "BATTERY_HEALTH_80_84", name: "Bateria: 80% a 84%", category: "BATTERY_HEALTH", description: "Bateria moderadamente desgastada.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-bat-below-80", code: "BATTERY_HEALTH_BELOW_80", name: "Bateria: Abaixo de 80%", category: "BATTERY_HEALTH", description: "Bateria necessitando de serviço.", type: "PERCENTAGE", value: 8, active: true },
+
+    // ETAPA 4 — ESTADO FÍSICO
+    { id: "def-phys-excellent", code: "PHYSICAL_EXCELLENT", name: "Estado: Excelente", category: "PHYSICAL", description: "Sem riscos relevantes, sem trincas e muito bem conservado.", type: "PERCENTAGE", value: 0, active: true },
+    { id: "def-phys-very-good", code: "PHYSICAL_VERY_GOOD", name: "Estado: Muito bom", category: "PHYSICAL", description: "Pequenas marcas normais de uso, sem danos importantes.", type: "PERCENTAGE", value: 2, active: true },
+    { id: "def-phys-good", code: "PHYSICAL_GOOD", name: "Estado: Bom", category: "PHYSICAL", description: "Possui riscos ou marcas de uso mais aparentes.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-phys-damaged", code: "PHYSICAL_DAMAGED", name: "Estado: Com avarias", category: "PHYSICAL", description: "Possui tela quebrada, tampa quebrada, amassados ou outro dano visível.", type: "PERCENTAGE", value: 0, active: true },
+
+    // AVARIAS ESPECÍFICAS
+    { id: "def-avaria-tela", code: "AVARIA_TELA_QUEBRADA", name: "Avaria: Tela quebrada", category: "DAMAGES", description: "Tela com trincas ou quebrada.", type: "PERCENTAGE", value: 18, active: true },
+    { id: "def-avaria-tampa", code: "AVARIA_TAMPA_QUEBRADA", name: "Avaria: Tampa traseira quebrada", category: "DAMAGES", description: "Vidro traseiro trincado ou quebrado.", type: "PERCENTAGE", value: 8, active: true },
+    { id: "def-avaria-camera", code: "AVARIA_CAMERA_DANIFICADA", name: "Avaria: Câmera danificada", category: "DAMAGES", description: "Câmera ou vidro externo quebrado.", type: "PERCENTAGE", value: 8, active: true },
+    { id: "def-avaria-carcaca", code: "AVARIA_CARCACA_AMASSADO", name: "Avaria: Carcaça / amassado", category: "DAMAGES", description: "Laterais amassadas ou com impacto.", type: "PERCENTAGE", value: 7, active: true },
+    { id: "def-avaria-faceid", code: "AVARIA_FACE_ID", name: "Avaria: Face ID com problema", category: "DAMAGES", description: "Biometria facial inoperante.", type: "PERCENTAGE", value: 15, active: true },
+    { id: "def-avaria-botoes", code: "AVARIA_BOTOES", name: "Avaria: Botões com problema", category: "DAMAGES", description: "Botões físicos emperrados ou quebrados.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-avaria-outro", code: "AVARIA_OUTRO", name: "Avaria: Outro dano visível", category: "DAMAGES", description: "Outro dano estético visível.", type: "PERCENTAGE", value: 5, active: true },
+
+    // ETAPA 5 — PEÇAS E REPAROS
+    { id: "def-rep-never-opened", code: "REPAIRS_NEVER", name: "Reparos: Nunca foi aberto", category: "REPAIRS", description: "100% selado de fábrica.", type: "PERCENTAGE", value: 0, active: true },
+    { id: "def-rep-unsure", code: "REPAIRS_UNSURE", name: "Reparos: Não tenho certeza", category: "REPAIRS", description: "Histórico de peças não confirmado.", type: "PERCENTAGE", value: 3, active: true },
+    { id: "def-reparo-tela", code: "REPARO_TELA", name: "Peça substituída: Tela", category: "REPAIRS", description: "Tela já substituída.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-reparo-bateria", code: "REPARO_BATERIA", name: "Peça substituída: Bateria", category: "REPAIRS", description: "Bateria já substituída.", type: "PERCENTAGE", value: 3, active: true },
+    { id: "def-reparo-camera", code: "REPARO_CAMERA", name: "Peça substituída: Câmera", category: "REPAIRS", description: "Câmera já substituída.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-reparo-tampa", code: "REPARO_TAMPA", name: "Peça substituída: Tampa traseira", category: "REPAIRS", description: "Tampa traseira já substituída.", type: "PERCENTAGE", value: 3, active: true },
+    { id: "def-reparo-conector", code: "REPARO_CONECTOR", name: "Peça substituída: Conector de carga", category: "REPAIRS", description: "Conector de carga já substituído.", type: "PERCENTAGE", value: 4, active: true },
+    { id: "def-reparo-outra", code: "REPARO_OUTRA", name: "Peça substituída: Outra peça", category: "REPAIRS", description: "Outra peça já substituída.", type: "PERCENTAGE", value: 4, active: true },
+
+    // ETAPA 6 — FUNCIONAMENTO
+    { id: "def-func-perfect", code: "FUNCTIONALITY_PERFECT", name: "Funcionamento: 100% normal", category: "FUNCTIONALITY", description: "Tudo funcionando perfeitamente.", type: "PERCENTAGE", value: 0, active: true },
+    { id: "def-prob-faceid", code: "PROB_FACE_ID", name: "Problema: Face ID", category: "MALFUNCTIONS", description: "Falha no reconhecimento facial.", type: "PERCENTAGE", value: 15, active: true },
+    { id: "def-prob-camera", code: "PROB_CAMERA", name: "Problema: Câmera", category: "MALFUNCTIONS", description: "Falha de foco, manchas ou inoperante.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-prob-microfone", code: "PROB_MICROFONE", name: "Problema: Microfone", category: "MALFUNCTIONS", description: "Áudio baixo ou inoperante.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-prob-altofalante", code: "PROB_ALTO_FALANTE", name: "Problema: Alto-falante", category: "MALFUNCTIONS", description: "Chiando ou sem som.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-prob-wifi", code: "PROB_WIFI", name: "Problema: Wi-Fi", category: "MALFUNCTIONS", description: "Sinal fraco ou não conecta.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-prob-bluetooth", code: "PROB_BLUETOOTH", name: "Problema: Bluetooth", category: "MALFUNCTIONS", description: "Falha ao parear acessórios.", type: "PERCENTAGE", value: 8, active: true },
+    { id: "def-prob-redesinal", code: "PROB_REDE_SINAL", name: "Problema: Rede / sinal", category: "MALFUNCTIONS", description: "Sem serviço ou não reconhece SIM.", type: "PERCENTAGE", value: 15, active: true },
+    { id: "def-prob-carregamento", code: "PROB_CARREGAMENTO", name: "Problema: Carregamento", category: "MALFUNCTIONS", description: "Mau contato ou não carrega.", type: "PERCENTAGE", value: 7, active: true },
+    { id: "def-prob-touch", code: "PROB_TOUCH", name: "Problema: Touch", category: "MALFUNCTIONS", description: "Toques fantasmas ou partes sem resposta.", type: "PERCENTAGE", value: 12, active: true },
+    { id: "def-prob-botoes", code: "PROB_BOTOES", name: "Problema: Botões", category: "MALFUNCTIONS", description: "Botões com falha.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-prob-reinicia", code: "PROB_REINICIA", name: "Problema: Reinicia ou desliga sozinho", category: "MALFUNCTIONS", description: "Desliga ou reinicia aleatoriamente.", type: "PERCENTAGE", value: 20, active: true },
+    { id: "def-prob-outro", code: "PROB_OUTRO", name: "Problema: Outro problema operacional", category: "MALFUNCTIONS", description: "Outro defeito de funcionamento.", type: "PERCENTAGE", value: 5, active: true },
   ];
 
   deflatorList.forEach((d) => {

@@ -74,6 +74,13 @@ export interface CalculationAnswers {
   // "unlocked" | "locked"
   icloudStatus?: string;
 
+  // 6-step Flow additions
+  physicalCondition?: string;
+  damages?: string[];
+  replacedPartsStatus?: string;
+  functionalityStatus?: string;
+  malfunctions?: string[];
+
   // Legacy fallbacks for compatibility
   powerOn?: string | boolean;
   screenConditions?: string[];
@@ -222,6 +229,111 @@ export function calculatePurchasePrice(input: CalculationInput): CalculationResu
 
   let manualReview = answers.icloudClear === null;
 
+  // --- NOVO FLUXO 6 ETAPAS ---
+
+  // 1. SAÚDE DA BATERIA
+  if (answers.batteryHealth === "85_89" || answers.batteryHealth === "85% a 89%") {
+    addDeflator("BATTERY_HEALTH_85_89", "Saúde da bateria entre 85% e 89%", 3);
+  } else if (answers.batteryHealth === "80_84" || answers.batteryHealth === "80% a 84%") {
+    addDeflator("BATTERY_HEALTH_80_84", "Saúde da bateria entre 80% e 84%", 5);
+  } else if (answers.batteryHealth === "below_80" || answers.batteryHealth === "Abaixo de 80%" || answers.batteryHealth === "below_85" || answers.batteryHealth === "service_unknown") {
+    addDeflator("BATTERY_HEALTH_BELOW_80", "Saúde da bateria abaixo de 80%", 8);
+  }
+
+  // 2. ESTADO FÍSICO
+  if (answers.physicalCondition === "very_good" || answers.physicalCondition === "Muito bom") {
+    addDeflator("PHYSICAL_VERY_GOOD", "Estado físico: Muito bom (marcas leves normais)", 2);
+  } else if (answers.physicalCondition === "good" || answers.physicalCondition === "Bom") {
+    addDeflator("PHYSICAL_GOOD", "Estado físico: Bom (marcas aparentes)", 5);
+  } else if ((answers.physicalCondition === "damaged" || answers.physicalCondition === "Com avarias") && Array.isArray(answers.damages)) {
+    if (answers.damages.includes("screen_cracked") || answers.damages.includes("Tela quebrada")) {
+      addDeflator("AVARIA_TELA_QUEBRADA", "Avaria: Tela quebrada", 18);
+    }
+    if (answers.damages.includes("back_cracked") || answers.damages.includes("Tampa traseira quebrada")) {
+      addDeflator("AVARIA_TAMPA_QUEBRADA", "Avaria: Tampa traseira quebrada", 8);
+    }
+    if (answers.damages.includes("camera_damaged") || answers.damages.includes("Câmera danificada")) {
+      addDeflator("AVARIA_CAMERA_DANIFICADA", "Avaria: Câmera danificada", 8);
+    }
+    if (answers.damages.includes("housing_dented") || answers.damages.includes("Carcaça/amassado")) {
+      addDeflator("AVARIA_CARCACA_AMASSADO", "Avaria: Carcaça / amassado", 7);
+    }
+    if (answers.damages.includes("face_id_issue") || answers.damages.includes("Face ID com problema")) {
+      addDeflator("AVARIA_FACE_ID", "Avaria: Face ID com problema", 15);
+    }
+    if (answers.damages.includes("buttons_issue") || answers.damages.includes("Botões com problema")) {
+      addDeflator("AVARIA_BOTOES", "Avaria: Botões com problema", 5);
+    }
+    if (answers.damages.includes("other_damage") || answers.damages.includes("Outro")) {
+      addDeflator("AVARIA_OUTRO", "Avaria: Outro dano visível", 5);
+    }
+  }
+
+  // 3. PEÇAS E REPAROS
+  if (answers.replacedPartsStatus === "unsure" || answers.replacedPartsStatus === "Não tenho certeza") {
+    addDeflator("REPAIRS_UNSURE", "Histórico de peças não confirmado", 3);
+  } else if ((answers.replacedPartsStatus === "yes" || answers.replacedPartsStatus === "Sim") && Array.isArray(answers.replacedParts)) {
+    if (answers.replacedParts.includes("screen") || answers.replacedParts.includes("Tela")) {
+      addDeflator("REPARO_TELA", "Peça substituída: Tela", 5);
+    }
+    if (answers.replacedParts.includes("battery") || answers.replacedParts.includes("Bateria")) {
+      addDeflator("REPARO_BATERIA", "Peça substituída: Bateria", 3);
+    }
+    if (answers.replacedParts.includes("camera") || answers.replacedParts.includes("Câmera")) {
+      addDeflator("REPARO_CAMERA", "Peça substituída: Câmera", 5);
+    }
+    if (answers.replacedParts.includes("back_glass") || answers.replacedParts.includes("Tampa traseira")) {
+      addDeflator("REPARO_TAMPA", "Peça substituída: Tampa traseira", 3);
+    }
+    if (answers.replacedParts.includes("charging_port") || answers.replacedParts.includes("Conector de carga")) {
+      addDeflator("REPARO_CONECTOR", "Peça substituída: Conector de carga", 4);
+    }
+    if (answers.replacedParts.includes("other_part") || answers.replacedParts.includes("Outra peça")) {
+      addDeflator("REPARO_OUTRA", "Peça substituída: Outra peça", 4);
+    }
+  }
+
+  // 4. FUNCIONAMENTO
+  if ((answers.functionalityStatus === "issues" || answers.functionalityStatus === "Não, possui algum problema") && Array.isArray(answers.malfunctions)) {
+    if (answers.malfunctions.includes("face_id") || answers.malfunctions.includes("Face ID")) {
+      addDeflator("PROB_FACE_ID", "Problema: Face ID", 15);
+    }
+    if (answers.malfunctions.includes("camera") || answers.malfunctions.includes("Câmera")) {
+      addDeflator("PROB_CAMERA", "Problema: Câmera", 10);
+    }
+    if (answers.malfunctions.includes("microphone") || answers.malfunctions.includes("Microfone")) {
+      addDeflator("PROB_MICROFONE", "Problema: Microfone", 5);
+    }
+    if (answers.malfunctions.includes("speaker") || answers.malfunctions.includes("Alto-falante")) {
+      addDeflator("PROB_ALTO_FALANTE", "Problema: Alto-falante", 5);
+    }
+    if (answers.malfunctions.includes("wifi") || answers.malfunctions.includes("Wi-Fi")) {
+      addDeflator("PROB_WIFI", "Problema: Wi-Fi", 10);
+    }
+    if (answers.malfunctions.includes("bluetooth") || answers.malfunctions.includes("Bluetooth")) {
+      addDeflator("PROB_BLUETOOTH", "Problema: Bluetooth", 8);
+    }
+    if (answers.malfunctions.includes("cellular") || answers.malfunctions.includes("Rede/sinal")) {
+      addDeflator("PROB_REDE_SINAL", "Problema: Rede / sinal", 15);
+    }
+    if (answers.malfunctions.includes("charging") || answers.malfunctions.includes("Carregamento")) {
+      addDeflator("PROB_CARREGAMENTO", "Problema: Carregamento", 7);
+    }
+    if (answers.malfunctions.includes("touch") || answers.malfunctions.includes("Touch")) {
+      addDeflator("PROB_TOUCH", "Problema: Touch", 12);
+    }
+    if (answers.malfunctions.includes("buttons") || answers.malfunctions.includes("Botões")) {
+      addDeflator("PROB_BOTOES", "Problema: Botões", 5);
+    }
+    if (answers.malfunctions.includes("reboots") || answers.malfunctions.includes("Reinicia ou desliga sozinho")) {
+      addDeflator("PROB_REINICIA", "Problema: Reinicia ou desliga sozinho", 20);
+    }
+    if (answers.malfunctions.includes("other") || answers.malfunctions.includes("Outro")) {
+      addDeflator("PROB_OUTRO", "Problema: Outro problema operacional", 5);
+    }
+  }
+
+  // --- FALLBACKS / CAMPOS LEGADOS (caso recebidos) ---
   // 1. FUNCIONAMENTO INICIAL
   const power = answers.powerOnStatus || answers.powerOn;
   if (power === "glitches" || power === "Liga, mas apresenta falhas ou reinicializações") {

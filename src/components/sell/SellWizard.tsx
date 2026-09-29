@@ -13,14 +13,10 @@ import {
   Search,
   MessageCircle,
   Loader2,
-  Lock,
   BatteryCharging,
-  Camera,
-  Wifi,
   Sparkles,
   Zap,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { storeConfig } from "@/data/storeConfig";
 import { formatCurrency } from "@/utils/formatters";
 
@@ -44,7 +40,7 @@ interface SellWizardProps {
 }
 
 export const SellWizard: React.FC<SellWizardProps> = () => {
-  const totalSteps = 15;
+  const totalSteps = 6;
   const [step, setStep] = useState(1);
 
   // Data loaded from database
@@ -55,36 +51,37 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
   const [storageOptions, setStorageOptions] = useState<StorageOption[]>([]);
   const [loadingStorages, setLoadingStorages] = useState(false);
 
-  // Form State — NO PRE-SELECTION (all default to empty string)
+  // Form State
   const [selectedModel, setSelectedModel] = useState<ModelOption | null>(null);
   const [selectedStorage, setSelectedStorage] = useState<StorageOption | null>(null);
-  const [deviceColor, setDeviceColor] = useState("");
 
-  // Single Question Answers (empty by default)
-  const [powerOnStatus, setPowerOnStatus] = useState<string>("");
-  const [icloudStatus, setIcloudStatus] = useState<string>("");
-  const [screenGlass, setScreenGlass] = useState<string>("");
-  const [screenDisplay, setScreenDisplay] = useState<string>("");
-  const [bodyBackGlass, setBodyBackGlass] = useState<string>("");
-  const [bodySides, setBodySides] = useState<string>("");
-  const [cameraRear, setCameraRear] = useState<string>("");
-  const [faceId, setFaceId] = useState<string>("");
+  // Etapa 3: Saúde da Bateria
   const [batteryHealth, setBatteryHealth] = useState<string>("");
-  const [charging, setCharging] = useState<string>("");
-  const [networkWifi, setNetworkWifi] = useState<string>("");
-  const [screenHistory, setScreenHistory] = useState<string>("");
 
-  // Customer Data
+  // Etapa 4: Estado Físico
+  const [physicalCondition, setPhysicalCondition] = useState<string>("");
+  const [damages, setDamages] = useState<string[]>([]);
+
+  // Etapa 5: Peças e Reparos
+  const [replacedPartsStatus, setReplacedPartsStatus] = useState<string>("");
+  const [replacedParts, setReplacedParts] = useState<string[]>([]);
+
+  // Etapa 6: Funcionamento
+  const [functionalityStatus, setFunctionalityStatus] = useState<string>("");
+  const [malfunctions, setMalfunctions] = useState<string[]>([]);
+
+  // Customer Data (Final Step)
   const [customerName, setCustomerName] = useState("");
   const [customerWhatsapp, setCustomerWhatsapp] = useState("");
-  const [customerCep, setCustomerCep] = useState("");
 
-  // Submission & Result
+  // Calculated Live Estimate
+  const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
+  const [calculationData, setCalculationData] = useState<any>(null);
+  const [calculating, setCalculating] = useState(false);
+
+  // Final Quote Submission
   const [submitting, setSubmitting] = useState(false);
-  const [quoteResult, setQuoteResult] = useState<{
-    quote: any;
-    calculation: any;
-  } | null>(null);
+  const [quoteSuccess, setQuoteSuccess] = useState(false);
 
   // 1. Load active models from API
   useEffect(() => {
@@ -113,15 +110,16 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
       return;
     }
 
+    const modelId = selectedModel.id;
     async function loadStorages() {
       try {
         setLoadingStorages(true);
-        const res = await fetch(`/api/sell/models/${selectedModel?.id}/storages`);
+        const res = await fetch(`/api/sell/models/${modelId}/storages`);
         const data = await res.json();
         const list = data.storageOptions || data.storages || [];
         if (Array.isArray(list) && list.length > 0) {
           setStorageOptions(list);
-          setSelectedStorage(null); // NO PRE-SELECTION
+          setSelectedStorage(null);
         } else {
           const fallback = [
             { id: "storage-64gb", displayName: "64GB", capacityGb: 64 },
@@ -142,7 +140,62 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
     loadStorages();
   }, [selectedModel?.id]);
 
-  // Mask Formatters
+  // Reactive price calculation on changes
+  useEffect(() => {
+    if (!selectedModel || !selectedStorage) {
+      setEstimatedPrice(null);
+      setCalculationData(null);
+      return;
+    }
+
+    async function calculate() {
+      try {
+        setCalculating(true);
+        const payload = {
+          deviceModelId: selectedModel?.id,
+          storageOptionId: selectedStorage?.id,
+          answers: {
+            batteryHealth,
+            physicalCondition,
+            damages,
+            replacedPartsStatus,
+            replacedParts,
+            functionalityStatus,
+            malfunctions,
+          },
+        };
+
+        const res = await fetch("/api/sell/calculate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (data.success && data.calculation) {
+          setEstimatedPrice(data.calculation.finalPrice);
+          setCalculationData(data.calculation);
+        }
+      } catch (err) {
+        console.error("Erro no cálculo:", err);
+      } finally {
+        setCalculating(false);
+      }
+    }
+
+    calculate();
+  }, [
+    selectedModel,
+    selectedStorage,
+    batteryHealth,
+    physicalCondition,
+    damages,
+    replacedPartsStatus,
+    replacedParts,
+    functionalityStatus,
+    malfunctions,
+  ]);
+
+  // Mask Phone Formatter
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, "");
     if (value.length > 11) value = value.slice(0, 11);
@@ -156,22 +209,13 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
     setCustomerWhatsapp(value);
   };
 
-  const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.length > 8) value = value.slice(0, 8);
-    if (value.length > 5) {
-      value = `${value.slice(0, 5)}-${value.slice(5)}`;
-    }
-    setCustomerCep(value);
-  };
-
   const filteredModels = useMemo(() => {
     if (!modelSearch.trim()) return models;
     const q = modelSearch.toLowerCase();
     return models.filter((m) => m.name.toLowerCase().includes(q));
   }, [models, modelSearch]);
 
-  // Step Validation Checkers — Requires user to actually answer
+  // Step Validation Checkers
   const isStepValid = useMemo(() => {
     switch (step) {
       case 1:
@@ -179,30 +223,21 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
       case 2:
         return !!selectedStorage;
       case 3:
-        return !!powerOnStatus;
-      case 4:
-        return !!icloudStatus;
-      case 5:
-        return !!screenGlass;
-      case 6:
-        return !!screenDisplay;
-      case 7:
-        return !!bodyBackGlass;
-      case 8:
-        return !!bodySides;
-      case 9:
-        return !!cameraRear;
-      case 10:
-        return !!faceId;
-      case 11:
         return !!batteryHealth;
-      case 12:
-        return !!charging;
-      case 13:
-        return !!networkWifi;
-      case 14:
-        return !!screenHistory;
-      case 15:
+      case 4:
+        if (!physicalCondition) return false;
+        if (physicalCondition === "damaged" && damages.length === 0) return false;
+        return true;
+      case 5:
+        if (!replacedPartsStatus) return false;
+        if (replacedPartsStatus === "yes" && replacedParts.length === 0) return false;
+        return true;
+      case 6:
+        if (!functionalityStatus) return false;
+        if (functionalityStatus === "issues" && malfunctions.length === 0) return false;
+        return true;
+      case 7:
+        // Final evaluation step: valid customer info
         return (
           customerName.trim().length >= 2 &&
           customerWhatsapp.replace(/\D/g, "").length >= 10
@@ -214,25 +249,40 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
     step,
     selectedModel,
     selectedStorage,
-    powerOnStatus,
-    icloudStatus,
-    screenGlass,
-    screenDisplay,
-    bodyBackGlass,
-    bodySides,
-    cameraRear,
-    faceId,
     batteryHealth,
-    charging,
-    networkWifi,
-    screenHistory,
+    physicalCondition,
+    damages,
+    replacedPartsStatus,
+    replacedParts,
+    functionalityStatus,
+    malfunctions,
     customerName,
     customerWhatsapp,
   ]);
 
-  // Submit Final Quote
-  const handleFinalSubmit = async () => {
-    if (!selectedModel || !selectedStorage || !isStepValid) return;
+  // Toggle helpers for multi-select
+  const toggleDamage = (item: string) => {
+    setDamages((prev) =>
+      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+    );
+  };
+
+  const toggleReplacedPart = (item: string) => {
+    setReplacedParts((prev) =>
+      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+    );
+  };
+
+  const toggleMalfunction = (item: string) => {
+    setMalfunctions((prev) =>
+      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
+    );
+  };
+
+  // Submit Final Sale Quote
+  const handleFinalSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (!selectedModel || !selectedStorage || !customerName || !customerWhatsapp) return;
 
     try {
       setSubmitting(true);
@@ -240,34 +290,19 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
         deviceModelId: selectedModel.id,
         storageOptionId: selectedStorage.id,
         answers: {
-          deviceColor: deviceColor.trim() || "Não informada",
-          powerOnStatus,
-          icloudStatus,
-          screenGlass,
-          screenDisplay,
-          bodyBackGlass,
-          bodySides,
-          cameraFront: "perfect",
-          cameraRear,
-          cameraGlass: "perfect",
-          faceId,
+          customerName,
+          customerWhatsapp,
           batteryHealth,
-          audioSpeakers: "perfect",
-          audioMicrophone: "perfect",
-          networkWifi,
-          networkCellular: networkWifi,
-          charging,
-          screenHistory,
-          batteryHistory: "never",
-          otherRepairs: ["none"],
-          customerName: customerName.trim(),
-          customerWhatsapp: customerWhatsapp.trim(),
-          customerCep: customerCep.trim(),
+          physicalCondition,
+          damages,
+          replacedPartsStatus,
+          replacedParts,
+          functionalityStatus,
+          malfunctions,
         },
         customer: {
-          name: customerName.trim(),
-          whatsapp: customerWhatsapp.trim(),
-          cep: customerCep.trim(),
+          name: customerName,
+          whatsapp: customerWhatsapp,
         },
       };
 
@@ -278,344 +313,171 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
       });
 
       const data = await res.json();
-      if (data.success) {
-        setQuoteResult(data);
-      } else {
-        alert(data.error || "Ocorreu um erro ao calcular a cotação.");
-      }
+      setQuoteSuccess(true);
+
+      // WhatsApp direct redirect
+      const publicCode = data.quote?.publicCode || "COT-AVAL";
+      const valorFinal = estimatedPrice ? formatCurrency(estimatedPrice) : "A consultar";
+
+      const batteryLabel =
+        batteryHealth === "90_plus"
+          ? "90% ou mais"
+          : batteryHealth === "85_89"
+          ? "85% a 89%"
+          : batteryHealth === "80_84"
+          ? "80% a 84%"
+          : "Abaixo de 80%";
+
+      const physicalLabel =
+        physicalCondition === "excellent"
+          ? "Excelente"
+          : physicalCondition === "very_good"
+          ? "Muito bom"
+          : physicalCondition === "good"
+          ? "Bom"
+          : `Com avarias (${damages.join(", ")})`;
+
+      const partsLabel =
+        replacedPartsStatus === "never"
+          ? "Nunca aberto"
+          : replacedPartsStatus === "unsure"
+          ? "Não tem certeza"
+          : `Peças trocadas: ${replacedParts.join(", ")}`;
+
+      const funcLabel =
+        functionalityStatus === "perfect"
+          ? "100% funcionando"
+          : `Problemas: ${malfunctions.join(", ")}`;
+
+      const msg = `Olá! Gostaria de vender meu *${selectedModel.name} ${selectedStorage.displayName}*.\n\n📋 *Código da Cotação:* ${publicCode}\n💵 *Valor Estimado:* ${valorFinal} no PIX\n\n📌 *Detalhes do Aparelho:*\n• Bateria: ${batteryLabel}\n• Estado Físico: ${physicalLabel}\n• Peças/Reparos: ${partsLabel}\n• Funcionamento: ${funcLabel}\n\n👤 *Nome:* ${customerName}\n📱 *WhatsApp:* ${customerWhatsapp}\n\nGostaria de agendar a avaliação e receber o pagamento!`;
+
+      const cleanPhone = storeConfig.contact.whatsapp.replace(/\D/g, "");
+      const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
+      window.open(waUrl, "_blank", "noopener,noreferrer");
     } catch (err) {
-      console.error("Erro ao enviar cotação:", err);
-      alert("Falha na conexão ao gerar cotação. Tente novamente.");
+      console.error("Erro ao gerar cotação:", err);
     } finally {
       setSubmitting(false);
     }
   };
 
-  const handleReset = () => {
+  const restart = () => {
     setStep(1);
     setSelectedModel(null);
     setSelectedStorage(null);
-    setDeviceColor("");
-    setPowerOnStatus("");
-    setIcloudStatus("");
-    setScreenGlass("");
-    setScreenDisplay("");
-    setBodyBackGlass("");
-    setBodySides("");
-    setCameraRear("");
-    setFaceId("");
     setBatteryHealth("");
-    setCharging("");
-    setNetworkWifi("");
-    setScreenHistory("");
-    setQuoteResult(null);
+    setPhysicalCondition("");
+    setDamages([]);
+    setReplacedPartsStatus("");
+    setReplacedParts([]);
+    setFunctionalityStatus("");
+    setMalfunctions([]);
     setCustomerName("");
     setCustomerWhatsapp("");
-    setCustomerCep("");
+    setQuoteSuccess(false);
   };
-
-  const handleNext = () => {
-    if (step < totalSteps) {
-      setStep(step + 1);
-    } else {
-      handleFinalSubmit();
-    }
-  };
-
-  const handleBack = () => {
-    if (step > 1) {
-      setStep(step - 1);
-    }
-  };
-
-  // Helper to select option
-  const selectOptionAndAdvance = (setter: (val: string) => void, val: string) => {
-    setter(val);
-  };
-
-  // WhatsApp formatted string
-  const whatsappUrl = useMemo(() => {
-    if (!quoteResult || !selectedModel || !selectedStorage) return "#";
-
-    const code = quoteResult.quote?.publicCode || "COT-AVAL";
-    const finalPrice = formatCurrency(quoteResult.calculation?.finalPrice || 0);
-
-    const message = `Olá! Gostaria de vender meu iPhone para a Mundo Apple Delivery:
-
-Código da Cotação: ${code}
-
-📱 APARELHO AVALIADO:
-• Modelo: ${selectedModel.name}
-• Armazenamento: ${selectedStorage.displayName}
-• Cor: ${deviceColor.trim() || "Não informada"}
-• Funcionamento: ${powerOnStatus === "normal" ? "Liga e funciona 100%" : powerOnStatus}
-• Bateria: ${batteryHealth === "good" ? "85% a 100%" : batteryHealth === "below_85" ? "Abaixo de 85%" : "Manutenção"}
-• iCloud: ${icloudStatus === "unlocked" ? "Desbloqueado" : "Bloqueado"}
-• Cotação para pagamento via Pix: ${finalPrice}
-
-👤 DADOS PARA CONTATO:
-Nome: ${customerName.trim()}
-WhatsApp: ${customerWhatsapp.trim()}
-
-Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
-
-    return `https://wa.me/${storeConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
-  }, [
-    quoteResult,
-    selectedModel,
-    selectedStorage,
-    deviceColor,
-    powerOnStatus,
-    batteryHealth,
-    icloudStatus,
-    customerName,
-    customerWhatsapp,
-  ]);
-
-  // Option Click Card Component
-  const OptionCard: React.FC<{
-    selected: boolean;
-    onClick: () => void;
-    title: string;
-    subtitle?: string;
-    icon?: React.ReactNode;
-    badge?: string;
-  }> = ({ selected, onClick, title, subtitle, icon, badge }) => {
-    return (
-      <button
-        type="button"
-        onClick={onClick}
-        className={`w-full p-4 sm:p-5 rounded-2xl border text-left flex items-center justify-between gap-4 transition-all duration-200 cursor-pointer ${
-          selected
-            ? "bg-blue-50/80 border-[#0071E3] shadow-md ring-2 ring-[#0071E3]/30 scale-[1.01]"
-            : "bg-white border-[#D2D2D7] hover:border-[#86868B] hover:bg-[#F5F5F7] shadow-xs"
-        }`}
-      >
-        <div className="flex items-center gap-3.5">
-          {icon && (
-            <div
-              className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
-                selected ? "bg-[#0071E3] text-white" : "bg-[#F5F5F7] text-[#1D1D1F]"
-              }`}
-            >
-              {icon}
-            </div>
-          )}
-          <div className="space-y-0.5">
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-[#1D1D1F] text-sm sm:text-base leading-snug">
-                {title}
-              </span>
-              {badge && (
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-                  {badge}
-                </span>
-              )}
-            </div>
-            {subtitle && <p className="text-xs text-[#6E6E73] leading-relaxed">{subtitle}</p>}
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 shrink-0">
-          <div
-            className={`w-6 h-6 rounded-full flex items-center justify-center border transition-all ${
-              selected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7] bg-white"
-            }`}
-          >
-            {selected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-          </div>
-        </div>
-      </button>
-    );
-  };
-
-  // ----------------------------------------------------
-  // RESULT SCREEN
-  // ----------------------------------------------------
-  if (quoteResult) {
-    const isBlocked = quoteResult.calculation?.blocked;
-    const isManual = quoteResult.calculation?.manualReview;
-    const finalVal = quoteResult.calculation?.finalPrice || 0;
-
-    return (
-      <div className="w-full max-w-2xl mx-auto py-4 px-4 sm:px-0 animate-in fade-in duration-300">
-        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-[#D2D2D7] space-y-8 text-center">
-          {/* Header */}
-          <div className="flex flex-col items-center space-y-2">
-            <div
-              className={`w-16 h-16 rounded-full flex items-center justify-center shadow-inner ${
-                isBlocked
-                  ? "bg-red-50 text-red-600"
-                  : isManual
-                  ? "bg-amber-50 text-amber-600"
-                  : "bg-emerald-50 text-emerald-600"
-              }`}
-            >
-              {isBlocked ? (
-                <AlertCircle className="w-8 h-8" />
-              ) : isManual ? (
-                <ShieldCheck className="w-8 h-8" />
-              ) : (
-                <CheckCircle2 className="w-8 h-8" />
-              )}
-            </div>
-
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#F5F5F7] text-xs font-semibold text-[#1D1D1F] border border-[#D2D2D7]">
-              <span>Cotação de Venda:</span>
-              <strong className="text-[#0071E3] font-bold tracking-wider">
-                {quoteResult.quote?.publicCode}
-              </strong>
-            </div>
-
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F]">
-              {isBlocked
-                ? "Aparelho Não Elegível para Compra"
-                : isManual
-                ? "Avaliação Manual / Técnica Presencial"
-                : "Proposta de Compra Concluída!"}
-            </h2>
-
-            <p className="text-xs sm:text-sm text-[#6E6E73] max-w-md">
-              {isBlocked
-                ? "Identificamos que o aparelho possui restrição ou bloqueio de iCloud ativo."
-                : isManual
-                ? "Pelo estado técnico informado, este aparelho necessita de checagem física detalhada por nossa equipe especializada."
-                : "Avaliamos seu iPhone com base na nossa tabela oficial com pagamento imediato via Pix."}
-            </p>
-          </div>
-
-          {isBlocked ? (
-            <div className="p-6 rounded-2xl bg-red-50 border border-red-200 text-left space-y-3">
-              <div className="flex items-center gap-2 text-red-800 font-bold">
-                <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
-                <span>Política de Segurança — Bloqueio de iCloud</span>
-              </div>
-              <p className="text-xs sm:text-sm text-red-700 leading-relaxed">
-                Por diretrizes rigorosas de conformidade e segurança da Mundo Apple, não compramos aparelhos com bloqueio de ativação do iCloud ou sem acesso à senha original.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-6 text-left">
-              <div className="bg-gradient-to-br from-[#F5F5F7] via-white to-[#F5F5F7] rounded-3xl p-6 sm:p-8 border border-[#D2D2D7] shadow-sm text-center space-y-3">
-                <span className="text-xs font-bold text-[#6E6E73] uppercase tracking-wider block">
-                  Valor da Proposta com Pagamento no Pix:
-                </span>
-                <div className="text-4xl sm:text-5xl font-extrabold text-emerald-600 tracking-tight">
-                  {formatCurrency(finalVal)}
-                </div>
-                <p className="text-xs text-[#6E6E73]">
-                  {selectedModel?.name} · {selectedStorage?.displayName} · Cor: {deviceColor || "Padrão"}
-                </p>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Dinheiro na conta na hora da entrega</span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
-            {!isBlocked && (
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base shadow-lg shadow-emerald-600/20 transition-all hover:scale-[1.01] active:scale-[0.99]"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>Receber Proposta e Agendar Pix</span>
-              </a>
-            )}
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={handleReset}
-              className="py-4 px-6 rounded-2xl font-bold border-[#D2D2D7] text-[#1D1D1F] hover:bg-[#F5F5F7] transition-all"
-            >
-              <RotateCcw className="w-4 h-4 mr-2" />
-              <span>Nova Cotação</span>
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="w-full max-w-2xl mx-auto py-4 px-4 sm:px-0">
-      {/* Wizard Progress Bar */}
-      <div className="mb-6 space-y-2">
-        <div className="flex items-center justify-between text-xs font-semibold text-[#6E6E73]">
-          <span>Pergunta {step} de {totalSteps}</span>
-          <span>{Math.round((step / totalSteps) * 100)}% concluído</span>
-        </div>
-        <div className="w-full h-2 bg-[#E5E5E7] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-[#0071E3] transition-all duration-300 rounded-full"
-            style={{ width: `${(step / totalSteps) * 100}%` }}
-          />
-        </div>
+    <div className="max-w-3xl mx-auto">
+      {/* ── Top Capsule Header ── */}
+      <div className="text-center mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#1D1D1F] tracking-tight font-display">
+          Venda seu iPhone
+        </h1>
+        <p className="text-sm sm:text-base text-[#6E6E73] mt-1.5 font-medium">
+          Descubra quanto podemos pagar pelo seu aparelho
+        </p>
       </div>
 
-      <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-[#D2D2D7] space-y-6">
-        {/* ----------------------------------------------------
-            ETAPA 1 — MODELO DO APARELHO
-        ---------------------------------------------------- */}
+      {/* ── Main Interactive Card ── */}
+      <div className="bg-white rounded-3xl border border-[#E5E5E7] p-5 sm:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
+        {/* Step Progress Bar (1 to 6) */}
+        {step <= 6 && (
+          <div className="mb-6 sm:mb-8">
+            <div className="flex items-center justify-between text-xs font-semibold text-[#86868B] mb-2">
+              <span className="uppercase tracking-wider">
+                Etapa {step} de {totalSteps}
+              </span>
+              <span className="text-[#0071E3] font-bold">
+                {step === 1 && "Modelo"}
+                {step === 2 && "Armazenamento"}
+                {step === 3 && "Saúde da Bateria"}
+                {step === 4 && "Estado Físico"}
+                {step === 5 && "Peças e Reparos"}
+                {step === 6 && "Funcionamento"}
+              </span>
+            </div>
+            <div className="w-full bg-[#F5F5F7] h-2 rounded-full overflow-hidden">
+              <div
+                className="bg-[#0071E3] h-full rounded-full transition-all duration-300 ease-out"
+                style={{ width: `${(step / totalSteps) * 100}%` }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* ── ETAPA 1: MODELO ── */}
         {step === 1 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 1: Modelo</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Qual iPhone você quer vender?
+          <div className="space-y-5 animate-in fade-in duration-200">
+            <div>
+              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+                Qual é o modelo do seu iPhone?
               </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Selecione o modelo do seu iPhone para iniciar a avaliação.
+              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+                Selecione o modelo exato do seu aparelho abaixo.
               </p>
             </div>
 
+            {/* Model Search Box */}
             <div className="relative">
-              <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#86868B]" />
               <input
                 type="text"
                 value={modelSearch}
                 onChange={(e) => setModelSearch(e.target.value)}
-                placeholder="Buscar modelo (ex: iPhone 14 Pro, iPhone 13...)"
-                className="w-full pl-10 pr-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm focus:outline-hidden focus:ring-2 focus:ring-[#0071E3] focus:bg-white transition-all text-[#1D1D1F]"
+                placeholder="Buscar modelo (ex: iPhone 15, iPhone 14 Pro...)"
+                className="w-full pl-10 pr-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
               />
             </div>
 
+            {/* Models Grid */}
             {loadingCatalog ? (
-              <div className="py-12 flex flex-col items-center justify-center space-y-3 text-[#6E6E73]">
-                <Loader2 className="w-8 h-8 animate-spin text-[#0071E3]" />
-                <p className="text-xs font-semibold">Carregando catálogo de modelos...</p>
+              <div className="py-12 flex flex-col items-center justify-center gap-2 text-[#86868B]">
+                <Loader2 className="w-6 h-6 animate-spin text-[#0071E3]" />
+                <span className="text-xs font-semibold">Carregando modelos...</span>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
                 {filteredModels.map((m) => {
-                  const isSel = selectedModel?.id === m.id;
+                  const isSelected = selectedModel?.id === m.id;
                   return (
                     <button
                       key={m.id}
                       type="button"
                       onClick={() => {
                         setSelectedModel(m);
+                        setStep(2);
                       }}
-                      className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
-                        isSel
-                          ? "bg-blue-50/80 border-[#0071E3] shadow-sm ring-1 ring-[#0071E3]/30"
-                          : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                      className={`p-3.5 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                        isSelected
+                          ? "bg-blue-50/70 border-[#0071E3] ring-2 ring-[#0071E3] text-[#0071E3]"
+                          : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7] text-[#1D1D1F]"
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-xl bg-[#F5F5F7] flex items-center justify-center text-[#1D1D1F]">
-                          <Smartphone className="w-4 h-4" />
-                        </div>
-                        <span className="font-bold text-[#1D1D1F] text-xs sm:text-sm">
+                      <div className="min-w-0">
+                        <span className="block text-xs sm:text-sm font-bold truncate">
                           {m.name}
                         </span>
                       </div>
-                      {isSel && <Check className="w-4 h-4 text-[#0071E3]" />}
+                      <div
+                        className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-2 ${
+                          isSelected
+                            ? "border-[#0071E3] bg-[#0071E3] text-white"
+                            : "border-[#D2D2D7]"
+                        }`}
+                      >
+                        {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                      </div>
                     </button>
                   );
                 })}
@@ -624,630 +486,598 @@ Gostaria de agendar a avaliação presencial / entrega com pagamento no ato!`;
           </div>
         )}
 
-        {/* ----------------------------------------------------
-            ETAPA 2 — ARMAZENAMENTO E COR
-        ---------------------------------------------------- */}
+        {/* ── ETAPA 2: ARMAZENAMENTO ── */}
         {step === 2 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 2: Capacidade</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Qual é a capacidade de memória?
+          <div className="space-y-5 animate-in fade-in duration-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+                  Qual é a capacidade de armazenamento?
+                </h2>
+                <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+                  Modelo selecionado: <strong className="text-[#1D1D1F]">{selectedModel?.name}</strong>
+                </p>
+              </div>
+            </div>
+
+            {loadingStorages ? (
+              <div className="py-12 flex flex-col items-center justify-center gap-2 text-[#86868B]">
+                <Loader2 className="w-6 h-6 animate-spin text-[#0071E3]" />
+                <span className="text-xs font-semibold">Consultando capacidades...</span>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {storageOptions.map((stg) => {
+                  const isSelected = selectedStorage?.id === stg.id;
+                  return (
+                    <button
+                      key={stg.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedStorage(stg);
+                        setStep(3);
+                      }}
+                      className={`p-4 rounded-2xl border text-center transition-all cursor-pointer ${
+                        isSelected
+                          ? "bg-blue-50/70 border-[#0071E3] ring-2 ring-[#0071E3] text-[#0071E3]"
+                          : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7] text-[#1D1D1F]"
+                      }`}
+                    >
+                      <span className="block text-base sm:text-lg font-extrabold">
+                        {stg.displayName}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ── ETAPA 3: SAÚDE DA BATERIA ── */}
+        {step === 3 && (
+          <div className="space-y-5 animate-in fade-in duration-200">
+            <div>
+              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+                Qual é a saúde da bateria do seu iPhone?
               </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                {selectedModel?.name} — selecione a memória interna do seu iPhone.
+              <p className="text-xs sm:text-sm text-[#86868B] mt-1 bg-[#F5F5F7] p-2.5 rounded-xl inline-block border border-[#E5E5E7]">
+                💡 Você encontra essa informação em: <strong className="text-[#1D1D1F]">Ajustes → Bateria → Saúde da Bateria</strong>.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {storageOptions.map((st) => {
-                const isSel = selectedStorage?.id === st.id;
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                { key: "90_plus", label: "90% ou mais", desc: "Bateria em perfeito estado" },
+                { key: "85_89", label: "85% a 89%", desc: "Desgaste natural de uso" },
+                { key: "80_84", label: "80% a 84%", desc: "Desgaste moderado" },
+                { key: "below_80", label: "Abaixo de 80%", desc: "Necessita de manutenção" },
+              ].map((opt) => {
+                const isSelected = batteryHealth === opt.key;
                 return (
                   <button
-                    key={st.id}
+                    key={opt.key}
                     type="button"
                     onClick={() => {
-                      setSelectedStorage(st);
+                      setBatteryHealth(opt.key);
+                      setStep(4);
                     }}
-                    className={`py-4 px-4 rounded-2xl border text-center font-bold text-sm sm:text-base transition-all cursor-pointer ${
-                      isSel
-                        ? "bg-[#0071E3] text-white border-[#0071E3] shadow-md ring-2 ring-[#0071E3]/30"
-                        : "bg-white border-[#D2D2D7] text-[#1D1D1F] hover:bg-[#F5F5F7]"
+                    className={`p-4 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-blue-50/70 border-[#0071E3] ring-2 ring-[#0071E3] text-[#0071E3]"
+                        : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7] text-[#1D1D1F]"
                     }`}
                   >
-                    {st.displayName}
+                    <div>
+                      <span className="block text-sm sm:text-base font-bold">
+                        {opt.label}
+                      </span>
+                      <span className="text-[11px] text-[#86868B] block mt-0.5">
+                        {opt.desc}
+                      </span>
+                    </div>
+                    <div
+                      className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-2 ${
+                        isSelected
+                          ? "border-[#0071E3] bg-[#0071E3] text-white"
+                          : "border-[#D2D2D7]"
+                      }`}
+                    >
+                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── ETAPA 4: ESTADO FÍSICO ── */}
+        {step === 4 && (
+          <div className="space-y-5 animate-in fade-in duration-200">
+            <div>
+              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+                Como está o estado físico do seu iPhone?
+              </h2>
+              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+                Avalie a conservação externa do vidro, tampa e laterais.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                {
+                  key: "excellent",
+                  title: "Excelente",
+                  desc: "Sem riscos relevantes, sem trincas e muito bem conservado.",
+                },
+                {
+                  key: "very_good",
+                  title: "Muito bom",
+                  desc: "Pequenas marcas normais de uso, sem danos importantes.",
+                },
+                {
+                  key: "good",
+                  title: "Bom",
+                  desc: "Possui riscos ou marcas de uso mais aparentes.",
+                },
+                {
+                  key: "damaged",
+                  title: "Com avarias",
+                  desc: "Possui tela quebrada, tampa quebrada, amassados ou outro dano visível.",
+                },
+              ].map((opt) => {
+                const isSelected = physicalCondition === opt.key;
+                return (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    onClick={() => {
+                      setPhysicalCondition(opt.key);
+                      if (opt.key !== "damaged") {
+                        setDamages([]);
+                        setStep(5);
+                      }
+                    }}
+                    className={`p-4 rounded-2xl border text-left flex items-start justify-between transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-blue-50/70 border-[#0071E3] ring-2 ring-[#0071E3] text-[#0071E3]"
+                        : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7] text-[#1D1D1F]"
+                    }`}
+                  >
+                    <div className="pr-2">
+                      <span className="block text-sm sm:text-base font-bold">
+                        {opt.title}
+                      </span>
+                      <span className="text-[11px] text-[#6E6E73] block mt-1 leading-relaxed">
+                        {opt.desc}
+                      </span>
+                    </div>
+                    <div
+                      className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 mt-0.5 ${
+                        isSelected
+                          ? "border-[#0071E3] bg-[#0071E3] text-white"
+                          : "border-[#D2D2D7]"
+                      }`}
+                    >
+                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                    </div>
                   </button>
                 );
               })}
             </div>
 
-            <div className="space-y-2 pt-2 border-t border-[#E5E5E7]">
-              <label className="text-xs font-semibold text-[#1D1D1F] block">
-                Cor do aparelho (opcional):
-              </label>
-              <input
-                type="text"
-                value={deviceColor}
-                onChange={(e) => setDeviceColor(e.target.value)}
-                placeholder="Ex: Preto, Azul, Dourado, Branco..."
-                className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
-              />
-            </div>
+            {/* SE ESCOLHER “COM AVARIAS” */}
+            {physicalCondition === "damaged" && (
+              <div className="pt-4 border-t border-[#E5E5E7] space-y-3 animate-in fade-in duration-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm sm:text-base font-bold text-[#1D1D1F]">
+                    Qual avaria o aparelho possui?
+                  </h3>
+                  <span className="text-[11px] text-[#86868B]">
+                    Seleção múltipla
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  {[
+                    { key: "screen_cracked", label: "Tela quebrada" },
+                    { key: "back_cracked", label: "Tampa traseira quebrada" },
+                    { key: "camera_damaged", label: "Câmera danificada" },
+                    { key: "housing_dented", label: "Carcaça/amassado" },
+                    { key: "face_id_issue", label: "Face ID com problema" },
+                    { key: "buttons_issue", label: "Botões com problema" },
+                    { key: "other_damage", label: "Outro" },
+                  ].map((item) => {
+                    const isChecked = damages.includes(item.key);
+                    return (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => toggleDamage(item.key)}
+                        className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
+                          isChecked
+                            ? "bg-blue-50/80 border-[#0071E3] text-[#0071E3] ring-1 ring-[#0071E3]"
+                            : "bg-white hover:bg-[#F5F5F7] border-[#D2D2D7] text-[#1D1D1F]"
+                        }`}
+                      >
+                        <span className="truncate pr-1">{item.label}</span>
+                        <div
+                          className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 ${
+                            isChecked
+                              ? "bg-[#0071E3] border-[#0071E3] text-white"
+                              : "border-[#D2D2D7]"
+                          }`}
+                        >
+                          {isChecked && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
-        {/* ----------------------------------------------------
-            ETAPA 3 — FUNCIONAMENTO INICIAL
-        ---------------------------------------------------- */}
-        {step === 3 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 3: Funcionamento</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                O iPhone liga e funciona normalmente?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Responda sobre o estado geral de inicialização do aparelho.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={powerOnStatus === "normal"}
-                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "normal")}
-                title="Liga perfeitamente e acessa a tela inicial"
-                subtitle="Sistema inicia normalmente sem travamentos ou reinicializações."
-                icon={<Zap className="w-5 h-5" />}
-                badge="100% Funcional"
-              />
-              <OptionCard
-                selected={powerOnStatus === "glitches"}
-                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "glitches")}
-                title="Liga, mas reinicia ou trava com frequência"
-                subtitle="Apresenta desligamento repentino ou travamento ocasional."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={powerOnStatus === "no_power"}
-                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "no_power")}
-                title="Não liga ou fica preso na maçã"
-                subtitle="Aparelho não dá sinal de imagem ou travado em modo de recuperação."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 4 — CONTA ICLOUD
-        ---------------------------------------------------- */}
-        {step === 4 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 4: Segurança</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                A conta do iCloud está liberada para remoção?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Você possui a senha para desvincular o iCloud e formatar o aparelho na entrega?
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={icloudStatus === "unlocked"}
-                onClick={() => selectOptionAndAdvance(setIcloudStatus, "unlocked")}
-                title="Sim, iCloud desbloqueado / tenho a senha"
-                subtitle="O aparelho pode ser desvinculado e formatado de fábrica normalmente."
-                icon={<Lock className="w-5 h-5 text-emerald-600" />}
-                badge="Elegível"
-              />
-              <OptionCard
-                selected={icloudStatus === "locked"}
-                onClick={() => selectOptionAndAdvance(setIcloudStatus, "locked")}
-                title="Não, possui bloqueio de ativação ou não sei a senha"
-                subtitle="Aparelho bloqueado por conta iCloud anterior ou sem senha."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 5 — VIDRO FRONTAL DA TELA
-        ---------------------------------------------------- */}
+        {/* ── ETAPA 5: PEÇAS E REPAROS ── */}
         {step === 5 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 5: Vidro Frontal</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Como está o vidro frontal da tela?
+          <div className="space-y-5 animate-in fade-in duration-200">
+            <div>
+              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+                O iPhone já foi aberto ou teve alguma peça substituída?
               </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Avalie o estado do vidro touch exterior da tela.
+              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+                Informe o histórico de manutenção do seu aparelho.
               </p>
             </div>
 
-            <div className="space-y-3">
-              <OptionCard
-                selected={screenGlass === "perfect"}
-                onClick={() => selectOptionAndAdvance(setScreenGlass, "perfect")}
-                title="Perfeito, sem riscos ou trincados"
-                subtitle="Vidro impecável, sem arranhões visíveis."
-                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={screenGlass === "light_scratches"}
-                onClick={() => selectOptionAndAdvance(setScreenGlass, "light_scratches")}
-                title="Riscos leves superficiais"
-                subtitle="Pequenas marcas de uso perceptíveis apenas contra a luz."
-                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={screenGlass === "deep_scratches"}
-                onClick={() => selectOptionAndAdvance(setScreenGlass, "deep_scratches")}
-                title="Riscos profundos"
-                subtitle="Arranhões mais evidentes sentidos ao passar a unha."
-                icon={<Smartphone className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={screenGlass === "cracked"}
-                onClick={() => selectOptionAndAdvance(setScreenGlass, "cracked")}
-                title="Vidro trincado ou quebrado"
-                subtitle="Fissuras, rachaduras ou vidro quebrado."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {[
+                { key: "never", label: "Não, nunca foi aberto" },
+                { key: "yes", label: "Sim" },
+                { key: "unsure", label: "Não tenho certeza" },
+              ].map((opt) => {
+                const isSelected = replacedPartsStatus === opt.key;
+                return (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    onClick={() => {
+                      setReplacedPartsStatus(opt.key);
+                      if (opt.key !== "yes") {
+                        setReplacedParts([]);
+                        setStep(6);
+                      }
+                    }}
+                    className={`p-4 rounded-2xl border text-center font-bold text-xs sm:text-sm transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-blue-50/70 border-[#0071E3] ring-2 ring-[#0071E3] text-[#0071E3]"
+                        : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7] text-[#1D1D1F]"
+                    }`}
+                  >
+                    <span>{opt.label}</span>
+                  </button>
+                );
+              })}
             </div>
+
+            {/* SE “SIM” */}
+            {replacedPartsStatus === "yes" && (
+              <div className="pt-4 border-t border-[#E5E5E7] space-y-3 animate-in fade-in duration-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm sm:text-base font-bold text-[#1D1D1F]">
+                    Qual peça já foi substituída?
+                  </h3>
+                  <span className="text-[11px] text-[#86868B]">
+                    Seleção múltipla
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  {[
+                    { key: "screen", label: "Tela" },
+                    { key: "battery", label: "Bateria" },
+                    { key: "camera", label: "Câmera" },
+                    { key: "back_glass", label: "Tampa traseira" },
+                    { key: "charging_port", label: "Conector de carga" },
+                    { key: "other_part", label: "Outra peça" },
+                  ].map((item) => {
+                    const isChecked = replacedParts.includes(item.key);
+                    return (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => toggleReplacedPart(item.key)}
+                        className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
+                          isChecked
+                            ? "bg-blue-50/80 border-[#0071E3] text-[#0071E3] ring-1 ring-[#0071E3]"
+                            : "bg-white hover:bg-[#F5F5F7] border-[#D2D2D7] text-[#1D1D1F]"
+                        }`}
+                      >
+                        <span className="truncate pr-1">{item.label}</span>
+                        <div
+                          className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 ${
+                            isChecked
+                              ? "bg-[#0071E3] border-[#0071E3] text-white"
+                              : "border-[#D2D2D7]"
+                          }`}
+                        >
+                          {isChecked && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
-        {/* ----------------------------------------------------
-            ETAPA 6 — DISPLAY E TOUCH
-        ---------------------------------------------------- */}
+        {/* ── ETAPA 6: FUNCIONAMENTO ── */}
         {step === 6 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 6: Imagem e Touch</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                A imagem e o toque (touch) da tela estão perfeitos?
+          <div className="space-y-5 animate-in fade-in duration-200">
+            <div>
+              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+                Seu iPhone está funcionando normalmente?
               </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Verifique se o display não possui manchas, linhas ou toques fantasmas.
+              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+                Verifique os recursos e conectividade do aparelho.
               </p>
             </div>
 
-            <div className="space-y-3">
-              <OptionCard
-                selected={screenDisplay === "perfect"}
-                onClick={() => selectOptionAndAdvance(setScreenDisplay, "perfect")}
-                title="Display 100% perfeito e touch respondendo perfeitamente"
-                subtitle="Sem manchas escuras, linhas coloridas ou falhas de toque."
-                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={screenDisplay === "spots"}
-                onClick={() => selectOptionAndAdvance(setScreenDisplay, "spots")}
-                title="Possui manchas escuras ou pixels mortos"
-                subtitle="Pequenos pontos pretos ou vazamento de cristal líquido."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={screenDisplay === "lines"}
-                onClick={() => selectOptionAndAdvance(setScreenDisplay, "lines")}
-                title="Possui listras verticais/horizontais ou touch falhando"
-                subtitle="Linhas coloridas na imagem ou partes da tela que não respondem ao toque."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                { key: "perfect", label: "Sim, tudo funcionando normalmente" },
+                { key: "issues", label: "Não, possui algum problema" },
+              ].map((opt) => {
+                const isSelected = functionalityStatus === opt.key;
+                return (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    onClick={() => {
+                      setFunctionalityStatus(opt.key);
+                      if (opt.key === "perfect") {
+                        setMalfunctions([]);
+                        setStep(7);
+                      }
+                    }}
+                    className={`p-4 rounded-2xl border text-center font-bold text-xs sm:text-sm transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-blue-50/70 border-[#0071E3] ring-2 ring-[#0071E3] text-[#0071E3]"
+                        : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7] text-[#1D1D1F]"
+                    }`}
+                  >
+                    <span>{opt.label}</span>
+                  </button>
+                );
+              })}
             </div>
+
+            {/* SE “NÃO, POSSUI ALGUM PROBLEMA” */}
+            {functionalityStatus === "issues" && (
+              <div className="pt-4 border-t border-[#E5E5E7] space-y-3 animate-in fade-in duration-200">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm sm:text-base font-bold text-[#1D1D1F]">
+                    Qual problema o aparelho apresenta?
+                  </h3>
+                  <span className="text-[11px] text-[#86868B]">
+                    Seleção múltipla
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  {[
+                    { key: "face_id", label: "Face ID" },
+                    { key: "camera", label: "Câmera" },
+                    { key: "microphone", label: "Microfone" },
+                    { key: "speaker", label: "Alto-falante" },
+                    { key: "wifi", label: "Wi-Fi" },
+                    { key: "bluetooth", label: "Bluetooth" },
+                    { key: "cellular", label: "Rede/sinal" },
+                    { key: "charging", label: "Carregamento" },
+                    { key: "touch", label: "Touch" },
+                    { key: "buttons", label: "Botões" },
+                    { key: "reboots", label: "Reinicia ou desliga sozinho" },
+                    { key: "other", label: "Outro" },
+                  ].map((item) => {
+                    const isChecked = malfunctions.includes(item.key);
+                    return (
+                      <button
+                        key={item.key}
+                        type="button"
+                        onClick={() => toggleMalfunction(item.key)}
+                        className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-between transition-all cursor-pointer ${
+                          isChecked
+                            ? "bg-blue-50/80 border-[#0071E3] text-[#0071E3] ring-1 ring-[#0071E3]"
+                            : "bg-white hover:bg-[#F5F5F7] border-[#D2D2D7] text-[#1D1D1F]"
+                        }`}
+                      >
+                        <span className="truncate pr-1">{item.label}</span>
+                        <div
+                          className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 ${
+                            isChecked
+                              ? "bg-[#0071E3] border-[#0071E3] text-white"
+                              : "border-[#D2D2D7]"
+                          }`}
+                        >
+                          {isChecked && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
-        {/* ----------------------------------------------------
-            ETAPA 7 — VIDRO TRASEIRO
-        ---------------------------------------------------- */}
+        {/* ── ETAPA 7: RESULTADO DA AVALIAÇÃO & DADOS DO CLIENTE ── */}
         {step === 7 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 7: Traseira</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Como está o vidro ou acabamento da tampa traseira?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Avalie o verso do seu aparelho.
+          <div className="space-y-6 animate-in fade-in duration-200">
+            {/* Value Display Box */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-blue-50/60 border border-blue-200/80 text-center space-y-3">
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0071E3] block">
+                Valor estimado do seu iPhone:
+              </span>
+              <div className="text-3xl sm:text-5xl font-extrabold text-[#1D1D1F] tracking-tight font-display">
+                {estimatedPrice && estimatedPrice > 0 ? (
+                  formatCurrency(estimatedPrice)
+                ) : calculating ? (
+                  <span className="inline-flex items-center gap-2 text-xl font-semibold text-[#86868B]">
+                    <Loader2 className="w-5 h-5 animate-spin" /> Calculando proposta...
+                  </span>
+                ) : (
+                  "Sob Consulta"
+                )}
+              </div>
+              <p className="text-xs sm:text-sm text-[#6E6E73] max-w-md mx-auto leading-relaxed">
+                Esse é o valor estimado que podemos pagar pelo seu aparelho, considerando as informações fornecidas.
               </p>
             </div>
 
-            <div className="space-y-3">
-              <OptionCard
-                selected={bodyBackGlass === "perfect"}
-                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "perfect")}
-                title="Traseira impecável, sem marcas ou trincados"
-                subtitle="Vidro traseiro e logo da Apple em perfeito estado."
-                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={bodyBackGlass === "light_marks"}
-                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "light_marks")}
-                title="Marcas leves de uso ou capinha"
-                subtitle="Pequenas marcas normais de atrito do dia a dia."
-                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={bodyBackGlass === "cracked"}
-                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "cracked")}
-                title="Vidro traseiro trincado ou quebrado"
-                subtitle="Fissuras ou quebras na tampa traseira."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 8 — LATERAIS E CARCAÇA
-        ---------------------------------------------------- */}
-        {step === 8 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 8: Laterais</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Como estão as laterais e quinas do iPhone?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Verifique a borda de alumínio ou titânio do aparelho.
-              </p>
+            {/* Summary Badge List */}
+            <div className="p-4 bg-[#F5F5F7] rounded-2xl border border-[#E5E5E7] flex flex-wrap gap-2 text-xs font-semibold text-[#1D1D1F]">
+              <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                📱 {selectedModel?.name}
+              </span>
+              <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                💾 {selectedStorage?.displayName}
+              </span>
+              <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                🔋 Bateria:{" "}
+                {batteryHealth === "90_plus"
+                  ? "90%+"
+                  : batteryHealth === "85_89"
+                  ? "85-89%"
+                  : batteryHealth === "80_84"
+                  ? "80-84%"
+                  : "<80%"}
+              </span>
+              <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                ✨ Estado:{" "}
+                {physicalCondition === "excellent"
+                  ? "Excelente"
+                  : physicalCondition === "very_good"
+                  ? "Muito bom"
+                  : physicalCondition === "good"
+                  ? "Bom"
+                  : "Com avarias"}
+              </span>
             </div>
 
-            <div className="space-y-3">
-              <OptionCard
-                selected={bodySides === "perfect"}
-                onClick={() => selectOptionAndAdvance(setBodySides, "perfect")}
-                title="Laterais impecáveis, sem amassados ou riscos"
-                subtitle="Estrutura 100% íntegra, sem amassados de queda."
-                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={bodySides === "light_scratches"}
-                onClick={() => selectOptionAndAdvance(setBodySides, "light_scratches")}
-                title="Pequenos riscos ou marcas leves"
-                subtitle="Marcas de uso superficiais nas bordas."
-                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={bodySides === "dents"}
-                onClick={() => selectOptionAndAdvance(setBodySides, "dents")}
-                title="Amassados ou marcas de queda nas quinas"
-                subtitle="Batidas evidentes ou carcaça empenada."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 9 — CÂMERAS
-        ---------------------------------------------------- */}
-        {step === 9 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 9: Câmeras</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                As câmeras e lentes traseiras estão funcionando?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Foco, zoom de 0.5x a 5x e vidro das câmeras.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={cameraRear === "perfect"}
-                onClick={() => selectOptionAndAdvance(setCameraRear, "perfect")}
-                title="Câmeras e lentes 100% perfeitas"
-                subtitle="Foco rápido, fotos nítidas e vidro das lentes sem riscos."
-                icon={<Camera className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={cameraRear === "spots"}
-                onClick={() => selectOptionAndAdvance(setCameraRear, "spots")}
-                title="Manchas pretas ou foco tremendo"
-                subtitle="Fotos saem com pequenas manchas ou vibração no foco."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={cameraRear === "broken"}
-                onClick={() => selectOptionAndAdvance(setCameraRear, "broken")}
-                title="Lente trincada ou câmera não abre"
-                subtitle="Vidro da câmera quebrado ou tela preta ao abrir a câmera."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 10 — FACE ID / BIOMETRIA
-        ---------------------------------------------------- */}
-        {step === 10 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 10: Face ID</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                O Face ID (desbloqueio facial) está funcionando?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Sensor de reconhecimento facial original da Apple.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={faceId === "perfect"}
-                onClick={() => selectOptionAndAdvance(setFaceId, "perfect")}
-                title="Face ID funciona perfeitamente"
-                subtitle="Desbloqueia instantaneamente com o rosto."
-                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={faceId === "broken"}
-                onClick={() => selectOptionAndAdvance(setFaceId, "broken")}
-                title="Face ID não funciona ou apresenta erro"
-                subtitle="Aparece 'Face ID indisponível' nos ajustes."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 11 — SAÚDE DA BATERIA
-        ---------------------------------------------------- */}
-        {step === 11 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 11: Bateria</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Qual é a saúde da bateria em Ajustes &gt; Bateria?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Verifique a porcentagem de capacidade máxima nos Ajustes do iOS.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={batteryHealth === "good"}
-                onClick={() => selectOptionAndAdvance(setBatteryHealth, "good")}
-                title="Excelente — 85% a 100%"
-                subtitle="Saúde ótima com capacidade de desempenho máxima."
-                icon={<BatteryCharging className="w-5 h-5 text-emerald-600" />}
-                badge="Alta Saúde"
-              />
-              <OptionCard
-                selected={batteryHealth === "below_85"}
-                onClick={() => selectOptionAndAdvance(setBatteryHealth, "below_85")}
-                title="Intermediária — 80% a 84%"
-                subtitle="Bateria original ainda em funcionamento sem aviso de serviço."
-                icon={<BatteryCharging className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={batteryHealth === "service_unknown"}
-                onClick={() => selectOptionAndAdvance(setBatteryHealth, "service_unknown")}
-                title="Abaixo de 80% ou mensagem de 'Manutenção'"
-                subtitle="Necessita de troca ou apresenta aviso de peça desconhecida."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 12 — CARREGAMENTO
-        ---------------------------------------------------- */}
-        {step === 12 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 12: Conector</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                O conector de carga e carregamento funcionam bem?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Entrada Lightning / USB-C e carregamento sem fio.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={charging === "perfect"}
-                onClick={() => selectOptionAndAdvance(setCharging, "perfect")}
-                title="Carrega normalmente pelo cabo e sem fio"
-                subtitle="Encaixe firme e carregamento contínuo sem mau contato."
-                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={charging === "bad_contact"}
-                onClick={() => selectOptionAndAdvance(setCharging, "bad_contact")}
-                title="Possui mau contato no cabo"
-                subtitle="Precisa posicionar o cabo em uma posição específica para carregar."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={charging === "broken"}
-                onClick={() => selectOptionAndAdvance(setCharging, "broken")}
-                title="Não carrega de jeito nenhum"
-                subtitle="Entrada danificada ou conector rompido."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 13 — CONECTIVIDADE (WI-FI & CHIP)
-        ---------------------------------------------------- */}
-        {step === 13 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 13: Conexões</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Wi-Fi, Bluetooth e sinal de operadora funcionam normais?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Conexão com redes sem fio e sinal 4G/5G do chip.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={networkWifi === "perfect"}
-                onClick={() => selectOptionAndAdvance(setNetworkWifi, "perfect")}
-                title="Tudo funciona perfeitamente (Wi-Fi, Bluetooth e 4G/5G)"
-                subtitle="Conecta em redes e faz chamadas normalmente."
-                icon={<Wifi className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={networkWifi === "broken"}
-                onClick={() => selectOptionAndAdvance(setNetworkWifi, "broken")}
-                title="Possui falha no Wi-Fi, Bluetooth ou sinal de operadora"
-                subtitle="Wi-Fi desabilitado (cinza) ou 'Sem Serviço' permanente."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 14 — HISTÓRICO DE REPAROS
-        ---------------------------------------------------- */}
-        {step === 14 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 14: Histórico</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                A tela ou bateria já foram trocadas alguma vez?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Peças originais de fábrica garantem maior valorização na compra.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={screenHistory === "original"}
-                onClick={() => selectOptionAndAdvance(setScreenHistory, "original")}
-                title="Nunca foi aberto — Todas as peças originais de fábrica"
-                subtitle="Aparelho 100% original sem trocas de tela, bateria ou carcaça."
-                icon={<ShieldCheck className="w-5 h-5 text-emerald-600" />}
-                badge="Máxima Valorização"
-              />
-              <OptionCard
-                selected={screenHistory === "apple_genuine"}
-                onClick={() => selectOptionAndAdvance(setScreenHistory, "apple_genuine")}
-                title="Já teve peça trocada em Autorizada Apple (Original)"
-                subtitle="Substituição oficial com registro nos Ajustes do iOS."
-                icon={<CheckCircle2 className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={screenHistory === "parallel"}
-                onClick={() => selectOptionAndAdvance(setScreenHistory, "parallel")}
-                title="Já teve peça trocada em assistência comum / paralela"
-                subtitle="Tela ou bateria trocada de primeira linha ou paralela."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 15 — DADOS DO CLIENTE
-        ---------------------------------------------------- */}
-        {step === 15 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Último Passo: Seus Dados</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Para onde enviamos sua cotação Pix na hora?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Preencha seu nome e WhatsApp para ver o valor final e agendar o pagamento.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#1D1D1F] block">
-                  Seu Nome Completo: <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)}
-                  placeholder="Ex: João da Silva"
-                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
-                />
+            {/* Client Form Section */}
+            <div className="p-6 rounded-3xl bg-white border border-[#E5E5E7] space-y-4">
+              <div className="text-left">
+                <h3 className="text-lg sm:text-xl font-extrabold text-[#1D1D1F] tracking-tight">
+                  Gostou da avaliação?
+                </h3>
+                <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
+                  Preencha seus dados para nossa equipe entrar em contato e finalizar a venda.
+                </p>
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#1D1D1F] block">
-                  WhatsApp com DDD: <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="tel"
-                  value={customerWhatsapp}
-                  onChange={handlePhoneChange}
-                  placeholder="(11) 99999-9999"
-                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
-                />
-              </div>
+              <form onSubmit={handleFinalSubmit} className="space-y-3.5 pt-1">
+                <div>
+                  <label className="block text-xs font-bold text-[#1D1D1F] mb-1">
+                    Nome Completo *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    placeholder="Seu nome"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-[#1D1D1F] mb-1">
+                    WhatsApp *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={customerWhatsapp}
+                    onChange={handlePhoneChange}
+                    placeholder="(11) 99999-9999"
+                    className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={!isStepValid || submitting}
+                  className="w-full py-4 bg-[#00C853] hover:bg-[#00B048] disabled:opacity-50 text-white font-extrabold text-sm sm:text-base rounded-full shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-4"
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Gerando proposta...</span>
+                    </>
+                  ) : (
+                    <>
+                      <MessageCircle className="w-5 h-5 fill-white" />
+                      <span>Quero vender</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            {/* Disclaimer Aviso */}
+            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-[#E5E5E7] text-left">
+              <p className="text-[11px] text-[#86868B] leading-relaxed">
+                <strong>Aviso:</strong> Avaliação estimada: o valor apresentado é calculado com base nas informações fornecidas pelo cliente e poderá ser revisado caso as condições informadas não correspondam ao estado real do aparelho.
+              </p>
             </div>
           </div>
         )}
 
-        {/* ----------------------------------------------------
-            NAVIGATION BUTTONS
-        ---------------------------------------------------- */}
-        <div className="pt-4 border-t border-[#E5E5E7] flex items-center justify-between gap-3">
-          {step > 1 ? (
+        {/* ── Navigation Bottom Bar ── */}
+        {step <= 6 && (
+          <div className="flex items-center justify-between pt-6 mt-6 border-t border-[#E5E5E7]">
+            {step > 1 ? (
+              <button
+                type="button"
+                onClick={() => setStep((s) => Math.max(1, s - 1))}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-[#6E6E73] hover:text-[#1D1D1F] rounded-full hover:bg-[#F5F5F7] transition-colors cursor-pointer"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Voltar</span>
+              </button>
+            ) : (
+              <div />
+            )}
+
+            {isStepValid && (
+              <button
+                type="button"
+                onClick={() => setStep((s) => Math.min(7, s + 1))}
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs sm:text-sm font-semibold rounded-full shadow-sm active:scale-95 transition-all cursor-pointer"
+              >
+                <span>{step === 6 ? "Ver Avaliação" : "Continuar"}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Restart Button on Final Step */}
+        {step === 7 && (
+          <div className="pt-4 text-center">
             <button
               type="button"
-              onClick={handleBack}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-[#D2D2D7] text-xs font-bold text-[#1D1D1F] hover:bg-[#F5F5F7] transition-all cursor-pointer"
+              onClick={restart}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#86868B] hover:text-[#0071E3] transition-colors cursor-pointer"
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Voltar</span>
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Fazer nova simulação</span>
             </button>
-          ) : (
-            <div />
-          )}
-
-          <button
-            type="button"
-            onClick={handleNext}
-            disabled={!isStepValid || submitting}
-            className={`inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs sm:text-sm font-bold text-white shadow-md transition-all cursor-pointer ${
-              isStepValid && !submitting
-                ? "bg-[#0071E3] hover:bg-[#0077ED] active:scale-95"
-                : "bg-gray-300 cursor-not-allowed opacity-60"
-            }`}
-          >
-            {submitting ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Calculando Cotação Pix...</span>
-              </>
-            ) : step === totalSteps ? (
-              <>
-                <span>Ver Cotação no Pix</span>
-                <ArrowRight className="w-4 h-4" />
-              </>
-            ) : (
-              <>
-                <span>Continuar</span>
-                <ArrowRight className="w-4 h-4" />
-              </>
-            )}
-          </button>
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
