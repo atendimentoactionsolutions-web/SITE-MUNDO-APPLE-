@@ -76,7 +76,7 @@ export const products: Product[] = [
       "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
-    "priceFrom": 10650,
+    "priceFrom": 10290,
     "condition": "new",
     "storage": [
       "256GB",
@@ -93,55 +93,55 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 10650,
+        "price": 10290,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Glacier",
-        "price": 10700,
+        "price": 10290,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Burgundy",
-        "price": 12050,
+        "price": 11750,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 10750,
+        "price": 10300,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Black",
-        "price": 12150,
+        "price": 11850,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Glacier",
-        "price": 12150,
+        "price": 11850,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Burgundy",
-        "price": 13800,
+        "price": 13650,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 12200,
+        "price": 12100,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Burgundy",
-        "price": 17050,
+        "price": 17100,
         "available": true
       }
     ],
@@ -162,7 +162,7 @@ export const products: Product[] = [
       "Glacier": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
-    "priceFrom": 9900,
+    "priceFrom": 9350,
     "condition": "new",
     "storage": [
       "256GB"
@@ -176,19 +176,19 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 9900,
+        "price": 9400,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Glacier",
-        "price": 9990,
+        "price": 9350,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Burgundy",
-        "price": 10530,
+        "price": 9800,
         "available": true
       }
     ],
@@ -204,7 +204,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-pro-max.png",
-    "priceFrom": 7520,
+    "priceFrom": 7490,
     "condition": "new",
     "storage": [
       "256GB",
@@ -221,7 +221,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
-        "price": 7520,
+        "price": 7490,
         "available": true
       },
       {
@@ -233,43 +233,43 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 7780,
+        "price": 7750,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 9140,
+        "price": 9090,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Deep Blue",
-        "price": 9200,
+        "price": 9130,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 9170,
+        "price": 9050,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Cosmic Orange",
-        "price": 10100,
+        "price": 10290,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Deep Blue",
-        "price": 10480,
+        "price": 10590,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Silver",
-        "price": 11050,
+        "price": 10850,
         "available": true
       },
       {
@@ -287,7 +287,7 @@ export const products: Product[] = [
       {
         "storage": "2TB",
         "color": "Deep Blue",
-        "price": 12100,
+        "price": 12200,
         "available": true
       }
     ],
@@ -302,7 +302,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-pro-max.png",
-    "priceFrom": 7310,
+    "priceFrom": 7300,
     "condition": "new",
     "storage": [
       "256GB",
@@ -318,37 +318,37 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
-        "price": 7310,
+        "price": 7300,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 7480,
+        "price": 7400,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Deep Blue",
-        "price": 7490,
+        "price": 7450,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 8850,
+        "price": 8749,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 8900,
+        "price": 8850,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Deep Blue",
-        "price": 9400,
+        "price": 8850,
         "available": true
       },
       {
@@ -360,7 +360,7 @@ export const products: Product[] = [
       {
         "storage": "1TB",
         "color": "Cosmic Orange",
-        "price": 9550,
+        "price": 9650,
         "available": true
       },
       {
@@ -404,19 +404,19 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Sky Blue",
-        "price": 5780,
+        "price": 5800,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Cloud White",
-        "price": 5780,
+        "price": 5800,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Light Gold",
-        "price": 5780,
+        "price": 5800,
         "available": true
       },
       {
@@ -434,7 +434,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Space Black",
-        "price": 6680,
+        "price": 6749,
         "available": true
       },
       {
@@ -479,7 +479,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-generic.png",
-    "priceFrom": 4280,
+    "priceFrom": 4240,
     "condition": "new",
     "storage": [
       "256GB",
@@ -494,19 +494,19 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 4287,
+        "price": 4298,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "White",
-        "price": 4280,
+        "price": 4240,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Soft Pink",
-        "price": 4298,
+        "price": 4295,
         "available": true
       },
       {
@@ -539,7 +539,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-normal.png",
-    "priceFrom": 5700,
+    "priceFrom": 5740,
     "condition": "new",
     "storage": [
       "256GB",
@@ -556,7 +556,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Sage",
-        "price": 5700,
+        "price": 5740,
         "available": true
       },
       {
@@ -568,13 +568,13 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Lavender",
-        "price": 5890,
+        "price": 5949,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 5930,
+        "price": 5949,
         "available": true
       },
       {
@@ -608,7 +608,7 @@ export const products: Product[] = [
       "Pink": "/images/products/iphone/iphone-16-pink.png",
       "White": "/images/products/iphone/iphone-16-white.png"
     },
-    "priceFrom": 4780,
+    "priceFrom": 4750,
     "condition": "new",
     "storage": [
       "128GB"
@@ -624,31 +624,31 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Teal",
-        "price": 4780,
+        "price": 4750,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Ultramarine",
-        "price": 4799.99,
+        "price": 4750,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 4870,
+        "price": 4900,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "White",
-        "price": 4890,
+        "price": 4919.99,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 4940,
+        "price": 4930,
         "available": true
       }
     ],
@@ -670,7 +670,7 @@ export const products: Product[] = [
       "Green": "/images/products/iphone/iphone-15-black.png",
       "Yellow": "/images/products/iphone/iphone-15-black.png"
     },
-    "priceFrom": 4250,
+    "priceFrom": 4295,
     "condition": "new",
     "storage": [
       "128GB",
@@ -687,19 +687,19 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 4250,
+        "price": 4295,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 4330,
+        "price": 4300,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 4700,
+        "price": 4800,
         "available": true
       },
       {
@@ -806,7 +806,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 16200,
+    "priceFrom": 16150,
     "condition": "new",
     "screenSizes": [
       "14\"",
@@ -834,7 +834,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 16200,
+        "price": 16150,
         "available": true
       },
       {
@@ -843,7 +843,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 16440,
+        "price": 16400,
         "available": true
       },
       {
@@ -852,7 +852,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 20000,
+        "price": 19900,
         "available": true
       },
       {
@@ -879,7 +879,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 18200,
+        "price": 18300,
         "available": true
       }
     ],
@@ -899,7 +899,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 25300,
+    "priceFrom": 25000,
     "condition": "new",
     "screenSizes": [
       "14\"",
@@ -926,7 +926,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 25300,
+        "price": 25000,
         "available": true
       },
       {
@@ -935,7 +935,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "2TB",
         "color": "Silver",
-        "price": 25300,
+        "price": 25000,
         "available": true
       },
       {
@@ -944,7 +944,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 28400,
+        "price": 27800,
         "available": true
       },
       {
@@ -953,7 +953,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "2TB",
         "color": "Silver",
-        "price": 28950,
+        "price": 27800,
         "available": true
       },
       {
@@ -984,7 +984,7 @@ export const products: Product[] = [
       "Silver": "/images/products/mac/macbook-air-silver.png",
       "Sky Blue": "/images/products/mac/macbook-air-spacegray.png"
     },
-    "priceFrom": 9600,
+    "priceFrom": 9649,
     "condition": "new",
     "screenSizes": [
       "13\"",
@@ -1010,7 +1010,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 9600,
+        "price": 9700,
         "available": true
       },
       {
@@ -1018,7 +1018,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Sky Blue",
-        "price": 9600,
+        "price": 9649,
         "available": true
       },
       {
@@ -1034,7 +1034,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 9900,
+        "price": 9790,
         "available": true
       },
       {
@@ -1042,7 +1042,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Sky Blue",
-        "price": 10880,
+        "price": 10480,
         "available": true
       },
       {
@@ -1050,7 +1050,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Midnight",
-        "price": 11199,
+        "price": 10600,
         "available": true
       },
       {
@@ -1058,7 +1058,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 10800,
+        "price": 10480,
         "available": true
       }
     ],
@@ -1112,7 +1112,7 @@ export const products: Product[] = [
         "ram": "8GB",
         "storage": "256GB",
         "color": "Blush",
-        "price": 5700,
+        "price": 5729.99,
         "available": true
       },
       {
@@ -1128,7 +1128,7 @@ export const products: Product[] = [
         "ram": "8GB",
         "storage": "256GB",
         "color": "Silver",
-        "price": 5900,
+        "price": 5880,
         "available": true
       },
       {
@@ -1144,7 +1144,7 @@ export const products: Product[] = [
         "ram": "8GB",
         "storage": "512GB",
         "color": "Blush",
-        "price": 6450,
+        "price": 6400,
         "available": true
       },
       {
@@ -1152,7 +1152,7 @@ export const products: Product[] = [
         "ram": "8GB",
         "storage": "512GB",
         "color": "Indigo",
-        "price": 6300,
+        "price": 6270,
         "available": true
       },
       {
@@ -1160,7 +1160,7 @@ export const products: Product[] = [
         "ram": "8GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6300,
+        "price": 6400,
         "available": true
       }
     ],
@@ -1176,7 +1176,7 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Design Ultracompacto • Chip M4",
     "image": "/images/products/mac/mac-mini-m4-clean.png",
-    "priceFrom": 6650,
+    "priceFrom": 6850,
     "condition": "new",
     "chips": [
       "M4"
@@ -1198,7 +1198,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Silver",
-        "price": 6650,
+        "price": 6870,
         "available": true
       },
       {
@@ -1206,7 +1206,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6950,
+        "price": 6850,
         "available": true
       },
       {
@@ -1214,7 +1214,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6950,
+        "price": 6850,
         "available": true
       }
     ],
@@ -1229,7 +1229,7 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Design Ultracompacto • Chip Apple M4 Pro",
     "image": "/images/products/mac/mac-mini-m4-clean.png",
-    "priceFrom": 12780,
+    "priceFrom": 12400,
     "condition": "new",
     "chips": [
       "M4 Pro"
@@ -1249,7 +1249,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 12780,
+        "price": 12400,
         "available": true
       }
     ],
@@ -1418,7 +1418,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Space Black",
-        "price": 7700,
+        "price": 7650,
         "available": true
       },
       {
@@ -1450,7 +1450,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "512GB",
         "color": "Space Black",
-        "price": 9500,
+        "price": 9450,
         "available": true
       },
       {
@@ -1554,7 +1554,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Silver",
-        "price": 8600,
+        "price": 8550,
         "available": true
       },
       {
@@ -1688,7 +1688,7 @@ export const products: Product[] = [
       "Purple": "/images/products/ipad/ipad-11-pink.png",
       "Starlight": "/images/products/ipad/ipad-11-silver.png"
     },
-    "priceFrom": 3950,
+    "priceFrom": 3930,
     "condition": "new",
     "screenSizes": [
       "8.3\""
@@ -1712,19 +1712,19 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 4400,
+        "price": 4500,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 3950,
+        "price": 3930,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Purple",
-        "price": 4400,
+        "price": 4350,
         "available": true
       },
       {
@@ -1736,25 +1736,25 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Space Gray",
-        "price": 4849,
+        "price": 4820,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Blue",
-        "price": 4800,
+        "price": 4780,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Purple",
-        "price": 4800,
+        "price": 4780,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Starlight",
-        "price": 4849,
+        "price": 4820,
         "available": true
       },
       {
@@ -1816,25 +1816,25 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 3180,
+        "price": 3170,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 3150,
+        "price": 3180,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Yellow",
-        "price": 3199,
+        "price": 3150,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Silver",
-        "price": 3230,
+        "price": 3240,
         "available": true
       },
       {
@@ -1846,7 +1846,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Pink",
-        "price": 3850,
+        "price": 3899,
         "available": true
       },
       {
@@ -2059,25 +2059,25 @@ export const products: Product[] = [
       {
         "size": "46mm",
         "color": "Space Gray",
-        "price": 2670,
+        "price": 2650,
         "available": true
       },
       {
         "size": "46mm",
         "color": "Rose Gold",
-        "price": 2599.99,
+        "price": 2590,
         "available": true
       },
       {
         "size": "46mm",
         "color": "Silver",
-        "price": 2690,
+        "price": 2660,
         "available": true
       },
       {
         "size": "46mm",
         "color": "Jet Black",
-        "price": 2685,
+        "price": 2680,
         "available": true
       }
     ],
@@ -2116,7 +2116,7 @@ export const products: Product[] = [
       {
         "size": "49mm",
         "color": "Natural Titanium",
-        "price": 4930,
+        "price": 4850,
         "available": true
       }
     ],
@@ -2136,7 +2136,7 @@ export const products: Product[] = [
       "Midnight": "/images/products/watch/apple-watch-se-midnight.png",
       "Starlight": "/images/products/watch/apple-watch-se-starlight.png"
     },
-    "priceFrom": 1945,
+    "priceFrom": 1949,
     "condition": "new",
     "sizes": [
       "40mm",
@@ -2150,25 +2150,25 @@ export const products: Product[] = [
       {
         "size": "40mm",
         "color": "Midnight",
-        "price": 1945,
+        "price": 1949,
         "available": true
       },
       {
         "size": "40mm",
         "color": "Starlight",
-        "price": 2000,
+        "price": 1990,
         "available": true
       },
       {
         "size": "44mm",
         "color": "Midnight",
-        "price": 2100,
+        "price": 2090,
         "available": true
       },
       {
         "size": "44mm",
         "color": "Starlight",
-        "price": 2100,
+        "price": 2150,
         "available": true
       }
     ],
@@ -2183,7 +2183,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/airpods/airpods-5.png",
-    "priceFrom": 1650,
+    "priceFrom": 1730,
     "condition": "new",
     "availability": "available",
     "description": "Nova engenharia acústica com graves profundos e agudos cristalinos, Áudio Espacial Personalizado com rastreamento dinâmico e cancelamento ativo de ruído.",
@@ -2198,7 +2198,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/airpods/airpods-4.png",
-    "priceFrom": 1095,
+    "priceFrom": 1090,
     "condition": "new",
     "description": "Áudio Espacial Personalizado com rastreamento dinâmico da cabeça, estojo de recarga USB-C e até 30 horas de áudio.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2211,7 +2211,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/airpods/airpods-4-anc.png",
-    "priceFrom": 1379,
+    "priceFrom": 1350,
     "condition": "new",
     "description": "Cancelamento Ativo de Ruído de última geração, Modo Ambiente, Áudio Adaptativo e estojo com alto-falante integrado para o recurso Buscar.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2224,7 +2224,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods Pro",
     "image": "/images/products/airpods/airpods-pro-3.png",
-    "priceFrom": 1680,
+    "priceFrom": 1679,
     "condition": "new",
     "description": "Cancelamento de ruído profissional avançado, isolamento acústico aprimorado com pontas de silicone e estojo MagSafe USB-C.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2244,7 +2244,7 @@ export const products: Product[] = [
       "Purple": "/images/products/airpods/airpods-max-purple.png",
       "Orange": "/images/products/airpods/airpods-max-orange.png"
     },
-    "priceFrom": 3200,
+    "priceFrom": 2850,
     "condition": "new",
     "colors": [
       "Purple",
@@ -2256,27 +2256,27 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Purple",
-        "price": 3230,
+        "price": 3180,
         "available": true
       },
       {
         "color": "Midnight",
-        "price": 3299,
+        "price": 2850,
         "available": true
       },
       {
         "color": "Orange",
-        "price": 3230,
+        "price": 3050,
         "available": true
       },
       {
         "color": "Blue",
-        "price": 3200,
+        "price": 2850,
         "available": true
       },
       {
         "color": "Starlight",
-        "price": 3230,
+        "price": 3100,
         "available": true
       }
     ],
@@ -2372,7 +2372,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-2.png",
-    "priceFrom": 575,
+    "priceFrom": 600,
     "condition": "new",
     "description": "Precisão absoluta com fixação e recarga magnética na lateral do iPad, sensível à inclinação e pressão.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2385,7 +2385,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-usbc.png",
-    "priceFrom": 575,
+    "priceFrom": 570,
     "condition": "new",
     "description": "Emparelhamento e recarga prática via porta USB-C retrátil, fixação magnética e precisão de pixel perfeito.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2425,7 +2425,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "AirTag",
     "image": "/images/products/accessories/airtag-1pack.png",
-    "priceFrom": 300,
+    "priceFrom": 295,
     "condition": "new",
     "description": "Rastreie suas chaves, carteira, mala e pertences com máxima precisão pelo app Buscar.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2439,7 +2439,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "AirTag",
     "image": "/images/products/accessories/airtag-4pack.png",
-    "priceFrom": 980,
+    "priceFrom": 950,
     "condition": "new",
     "description": "Pacote com 4 unidades para proteger todos os seus itens mais importantes com a rede Buscar da Apple.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2452,7 +2452,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 16 Pro Max",
     "image": "/images/products/iphone/iphone-16-generic.png",
-    "priceFrom": 7050,
+    "priceFrom": 7000,
     "condition": "new",
     "availability": "available",
     "storage": [
@@ -2470,7 +2470,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Titânio Natural",
-        "price": 7150,
+        "price": 7100,
         "available": true
       },
       {
@@ -2482,19 +2482,19 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "White Titanium",
-        "price": 7050,
+        "price": 7000,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Desert Titanium",
-        "price": 7050,
+        "price": 7000,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Titânio Natural",
-        "price": 7650,
+        "price": 7600,
         "available": true
       },
       {
@@ -2512,7 +2512,7 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Desert Titanium",
-        "price": 7650,
+        "price": 7600,
         "available": true
       },
       {
@@ -2552,7 +2552,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 16 Plus",
     "image": "/images/products/iphone/iphone-16-ultramarine.png",
-    "priceFrom": 5399,
+    "priceFrom": 5350,
     "condition": "new",
     "availability": "available",
     "storage": [
@@ -2571,7 +2571,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Ultramarine",
-        "price": 5400,
+        "price": 5350,
         "available": true
       },
       {
@@ -2641,7 +2641,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 16e",
     "image": "/images/products/iphone/iphone-16e.png",
-    "priceFrom": 3900,
+    "priceFrom": 3800,
     "condition": "new",
     "availability": "available",
     "storage": [
@@ -2662,13 +2662,13 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 4070,
+        "price": 4050,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "White",
-        "price": 3900,
+        "price": 3800,
         "available": true
       },
       {
@@ -2719,6 +2719,14 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Space Gray",
+        "price": 4900,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Blue",
         "price": 4850,
         "available": true
       },
@@ -2726,16 +2734,8 @@ export const products: Product[] = [
         "screenSize": "11\"",
         "chip": "Wi-Fi",
         "storage": "128GB",
-        "color": "Blue",
-        "price": 4900,
-        "available": true
-      },
-      {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi",
-        "storage": "128GB",
         "color": "Purple",
-        "price": 4900,
+        "price": 4890,
         "available": true
       },
       {
@@ -2743,7 +2743,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Starlight",
-        "price": 5049,
+        "price": 4950,
         "available": true
       },
       {
@@ -2751,7 +2751,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Space Gray",
-        "price": 5950,
+        "price": 5750,
         "available": true
       },
       {
@@ -2759,7 +2759,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Blue",
-        "price": 5350,
+        "price": 5600,
         "available": true
       },
       {
@@ -2767,7 +2767,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Purple",
-        "price": 5950,
+        "price": 5800,
         "available": true
       },
       {
@@ -2807,7 +2807,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Starlight",
-        "price": 5850,
+        "price": 6300,
         "available": true
       },
       {
@@ -2823,7 +2823,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Blue",
-        "price": 6200,
+        "price": 6300,
         "available": true
       },
       {
@@ -2871,7 +2871,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/airpods/airpods-pro-2.png",
-    "priceFrom": 1680,
+    "priceFrom": 1650,
     "condition": "new",
     "availability": "available",
     "description": "Cancelamento Ativo de Ruído até 2x mais potente, modo Transparência Adaptativa, Áudio Espacial com rastreamento e estojo MagSafe USB-C.",
