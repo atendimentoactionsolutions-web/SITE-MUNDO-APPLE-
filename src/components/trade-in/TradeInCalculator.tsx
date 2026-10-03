@@ -582,7 +582,6 @@ Código da Simulação: ${code}
 • Modelo: ${selectedModel?.name}
 • Armazenamento: ${selectedStorage?.displayName}
 • Cor: ${deviceColor || "Padrão"}
-• Valor de Avaliação: ${formatCurrency(tradeInValue)}
 
 ✨ PRODUTO NOVO DESEJADO:
 • Modelo: ${selectedNewProduct?.name}
@@ -656,7 +655,7 @@ Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada s
                     {selectedModel?.name}
                   </div>
                   <div className="text-xs text-emerald-700 font-bold">
-                    Vale: + {formatCurrency(tradeInValue)}
+                    Avaliação Sob Consulta
                   </div>
                 </div>
 

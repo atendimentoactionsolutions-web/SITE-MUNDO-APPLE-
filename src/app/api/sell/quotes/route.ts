@@ -154,7 +154,12 @@ export async function POST(request: NextRequest) {
       const storageName = storage ? storage.displayName : "";
       const valorFormatado = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(calculation.finalPrice);
 
-      const autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de venda/avaliação na Mundo Apple.\n\n📱 Aparelho: ${modelName} ${storageName}\n💵 Valor Estimado: ${valorFormatado} (Pagamento via PIX)\n📋 Código da Cotação: ${publicCode}\n\nNossa equipe já foi notificada e em instantes daremos continuidade ao seu atendimento!`;
+      let autoMessage = "";
+      if (answers.upgradeGoal && answers.upgradeGoal.productName) {
+        autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de Upgrade / Troca na Mundo Apple.\n\n📱 Aparelho de Entrada: ${modelName} ${storageName}\n✨ Aparelho Desejado: ${answers.upgradeGoal.productName} ${answers.upgradeGoal.storage || ""}\n📋 Código da Cotação: ${publicCode}\n\nNossa equipe já foi notificada e em instantes passaremos as condições especiais de volta para você!`;
+      } else {
+        autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de venda/avaliação na Mundo Apple.\n\n📱 Aparelho: ${modelName} ${storageName}\n💵 Valor Estimado: ${valorFormatado} (Pagamento via PIX)\n📋 Código da Cotação: ${publicCode}\n\nNossa equipe já foi notificada e em instantes daremos continuidade ao seu atendimento!`;
+      }
 
       try {
         const { sendWhatsAppMessage } = await import("@/lib/whatsapp/whatsapp-service");
