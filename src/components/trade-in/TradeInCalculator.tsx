@@ -587,17 +587,12 @@ Código da Simulação: ${code}
 ✨ PRODUTO NOVO DESEJADO:
 • Modelo: ${selectedNewProduct?.name}
 • Configuração: ${selectedNewStorage || ""} ${selectedNewColor ? `(${selectedNewColor})` : ""}
-• Valor do Novo à vista: ${formatCurrency(targetPrice)}
-
-💰 VALOR DA DIFERENÇA (A PAGAR):
-• À vista no Pix: ${formatCurrency(differenceToPay)}
-${maxInstallment ? `• Ou em até 18x de ${formatCurrency(maxInstallment.installmentValue)} no cartão` : ""}
 
 👤 MEUS DADOS:
 Nome: ${customerName.trim()}
 WhatsApp: ${customerWhatsapp.trim()}
 
-Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
+Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada simultânea em SP!`;
 
       return `https://wa.me/${storeConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
     };
@@ -673,7 +668,7 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                     {selectedNewProduct?.name}
                   </div>
                   <div className="text-xs text-[#0071E3] font-bold">
-                    Valor: {formatCurrency(targetPrice)}
+                    Sob Consulta
                   </div>
                 </div>
               </div>
@@ -681,23 +676,14 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
               {/* Difference Box */}
               <div className="p-6 rounded-3xl bg-gradient-to-br from-[#1D1D1F] to-[#2D2D30] text-white space-y-3 text-center shadow-lg">
                 <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">
-                  Valor da Diferença (Volta a Pagar):
+                  Simulação de Upgrade
                 </span>
-                <div className="text-4xl sm:text-5xl font-extrabold text-emerald-400 tracking-tight">
-                  {formatCurrency(differenceToPay)}
+                <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tracking-tight">
+                  Condições Especiais no WhatsApp
                 </div>
                 <p className="text-xs text-zinc-300">
-                  À vista no Pix com entrega e retirada no mesmo dia
+                  Consulte a melhor condição da volta com entrega e retirada rápida em SP!
                 </p>
-
-                {maxInstallment && differenceToPay > 0 && (
-                  <div className="pt-3 border-t border-white/10 flex items-center justify-center gap-2 text-xs text-zinc-300">
-                    <CreditCard className="w-4 h-4 text-[#0071E3]" />
-                    <span>
-                      Ou em até <strong className="text-white font-bold">18x de {formatCurrency(maxInstallment.installmentValue)}</strong> no cartão
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
           )}
@@ -820,7 +806,7 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                           {p.name}
                         </span>
                         <span className="text-[11px] text-[#0071E3] font-bold">
-                          {p.priceFrom > 0 ? `A partir de ${formatCurrency(p.priceFrom)}` : "Sob Consulta"}
+                          Sob Consulta
                         </span>
                       </div>
                     </div>
@@ -903,8 +889,8 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
 
             <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 flex items-center justify-between">
               <span className="text-xs text-[#0071E3] font-semibold">Valor do Novo Lacrado:</span>
-              <span className="text-lg font-bold text-[#1D1D1F]">
-                {selectedNewPrice > 0 ? formatCurrency(selectedNewPrice) : "Sob Consulta"}
+              <span className="text-sm font-bold text-[#0071E3]">
+                Sob Consulta
               </span>
             </div>
           </div>
