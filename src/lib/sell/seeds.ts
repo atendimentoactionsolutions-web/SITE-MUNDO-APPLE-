@@ -119,7 +119,7 @@ export function runSeed() {
     db.priceBooks.push(primaryPriceBook);
   }
 
-  // 5. Seed exact pricing from user specifications
+  // 5. Seed exact pricing from user specifications & complete official Apple storages
   const exactPrices: { modelSlug: string; storageDisplayName: string; basePrice: number }[] = [
     // iPhone 11
     { modelSlug: "iphone-11", storageDisplayName: "64GB", basePrice: 510 },
@@ -127,13 +127,18 @@ export function runSeed() {
     { modelSlug: "iphone-11", storageDisplayName: "256GB", basePrice: 799 },
     // iPhone 11 Pro
     { modelSlug: "iphone-11-pro", storageDisplayName: "64GB", basePrice: 850 },
+    { modelSlug: "iphone-11-pro", storageDisplayName: "256GB", basePrice: 1050 },
+    { modelSlug: "iphone-11-pro", storageDisplayName: "512GB", basePrice: 1150 },
     // iPhone 11 Pro Max
-    { modelSlug: "iphone-11-pro-max", storageDisplayName: "128GB", basePrice: 1145 },
+    { modelSlug: "iphone-11-pro-max", storageDisplayName: "64GB", basePrice: 950 },
+    { modelSlug: "iphone-11-pro-max", storageDisplayName: "256GB", basePrice: 1250 },
+    { modelSlug: "iphone-11-pro-max", storageDisplayName: "512GB", basePrice: 1350 },
     // iPhone 12
     { modelSlug: "iphone-12", storageDisplayName: "64GB", basePrice: 720 },
     { modelSlug: "iphone-12", storageDisplayName: "128GB", basePrice: 830 },
     { modelSlug: "iphone-12", storageDisplayName: "256GB", basePrice: 999 },
     // iPhone 12 mini
+    { modelSlug: "iphone-12-mini", storageDisplayName: "64GB", basePrice: 580 },
     { modelSlug: "iphone-12-mini", storageDisplayName: "128GB", basePrice: 650 },
     { modelSlug: "iphone-12-mini", storageDisplayName: "256GB", basePrice: 699 },
     // iPhone 12 Pro
@@ -143,27 +148,33 @@ export function runSeed() {
     // iPhone 12 Pro Max
     { modelSlug: "iphone-12-pro-max", storageDisplayName: "128GB", basePrice: 1360 },
     { modelSlug: "iphone-12-pro-max", storageDisplayName: "256GB", basePrice: 1550 },
+    { modelSlug: "iphone-12-pro-max", storageDisplayName: "512GB", basePrice: 1680 },
     // iPhone 13
     { modelSlug: "iphone-13", storageDisplayName: "128GB", basePrice: 1050 },
     { modelSlug: "iphone-13", storageDisplayName: "256GB", basePrice: 1299 },
+    { modelSlug: "iphone-13", storageDisplayName: "512GB", basePrice: 1450 },
     // iPhone 13 mini
     { modelSlug: "iphone-13-mini", storageDisplayName: "128GB", basePrice: 850 },
+    { modelSlug: "iphone-13-mini", storageDisplayName: "256GB", basePrice: 980 },
+    { modelSlug: "iphone-13-mini", storageDisplayName: "512GB", basePrice: 1120 },
     // iPhone 13 Pro
     { modelSlug: "iphone-13-pro", storageDisplayName: "128GB", basePrice: 1400 },
     { modelSlug: "iphone-13-pro", storageDisplayName: "256GB", basePrice: 1600 },
     { modelSlug: "iphone-13-pro", storageDisplayName: "512GB", basePrice: 2000 },
-    { modelSlug: "iphone-13-pro", storageDisplayName: "1TB", basePrice: 1950 },
+    { modelSlug: "iphone-13-pro", storageDisplayName: "1TB", basePrice: 2150 },
     // iPhone 13 Pro Max
     { modelSlug: "iphone-13-pro-max", storageDisplayName: "128GB", basePrice: 1880 },
-    { modelSlug: "iphone-13-pro-max", storageDisplayName: "256GB", basePrice: 1600 },
+    { modelSlug: "iphone-13-pro-max", storageDisplayName: "256GB", basePrice: 2100 },
     { modelSlug: "iphone-13-pro-max", storageDisplayName: "512GB", basePrice: 2400 },
-    { modelSlug: "iphone-13-pro-max", storageDisplayName: "1TB", basePrice: 2300 },
+    { modelSlug: "iphone-13-pro-max", storageDisplayName: "1TB", basePrice: 2550 },
     // iPhone 14
     { modelSlug: "iphone-14", storageDisplayName: "128GB", basePrice: 1230 },
     { modelSlug: "iphone-14", storageDisplayName: "256GB", basePrice: 1450 },
+    { modelSlug: "iphone-14", storageDisplayName: "512GB", basePrice: 1680 },
     // iPhone 14 Plus
     { modelSlug: "iphone-14-plus", storageDisplayName: "128GB", basePrice: 1400 },
     { modelSlug: "iphone-14-plus", storageDisplayName: "256GB", basePrice: 1600 },
+    { modelSlug: "iphone-14-plus", storageDisplayName: "512GB", basePrice: 1800 },
     // iPhone 14 Pro
     { modelSlug: "iphone-14-pro", storageDisplayName: "128GB", basePrice: 2050 },
     { modelSlug: "iphone-14-pro", storageDisplayName: "256GB", basePrice: 2100 },
@@ -186,6 +197,7 @@ export function runSeed() {
     { modelSlug: "iphone-15-pro", storageDisplayName: "128GB", basePrice: 2450 },
     { modelSlug: "iphone-15-pro", storageDisplayName: "256GB", basePrice: 2745 },
     { modelSlug: "iphone-15-pro", storageDisplayName: "512GB", basePrice: 3000 },
+    { modelSlug: "iphone-15-pro", storageDisplayName: "1TB", basePrice: 3250 },
     // iPhone 15 Pro Max
     { modelSlug: "iphone-15-pro-max", storageDisplayName: "256GB", basePrice: 3000 },
     { modelSlug: "iphone-15-pro-max", storageDisplayName: "512GB", basePrice: 3390 },
@@ -196,26 +208,30 @@ export function runSeed() {
     { modelSlug: "iphone-16", storageDisplayName: "512GB", basePrice: 3450 },
     // iPhone 16e
     { modelSlug: "iphone-16e", storageDisplayName: "128GB", basePrice: 1890 },
+    { modelSlug: "iphone-16e", storageDisplayName: "256GB", basePrice: 2150 },
     // iPhone 16 Plus
     { modelSlug: "iphone-16-plus", storageDisplayName: "128GB", basePrice: 2950 },
     { modelSlug: "iphone-16-plus", storageDisplayName: "256GB", basePrice: 3450 },
+    { modelSlug: "iphone-16-plus", storageDisplayName: "512GB", basePrice: 3750 },
     // iPhone 16 Pro
     { modelSlug: "iphone-16-pro", storageDisplayName: "128GB", basePrice: 3100 },
     { modelSlug: "iphone-16-pro", storageDisplayName: "256GB", basePrice: 3700 },
     { modelSlug: "iphone-16-pro", storageDisplayName: "512GB", basePrice: 3920 },
     { modelSlug: "iphone-16-pro", storageDisplayName: "1TB", basePrice: 4000 },
     // iPhone 16 Pro Max
-    { modelSlug: "iphone-16-pro-max", storageDisplayName: "128GB", basePrice: 4250 },
     { modelSlug: "iphone-16-pro-max", storageDisplayName: "256GB", basePrice: 3950 },
     { modelSlug: "iphone-16-pro-max", storageDisplayName: "512GB", basePrice: 4480 },
-    { modelSlug: "iphone-16-pro-max", storageDisplayName: "1TB", basePrice: 4150 },
+    { modelSlug: "iphone-16-pro-max", storageDisplayName: "1TB", basePrice: 4800 },
     // iPhone 17
     { modelSlug: "iphone-17", storageDisplayName: "256GB", basePrice: 3600 },
+    { modelSlug: "iphone-17", storageDisplayName: "512GB", basePrice: 4100 },
     // iPhone 17 Air
     { modelSlug: "iphone-17-air", storageDisplayName: "256GB", basePrice: 4200 },
+    { modelSlug: "iphone-17-air", storageDisplayName: "512GB", basePrice: 4750 },
     // iPhone 17 Pro
     { modelSlug: "iphone-17-pro", storageDisplayName: "256GB", basePrice: 5150 },
     { modelSlug: "iphone-17-pro", storageDisplayName: "512GB", basePrice: 6150 },
+    { modelSlug: "iphone-17-pro", storageDisplayName: "1TB", basePrice: 6900 },
     // iPhone 17 Pro Max
     { modelSlug: "iphone-17-pro-max", storageDisplayName: "256GB", basePrice: 5780 },
     { modelSlug: "iphone-17-pro-max", storageDisplayName: "512GB", basePrice: 6550 },
