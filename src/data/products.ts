@@ -1694,7 +1694,6 @@ export const products: Product[] = [
       "8.3\""
     ],
     "chips": [
-      "A17 Pro",
       "Wi-Fi"
     ],
     "storage": [
