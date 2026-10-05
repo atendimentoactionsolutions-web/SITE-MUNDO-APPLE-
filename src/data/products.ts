@@ -1914,9 +1914,9 @@ export const products: Product[] = [
     "category": "watch",
     "subcategory": "Apple Watch Series",
     "image": "/images/products/watch/apple-watch-s12-v2.png",
-    "priceFrom": 3200,
+    "priceFrom": 3050,
     "condition": "new",
-    "availability": "pre_order",
+    "availability": "available",
     "sizes": [
       "42mm",
       "46mm"
