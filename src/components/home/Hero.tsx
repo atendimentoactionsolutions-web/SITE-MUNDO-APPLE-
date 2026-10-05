@@ -21,11 +21,11 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-4 pt-1 w-full max-w-xl">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-1 w-full max-w-2xl">
             {/* Ver Catálogo (Primary Apple Blue) */}
             <a
               href="#catalogo"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 sm:py-4 bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-sm sm:text-base rounded-full shadow-sm hover:shadow active:scale-95 transition-all duration-200 group tracking-tight"
+              className="w-full sm:w-auto h-12 sm:h-13 inline-flex items-center justify-center gap-2 px-6 sm:px-8 bg-[#0071E3] hover:bg-[#0077ED] text-white font-semibold text-sm sm:text-base rounded-full shadow-sm hover:shadow active:scale-95 transition-all duration-200 group tracking-tight whitespace-nowrap"
             >
               <span>Explorar Catálogo</span>
               <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
@@ -34,17 +34,17 @@ export const Hero: React.FC = () => {
             {/* Vender meu Produto Apple */}
             <Link
               href="/vender"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3 sm:px-7 sm:py-4 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-xs sm:text-sm md:text-base rounded-full border border-[#D2D2D7] shadow-2xs active:scale-95 transition-all duration-200 tracking-tight whitespace-nowrap"
+              className="w-full sm:w-auto h-12 sm:h-13 inline-flex items-center justify-center px-6 sm:px-7 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-sm sm:text-base rounded-full border border-[#D2D2D7] shadow-2xs hover:border-[#86868B] active:scale-95 transition-all duration-200 tracking-tight whitespace-nowrap"
             >
               <span>Vender meu Produto Apple</span>
             </Link>
 
-            {/* Simular Troca */}
+            {/* Simular Upgrade */}
             <Link
               href="/troca"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-3 sm:px-7 sm:py-4 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-xs sm:text-sm md:text-base rounded-full border border-[#D2D2D7] shadow-2xs active:scale-95 transition-all duration-200 tracking-tight whitespace-nowrap"
+              className="w-full sm:w-auto h-12 sm:h-13 inline-flex items-center justify-center gap-2 px-6 sm:px-7 bg-white hover:bg-[#F5F5F7] text-[#1D1D1F] font-semibold text-sm sm:text-base rounded-full border border-[#D2D2D7] shadow-2xs hover:border-[#86868B] active:scale-95 transition-all duration-200 tracking-tight whitespace-nowrap"
             >
-              <RefreshCw className="w-3.5 h-3.5 text-[#0071E3]" />
+              <RefreshCw className="w-4 h-4 text-[#0071E3]" />
               <span>Simular Upgrade</span>
             </Link>
           </div>
