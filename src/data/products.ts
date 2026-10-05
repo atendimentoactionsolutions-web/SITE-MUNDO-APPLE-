@@ -1876,28 +1876,28 @@ export const products: Product[] = [
       "Titânio Natural": "/images/products/watch/apple-watch-ultra-natural.png",
       "Titânio Preto": "/images/products/watch/apple-watch-ultra-black.png"
     },
-    "priceFrom": 0,
+    "priceFrom": 5400,
     "condition": "new",
-    "availability": "pre_order",
+    "availability": "available",
     "sizes": [
       "49mm"
     ],
     "colors": [
-      "Titânio Natural",
-      "Titânio Preto"
+      "Titânio Preto",
+      "Titânio Natural"
     ],
     "variants": [
       {
         "size": "49mm",
         "storage": "",
-        "color": "Titânio Natural",
-        "price": 0,
+        "color": "Titânio Preto",
+        "price": 5400,
         "available": true
       },
       {
         "size": "49mm",
         "storage": "",
-        "color": "Titânio Preto",
+        "color": "Titânio Natural",
         "price": 0,
         "available": true
       }
