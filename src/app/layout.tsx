@@ -5,6 +5,8 @@ import { Footer } from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { storeConfig } from "@/data/storeConfig";
 
+export const revalidate = 60; // Revalidação a cada 60 segundos com o buscador em tempo real
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://mundoappledelivery.com"),
   title: {

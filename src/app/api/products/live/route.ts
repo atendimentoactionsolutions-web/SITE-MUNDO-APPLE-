@@ -3,7 +3,7 @@ import { products } from "@/data/products";
 import { getLiveEnrichedProducts } from "@/lib/pricing/live-pricing";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 300; // 5 minutes
+export const revalidate = 0; // Real-time fetch without stale ISR cache
 
 export async function GET() {
   try {

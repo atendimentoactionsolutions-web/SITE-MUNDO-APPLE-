@@ -189,10 +189,82 @@ export function normalizeSize(size?: string): string {
   return size.trim().toUpperCase().replace(/\s+/g, "");
 }
 
-// In-memory cache for fast, resilient serving (10 minutes)
+// In-memory cache for fast, resilient serving (60 seconds = near real time)
 let cachedEnrichedProducts: Product[] | null = null;
 let lastFetchTimestamp = 0;
-const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes cache
+const CACHE_TTL_MS = 60 * 1000;
+const BUSCADOR_URL = "https://mundo-apple-buscador.onrender.com";
+
+// ─── Margens ao vivo do Buscador (mesma regra da "Loja Física") ───
+export interface BuscadorMargins {
+  categories: Record<string, number>;
+  products: Record<string, number>;
+}
+
+const DEFAULT_MARGINS: BuscadorMargins = {
+  categories: {
+    SEMINOVOS: 600, IPH18: 1300, IPH: 750, MCB_AIR: 1000, MCB_PRO: 1300, MCB_MAX: 2500,
+    IPAD: 500, RLG: 500, IMAC: 1500, PODS: 400, ACSS: 100, FOLIO: 400, PENCIL: 200,
+    AIRTAG_UNIT: 100, AIRTAG_PACK: 350, MAGIC_KEY: 400, MAGIC_MOUSE: 430, APPLE_TV: 500,
+  },
+  products: {},
+};
+
+let lastGoodMargins: BuscadorMargins = DEFAULT_MARGINS;
+
+export async function fetchBuscadorMargins(): Promise<BuscadorMargins> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+  try {
+    const res = await fetch(`${BUSCADOR_URL}/api/margins`, {
+      signal: controller.signal,
+      next: { revalidate: 60 },
+    });
+    clearTimeout(timeoutId);
+    if (!res.ok) return lastGoodMargins;
+    const data = await res.json();
+    if (data?.success && data.margins?.categories) {
+      lastGoodMargins = {
+        categories: { ...DEFAULT_MARGINS.categories, ...data.margins.categories },
+        products: data.margins.products || {},
+      };
+    }
+  } catch (err) {
+    clearTimeout(timeoutId);
+    console.warn("[LivePricing] Falha ao buscar margens, usando últimas conhecidas:", err);
+  }
+  return lastGoodMargins;
+}
+
+/** Porte fiel de getProductRetailPrice() do buscador (margem para um item novo). */
+export function getRetailMargin(item: RenderSupplierItem, margins: BuscadorMargins): number {
+  const n = (item.name || "").trim().toUpperCase();
+  const c = (item.category || "").trim().toUpperCase();
+  const m = margins.categories;
+
+  const custom = margins.products?.[n];
+  if (custom !== undefined) return Number(custom) || 0;
+  if (n.includes("IPHONE 18") || n.includes("IPH 18")) return m.IPH18 ?? 1300;
+
+  if (n.includes("FOLIO") || n.includes("SMART FOLIO")) return m.FOLIO ?? 400;
+  if (n.includes("PENCIL")) return m.PENCIL ?? 200;
+  if (n.includes("AIRTAG") && ["4 PACK", "4-PACK", "4PACK", "PACOTE", "4PK", "4 UN", "4UN"].some((k) => n.includes(k)))
+    return m.AIRTAG_PACK ?? 350;
+  if (n.includes("AIRTAG")) return m.AIRTAG_UNIT ?? 100;
+  if (["MAGIC KEY", "MAGIC KEYBOARD", "SMART KEYBOARD", "SMART KEY"].some((k) => n.includes(k))) return m.MAGIC_KEY ?? 400;
+  if (n.includes("MAGIC MOUSE") || (n.includes("MOUSE") && (c === "ACSS" || n.includes("APPLE")))) return m.MAGIC_MOUSE ?? 430;
+  if (["APPLE TV", "APPLETV", "TV 4K", "TV HD"].some((k) => n.includes(k))) return m.APPLE_TV ?? 500;
+  if (c === "IPH" || n.includes("IPHONE")) return m.IPH ?? 750;
+  if ((n.includes("MACBOOK") || c === "MCB") && n.includes("MAX")) return m.MCB_MAX ?? 2500;
+  if (n.includes("MACBOOK AIR") || n.includes("AIR M") || (c === "MCB" && n.includes("AIR"))) return m.MCB_AIR ?? 1000;
+  if (c === "MCB" || ["MACBOOK", "MAC MINI", "MAC STUDIO", "MAC PRO"].some((k) => n.includes(k))) return m.MCB_PRO ?? 1300;
+  if (c === "IPAD" || c === "IPD" || n.includes("IPAD")) return m.IPAD ?? 500;
+  if (c === "RLG" || n.includes("WATCH") || n.includes("SERIES") || n.includes("ULTRA")) return m.RLG ?? 500;
+  if (c === "IMAC" || n.includes("IMAC")) return m.IMAC ?? 1500;
+  if (c === "PODS" || n.includes("AIRPOD")) return m.PODS ?? 400;
+  if (c === "ACSS" || n.includes("MAGIC")) return m.ACSS ?? 100;
+  return m.DEFAULT ?? 500;
+}
 
 /**
  * Fetch products from the Render Buscador API with timeout protection
@@ -202,9 +274,9 @@ export async function fetchRenderSupplierProducts(): Promise<RenderSupplierItem[
   const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
 
   try {
-    const res = await fetch("https://mundo-apple-buscador.onrender.com/api/products?limit=10000", {
+    const res = await fetch(`${BUSCADOR_URL}/api/products?limit=10000`, {
       signal: controller.signal,
-      next: { revalidate: 600 }, // Next.js ISR cache: 10 minutes (600s)
+      next: { revalidate: 60 }, // atualização a cada 60s
     });
 
     clearTimeout(timeoutId);
@@ -232,7 +304,8 @@ export async function fetchRenderSupplierProducts(): Promise<RenderSupplierItem[
 function findBestSupplierPrice(
   product: Product,
   variant: ProductVariant | undefined,
-  supplierItems: RenderSupplierItem[]
+  supplierItems: RenderSupplierItem[],
+  margins: BuscadorMargins = lastGoodMargins
 ): number | null {
   const prodSlug = product.slug.toLowerCase();
   const prodCat = product.category.toLowerCase();
@@ -471,63 +544,51 @@ function findBestSupplierPrice(
 
   if (!candidates.length) return null;
 
-  // Return lowest supplier price among matching items
-  const lowestPrice = Math.min(...candidates.map((c) => c.price));
-  return lowestPrice > 0 ? lowestPrice : null;
+  // Preço de venda = menor oferta do fornecedor + margem do buscador (igual à Loja Física)
+  const retailPrices = candidates
+    .filter((c) => c.price > 0)
+    .map((c) => c.price + getRetailMargin(c, margins));
+  if (!retailPrices.length) return null;
+  return Math.round(Math.min(...retailPrices));
 }
 
 /**
- * Enriches the base products list with live supplier prices + profit margins.
+ * Enriches the base products list with live supplier prices + buscador margins.
  * Falls back safely to base prices if no supplier price is found.
  */
 export function applyLivePrices(
   baseProducts: Product[],
-  supplierItems: RenderSupplierItem[]
+  supplierItems: RenderSupplierItem[],
+  margins: BuscadorMargins = lastGoodMargins
 ): Product[] {
   if (!supplierItems || supplierItems.length === 0) {
     return baseProducts;
   }
 
   return baseProducts.map((product) => {
-    const margin = getProductMargin(product);
-
-    // If no margin rule or product is seminovo / accessory, preserve static data
-    if (margin === null || margin === undefined || product.condition === "used") {
+    // Seminovos mantêm dados estáticos
+    if (product.condition === "used") {
       return product;
     }
 
-    // Clone product
     const updatedProduct: Product = { ...product };
 
-    // Update variants if present
     if (product.variants && product.variants.length > 0) {
       const updatedVariants = product.variants.map((variant) => {
-        const supplierPrice = findBestSupplierPrice(product, variant, supplierItems);
-        if (supplierPrice !== null && supplierPrice > 0) {
-          const finalPrice = Math.round(supplierPrice + margin);
-          return {
-            ...variant,
-            price: finalPrice,
-          };
-        }
-        return variant;
+        const retail = findBestSupplierPrice(product, variant, supplierItems, margins);
+        return retail !== null && retail > 0 ? { ...variant, price: retail } : variant;
       });
 
       updatedProduct.variants = updatedVariants;
 
-      // Recalculate priceFrom as lowest variant price > 0
-      const activePrices = updatedVariants
-        .map((v) => v.price)
-        .filter((p) => p > 0);
-
+      const activePrices = updatedVariants.map((v) => v.price).filter((p) => p > 0);
       if (activePrices.length > 0) {
         updatedProduct.priceFrom = Math.min(...activePrices);
       }
     } else {
-      // Product without explicit variants (e.g. single AirPods 4)
-      const supplierPrice = findBestSupplierPrice(product, undefined, supplierItems);
-      if (supplierPrice !== null && supplierPrice > 0) {
-        updatedProduct.priceFrom = Math.round(supplierPrice + margin);
+      const retail = findBestSupplierPrice(product, undefined, supplierItems, margins);
+      if (retail !== null && retail > 0) {
+        updatedProduct.priceFrom = retail;
       }
     }
 
@@ -541,15 +602,17 @@ export function applyLivePrices(
 export async function getLiveEnrichedProducts(baseProducts: Product[]): Promise<Product[]> {
   const now = Date.now();
 
-  // Return cached result if fresh
   if (cachedEnrichedProducts && now - lastFetchTimestamp < CACHE_TTL_MS) {
     return cachedEnrichedProducts;
   }
 
   try {
-    const supplierItems = await fetchRenderSupplierProducts();
+    const [supplierItems, margins] = await Promise.all([
+      fetchRenderSupplierProducts(),
+      fetchBuscadorMargins(),
+    ]);
     if (supplierItems && supplierItems.length > 0) {
-      const enriched = applyLivePrices(baseProducts, supplierItems);
+      const enriched = applyLivePrices(baseProducts, supplierItems, margins);
       cachedEnrichedProducts = enriched;
       lastFetchTimestamp = now;
       return enriched;
@@ -558,6 +621,7 @@ export async function getLiveEnrichedProducts(baseProducts: Product[]): Promise<
     console.error("[LivePricing] Error enriching products:", err);
   }
 
-  // Fallback to previous cache or original baseProducts
   return cachedEnrichedProducts || baseProducts;
 }
+
+
