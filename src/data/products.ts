@@ -600,7 +600,7 @@ export const products: Product[] = [
     "name": "iPhone 16",
     "category": "iphone",
     "subcategory": "iPhone 16 Series",
-    "image": "/images/products/iphone/iphone-16-black.png",
+    "image": "/images/products/iphone/iphone-16-all-colors.png",
     "colorImages": {
       "Teal": "/images/products/iphone/iphone-16-teal.png",
       "Black": "/images/products/iphone/iphone-16-black.png",
