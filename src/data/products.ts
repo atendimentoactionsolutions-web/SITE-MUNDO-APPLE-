@@ -662,7 +662,7 @@ export const products: Product[] = [
     "name": "iPhone 15",
     "category": "iphone",
     "subcategory": "iPhone 15 Series",
-    "image": "/images/products/iphone/iphone-15-black.png",
+    "image": "/images/products/iphone/iphone-15-all-colors.jpg",
     "colorImages": {
       "Black": "/images/products/iphone/iphone-15-black.png",
       "Blue": "/images/products/iphone/iphone-15-blue.png",
