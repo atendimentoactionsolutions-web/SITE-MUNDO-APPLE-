@@ -2631,7 +2631,7 @@ export const products: Product[] = [
     "description": "Tela generosa de 6,7 polegadas, chip A18 com Apple Intelligence, bateria de duração excepcional e câmera Fusion de 48 MP.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": false,
-    "active": true
+    "active": false
   },
   {
     "id": "iphone-16e",
@@ -2680,7 +2680,7 @@ export const products: Product[] = [
     "description": "O novo padrão de entrada com chip potente, design elegante e suporte aos recursos essenciais da Apple.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": false,
-    "active": true
+    "active": false
   },
   {
     "id": "ipad-air-m4",
