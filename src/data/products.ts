@@ -1102,7 +1102,7 @@ export const products: Product[] = [
       "Silver": "/images/products/mac/macbook-air-silver.png",
       "Sky Blue": "/images/products/mac/macbook-air-spacegray.png"
     },
-    "priceFrom": 9800,
+    "priceFrom": 10100,
     "condition": "new",
     "screenSizes": [
       "13\"",
@@ -1127,7 +1127,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Midnight",
-        "price": 9800,
+        "price": 10100,
         "available": true
       },
       {
@@ -1135,7 +1135,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 9850,
+        "price": 10150,
         "available": true
       },
       {
@@ -1143,7 +1143,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 9900,
+        "price": 10200,
         "available": true
       },
       {
@@ -1151,7 +1151,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 10700,
+        "price": 11000,
         "available": true
       },
       {
@@ -1159,7 +1159,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Midnight",
-        "price": 10900,
+        "price": 11200,
         "available": true
       },
       {
@@ -1167,7 +1167,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 11100,
+        "price": 11400,
         "available": true
       },
       {
@@ -1175,7 +1175,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Starlight",
-        "price": 14050,
+        "price": 14350,
         "available": true
       },
       {
@@ -1183,7 +1183,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 14200,
+        "price": 14500,
         "available": true
       },
       {
@@ -1191,7 +1191,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Midnight",
-        "price": 14799,
+        "price": 15099,
         "available": true
       }
     ],
@@ -3601,7 +3601,7 @@ export const products: Product[] = [
       "Midnight": "/images/products/mac/macbook-air-midnight.png",
       "Starlight": "/images/products/mac/macbook-air-starlight.png"
     },
-    "priceFrom": 10200,
+    "priceFrom": 10500,
     "condition": "new",
     "screenSizes": [
       "15\""
@@ -3623,7 +3623,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Midnight",
-        "price": 10200,
+        "price": 10500,
         "available": true
       },
       {
@@ -3631,7 +3631,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 12300,
+        "price": 12600,
         "available": true
       }
     ],
