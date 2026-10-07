@@ -76,7 +76,7 @@ export const products: Product[] = [
       "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
-    "priceFrom": 9930,
+    "priceFrom": 9630,
     "condition": "new",
     "storage": [
       "256GB",
@@ -94,79 +94,91 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 9930,
+        "price": 9630,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 9960,
+        "price": 9630,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Glacier",
-        "price": 10140,
+        "price": 9900,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Burgundy",
-        "price": 10930,
+        "price": 10650,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Black",
-        "price": 11190,
+        "price": 10870,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Glacier",
-        "price": 11290,
+        "price": 11050,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 11700,
+        "price": 11349.9,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Burgundy",
-        "price": 12700,
+        "price": 12400,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Black",
-        "price": 15800,
+        "price": 15600,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Glacier",
-        "price": 17450,
+        "price": 15700,
         "available": true
       },
       {
-        "storage": "2TB",
-        "color": "Glacier",
-        "price": 18100,
+        "storage": "1TB",
+        "color": "Silver",
+        "price": 15700,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Burgundy",
+        "price": 17300,
         "available": true
       },
       {
         "storage": "2TB",
         "color": "Black",
-        "price": 19550,
+        "price": 17000,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Glacier",
+        "price": 17000,
         "available": true
       },
       {
         "storage": "2TB",
         "color": "Burgundy",
-        "price": 20750,
+        "price": 20550,
         "available": true
       }
     ],
@@ -188,65 +200,84 @@ export const products: Product[] = [
       "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
       "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
     },
-    "priceFrom": 8750,
+    "priceFrom": 8390,
     "condition": "new",
     "storage": [
       "256GB",
-      "512GB"
+      "512GB",
+      "1TB"
     ],
     "colors": [
       "Glacier",
-      "Black",
       "Silver",
+      "Black",
       "Burgundy"
     ],
     "variants": [
       {
         "storage": "256GB",
         "color": "Glacier",
-        "price": 8750,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Black",
-        "price": 8750,
+        "price": 8390,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 8800,
+        "price": 8400,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Black",
+        "price": 8450,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Burgundy",
-        "price": 9300,
+        "price": 9080,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Glacier",
-        "price": 10940,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Black",
-        "price": 11100,
+        "price": 10700,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Burgundy",
-        "price": 11200,
+        "price": 10850,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Black",
+        "price": 10900,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 12499,
+        "price": 11500,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Black",
+        "price": 14600,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Glacier",
+        "price": 14600,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Burgundy",
+        "price": 14800,
         "available": true
       }
     ],
@@ -262,7 +293,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-pro-max.png",
-    "priceFrom": 7520,
+    "priceFrom": 7300,
     "condition": "new",
     "storage": [
       "256GB",
@@ -279,55 +310,67 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
+        "price": 7300,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Deep Blue",
         "price": 7520,
         "available": true
       },
       {
         "storage": "256GB",
-        "color": "Deep Blue",
-        "price": 7750,
-        "available": true
-      },
-      {
-        "storage": "256GB",
         "color": "Silver",
-        "price": 7870,
+        "price": 7640,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 9040,
+        "price": 8820,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 9130,
+        "price": 8850,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Deep Blue",
-        "price": 9130,
+        "price": 8900,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Cosmic Orange",
-        "price": 10850,
+        "price": 10350,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Deep Blue",
+        "price": 10550,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Silver",
-        "price": 10949,
+        "price": 10600,
         "available": true
       },
       {
         "storage": "2TB",
         "color": "Cosmic Orange",
-        "price": 11750,
+        "price": 11400,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Silver",
+        "price": 12650,
         "available": true
       }
     ],
@@ -347,7 +390,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-pro-max.png",
-    "priceFrom": 7350,
+    "priceFrom": 7000,
     "condition": "new",
     "storage": [
       "256GB",
@@ -356,50 +399,50 @@ export const products: Product[] = [
     ],
     "colors": [
       "Cosmic Orange",
-      "Silver",
-      "Deep Blue"
+      "Deep Blue",
+      "Silver"
     ],
     "variants": [
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
-        "price": 7350,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Silver",
-        "price": 7530,
+        "price": 7000,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Deep Blue",
-        "price": 7549,
+        "price": 7250,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Silver",
+        "price": 7260,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 8750,
+        "price": 8500,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 8780,
+        "price": 8550,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Deep Blue",
-        "price": 9050,
+        "price": 8750,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Cosmic Orange",
-        "price": 9950,
+        "price": 9750,
         "available": true
       }
     ],
@@ -419,7 +462,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-air.png",
-    "priceFrom": 5995,
+    "priceFrom": 5750,
     "condition": "new",
     "storage": [
       "256GB",
@@ -427,82 +470,82 @@ export const products: Product[] = [
       "1TB"
     ],
     "colors": [
-      "Light Gold",
       "Space Black",
       "Sky Blue",
+      "Light Gold",
       "Cloud White"
     ],
     "variants": [
       {
         "storage": "256GB",
-        "color": "Light Gold",
-        "price": 5995,
-        "available": true
-      },
-      {
-        "storage": "256GB",
         "color": "Space Black",
-        "price": 5995,
+        "price": 5750,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Sky Blue",
-        "price": 5995,
+        "price": 5795,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Light Gold",
+        "price": 5795,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Cloud White",
-        "price": 6049.99,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Cloud White",
-        "price": 6500,
+        "price": 5800,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Sky Blue",
-        "price": 6500,
+        "price": 6300,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Cloud White",
+        "price": 6300,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Light Gold",
-        "price": 6900,
+        "price": 6640,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Space Black",
-        "price": 7000,
-        "available": true
-      },
-      {
-        "storage": "1TB",
-        "color": "Light Gold",
-        "price": 7800,
+        "price": 6790,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Sky Blue",
-        "price": 7800,
+        "price": 7600,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Light Gold",
+        "price": 7600,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Cloud White",
-        "price": 7900,
+        "price": 7700,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Space Black",
-        "price": 7900,
+        "price": 7700,
         "available": true
       }
     ],
@@ -523,7 +566,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-generic.png",
-    "priceFrom": 4509,
+    "priceFrom": 4240,
     "condition": "new",
     "storage": [
       "256GB",
@@ -538,37 +581,37 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "White",
-        "price": 4509,
+        "price": 4240,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Soft Pink",
-        "price": 4539,
+        "price": 4250,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 4540,
+        "price": 4300,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Soft Pink",
-        "price": 5449,
+        "price": 5249,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "White",
-        "price": 5449,
+        "price": 5249,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Black",
-        "price": 5449,
+        "price": 5249,
         "available": true
       }
     ],
@@ -588,7 +631,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-normal.png",
-    "priceFrom": 6000,
+    "priceFrom": 5800,
     "condition": "new",
     "storage": [
       "256GB"
@@ -596,39 +639,39 @@ export const products: Product[] = [
     "colors": [
       "Sage",
       "Mist Blue",
+      "White",
       "Black",
-      "Lavender",
-      "White"
+      "Lavender"
     ],
     "variants": [
       {
         "storage": "256GB",
         "color": "Sage",
-        "price": 6000,
+        "price": 5800,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Mist Blue",
-        "price": 6150,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Black",
-        "price": 6199,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Lavender",
-        "price": 6200,
+        "price": 5890,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "White",
-        "price": 6200,
+        "price": 5940,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Black",
+        "price": 5950,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Lavender",
+        "price": 5950,
         "available": true
       }
     ],
@@ -657,15 +700,15 @@ export const products: Product[] = [
       "Pink": "/images/products/iphone/iphone-16-pink.png",
       "White": "/images/products/iphone/iphone-16-white.png"
     },
-    "priceFrom": 5040,
+    "priceFrom": 4750,
     "condition": "new",
     "storage": [
       "128GB"
     ],
     "colors": [
       "Teal",
-      "Ultramarine",
       "Black",
+      "Ultramarine",
       "White",
       "Pink"
     ],
@@ -673,31 +716,31 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Teal",
-        "price": 5040,
-        "available": true
-      },
-      {
-        "storage": "128GB",
-        "color": "Ultramarine",
-        "price": 5050,
+        "price": 4750,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 5050,
+        "price": 4775,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "color": "Ultramarine",
+        "price": 4800,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "White",
-        "price": 5090,
+        "price": 4870,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 5200,
+        "price": 4940,
         "available": true
       }
     ],
@@ -719,7 +762,7 @@ export const products: Product[] = [
       "Green": "/images/products/iphone/iphone-15-black.png",
       "Yellow": "/images/products/iphone/iphone-15-black.png"
     },
-    "priceFrom": 4549,
+    "priceFrom": 4300,
     "condition": "new",
     "storage": [
       "128GB",
@@ -737,61 +780,67 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 4549,
+        "price": 4300,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 4630,
+        "price": 4350,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 5100,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Pink",
-        "price": 5250,
+        "price": 4900,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 5250,
+        "price": 5050,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Pink",
+        "price": 5050,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Blue",
+        "price": 5150,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Yellow",
-        "price": 5350,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Pink",
-        "price": 5350,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Blue",
-        "price": 5350,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Black",
-        "price": 5350,
+        "price": 4900,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Green",
-        "price": 5400,
+        "price": 5000,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Pink",
+        "price": 5000,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Blue",
+        "price": 5150,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Black",
+        "price": 5150,
         "available": true
       }
     ],
@@ -2567,7 +2616,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 16 Pro Max",
     "image": "/images/products/iphone/iphone-16-generic.png",
-    "priceFrom": 7250,
+    "priceFrom": 7050,
     "condition": "new",
     "availability": "available",
     "storage": [
@@ -2577,37 +2626,50 @@ export const products: Product[] = [
     "colors": [
       "Desert Titanium",
       "Titânio Preto",
+      "White Titanium",
       "Titânio Natural"
     ],
     "variants": [
       {
         "storage": "256GB",
         "color": "Desert Titanium",
-        "price": 7250,
+        "price": 7050,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Titânio Preto",
-        "price": 7350,
+        "price": 7050,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "White Titanium",
+        "price": 7050,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Titânio Natural",
+        "price": 7150,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Titânio Natural",
-        "price": 7800,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Titânio Preto",
-        "price": 7800,
+        "price": 7400,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Desert Titanium",
-        "price": 7800,
+        "price": 7400,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Titânio Preto",
+        "price": 7400,
         "available": true
       }
     ],
@@ -2628,68 +2690,29 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 16 Plus",
     "image": "/images/products/iphone/iphone-16-ultramarine.png",
-    "priceFrom": 5350,
+    "priceFrom": 5400,
     "condition": "new",
     "availability": "available",
     "storage": [
       "128GB",
-      "256GB",
-      "512GB"
+      "256GB"
     ],
     "colors": [
       "Ultramarine",
-      "Teal",
-      "Pink",
-      "White",
-      "Black"
+      "Black",
+      "White"
     ],
     "variants": [
       {
         "storage": "128GB",
         "color": "Ultramarine",
-        "price": 5350,
-        "available": true
-      },
-      {
-        "storage": "128GB",
-        "color": "Teal",
-        "price": 5500,
-        "available": true
-      },
-      {
-        "storage": "128GB",
-        "color": "Pink",
-        "price": 5500,
-        "available": true
-      },
-      {
-        "storage": "128GB",
-        "color": "White",
-        "price": 5450,
+        "price": 5400,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 5350,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Ultramarine",
-        "price": 6100,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Teal",
-        "price": 5850,
-        "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Pink",
-        "price": 6100,
+        "price": 5450,
         "available": true
       },
       {
@@ -2697,18 +2720,12 @@ export const products: Product[] = [
         "color": "White",
         "price": 6500,
         "available": true
-      },
-      {
-        "storage": "256GB",
-        "color": "Black",
-        "price": 6100,
-        "available": true
       }
     ],
     "description": "Tela generosa de 6,7 polegadas, chip A18 com Apple Intelligence, bateria de duração excepcional e câmera Fusion de 48 MP.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": false,
-    "active": false
+    "active": true
   },
   {
     "id": "iphone-16e",
@@ -2732,13 +2749,13 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "White",
-        "price": 4040,
+        "price": 3900,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 4040,
+        "price": 4100,
         "available": true
       },
       {
@@ -2750,14 +2767,14 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 3999,
+        "price": 4030,
         "available": true
       }
     ],
     "description": "O novo padrão de entrada com chip potente, design elegante e suporte aos recursos essenciais da Apple.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": false,
-    "active": false
+    "active": true
   },
   {
     "id": "ipad-air-m4",
@@ -4647,6 +4664,155 @@ export const products: Product[] = [
       }
     ],
     "description": "Teclado completo que não precisa de recarga nem de emparelhamento. Basta conectar via Smart Connector e começar a usar.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "iphone-16-pro",
+    "slug": "iphone-16-pro",
+    "name": "iPhone 16 Pro",
+    "category": "iphone",
+    "subcategory": "iPhone 16 Pro",
+    "image": "/images/products/iphone/iphone-16-generic.png",
+    "priceFrom": 6050,
+    "condition": "new",
+    "storage": [
+      "128GB"
+    ],
+    "colors": [
+      "White Titanium"
+    ],
+    "variants": [
+      {
+        "storage": "128GB",
+        "color": "White Titanium",
+        "price": 6050,
+        "available": true
+      }
+    ],
+    "description": "Chip A18 Pro extraordinário, estrutura em titânio grau 5 e controle de câmera intuitivo.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "iphone-15-pro-max",
+    "slug": "iphone-15-pro-max",
+    "name": "iPhone 15 Pro Max",
+    "category": "iphone",
+    "subcategory": "iPhone 15 Pro Max",
+    "image": "/images/products/iphone/iphone-16-generic.png",
+    "priceFrom": 6300,
+    "condition": "new",
+    "storage": [
+      "256GB"
+    ],
+    "colors": [
+      "Natural Titanium",
+      "Black Titanium"
+    ],
+    "variants": [
+      {
+        "storage": "256GB",
+        "color": "Natural Titanium",
+        "price": 6300,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Black Titanium",
+        "price": 6300,
+        "available": true
+      }
+    ],
+    "description": "Titânio com tela Super Retina XDR de 6,7 polegadas, chip A17 Pro e lente teleobjetiva de 5x.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "iphone-15-plus",
+    "slug": "iphone-15-plus",
+    "name": "iPhone 15 Plus",
+    "category": "iphone",
+    "subcategory": "iPhone 15 Series",
+    "image": "/images/products/iphone/iphone-15-all-colors.jpg",
+    "priceFrom": 4930,
+    "condition": "new",
+    "storage": [
+      "256GB"
+    ],
+    "colors": [
+      "Pink"
+    ],
+    "variants": [
+      {
+        "storage": "256GB",
+        "color": "Pink",
+        "price": 4930,
+        "available": true
+      }
+    ],
+    "description": "Dynamic Island, câmera principal de 48 MP e conector USB-C com bateria para o dia todo.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "iphone-14-plus",
+    "slug": "iphone-14-plus",
+    "name": "iPhone 14 Plus",
+    "category": "iphone",
+    "subcategory": "iPhone 14 Series",
+    "image": "/images/products/iphone/iphone-14-all-colors.jpg",
+    "priceFrom": 4150,
+    "condition": "new",
+    "storage": [
+      "128GB"
+    ],
+    "colors": [
+      "Midnight"
+    ],
+    "variants": [
+      {
+        "storage": "128GB",
+        "color": "Midnight",
+        "price": 4150,
+        "available": true
+      }
+    ],
+    "description": "Grande tela Super Retina XDR de 6,7 polegadas, bateria duradoura e fotos incríveis com pouca luz.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "iphone-13",
+    "slug": "iphone-13",
+    "name": "iPhone 13",
+    "category": "iphone",
+    "subcategory": "iPhone 13 Series",
+    "image": "/images/products/iphone/iphone-13-all-colors.jpg",
+    "priceFrom": 3650,
+    "condition": "new",
+    "storage": [
+      "128GB"
+    ],
+    "colors": [
+      "Midnight",
+      "Starlight"
+    ],
+    "variants": [
+      {
+        "storage": "128GB",
+        "color": "Midnight",
+        "price": 3650,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "color": "Starlight",
+        "price": 3849,
+        "available": true
+      }
+    ],
+    "description": "Chip A15 Bionic super-rápido, modo Cinema e sistema avançado de câmera dupla.",
     "warranty": "1 ano de garantia oficial Apple",
     "active": true
   }
