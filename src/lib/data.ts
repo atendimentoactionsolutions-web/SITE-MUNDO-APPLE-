@@ -16,9 +16,8 @@ export async function getProducts(options?: {
   featured?: boolean;
   searchQuery?: string;
 }): Promise<Product[]> {
-  // Use live enriched product catalog with 10-minute ISR cache
-  const liveCatalog = await getLiveEnrichedProducts(products);
-  let list = liveCatalog.filter((p) => p.active);
+  // Use products database directly without external overrides
+  let list = products.filter((p) => p.active);
 
   // Filter condition: default to "new" for storefront sales unless "all" or "used" explicitly specified
   if (options?.condition === "all") {
@@ -95,8 +94,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const liveCatalog = await getLiveEnrichedProducts(products);
-  const product = liveCatalog.find((p) => p.slug === slug && p.active);
+  const product = products.find((p) => p.slug === slug && p.active);
   return product || null;
 }
 
