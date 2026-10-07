@@ -1391,7 +1391,7 @@ export const products: Product[] = [
       "Pink": "/images/products/mac/imac-24-pink.png",
       "Silver": "/images/products/mac/imac-24-silver.png"
     },
-    "priceFrom": 13000,
+    "priceFrom": 12500,
     "condition": "new",
     "screenSizes": [
       "24\""
@@ -1409,9 +1409,9 @@ export const products: Product[] = [
       "512GB"
     ],
     "colors": [
+      "Silver",
       "Blue",
       "Green",
-      "Silver",
       "Pink"
     ],
     "variants": [
@@ -1420,8 +1420,17 @@ export const products: Product[] = [
         "chip": "2 Portas",
         "ram": "16GB",
         "storage": "256GB",
+        "color": "Silver",
+        "price": 12500,
+        "available": true
+      },
+      {
+        "screenSize": "24\"",
+        "chip": "2 Portas",
+        "ram": "16GB",
+        "storage": "256GB",
         "color": "Blue",
-        "price": 13000,
+        "price": 12500,
         "available": true
       },
       {
@@ -1430,16 +1439,34 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Green",
-        "price": 13099,
+        "price": 12599,
         "available": true
       },
       {
         "screenSize": "24\"",
         "chip": "2 Portas",
-        "ram": "16GB",
-        "storage": "256GB",
+        "ram": "24GB",
+        "storage": "512GB",
         "color": "Silver",
-        "price": 13200,
+        "price": 17900,
+        "available": true
+      },
+      {
+        "screenSize": "24\"",
+        "chip": "2 Portas",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Blue",
+        "price": 19050,
+        "available": true
+      },
+      {
+        "screenSize": "24\"",
+        "chip": "2 Portas",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Green",
+        "price": 19050,
         "available": true
       },
       {
@@ -1448,7 +1475,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Pink",
-        "price": 18490,
+        "price": 17990,
         "available": true
       },
       {
@@ -1457,16 +1484,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 18550,
-        "available": true
-      },
-      {
-        "screenSize": "24\"",
-        "chip": "4 Saídas",
-        "ram": "24GB",
-        "storage": "512GB",
-        "color": "Green",
-        "price": 19500,
+        "price": 18050,
         "available": true
       },
       {
@@ -1475,7 +1493,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 19500,
+        "price": 19000,
         "available": true
       },
       {
@@ -1484,7 +1502,16 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Blue",
-        "price": 19500,
+        "price": 19000,
+        "available": true
+      },
+      {
+        "screenSize": "24\"",
+        "chip": "4 Saídas",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Green",
+        "price": 19000,
         "available": true
       }
     ],
