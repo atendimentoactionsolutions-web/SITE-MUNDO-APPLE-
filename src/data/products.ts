@@ -2194,13 +2194,20 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/airpods/airpods-5.png",
-    "priceFrom": 1420,
+    "priceFrom": 1399.99,
     "condition": "new",
     "availability": "available",
     "description": "Nova engenharia acústica com graves profundos e agudos cristalinos, Áudio Espacial Personalizado com rastreamento dinâmico e cancelamento ativo de ruído.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 1399.99,
+        "available": true
+      }
+    ]
   },
   {
     "id": "airpods-4",
@@ -2209,11 +2216,18 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/airpods/airpods-4.png",
-    "priceFrom": 1090,
+    "priceFrom": 1050,
     "condition": "new",
     "description": "Áudio Espacial Personalizado com rastreamento dinâmico da cabeça, estojo de recarga USB-C e até 30 horas de áudio.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 1050,
+        "available": true
+      }
+    ]
   },
   {
     "id": "airpods-4-anc",
@@ -2222,11 +2236,18 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/airpods/airpods-4-anc.png",
-    "priceFrom": 1340,
+    "priceFrom": 1330,
     "condition": "new",
     "description": "Cancelamento Ativo de Ruído de última geração, Modo Ambiente, Áudio Adaptativo e estojo com alto-falante integrado para o recurso Buscar.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 1330,
+        "available": true
+      }
+    ]
   },
   {
     "id": "airpods-pro-3",
@@ -2235,11 +2256,18 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods Pro",
     "image": "/images/products/airpods/airpods-pro-3.png",
-    "priceFrom": 1650,
+    "priceFrom": 1649,
     "condition": "new",
     "description": "Cancelamento de ruído profissional avançado, isolamento acústico aprimorado com pontas de silicone e estojo MagSafe USB-C.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 1649,
+        "available": true
+      }
+    ]
   },
   {
     "id": "airpods-max-2",
@@ -2255,39 +2283,39 @@ export const products: Product[] = [
       "Purple": "/images/products/airpods/airpods-max-purple.png",
       "Orange": "/images/products/airpods/airpods-max-orange.png"
     },
-    "priceFrom": 2900,
+    "priceFrom": 2890,
     "condition": "new",
     "colors": [
+      "Orange",
       "Purple",
       "Midnight",
-      "Orange",
-      "Blue",
-      "Starlight"
+      "Starlight",
+      "Blue"
     ],
     "variants": [
       {
+        "color": "Orange",
+        "price": 2890,
+        "available": true
+      },
+      {
         "color": "Purple",
-        "price": 3050,
+        "price": 3040,
         "available": true
       },
       {
         "color": "Midnight",
-        "price": 3200,
-        "available": true
-      },
-      {
-        "color": "Orange",
-        "price": 2900,
-        "available": true
-      },
-      {
-        "color": "Blue",
-        "price": 3090,
+        "price": 3150,
         "available": true
       },
       {
         "color": "Starlight",
-        "price": 3090,
+        "price": 3180,
+        "available": true
+      },
+      {
+        "color": "Blue",
+        "price": 3200,
         "available": true
       }
     ],
@@ -2896,7 +2924,14 @@ export const products: Product[] = [
     "description": "Cancelamento Ativo de Ruído até 2x mais potente, modo Transparência Adaptativa, Áudio Espacial com rastreamento e estojo MagSafe USB-C.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": false,
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 1650,
+        "available": true
+      }
+    ]
   },
   {
     "id": "seminovo-iphone-16-pro-max",
@@ -4075,6 +4110,152 @@ export const products: Product[] = [
       }
     ],
     "description": "Recursos essenciais para manter você conectado, ativo, saudável e em segurança.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "airpods-max-smart-case",
+    "slug": "airpods-max-smart-case",
+    "name": "AirPods Max com Smart Case",
+    "category": "airpods",
+    "subcategory": "AirPods Max",
+    "image": "/images/products/airpods/airpods-max-starlight.png",
+    "colorImages": {
+      "Blue": "/images/products/airpods/airpods-max-blue.png",
+      "Orange": "/images/products/airpods/airpods-max-orange.png",
+      "Purple": "/images/products/airpods/airpods-max-purple.png",
+      "Midnight": "/images/products/airpods/airpods-max-midnight.png",
+      "Starlight": "/images/products/airpods/airpods-max-starlight.png"
+    },
+    "priceFrom": 2800,
+    "condition": "new",
+    "colors": [
+      "Blue",
+      "Orange",
+      "Purple",
+      "Midnight",
+      "Starlight"
+    ],
+    "variants": [
+      {
+        "color": "Blue",
+        "price": 2800,
+        "available": true
+      },
+      {
+        "color": "Orange",
+        "price": 2850,
+        "available": true
+      },
+      {
+        "color": "Purple",
+        "price": 2850,
+        "available": true
+      },
+      {
+        "color": "Midnight",
+        "price": 2899,
+        "available": true
+      },
+      {
+        "color": "Starlight",
+        "price": 2950,
+        "available": true
+      }
+    ],
+    "description": "Som de altíssima fidelidade, cancelamento ativo de ruído líder do setor, áudio espacial e Smart Case inclusa.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "airpods-pro-lightning",
+    "slug": "airpods-pro-lightning",
+    "name": "AirPods Pro (Lightning)",
+    "category": "airpods",
+    "subcategory": "AirPods Pro",
+    "image": "/images/products/airpods/airpods-pro-2.png",
+    "priceFrom": 1160,
+    "condition": "new",
+    "colors": [
+      "Branco"
+    ],
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 1160,
+        "available": true
+      }
+    ],
+    "description": "Cancelamento Ativo de Ruído de nível profissional, Áudio Espacial Personalizado e estojo com conector Lightning.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "airpods-3",
+    "slug": "airpods-3",
+    "name": "AirPods (3ª Geração)",
+    "category": "airpods",
+    "subcategory": "AirPods",
+    "image": "/images/products/airpods/airpods-3.png",
+    "priceFrom": 940,
+    "condition": "new",
+    "colors": [
+      "Branco"
+    ],
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 940,
+        "available": true
+      }
+    ],
+    "description": "Áudio Espacial personalizado com rastreamento dinâmico da cabeça e resistência a suor e água.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "airpods-2",
+    "slug": "airpods-2",
+    "name": "AirPods (2ª Geração)",
+    "category": "airpods",
+    "subcategory": "AirPods",
+    "image": "/images/products/airpods/airpods-3.png",
+    "priceFrom": 850,
+    "condition": "new",
+    "colors": [
+      "Branco"
+    ],
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 850,
+        "available": true
+      }
+    ],
+    "description": "Simplicidade mágica e conexão instantânea para o seu dia a dia.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "airpods-5-wireless",
+    "slug": "airpods-5-wireless",
+    "name": "AirPods 5 com Estojo de Recarga Sem Fio",
+    "category": "airpods",
+    "subcategory": "AirPods 5",
+    "image": "/images/products/airpods/airpods-5-white.png",
+    "priceFrom": 1520,
+    "condition": "new",
+    "colors": [
+      "Branco"
+    ],
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 1520,
+        "available": true
+      }
+    ],
+    "description": "Nova geração de AirPods com estojo de carregamento sem fio MagSafe e som de altíssima definição acústica.",
     "warranty": "1 ano de garantia oficial Apple",
     "active": true
   }
