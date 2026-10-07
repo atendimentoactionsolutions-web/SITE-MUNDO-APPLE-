@@ -2334,7 +2334,7 @@ export const products: Product[] = [
       "White": "/images/products/accessories/magic-mouse-white.png",
       "Black": "/images/products/accessories/magic-mouse-3-black.png"
     },
-    "priceFrom": 600,
+    "priceFrom": 910,
     "condition": "new",
     "colors": [
       "White",
@@ -2343,12 +2343,12 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "White",
-        "price": 600,
+        "price": 910,
         "available": true
       },
       {
         "color": "Black",
-        "price": 600,
+        "price": 980,
         "available": true
       }
     ],
@@ -2368,21 +2368,21 @@ export const products: Product[] = [
       "White": "/images/products/accessories/magic-mouse-white.png",
       "Black": "/images/products/accessories/magic-mouse-black.png"
     },
-    "priceFrom": 600,
+    "priceFrom": 930,
     "condition": "new",
     "colors": [
-      "White",
-      "Black"
+      "Black",
+      "White"
     ],
     "variants": [
       {
-        "color": "White",
-        "price": 600,
+        "color": "Black",
+        "price": 930,
         "available": true
       },
       {
-        "color": "Black",
-        "price": 600,
+        "color": "White",
+        "price": 930,
         "available": true
       }
     ],
@@ -2397,12 +2397,19 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-pro.png",
-    "priceFrom": 750,
+    "priceFrom": 850,
     "condition": "new",
     "description": "Sensor de apertar inovador, resposta tátil precisa, giroscópio para controle de rotação e suporte ao recurso Buscar.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 850,
+        "available": true
+      }
+    ]
   },
   {
     "id": "apple-pencil-2",
@@ -2411,11 +2418,18 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-2.png",
-    "priceFrom": 550,
+    "priceFrom": 650,
     "condition": "new",
     "description": "Precisão absoluta com fixação e recarga magnética na lateral do iPad, sensível à inclinação e pressão.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 650,
+        "available": true
+      }
+    ]
   },
   {
     "id": "apple-pencil-usbc",
@@ -2424,11 +2438,18 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-usbc.png",
-    "priceFrom": 550,
+    "priceFrom": 649,
     "condition": "new",
     "description": "Emparelhamento e recarga prática via porta USB-C retrátil, fixação magnética e precisão de pixel perfeito.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 649,
+        "available": true
+      }
+    ]
   },
   {
     "id": "airtag-1pack",
@@ -2442,7 +2463,14 @@ export const products: Product[] = [
     "description": "Rastreie suas chaves, carteira, mala e pertences com máxima precisão pelo app Buscar na rede Apple.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 260,
+        "available": true
+      }
+    ]
   },
   {
     "id": "airtag-4pack",
@@ -2455,7 +2483,14 @@ export const products: Product[] = [
     "condition": "new",
     "description": "Pacote com 4 unidades do AirTag de 1ª Geração para manter todos os seus itens protegidos e localizáveis.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 830,
+        "available": true
+      }
+    ]
   },
   {
     "id": "airtag-2-1pack",
@@ -2469,7 +2504,14 @@ export const products: Product[] = [
     "description": "Rastreie suas chaves, carteira, mala e pertences com máxima precisão pelo app Buscar.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 300,
+        "available": true
+      }
+    ]
   },
   {
     "id": "airtag-2-4pack",
@@ -2478,11 +2520,18 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "AirTag",
     "image": "/images/products/accessories/airtag-4pack.png",
-    "priceFrom": 970,
+    "priceFrom": 950,
     "condition": "new",
     "description": "Pacote com 4 unidades para proteger todos os seus itens mais importantes com a rede Buscar da Apple.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 950,
+        "available": true
+      }
+    ]
   },
   {
     "id": "iphone-16-pro-max",
@@ -4256,6 +4305,321 @@ export const products: Product[] = [
       }
     ],
     "description": "Nova geração de AirPods com estojo de carregamento sem fio MagSafe e som de altíssima definição acústica.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "apple-pencil-com-adaptador",
+    "slug": "apple-pencil-com-adaptador",
+    "name": "Apple Pencil com Adaptador USB-C (1ª Geração)",
+    "category": "accessories",
+    "subcategory": "Apple Pencil",
+    "image": "/images/products/accessories/apple-pencil.png",
+    "priceFrom": 880,
+    "condition": "new",
+    "colors": [
+      "Branco"
+    ],
+    "variants": [
+      {
+        "color": "Branco",
+        "price": 880,
+        "available": true
+      }
+    ],
+    "description": "Sensibilidade à pressão e à inclinação com traço instantâneo. Inclui adaptador de USB-C para Apple Pencil.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "magic-keyboard-11",
+    "slug": "magic-keyboard-11",
+    "name": "Magic Keyboard para iPad Pro / Air 11\"",
+    "category": "accessories",
+    "subcategory": "Teclados",
+    "image": "/images/products/accessories/magic-keyboard.png",
+    "colorImages": {
+      "Black": "/images/products/accessories/magic-keyboard.png",
+      "White": "/images/products/accessories/magic-keyboard.png"
+    },
+    "priceFrom": 2600,
+    "condition": "new",
+    "sizes": [
+      "11\""
+    ],
+    "colors": [
+      "Black",
+      "White"
+    ],
+    "variants": [
+      {
+        "size": "11\"",
+        "color": "Black",
+        "price": 2600,
+        "available": true
+      },
+      {
+        "size": "11\"",
+        "color": "White",
+        "price": 2630,
+        "available": true
+      }
+    ],
+    "description": "Design suspenso inovador, trackpad integrado, teclas retroiluminadas e conector USB-C para recarga.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "magic-keyboard-12-9",
+    "slug": "magic-keyboard-12-9",
+    "name": "Magic Keyboard para iPad Pro 12.9\"",
+    "category": "accessories",
+    "subcategory": "Teclados",
+    "image": "/images/products/accessories/magic-keyboard.png",
+    "priceFrom": 1289,
+    "condition": "new",
+    "sizes": [
+      "12.9\""
+    ],
+    "colors": [
+      "Black"
+    ],
+    "variants": [
+      {
+        "size": "12.9\"",
+        "color": "Black",
+        "price": 1289,
+        "available": true
+      }
+    ],
+    "description": "Experiência incrível de digitação com design em balanço magnético e trackpad preciso para iPad Pro 12.9 polegadas.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "magic-keyboard-13",
+    "slug": "magic-keyboard-13",
+    "name": "Magic Keyboard para iPad Pro / Air 13\"",
+    "category": "accessories",
+    "subcategory": "Teclados",
+    "image": "/images/products/accessories/magic-keyboard.png",
+    "colorImages": {
+      "Black": "/images/products/accessories/magic-keyboard.png",
+      "White": "/images/products/accessories/magic-keyboard.png"
+    },
+    "priceFrom": 2750,
+    "condition": "new",
+    "sizes": [
+      "13\""
+    ],
+    "colors": [
+      "Black",
+      "White"
+    ],
+    "variants": [
+      {
+        "size": "13\"",
+        "color": "Black",
+        "price": 2750,
+        "available": true
+      },
+      {
+        "size": "13\"",
+        "color": "White",
+        "price": 2750,
+        "available": true
+      }
+    ],
+    "description": "Nova estrutura em alumínio com fileira de teclas de função e trackpad de vidro háptico para telas de 13 polegadas.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "magic-keyboard-folio",
+    "slug": "magic-keyboard-folio",
+    "name": "Magic Keyboard Folio",
+    "category": "accessories",
+    "subcategory": "Teclados",
+    "image": "/images/products/accessories/magic-keyboard.png",
+    "priceFrom": 2300,
+    "condition": "new",
+    "colors": [
+      "White"
+    ],
+    "variants": [
+      {
+        "color": "White",
+        "price": 2300,
+        "available": true
+      }
+    ],
+    "description": "Design versátil em duas partes com teclado destacável, suporte ajustável e proteção completa para iPad.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "magic-keyboard-touch-id",
+    "slug": "magic-keyboard-touch-id",
+    "name": "Magic Keyboard com Touch ID",
+    "category": "accessories",
+    "subcategory": "Teclados Mac",
+    "image": "/images/products/accessories/magic-keyboard.png",
+    "priceFrom": 1780,
+    "condition": "new",
+    "colors": [
+      "White"
+    ],
+    "variants": [
+      {
+        "color": "White",
+        "price": 1780,
+        "available": true
+      }
+    ],
+    "description": "Digitação rápida, confortável e precisa com autenticação prática e segura via sensor Touch ID integrado para Mac.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "magic-keyboard-touch-id-numeric",
+    "slug": "magic-keyboard-touch-id-numeric",
+    "name": "Magic Keyboard com Touch ID e Teclado Numérico",
+    "category": "accessories",
+    "subcategory": "Teclados Mac",
+    "image": "/images/products/accessories/magic-keyboard.png",
+    "colorImages": {
+      "White": "/images/products/accessories/magic-keyboard.png",
+      "Black": "/images/products/accessories/magic-keyboard.png"
+    },
+    "priceFrom": 1780,
+    "condition": "new",
+    "colors": [
+      "White",
+      "Black"
+    ],
+    "variants": [
+      {
+        "color": "White",
+        "price": 1780,
+        "available": true
+      },
+      {
+        "color": "Black",
+        "price": 1850,
+        "available": true
+      }
+    ],
+    "description": "Layout ampliado com controles de navegação rápida em documentos, teclas de direção em tamanho padrão e teclado numérico completo.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "magic-trackpad",
+    "slug": "magic-trackpad",
+    "name": "Magic Trackpad",
+    "category": "accessories",
+    "subcategory": "Acessórios Mac",
+    "image": "/images/products/accessories/magic-mouse.png",
+    "colorImages": {
+      "White": "/images/products/accessories/magic-mouse.png",
+      "Black": "/images/products/accessories/magic-mouse.png"
+    },
+    "priceFrom": 900,
+    "condition": "new",
+    "colors": [
+      "White",
+      "Black"
+    ],
+    "variants": [
+      {
+        "color": "White",
+        "price": 900,
+        "available": true
+      },
+      {
+        "color": "Black",
+        "price": 900,
+        "available": true
+      }
+    ],
+    "description": "Sem fio e recarregável com suporte a toda a gama de gestos Multi-Touch e tecnologia Force Touch para Mac.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "apple-tv-4k-64gb",
+    "slug": "apple-tv-4k-64gb",
+    "name": "Apple TV 4K 64GB (Wi-Fi)",
+    "category": "accessories",
+    "subcategory": "Apple TV",
+    "image": "/images/products/accessories/apple-tv.png",
+    "priceFrom": 1899,
+    "condition": "new",
+    "storage": [
+      "64GB"
+    ],
+    "colors": [
+      "Preto"
+    ],
+    "variants": [
+      {
+        "storage": "64GB",
+        "color": "Preto",
+        "price": 1899,
+        "available": true
+      }
+    ],
+    "description": "Chip A15 Bionic, Dolby Vision e HDR10+ com áudio cinematográfico Dolby Atmos e controle Siri Remote.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "apple-tv-4k-128gb",
+    "slug": "apple-tv-4k-128gb",
+    "name": "Apple TV 4K 128GB (Wi-Fi + Ethernet)",
+    "category": "accessories",
+    "subcategory": "Apple TV",
+    "image": "/images/products/accessories/apple-tv.png",
+    "priceFrom": 1999,
+    "condition": "new",
+    "storage": [
+      "128GB"
+    ],
+    "colors": [
+      "Preto"
+    ],
+    "variants": [
+      {
+        "storage": "128GB",
+        "color": "Preto",
+        "price": 1999,
+        "available": true
+      }
+    ],
+    "description": "Conexão Gigabit Ethernet, suporte a rede Thread e o dobro de capacidade de armazenamento para seus apps e jogos.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "smart-keyboard",
+    "slug": "smart-keyboard",
+    "name": "Smart Keyboard",
+    "category": "accessories",
+    "subcategory": "Teclados",
+    "image": "/images/products/accessories/magic-keyboard.png",
+    "priceFrom": 1140,
+    "condition": "new",
+    "colors": [
+      "Charcoal Gray"
+    ],
+    "variants": [
+      {
+        "color": "Charcoal Gray",
+        "price": 1140,
+        "available": true
+      }
+    ],
+    "description": "Teclado completo que não precisa de recarga nem de emparelhamento. Basta conectar via Smart Connector e começar a usar.",
     "warranty": "1 ano de garantia oficial Apple",
     "active": true
   }
