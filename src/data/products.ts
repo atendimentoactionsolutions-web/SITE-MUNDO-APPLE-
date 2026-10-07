@@ -1884,29 +1884,20 @@ export const products: Product[] = [
       "Titânio Natural": "/images/products/watch/apple-watch-ultra-natural.png",
       "Titânio Preto": "/images/products/watch/apple-watch-ultra-black.png"
     },
-    "priceFrom": 5400,
+    "priceFrom": 5690,
     "condition": "new",
     "availability": "available",
     "sizes": [
       "49mm"
     ],
     "colors": [
-      "Titânio Preto",
-      "Titânio Natural"
+      "Black"
     ],
     "variants": [
       {
         "size": "49mm",
-        "storage": "",
-        "color": "Titânio Preto",
-        "price": 5400,
-        "available": true
-      },
-      {
-        "size": "49mm",
-        "storage": "",
-        "color": "Titânio Natural",
-        "price": 0,
+        "color": "Black",
+        "price": 5690,
         "available": true
       }
     ],
@@ -1922,7 +1913,7 @@ export const products: Product[] = [
     "category": "watch",
     "subcategory": "Apple Watch Series",
     "image": "/images/products/watch/apple-watch-s12-v2.png",
-    "priceFrom": 3150,
+    "priceFrom": 3300,
     "condition": "new",
     "availability": "available",
     "sizes": [
@@ -1930,81 +1921,58 @@ export const products: Product[] = [
       "46mm"
     ],
     "colors": [
-      "Preta",
-      "Bronze-escura",
-      "Dourada-clara",
-      "Cinza-espacial",
-      "Titânio Natural"
+      "Black",
+      "Light Gold",
+      "Dark Bronze",
+      "Space Gray"
     ],
     "variants": [
       {
         "size": "42mm",
-        "storage": "",
-        "color": "Preta",
-        "price": 0,
+        "color": "Black",
+        "price": 3300,
         "available": true
       },
       {
         "size": "42mm",
-        "storage": "",
-        "color": "Bronze-escura",
-        "price": 0,
+        "color": "Light Gold",
+        "price": 3350,
         "available": true
       },
       {
         "size": "42mm",
-        "storage": "",
-        "color": "Dourada-clara",
-        "price": 0,
+        "color": "Dark Bronze",
+        "price": 3430,
         "available": true
       },
       {
         "size": "42mm",
-        "storage": "",
-        "color": "Cinza-espacial",
-        "price": 3150,
-        "available": true
-      },
-      {
-        "size": "42mm",
-        "storage": "",
-        "color": "Titânio Natural",
-        "price": 0,
+        "color": "Space Gray",
+        "price": 3550,
         "available": true
       },
       {
         "size": "46mm",
-        "storage": "",
-        "color": "Preta",
-        "price": 0,
+        "color": "Black",
+        "price": 3550,
         "available": true
       },
       {
         "size": "46mm",
-        "storage": "",
-        "color": "Bronze-escura",
-        "price": 0,
+        "color": "Dark Bronze",
+        "price": 3690,
         "available": true
       },
       {
         "size": "46mm",
-        "storage": "",
-        "color": "Dourada-clara",
-        "price": 0,
+        "color": "Light Gold",
+        "price": 3690,
         "available": true
       },
       {
         "size": "46mm",
-        "storage": "",
-        "color": "Cinza-espacial",
-        "price": 3400,
-        "available": true
-      },
-      {
-        "size": "46mm",
-        "storage": "",
-        "color": "Titânio Natural",
-        "price": 0,
+        "color": "Space Gray",
+        "price": 3700,
         "available": true
       }
     ],
@@ -2033,12 +2001,18 @@ export const products: Product[] = [
       "46mm"
     ],
     "colors": [
-      "Jet Black",
       "Rose Gold",
-      "Space Gray",
-      "Silver"
+      "Jet Black",
+      "Silver",
+      "Space Gray"
     ],
     "variants": [
+      {
+        "size": "42mm",
+        "color": "Rose Gold",
+        "price": 2400,
+        "available": true
+      },
       {
         "size": "42mm",
         "color": "Jet Black",
@@ -2047,8 +2021,8 @@ export const products: Product[] = [
       },
       {
         "size": "42mm",
-        "color": "Rose Gold",
-        "price": 2400,
+        "color": "Silver",
+        "price": 2500,
         "available": true
       },
       {
@@ -2058,21 +2032,15 @@ export const products: Product[] = [
         "available": true
       },
       {
-        "size": "42mm",
-        "color": "Silver",
-        "price": 2540,
-        "available": true
-      },
-      {
         "size": "46mm",
         "color": "Space Gray",
-        "price": 2600,
+        "price": 2580,
         "available": true
       },
       {
         "size": "46mm",
         "color": "Rose Gold",
-        "price": 2600,
+        "price": 2599,
         "available": true
       },
       {
@@ -2104,26 +2072,26 @@ export const products: Product[] = [
       "Black Titanium": "/images/products/watch/apple-watch-ultra-black.png",
       "Natural Titanium": "/images/products/watch/apple-watch-ultra-natural.png"
     },
-    "priceFrom": 4749,
+    "priceFrom": 4940,
     "condition": "new",
     "sizes": [
       "49mm"
     ],
     "colors": [
-      "Black Titanium",
-      "Natural Titanium"
+      "Black",
+      "Natural"
     ],
     "variants": [
       {
         "size": "49mm",
-        "color": "Black Titanium",
-        "price": 4749,
+        "color": "Black",
+        "price": 4940,
         "available": true
       },
       {
         "size": "49mm",
-        "color": "Natural Titanium",
-        "price": 4900,
+        "color": "Natural",
+        "price": 5190,
         "available": true
       }
     ],
@@ -2143,7 +2111,7 @@ export const products: Product[] = [
       "Midnight": "/images/products/watch/apple-watch-se-midnight.png",
       "Starlight": "/images/products/watch/apple-watch-se-starlight.png"
     },
-    "priceFrom": 1980,
+    "priceFrom": 1940,
     "condition": "new",
     "sizes": [
       "40mm",
@@ -2156,32 +2124,68 @@ export const products: Product[] = [
     "variants": [
       {
         "size": "40mm",
+        "chip": "GPS",
         "color": "Midnight",
-        "price": 1980,
+        "price": 1940,
         "available": true
       },
       {
         "size": "40mm",
+        "chip": "GPS",
         "color": "Starlight",
+        "price": 2000,
+        "available": true
+      },
+      {
+        "size": "40mm",
+        "chip": "GPS + Cellular",
+        "color": "Midnight",
+        "price": 2050,
+        "available": true
+      },
+      {
+        "size": "40mm",
+        "chip": "GPS + Cellular",
+        "color": "Starlight",
+        "price": 2050,
+        "available": true
+      },
+      {
+        "size": "44mm",
+        "chip": "GPS",
+        "color": "Starlight",
+        "price": 2075,
+        "available": true
+      },
+      {
+        "size": "44mm",
+        "chip": "GPS",
+        "color": "Midnight",
         "price": 2080,
         "available": true
       },
       {
         "size": "44mm",
+        "chip": "GPS + Cellular",
         "color": "Midnight",
-        "price": 2100,
+        "price": 2250,
         "available": true
       },
       {
         "size": "44mm",
+        "chip": "GPS + Cellular",
         "color": "Starlight",
-        "price": 2090,
+        "price": 2499,
         "available": true
       }
     ],
     "description": "Tudo o que você precisa por um valor imperdível. Notificações cardíacas, Detecção de Acidente e monitoramento de treinos em 40mm ou 44mm.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "chips": [
+      "GPS",
+      "GPS + Cellular"
+    ]
   },
   {
     "id": "airpods-5",
@@ -3840,6 +3844,237 @@ export const products: Product[] = [
       }
     ],
     "description": "Design compacto de 8.3 polegadas, chip A15 Bionic e suporte ao Apple Pencil de 2ª geração.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "apple-watch-ultra-2",
+    "slug": "apple-watch-ultra-2",
+    "name": "Apple Watch Ultra 2",
+    "category": "watch",
+    "subcategory": "Apple Watch Ultra",
+    "image": "/images/products/watch/watch-ultra-black.png",
+    "colorImages": {
+      "Black": "/images/products/watch/watch-ultra-black.png",
+      "Natural": "/images/products/watch/watch-ultra-natural.png"
+    },
+    "priceFrom": 4750,
+    "condition": "new",
+    "sizes": [
+      "49mm"
+    ],
+    "colors": [
+      "Natural",
+      "Black"
+    ],
+    "variants": [
+      {
+        "size": "49mm",
+        "color": "Natural",
+        "price": 4750,
+        "available": true
+      },
+      {
+        "size": "49mm",
+        "color": "Black",
+        "price": 4900,
+        "available": true
+      }
+    ],
+    "description": "O relógio de aventura e resistência mais capaz da Apple. Caixa de 49 mm em titânio e tela com 3.000 nits de brilho.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "apple-watch-s10",
+    "slug": "apple-watch-s10",
+    "name": "Apple Watch Series 10",
+    "category": "watch",
+    "subcategory": "Apple Watch Series 10",
+    "image": "/images/products/watch/watch-s11-jetblack.png",
+    "colorImages": {
+      "Rose Gold": "/images/products/watch/watch-s11-rosegold.png",
+      "Jet Black": "/images/products/watch/watch-s11-jetblack.png"
+    },
+    "priceFrom": 2300,
+    "condition": "new",
+    "sizes": [
+      "46mm"
+    ],
+    "colors": [
+      "Rose Gold",
+      "Jet Black"
+    ],
+    "variants": [
+      {
+        "size": "46mm",
+        "color": "Rose Gold",
+        "price": 2300,
+        "available": true
+      },
+      {
+        "size": "46mm",
+        "color": "Jet Black",
+        "price": 2650,
+        "available": true
+      }
+    ],
+    "description": "Design ultrafino com a maior e mais avançada tela em um Apple Watch Series.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "apple-watch-s9",
+    "slug": "apple-watch-s9",
+    "name": "Apple Watch Series 9",
+    "category": "watch",
+    "subcategory": "Apple Watch Series 9",
+    "image": "/images/products/watch/watch-s11-jetblack.png",
+    "colorImages": {
+      "Red": "/images/products/watch/watch-s11-rosegold.png",
+      "Midnight": "/images/products/watch/watch-s11-jetblack.png",
+      "Pink": "/images/products/watch/watch-s11-rosegold.png"
+    },
+    "priceFrom": 1650,
+    "condition": "new",
+    "sizes": [
+      "41mm",
+      "45mm"
+    ],
+    "chips": [
+      "GPS",
+      "GPS + Cellular"
+    ],
+    "colors": [
+      "Red",
+      "Midnight",
+      "Pink"
+    ],
+    "variants": [
+      {
+        "size": "41mm",
+        "chip": "GPS",
+        "color": "Red",
+        "price": 1650,
+        "available": true
+      },
+      {
+        "size": "45mm",
+        "chip": "GPS",
+        "color": "Red",
+        "price": 1900,
+        "available": true
+      },
+      {
+        "size": "45mm",
+        "chip": "GPS",
+        "color": "Midnight",
+        "price": 2230,
+        "available": true
+      },
+      {
+        "size": "45mm",
+        "chip": "GPS",
+        "color": "Pink",
+        "price": 2250,
+        "available": true
+      },
+      {
+        "size": "41mm",
+        "chip": "GPS + Cellular",
+        "color": "Red",
+        "price": 1900,
+        "available": true
+      },
+      {
+        "size": "45mm",
+        "chip": "GPS + Cellular",
+        "color": "Midnight",
+        "price": 2099,
+        "available": true
+      },
+      {
+        "size": "45mm",
+        "chip": "GPS + Cellular",
+        "color": "Pink",
+        "price": 2350,
+        "available": true
+      }
+    ],
+    "description": "Mais inteligente, brilhante e poderoso com o chip S9 SiP e o gesto de dois toques (Double Tap).",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "apple-watch-se-2",
+    "slug": "apple-watch-se-2",
+    "name": "Apple Watch SE 2",
+    "category": "watch",
+    "subcategory": "Apple Watch SE",
+    "image": "/images/products/watch/watch-se-midnight.png",
+    "colorImages": {
+      "Midnight": "/images/products/watch/watch-se-midnight.png",
+      "Starlight": "/images/products/watch/watch-se-starlight.png"
+    },
+    "priceFrom": 1700,
+    "condition": "new",
+    "sizes": [
+      "40mm",
+      "44mm"
+    ],
+    "chips": [
+      "GPS",
+      "GPS + Cellular"
+    ],
+    "colors": [
+      "Midnight",
+      "Starlight"
+    ],
+    "variants": [
+      {
+        "size": "40mm",
+        "chip": "GPS",
+        "color": "Midnight",
+        "price": 1700,
+        "available": true
+      },
+      {
+        "size": "40mm",
+        "chip": "GPS",
+        "color": "Starlight",
+        "price": 2100,
+        "available": true
+      },
+      {
+        "size": "40mm",
+        "chip": "GPS + Cellular",
+        "color": "Midnight",
+        "price": 1850,
+        "available": true
+      },
+      {
+        "size": "44mm",
+        "chip": "GPS",
+        "color": "Midnight",
+        "price": 1700,
+        "available": true
+      },
+      {
+        "size": "44mm",
+        "chip": "GPS",
+        "color": "Starlight",
+        "price": 1980,
+        "available": true
+      },
+      {
+        "size": "44mm",
+        "chip": "GPS + Cellular",
+        "color": "Midnight",
+        "price": 1719,
+        "available": true
+      }
+    ],
+    "description": "Recursos essenciais para manter você conectado, ativo, saudável e em segurança.",
     "warranty": "1 ano de garantia oficial Apple",
     "active": true
   }
