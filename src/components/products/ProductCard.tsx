@@ -3,9 +3,12 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { MessageCircle, ShieldCheck, Sparkles, CreditCard } from "lucide-react";
 import { Product, ProductVariant } from "@/types/product";
+import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
+import { getMaxInstallment } from "@/utils/installments";
+import { InstallmentsModal } from "./InstallmentsModal";
 
 const colorMap: Record<string, string> = {
   "Black": "#1D1D1F",
@@ -68,6 +71,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   priority = false,
 }) => {
+  const [isInstallmentsModalOpen, setIsInstallmentsModalOpen] = useState(false);
 
   const hasVariants = Boolean(product.variants && product.variants.length > 0);
 
@@ -281,6 +285,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   // Check if product is on pre-order or announcement
   const isPreOrder = product.availability === "pre_order" || product.priceFrom === 0;
 
+  // Calculate 18x installment preview
+  const maxInstallment = currentPrice > 0 ? getMaxInstallment(currentPrice) : null;
 
   // WhatsApp formatted lead
   const handleWhatsAppRedirect = () => {
@@ -296,7 +302,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     if (details.length > 0) {
       messageText += ` (${details.join(", ")})`;
     }
-    messageText += `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado com 1 ano de garantia Apple"}\nGostaria de consultar disponibilidade, valores atualizados e formas de pagamento.`;
+    if (currentPrice > 0) {
+      messageText += ` no valor de ${formatCurrency(currentPrice)} no PIX`;
+    } else {
+      messageText += `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado com 1 ano de garantia Apple"}\nGostaria de consultar os valores atualizados, disponibilidade e prazo de entrega.`;
+    }
+    if (currentPrice > 0) {
+      messageText += `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado de fábrica"}\nGostaria de consultar disponibilidade e condições de pagamento.`;
+    }
 
     const link = createWhatsAppLink(messageText);
     window.open(link, "_blank", "noopener,noreferrer");
@@ -501,7 +514,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         key={c.color}
                         type="button"
                         onClick={() => handleSelectOption("color", c.color)}
-                        title={c.color}
+                        title={`${c.color}${c.price ? ` - ${formatCurrency(c.price)}` : ""}`}
                         className={`group/color relative w-7 h-7 rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center ${
                           isSelected
                             ? "ring-2 ring-offset-2 ring-[#0071E3] scale-110 shadow-sm"
@@ -526,12 +539,64 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               </div>
             )}
 
-            {/* Consultation Notice */}
-            <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-1">
-              <p className="text-[11px] text-[#6E6E73] leading-relaxed">
-                Consulte valores atualizados, disponibilidade de cor e condições de pagamento no WhatsApp.
-              </p>
-            </div>
+            {/* Live Dynamic Price Display OR Under Consultation */}
+            {currentPrice === 0 || isPreOrder ? (
+              <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-2">
+                <div className="flex items-baseline justify-between">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-[#0071E3] block leading-none mb-1">
+                      Disponibilidade
+                    </span>
+                    <span className="text-sm sm:text-base font-bold text-[#1D1D1F] font-display tracking-[-0.02em]">
+                      Consultar valores e disponibilidade
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/80 inline-block">
+                    Sob Consulta
+                  </span>
+                </div>
+
+                <p className="text-[11px] text-[#6E6E73] leading-tight">
+                  Consulte valores atualizados e prazo de entrega direto com nossos especialistas.
+                </p>
+              </div>
+            ) : currentPrice > 0 ? (
+              <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-2">
+                <div className="flex items-baseline justify-between">
+                  <div>
+                    <span className="text-[10px] uppercase font-semibold text-[#6E6E73] block leading-none mb-1">
+                      Valor à vista
+                    </span>
+                    <span className="text-xl sm:text-2xl font-bold text-[#1D1D1F] font-display tracking-[-0.025em]">
+                      {formatCurrency(currentPrice)}
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-[#0071E3] font-semibold bg-blue-50/80 px-2.5 py-1 rounded-full border border-blue-200/60 inline-block">
+                    no PIX
+                  </span>
+                </div>
+
+                {/* Installments Option Preview & Modal Trigger */}
+                {maxInstallment && (
+                  <div className="bg-[#F5F5F7] rounded-xl p-2.5 border border-[#E5E5E7] flex items-center justify-between">
+                    <div className="text-[11px] text-[#6E6E73]">
+                      <span className="block font-medium">
+                        ou em até <strong className="text-[#1D1D1F] font-semibold">18x de {formatCurrency(maxInstallment.installmentValue)}</strong>
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsInstallmentsModalOpen(true)}
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0071E3] hover:underline cursor-pointer shrink-0"
+                    >
+                      <CreditCard className="w-3.5 h-3.5" />
+                      <span>Ver parcelas</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : null}
           </div>
         </div>
 
@@ -543,10 +608,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 active:scale-[0.98] text-white font-extrabold text-xs sm:text-sm rounded-full shadow-sm hover:shadow transition-all duration-200 cursor-pointer bg-[#00C853] hover:bg-[#00B048]"
           >
             <MessageCircle className="w-4 h-4 fill-white shrink-0" />
-            <span>Consultar Disponibilidade</span>
+            <span>
+              {currentPrice > 0 ? "Consultar Disponibilidade" : "Consultar Valores e Disponibilidade"}
+            </span>
           </button>
         </div>
       </div>
+
+      {/* Installments Modal */}
+      {isInstallmentsModalOpen && (
+        <InstallmentsModal
+          isOpen={isInstallmentsModalOpen}
+          onClose={() => setIsInstallmentsModalOpen(false)}
+          productName={`${product.name} ${currentSize ? `(${currentSize})` : ""}`}
+          storage={currentStorage}
+          color={currentColor}
+          cashPrice={currentPrice}
+        />
+      )}
     </>
   );
 };

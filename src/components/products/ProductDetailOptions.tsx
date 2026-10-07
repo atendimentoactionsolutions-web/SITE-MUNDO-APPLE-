@@ -104,14 +104,14 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         </div>
       </div>
 
-      {/* Consultation Block */}
+      {/* Price Block */}
       <div className="p-6 rounded-3xl bg-apple-gray/60 border border-apple-border/60 space-y-1">
-        <span className="text-xs text-apple-muted block">Valores e Condições</span>
-        <div className="text-2xl sm:text-3xl font-bold text-apple-dark tracking-tight">
-          Sob Consulta
+        <span className="text-xs text-apple-muted block">Preço à vista ou Pix</span>
+        <div className="text-3xl sm:text-4xl font-bold text-apple-dark tracking-tight">
+          {currentPrice > 0 ? formatBRL(currentPrice) : "Sob Consulta"}
         </div>
         <p className="text-xs text-apple-muted pt-1">
-          Consulte disponibilidade de cores, capacidades e condições pelo WhatsApp. Pagamento na entrega ou retirada na loja na Santa Ifigênia.
+          Aceitamos pagamento na entrega ou retirada na loja na Santa Ifigênia.
         </p>
       </div>
 
@@ -223,6 +223,11 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
                 >
                   {isSelected && <Check className="w-3.5 h-3.5 text-apple-blue" />}
                   <span>{color}</span>
+                  {vPrice && vPrice > 0 && (
+                    <span className="text-[11px] opacity-75 font-normal">
+                      ({formatBRL(vPrice)})
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -256,7 +261,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
           className="w-full font-bold"
           icon={<MessageCircle className="w-5 h-5" />}
         >
-          Consultar Disponibilidade
+          Comprar pelo WhatsApp
         </Button>
       </div>
     </div>

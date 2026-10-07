@@ -810,7 +810,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 12800,
+    "priceFrom": 13540,
     "condition": "new",
     "screenSizes": [
       "14\""
@@ -820,13 +820,11 @@ export const products: Product[] = [
     ],
     "ramOptions": [
       "16GB",
-      "24GB",
-      "32GB"
+      "24GB"
     ],
     "storage": [
       "512GB",
-      "1TB",
-      "2TB"
+      "1TB"
     ],
     "colors": [
       "Space Black",
@@ -837,18 +835,27 @@ export const products: Product[] = [
         "screenSize": "14\"",
         "chip": "M5",
         "ram": "16GB",
-        "storage": "1TB",
+        "storage": "512GB",
         "color": "Space Black",
-        "price": 12800,
+        "price": 13540,
         "available": true
       },
       {
         "screenSize": "14\"",
         "chip": "M5",
-        "ram": "16GB",
+        "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 13250,
+        "price": 15500,
+        "available": true
+      },
+      {
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 15500,
         "available": true
       }
     ],
@@ -1046,7 +1053,7 @@ export const products: Product[] = [
       "Silver": "/images/products/mac/macbook-air-silver.png",
       "Sky Blue": "/images/products/mac/macbook-air-spacegray.png"
     },
-    "priceFrom": 9249,
+    "priceFrom": 9800,
     "condition": "new",
     "screenSizes": [
       "13\"",
@@ -1061,9 +1068,8 @@ export const products: Product[] = [
       "1TB"
     ],
     "colors": [
-      "Starlight",
-      "Sky Blue",
       "Midnight",
+      "Starlight",
       "Silver"
     ],
     "variants": [
@@ -1071,24 +1077,16 @@ export const products: Product[] = [
         "screenSize": "13\"",
         "ram": "16GB",
         "storage": "512GB",
-        "color": "Starlight",
-        "price": 9249,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "ram": "16GB",
-        "storage": "512GB",
-        "color": "Sky Blue",
-        "price": 9290,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "ram": "16GB",
-        "storage": "512GB",
         "color": "Midnight",
-        "price": 9280,
+        "price": 9800,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "ram": "16GB",
+        "storage": "512GB",
+        "color": "Starlight",
+        "price": 9850,
         "available": true
       },
       {
@@ -1096,23 +1094,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 9330,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "16GB",
-        "storage": "512GB",
-        "color": "Sky Blue",
-        "price": 10249,
-        "available": true
-      },
-      {
-        "screenSize": "15\"",
-        "ram": "16GB",
-        "storage": "512GB",
-        "color": "Midnight",
-        "price": 10249,
+        "price": 9900,
         "available": true
       },
       {
@@ -1120,7 +1102,47 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Starlight",
-        "price": 10249,
+        "price": 10700,
+        "available": true
+      },
+      {
+        "screenSize": "15\"",
+        "ram": "16GB",
+        "storage": "512GB",
+        "color": "Midnight",
+        "price": 10900,
+        "available": true
+      },
+      {
+        "screenSize": "15\"",
+        "ram": "16GB",
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 11100,
+        "available": true
+      },
+      {
+        "screenSize": "15\"",
+        "ram": "24GB",
+        "storage": "1TB",
+        "color": "Starlight",
+        "price": 14050,
+        "available": true
+      },
+      {
+        "screenSize": "15\"",
+        "ram": "24GB",
+        "storage": "1TB",
+        "color": "Silver",
+        "price": 14200,
+        "available": true
+      },
+      {
+        "screenSize": "15\"",
+        "ram": "24GB",
+        "storage": "1TB",
+        "color": "Midnight",
+        "price": 14799,
         "available": true
       }
     ],
@@ -1238,7 +1260,7 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Design Ultracompacto • Chip M4",
     "image": "/images/products/mac/mac-mini-m4-clean.png",
-    "priceFrom": 6740,
+    "priceFrom": 7100,
     "condition": "new",
     "chips": [
       "M4"
@@ -1260,7 +1282,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Silver",
-        "price": 6740,
+        "price": 7100,
         "available": true
       },
       {
@@ -1268,15 +1290,15 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6749,
+        "price": 7300,
         "available": true
       },
       {
-        "chip": "M4 Pro",
+        "chip": "M4",
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 6749,
+        "price": 10600,
         "available": true
       }
     ],
@@ -1291,7 +1313,7 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Design Ultracompacto • Chip Apple M4 Pro",
     "image": "/images/products/mac/mac-mini-m4-clean.png",
-    "priceFrom": 12290,
+    "priceFrom": 12800,
     "condition": "new",
     "chips": [
       "M4 Pro"
@@ -1311,7 +1333,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 12290,
+        "price": 12800,
         "available": true
       }
     ],
@@ -1369,7 +1391,7 @@ export const products: Product[] = [
       "Pink": "/images/products/mac/imac-24-pink.png",
       "Silver": "/images/products/mac/imac-24-silver.png"
     },
-    "priceFrom": 12400,
+    "priceFrom": 13000,
     "condition": "new",
     "screenSizes": [
       "24\""
@@ -1399,7 +1421,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Blue",
-        "price": 12400,
+        "price": 13000,
         "available": true
       },
       {
@@ -1408,7 +1430,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Green",
-        "price": 12499,
+        "price": 13099,
         "available": true
       },
       {
@@ -1417,7 +1439,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Silver",
-        "price": 12400,
+        "price": 13200,
         "available": true
       },
       {
@@ -1426,7 +1448,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Pink",
-        "price": 17890,
+        "price": 18490,
         "available": true
       },
       {
@@ -1435,7 +1457,34 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 17800,
+        "price": 18550,
+        "available": true
+      },
+      {
+        "screenSize": "24\"",
+        "chip": "4 Saídas",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Green",
+        "price": 19500,
+        "available": true
+      },
+      {
+        "screenSize": "24\"",
+        "chip": "4 Saídas",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 19500,
+        "available": true
+      },
+      {
+        "screenSize": "24\"",
+        "chip": "4 Saídas",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Blue",
+        "price": 19500,
         "available": true
       }
     ],
@@ -3336,6 +3385,183 @@ export const products: Product[] = [
     ],
     "description": "O seminovo de entrada mais acessível da Apple. Câmera dupla com Modo Noturno e chip A13 Bionic.",
     "warranty": "90 dias de garantia com suporte especializado",
+    "active": true
+  },
+  {
+    "id": "macbook-pro-m4-pro",
+    "slug": "macbook-pro-m4-pro",
+    "name": "MacBook Pro M4 Pro",
+    "category": "mac",
+    "subcategory": "Liquid Retina XDR • Chip Apple M4 Pro",
+    "image": "/images/products/mac/macbook-pro-space-black.png",
+    "colorImages": {
+      "Space Black": "/images/products/mac/macbook-pro-space-black.png",
+      "Silver": "/images/products/mac/macbook-pro-silver.png"
+    },
+    "priceFrom": 13900,
+    "condition": "new",
+    "screenSizes": [
+      "14\"",
+      "16\""
+    ],
+    "chips": [
+      "M4 Pro"
+    ],
+    "ramOptions": [
+      "24GB",
+      "48GB"
+    ],
+    "storage": [
+      "512GB",
+      "1TB"
+    ],
+    "colors": [
+      "Silver",
+      "Space Black"
+    ],
+    "variants": [
+      {
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 13900,
+        "available": true
+      },
+      {
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Space Black",
+        "price": 14700,
+        "available": true
+      },
+      {
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 16750,
+        "available": true
+      },
+      {
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Space Black",
+        "price": 16950,
+        "available": true
+      },
+      {
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 31899,
+        "available": true
+      }
+    ],
+    "description": "Potência profissional com o chip Apple M4 Pro, tela Liquid Retina XDR de ponta a ponta e portas Thunderbolt 5 de altíssima velocidade.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "featured": true,
+    "active": true
+  },
+  {
+    "id": "macbook-pro-m4-max",
+    "slug": "macbook-pro-m4-max",
+    "name": "MacBook Pro M4 Max",
+    "category": "mac",
+    "subcategory": "Liquid Retina XDR • Chip Apple M4 Max",
+    "image": "/images/products/mac/macbook-pro-space-black.png",
+    "colorImages": {
+      "Space Black": "/images/products/mac/macbook-pro-space-black.png"
+    },
+    "priceFrom": 24100,
+    "condition": "new",
+    "screenSizes": [
+      "16\""
+    ],
+    "chips": [
+      "M4 Max"
+    ],
+    "ramOptions": [
+      "36GB"
+    ],
+    "storage": [
+      "1TB"
+    ],
+    "colors": [
+      "Space Black"
+    ],
+    "variants": [
+      {
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 24100,
+        "available": true
+      }
+    ],
+    "description": "Desempenho extremo para fluxos de trabalho 3D e renderização pesada com o poder do chip Apple M4 Max.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "featured": true,
+    "active": true
+  },
+  {
+    "id": "macbook-air-m4",
+    "slug": "macbook-air-m4",
+    "name": "MacBook Air M4",
+    "category": "mac",
+    "subcategory": "Ultrafino • Display 15.3\" • Chip M4",
+    "image": "/images/products/mac/macbook-air-midnight.png",
+    "colorImages": {
+      "Midnight": "/images/products/mac/macbook-air-midnight.png",
+      "Starlight": "/images/products/mac/macbook-air-starlight.png"
+    },
+    "priceFrom": 10200,
+    "condition": "new",
+    "screenSizes": [
+      "15\""
+    ],
+    "ramOptions": [
+      "16GB",
+      "24GB"
+    ],
+    "storage": [
+      "512GB"
+    ],
+    "colors": [
+      "Midnight",
+      "Starlight"
+    ],
+    "variants": [
+      {
+        "screenSize": "15\"",
+        "ram": "16GB",
+        "storage": "512GB",
+        "color": "Midnight",
+        "price": 10200,
+        "available": true
+      },
+      {
+        "screenSize": "15\"",
+        "ram": "24GB",
+        "storage": "512GB",
+        "color": "Starlight",
+        "price": 12300,
+        "available": true
+      }
+    ],
+    "description": "Design ultrafino com tela de 15.3 polegadas, chip M4 e bateria que dura o dia todo.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "featured": true,
     "active": true
   }
 ];
