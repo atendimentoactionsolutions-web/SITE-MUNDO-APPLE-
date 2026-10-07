@@ -3981,10 +3981,10 @@ export const products: Product[] = [
     "name": "Apple Watch Ultra 2",
     "category": "watch",
     "subcategory": "Apple Watch Ultra",
-    "image": "/images/products/watch/watch-ultra-black.png",
+    "image": "/images/products/watch/apple-watch-ultra-black.png",
     "colorImages": {
-      "Black": "/images/products/watch/watch-ultra-black.png",
-      "Natural": "/images/products/watch/watch-ultra-natural.png"
+      "Black": "/images/products/watch/apple-watch-ultra-black.png",
+      "Natural": "/images/products/watch/apple-watch-ultra-natural.png"
     },
     "priceFrom": 4750,
     "condition": "new",
@@ -4019,10 +4019,10 @@ export const products: Product[] = [
     "name": "Apple Watch Series 10",
     "category": "watch",
     "subcategory": "Apple Watch Series 10",
-    "image": "/images/products/watch/watch-s11-jetblack.png",
+    "image": "/images/products/watch/apple-watch-s11-black.png",
     "colorImages": {
-      "Rose Gold": "/images/products/watch/watch-s11-rosegold.png",
-      "Jet Black": "/images/products/watch/watch-s11-jetblack.png"
+      "Rose Gold": "/images/products/watch/apple-watch-s11-rosegold.png",
+      "Jet Black": "/images/products/watch/apple-watch-s11-black.png"
     },
     "priceFrom": 2300,
     "condition": "new",
@@ -4057,11 +4057,11 @@ export const products: Product[] = [
     "name": "Apple Watch Series 9",
     "category": "watch",
     "subcategory": "Apple Watch Series 9",
-    "image": "/images/products/watch/watch-s11-jetblack.png",
+    "image": "/images/products/watch/apple-watch-s11-black.png",
     "colorImages": {
-      "Red": "/images/products/watch/watch-s11-rosegold.png",
-      "Midnight": "/images/products/watch/watch-s11-jetblack.png",
-      "Pink": "/images/products/watch/watch-s11-rosegold.png"
+      "Red": "/images/products/watch/apple-watch-s11-rosegold.png",
+      "Midnight": "/images/products/watch/apple-watch-s11-black.png",
+      "Pink": "/images/products/watch/apple-watch-s11-rosegold.png"
     },
     "priceFrom": 1650,
     "condition": "new",
@@ -4139,10 +4139,10 @@ export const products: Product[] = [
     "name": "Apple Watch SE 2",
     "category": "watch",
     "subcategory": "Apple Watch SE",
-    "image": "/images/products/watch/watch-se-midnight.png",
+    "image": "/images/products/watch/apple-watch-se-midnight.png",
     "colorImages": {
-      "Midnight": "/images/products/watch/watch-se-midnight.png",
-      "Starlight": "/images/products/watch/watch-se-starlight.png"
+      "Midnight": "/images/products/watch/apple-watch-se-midnight.png",
+      "Starlight": "/images/products/watch/apple-watch-se-starlight.png"
     },
     "priceFrom": 1700,
     "condition": "new",
@@ -4289,7 +4289,7 @@ export const products: Product[] = [
     "name": "AirPods (3ª Geração)",
     "category": "airpods",
     "subcategory": "AirPods",
-    "image": "/images/products/airpods/airpods-3.png",
+    "image": "/images/products/airpods/airpods-4.png",
     "priceFrom": 940,
     "condition": "new",
     "colors": [
@@ -4312,7 +4312,7 @@ export const products: Product[] = [
     "name": "AirPods (2ª Geração)",
     "category": "airpods",
     "subcategory": "AirPods",
-    "image": "/images/products/airpods/airpods-3.png",
+    "image": "/images/products/airpods/airpods-4.png",
     "priceFrom": 850,
     "condition": "new",
     "colors": [
@@ -4335,7 +4335,7 @@ export const products: Product[] = [
     "name": "AirPods 5 com Estojo de Recarga Sem Fio",
     "category": "airpods",
     "subcategory": "AirPods 5",
-    "image": "/images/products/airpods/airpods-5-white.png",
+    "image": "/images/products/airpods/airpods-5.png",
     "priceFrom": 1520,
     "condition": "new",
     "colors": [
@@ -4358,7 +4358,7 @@ export const products: Product[] = [
     "name": "Apple Pencil com Adaptador USB-C (1ª Geração)",
     "category": "accessories",
     "subcategory": "Apple Pencil",
-    "image": "/images/products/accessories/apple-pencil.png",
+    "image": "/images/products/accessories/apple-pencil-usbc.png",
     "priceFrom": 880,
     "condition": "new",
     "colors": [
@@ -4761,7 +4761,7 @@ export const products: Product[] = [
     "name": "iPhone 14 Plus",
     "category": "iphone",
     "subcategory": "iPhone 14 Series",
-    "image": "/images/products/iphone/iphone-14-all-colors.jpg",
+    "image": "/images/products/iphone/iphone-15-all-colors.jpg",
     "priceFrom": 4150,
     "condition": "new",
     "storage": [
@@ -4788,7 +4788,7 @@ export const products: Product[] = [
     "name": "iPhone 13",
     "category": "iphone",
     "subcategory": "iPhone 13 Series",
-    "image": "/images/products/iphone/iphone-13-all-colors.jpg",
+    "image": "/images/products/iphone/iphone-15-all-colors.jpg",
     "priceFrom": 3650,
     "condition": "new",
     "storage": [
