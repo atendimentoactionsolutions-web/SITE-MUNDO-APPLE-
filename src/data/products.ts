@@ -1503,7 +1503,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/ipad/ipad-pro-spaceblack.png",
       "Silver": "/images/products/ipad/ipad-pro-silver.png"
     },
-    "priceFrom": 7800,
+    "priceFrom": 7450,
     "condition": "new",
     "screenSizes": [
       "11\"",
@@ -1528,16 +1528,32 @@ export const products: Product[] = [
         "screenSize": "11\"",
         "chip": "Wi-Fi",
         "storage": "256GB",
-        "color": "Silver",
-        "price": 7800,
+        "color": "Space Black",
+        "price": 7450,
         "available": true
       },
       {
         "screenSize": "11\"",
         "chip": "Wi-Fi",
         "storage": "256GB",
+        "color": "Silver",
+        "price": 7450,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "512GB",
         "color": "Space Black",
-        "price": 7800,
+        "price": 9150,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "256GB",
+        "color": "Space Black",
+        "price": 8750,
         "available": true
       },
       {
@@ -1545,7 +1561,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "512GB",
         "color": "Space Black",
-        "price": 10640,
+        "price": 10340,
         "available": true
       },
       {
@@ -1553,7 +1569,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Space Black",
-        "price": 8550,
+        "price": 8250,
         "available": true
       },
       {
@@ -1561,7 +1577,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Silver",
-        "price": 9850,
+        "price": 8500,
         "available": true
       },
       {
@@ -1569,7 +1585,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "512GB",
         "color": "Space Black",
-        "price": 9850,
+        "price": 9550,
         "available": true
       },
       {
@@ -1577,7 +1593,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "512GB",
         "color": "Silver",
-        "price": 9950,
+        "price": 9650,
         "available": true
       },
       {
@@ -1585,7 +1601,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "1TB",
         "color": "Silver",
-        "price": 11200,
+        "price": 10900,
         "available": true
       },
       {
@@ -1593,7 +1609,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 11950,
+        "price": 11650,
         "available": true
       },
       {
@@ -1601,7 +1617,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 12350,
+        "price": 12050,
         "available": true
       },
       {
@@ -1609,7 +1625,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "256GB",
         "color": "Space Black",
-        "price": 10149,
+        "price": 9250,
         "available": true
       },
       {
@@ -1617,7 +1633,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "512GB",
         "color": "Silver",
-        "price": 11140,
+        "price": 10840,
         "available": true
       },
       {
@@ -1625,7 +1641,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "512GB",
         "color": "Space Black",
-        "price": 11140,
+        "price": 10840,
         "available": true
       },
       {
@@ -1633,7 +1649,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 12040,
+        "price": 11740,
         "available": true
       },
       {
@@ -1641,7 +1657,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "1TB",
         "color": "Silver",
-        "price": 12200,
+        "price": 11900,
         "available": true
       },
       {
@@ -1649,7 +1665,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "2TB",
         "color": "Silver",
-        "price": 12740,
+        "price": 12440,
         "available": true
       },
       {
@@ -1657,7 +1673,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 14800,
+        "price": 14500,
         "available": true
       }
     ],
@@ -1679,7 +1695,7 @@ export const products: Product[] = [
       "Purple": "/images/products/ipad/ipad-11-pink.png",
       "Starlight": "/images/products/ipad/ipad-11-silver.png"
     },
-    "priceFrom": 4600,
+    "priceFrom": 4300,
     "condition": "new",
     "screenSizes": [
       "8.3\""
@@ -1701,31 +1717,49 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 4600,
+        "price": 4300,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Purple",
-        "price": 4650,
+        "price": 4350,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Starlight",
-        "price": 4750,
+        "price": 4450,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 4800,
+        "price": 4500,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Space Gray",
-        "price": 4999,
+        "price": 4699,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Blue",
+        "price": 4700,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Purple",
+        "price": 4700,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Starlight",
+        "price": 4749,
         "available": true
       }
     ],
@@ -1747,7 +1781,7 @@ export const products: Product[] = [
       "Silver": "/images/products/ipad/ipad-11-silver.png",
       "Yellow": "/images/products/ipad/ipad-11-yellow.png"
     },
-    "priceFrom": 3350,
+    "priceFrom": 3050,
     "condition": "new",
     "storage": [
       "128GB",
@@ -1755,8 +1789,8 @@ export const products: Product[] = [
     ],
     "colors": [
       "Yellow",
-      "Blue",
       "Pink",
+      "Blue",
       "Silver"
     ],
     "variants": [
@@ -1764,70 +1798,70 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Yellow",
-        "price": 3350,
-        "available": true
-      },
-      {
-        "chip": "Wi-Fi",
-        "storage": "128GB",
-        "color": "Blue",
-        "price": 3410,
+        "price": 3050,
         "available": true
       },
       {
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Pink",
-        "price": 3410,
+        "price": 3100,
+        "available": true
+      },
+      {
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 3100,
         "available": true
       },
       {
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Silver",
-        "price": 3460,
+        "price": 3150,
         "available": true
       },
       {
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Pink",
-        "price": 4050,
-        "available": true
-      },
-      {
-        "chip": "Wi-Fi",
-        "storage": "256GB",
-        "color": "Silver",
-        "price": 4150,
+        "price": 3750,
         "available": true
       },
       {
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Blue",
-        "price": 4150,
+        "price": 3800,
+        "available": true
+      },
+      {
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Silver",
+        "price": 3850,
+        "available": true
+      },
+      {
+        "chip": "Wi-Fi + Cellular",
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 4100,
         "available": true
       },
       {
         "chip": "Wi-Fi + Cellular",
         "storage": "128GB",
         "color": "Pink",
-        "price": 4750,
+        "price": 4450,
         "available": true
       },
       {
         "chip": "Wi-Fi + Cellular",
         "storage": "128GB",
         "color": "Silver",
-        "price": 4750,
-        "available": true
-      },
-      {
-        "chip": "Wi-Fi + Cellular",
-        "storage": "128GB",
-        "color": "Blue",
-        "price": 4750,
+        "price": 4450,
         "available": true
       }
     ],
@@ -2624,7 +2658,7 @@ export const products: Product[] = [
     "category": "ipad",
     "subcategory": "iPad Air",
     "image": "/images/products/ipad/ipad-pro-m4.png",
-    "priceFrom": 5600,
+    "priceFrom": 5250,
     "condition": "new",
     "availability": "available",
     "screenSizes": [
@@ -2637,7 +2671,8 @@ export const products: Product[] = [
     ],
     "storage": [
       "128GB",
-      "256GB"
+      "256GB",
+      "512GB"
     ],
     "colors": [
       "Blue",
@@ -2651,7 +2686,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Purple",
-        "price": 5600,
+        "price": 5250,
         "available": true
       },
       {
@@ -2659,15 +2694,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Blue",
-        "price": 5600,
-        "available": true
-      },
-      {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi",
-        "storage": "128GB",
-        "color": "Starlight",
-        "price": 5650,
+        "price": 5250,
         "available": true
       },
       {
@@ -2675,71 +2702,79 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 5650,
+        "price": 5300,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Starlight",
+        "price": 5350,
         "available": true
       },
       {
         "screenSize": "11\"",
         "chip": "Wi-Fi",
         "storage": "256GB",
+        "color": "Blue",
+        "price": 5850,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Starlight",
+        "price": 5900,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Space Gray",
+        "price": 5900,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Purple",
+        "price": 6250,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 6990,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "128GB",
+        "color": "Space Gray",
+        "price": 6990,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
         "color": "Blue",
         "price": 6150,
         "available": true
       },
       {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi",
-        "storage": "256GB",
-        "color": "Space Gray",
-        "price": 6200,
-        "available": true
-      },
-      {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi",
-        "storage": "256GB",
-        "color": "Starlight",
-        "price": 6200,
-        "available": true
-      },
-      {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi",
-        "storage": "256GB",
-        "color": "Purple",
-        "price": 6550,
-        "available": true
-      },
-      {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi + Cellular",
-        "storage": "128GB",
-        "color": "Blue",
-        "price": 7290,
-        "available": true
-      },
-      {
-        "screenSize": "11\"",
-        "chip": "Wi-Fi + Cellular",
-        "storage": "128GB",
-        "color": "Space Gray",
-        "price": 7290,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "128GB",
-        "color": "Blue",
-        "price": 6450,
-        "available": true
-      },
-      {
         "screenSize": "13\"",
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 6550,
+        "price": 6250,
         "available": true
       },
       {
@@ -2747,7 +2782,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Starlight",
-        "price": 6750,
+        "price": 6400,
         "available": true
       },
       {
@@ -2755,7 +2790,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "128GB",
         "color": "Purple",
-        "price": 7200,
+        "price": 6900,
         "available": true
       },
       {
@@ -2763,23 +2798,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Space Gray",
-        "price": 7000,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "256GB",
-        "color": "Blue",
-        "price": 8499,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi",
-        "storage": "256GB",
-        "color": "Purple",
-        "price": 8499,
+        "price": 6700,
         "available": true
       },
       {
@@ -2787,7 +2806,39 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Starlight",
-        "price": 8499,
+        "price": 6850,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Blue",
+        "price": 6850,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Purple",
+        "price": 8199,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "512GB",
+        "color": "Space Gray",
+        "price": 7600,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 7100,
         "available": true
       },
       {
@@ -2795,15 +2846,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 7900,
-        "available": true
-      },
-      {
-        "screenSize": "13\"",
-        "chip": "Wi-Fi + Cellular",
-        "storage": "128GB",
-        "color": "Blue",
-        "price": 8290,
+        "price": 7600,
         "available": true
       },
       {
@@ -2811,7 +2854,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "128GB",
         "color": "Starlight",
-        "price": 8290,
+        "price": 7800,
         "available": true
       },
       {
@@ -2819,7 +2862,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "128GB",
         "color": "Purple",
-        "price": 9000,
+        "price": 8700,
         "available": true
       },
       {
@@ -2827,7 +2870,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "256GB",
         "color": "Starlight",
-        "price": 9199,
+        "price": 8899,
         "available": true
       }
     ],
@@ -3476,7 +3519,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/ipad/ipad-pro-spaceblack.png",
       "Silver": "/images/products/ipad/ipad-pro-silver.png"
     },
-    "priceFrom": 7940,
+    "priceFrom": 7550,
     "condition": "new",
     "screenSizes": [
       "11\"",
@@ -3500,7 +3543,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Silver",
-        "price": 7940,
+        "price": 7640,
         "available": true
       },
       {
@@ -3508,7 +3551,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Space Black",
-        "price": 7940,
+        "price": 7640,
         "available": true
       },
       {
@@ -3516,7 +3559,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "256GB",
         "color": "Space Black",
-        "price": 8949,
+        "price": 7550,
         "available": true
       },
       {
@@ -3524,7 +3567,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi",
         "storage": "512GB",
         "color": "Space Black",
-        "price": 9549,
+        "price": 9249,
         "available": true
       },
       {
@@ -3532,7 +3575,7 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "256GB",
         "color": "Silver",
-        "price": 9000,
+        "price": 8700,
         "available": true
       },
       {
@@ -3540,13 +3583,264 @@ export const products: Product[] = [
         "chip": "Wi-Fi + Cellular",
         "storage": "256GB",
         "color": "Space Black",
-        "price": 9050,
+        "price": 8750,
         "available": true
       }
     ],
     "description": "Design incrivelmente fino com o inovador display Ultra Retina XDR Tandem OLED e chip Apple M4.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
+    "active": true
+  },
+  {
+    "id": "ipad-air-m3",
+    "slug": "ipad-air-m3",
+    "name": "iPad Air M3",
+    "category": "ipad",
+    "subcategory": "iPad Air M3",
+    "image": "/images/products/ipad/ipad-11-colors.png",
+    "colorImages": {
+      "Blue": "/images/products/ipad/ipad-11-blue.png",
+      "Space Gray": "/images/products/ipad/ipad-pro-spaceblack.png",
+      "Purple": "/images/products/ipad/ipad-11-pink.png",
+      "Starlight": "/images/products/ipad/ipad-11-silver.png"
+    },
+    "priceFrom": 4900,
+    "condition": "new",
+    "screenSizes": [
+      "11\"",
+      "13\""
+    ],
+    "chips": [
+      "Wi-Fi",
+      "Wi-Fi + Cellular"
+    ],
+    "storage": [
+      "128GB",
+      "256GB"
+    ],
+    "colors": [
+      "Blue",
+      "Space Gray",
+      "Purple",
+      "Starlight"
+    ],
+    "variants": [
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 4900,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Space Gray",
+        "price": 4900,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Purple",
+        "price": 5150,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Starlight",
+        "price": 5299,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Blue",
+        "price": 6090,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Space Gray",
+        "price": 6090,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Purple",
+        "price": 6099,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Starlight",
+        "price": 6099,
+        "available": true
+      },
+      {
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 5900,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Space Gray",
+        "price": 5550,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 5600,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "128GB",
+        "color": "Purple",
+        "price": 5700,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Space Gray",
+        "price": 6400,
+        "available": true
+      },
+      {
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Purple",
+        "price": 6400,
+        "available": true
+      }
+    ],
+    "description": "Leve, potente e versátil com chip Apple M3, tela Liquid Retina brilhante e suporte completo ao Apple Pencil.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "ipad-pro-m2-12-9",
+    "slug": "ipad-pro-m2-12-9",
+    "name": "iPad Pro M2 12.9\"",
+    "category": "ipad",
+    "subcategory": "iPad Pro M2",
+    "image": "/images/products/ipad/ipad-pro-spaceblack.png",
+    "colorImages": {
+      "Space Gray": "/images/products/ipad/ipad-pro-spaceblack.png"
+    },
+    "priceFrom": 6550,
+    "condition": "new",
+    "screenSizes": [
+      "12.9\""
+    ],
+    "chips": [
+      "Wi-Fi"
+    ],
+    "storage": [
+      "256GB"
+    ],
+    "colors": [
+      "Space Gray"
+    ],
+    "variants": [
+      {
+        "screenSize": "12.9\"",
+        "chip": "Wi-Fi",
+        "storage": "256GB",
+        "color": "Space Gray",
+        "price": 6550,
+        "available": true
+      }
+    ],
+    "description": "Tela Liquid Retina XDR de 12.9 polegadas com tecnologia Mini-LED e potência incomparável do chip M2.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "smart-folio-ipad-air-13",
+    "slug": "smart-folio-ipad-air-13",
+    "name": "Smart Folio para iPad Air 13\"",
+    "category": "accessories",
+    "subcategory": "Acessórios iPad",
+    "image": "/images/products/accessories/magic-keyboard.png",
+    "colorImages": {
+      "Charcoal Gray": "/images/products/accessories/magic-keyboard.png"
+    },
+    "priceFrom": 1280,
+    "condition": "new",
+    "colors": [
+      "Charcoal Gray"
+    ],
+    "variants": [
+      {
+        "color": "Charcoal Gray",
+        "price": 1280,
+        "available": true
+      }
+    ],
+    "description": "Capa Smart Folio original Apple para iPad Air de 13 polegadas. Proteção frontal e traseira com suporte dobrável magnético.",
+    "warranty": "1 ano de garantia oficial Apple",
+    "active": true
+  },
+  {
+    "id": "ipad-mini-6",
+    "slug": "ipad-mini-6",
+    "name": "iPad mini 6",
+    "category": "ipad",
+    "subcategory": "iPad mini",
+    "image": "/images/products/ipad/ipad-11-silver.png",
+    "colorImages": {
+      "Starlight": "/images/products/ipad/ipad-11-silver.png"
+    },
+    "priceFrom": 4200,
+    "condition": "new",
+    "screenSizes": [
+      "8.3\""
+    ],
+    "chips": [
+      "Wi-Fi"
+    ],
+    "storage": [
+      "256GB"
+    ],
+    "colors": [
+      "Starlight"
+    ],
+    "variants": [
+      {
+        "storage": "256GB",
+        "color": "Starlight",
+        "price": 4200,
+        "available": true
+      }
+    ],
+    "description": "Design compacto de 8.3 polegadas, chip A15 Bionic e suporte ao Apple Pencil de 2ª geração.",
+    "warranty": "1 ano de garantia oficial Apple",
     "active": true
   }
 ];
