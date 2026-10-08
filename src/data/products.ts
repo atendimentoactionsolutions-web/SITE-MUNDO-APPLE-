@@ -1440,7 +1440,7 @@ export const products: Product[] = [
       "Pink": "/images/products/mac/imac-24-pink.png",
       "Silver": "/images/products/mac/imac-24-silver.png"
     },
-    "priceFrom": 12500,
+    "priceFrom": 13000,
     "condition": "new",
     "screenSizes": [
       "24\""
@@ -1470,7 +1470,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Silver",
-        "price": 12500,
+        "price": 13000,
         "available": true
       },
       {
@@ -1479,7 +1479,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Blue",
-        "price": 12500,
+        "price": 13000,
         "available": true
       },
       {
@@ -1488,7 +1488,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "256GB",
         "color": "Green",
-        "price": 12599,
+        "price": 13099,
         "available": true
       },
       {
@@ -1497,7 +1497,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 17900,
+        "price": 18400,
         "available": true
       },
       {
@@ -1506,7 +1506,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Blue",
-        "price": 19050,
+        "price": 19550,
         "available": true
       },
       {
@@ -1515,7 +1515,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Green",
-        "price": 19050,
+        "price": 19550,
         "available": true
       },
       {
@@ -1524,7 +1524,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Pink",
-        "price": 17990,
+        "price": 18490,
         "available": true
       },
       {
@@ -1533,7 +1533,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 18050,
+        "price": 18550,
         "available": true
       },
       {
@@ -1542,7 +1542,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 19000,
+        "price": 19500,
         "available": true
       },
       {
@@ -1551,7 +1551,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Blue",
-        "price": 19000,
+        "price": 19500,
         "available": true
       },
       {
@@ -1560,7 +1560,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Green",
-        "price": 19000,
+        "price": 19500,
         "available": true
       }
     ],
