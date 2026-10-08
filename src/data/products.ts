@@ -859,7 +859,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 13540,
+    "priceFrom": 14040,
     "condition": "new",
     "screenSizes": [
       "14\""
@@ -886,7 +886,7 @@ export const products: Product[] = [
         "ram": "16GB",
         "storage": "512GB",
         "color": "Space Black",
-        "price": 13540,
+        "price": 14040,
         "available": true
       },
       {
@@ -895,7 +895,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 15500,
+        "price": 16000,
         "available": true
       },
       {
@@ -904,7 +904,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 15500,
+        "price": 16000,
         "available": true
       }
     ],
@@ -924,7 +924,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 16180,
+    "priceFrom": 16680,
     "condition": "new",
     "screenSizes": [
       "14\"",
@@ -952,7 +952,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 16180,
+        "price": 16680,
         "available": true
       },
       {
@@ -961,7 +961,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 16200,
+        "price": 16700,
         "available": true
       },
       {
@@ -970,7 +970,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 19700,
+        "price": 20200,
         "available": true
       },
       {
@@ -979,7 +979,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "2TB",
         "color": "Silver",
-        "price": 18200,
+        "price": 18700,
         "available": true
       },
       {
@@ -988,7 +988,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Silver",
-        "price": 17800,
+        "price": 18300,
         "available": true
       },
       {
@@ -997,7 +997,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 18200,
+        "price": 18700,
         "available": true
       }
     ],
@@ -1017,7 +1017,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 24800,
+    "priceFrom": 25300,
     "condition": "new",
     "screenSizes": [
       "14\"",
@@ -1044,7 +1044,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 24800,
+        "price": 25300,
         "available": true
       },
       {
@@ -1053,7 +1053,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "2TB",
         "color": "Silver",
-        "price": 24800,
+        "price": 25300,
         "available": true
       },
       {
@@ -1062,7 +1062,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 27700,
+        "price": 28200,
         "available": true
       },
       {
@@ -1071,7 +1071,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "2TB",
         "color": "Silver",
-        "price": 27400,
+        "price": 27900,
         "available": true
       },
       {
@@ -1080,7 +1080,7 @@ export const products: Product[] = [
         "ram": "48GB",
         "storage": "2TB",
         "color": "Space Black",
-        "price": 37700,
+        "price": 38200,
         "available": true
       }
     ],
@@ -3474,7 +3474,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 13900,
+    "priceFrom": 14400,
     "condition": "new",
     "screenSizes": [
       "14\"",
@@ -3502,7 +3502,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 13900,
+        "price": 14400,
         "available": true
       },
       {
@@ -3511,7 +3511,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Space Black",
-        "price": 14700,
+        "price": 15200,
         "available": true
       },
       {
@@ -3520,7 +3520,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Silver",
-        "price": 16750,
+        "price": 17250,
         "available": true
       },
       {
@@ -3529,7 +3529,7 @@ export const products: Product[] = [
         "ram": "24GB",
         "storage": "512GB",
         "color": "Space Black",
-        "price": 16950,
+        "price": 17450,
         "available": true
       },
       {
@@ -3538,7 +3538,7 @@ export const products: Product[] = [
         "ram": "48GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 31899,
+        "price": 32399,
         "available": true
       }
     ],
@@ -3557,7 +3557,7 @@ export const products: Product[] = [
     "colorImages": {
       "Space Black": "/images/products/mac/macbook-pro-space-black.png"
     },
-    "priceFrom": 24100,
+    "priceFrom": 24600,
     "condition": "new",
     "screenSizes": [
       "16\""
@@ -3581,7 +3581,7 @@ export const products: Product[] = [
         "ram": "36GB",
         "storage": "1TB",
         "color": "Space Black",
-        "price": 24100,
+        "price": 24600,
         "available": true
       }
     ],
