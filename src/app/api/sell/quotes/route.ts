@@ -156,9 +156,25 @@ export async function POST(request: NextRequest) {
 
       let autoMessage = "";
       if (answers.upgradeGoal && answers.upgradeGoal.productName) {
-        autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de Upgrade / Troca na Mundo Apple.\n\n📱 Aparelho de Entrada: ${modelName} ${storageName}\n✨ Aparelho Desejado: ${answers.upgradeGoal.productName} ${answers.upgradeGoal.storage || ""}\n📋 Código da Cotação: ${publicCode}\n\nNossa equipe já foi notificada e em instantes passaremos as condições especiais de volta para você!`;
+        const tradeInValue = calculation.finalPrice || 0;
+        const targetPrice = Number(answers.upgradeGoal.newPrice) || 0;
+        const differenceToPay = Math.max(0, targetPrice - tradeInValue);
+
+        const tradeInFormatted = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(tradeInValue);
+        const targetFormatted = targetPrice > 0
+          ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(targetPrice)
+          : "Sob Consulta";
+        const diffFormatted = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(differenceToPay);
+
+        const { getMaxInstallment } = await import("@/utils/installments");
+        const maxInstallment = differenceToPay > 0 ? getMaxInstallment(differenceToPay) : null;
+        const installmentText = maxInstallment
+          ? `\n💳 Ou em até 18x de ${new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(maxInstallment.installmentValue)} no cartão`
+          : "";
+
+        autoMessage = `Olá ${custData.name}! 🍏\n\nRecebemos sua solicitação de Upgrade / Troca na Mundo Apple!\n\n📋 Código da Cotação: ${publicCode}\n\n📱 SEU APARELHO USADO (ENTRADA):\n• Modelo: ${modelName} ${storageName}\n• Valor de Avaliação: ${tradeInFormatted}\n\n✨ NOVO DESEJADO (LACRADO):\n• Modelo: ${answers.upgradeGoal.productName} ${answers.upgradeGoal.storage || ""}\n• Valor à vista: ${targetFormatted}\n\n💰 VALOR DA DIFERENÇA (VOLTA A PAGAR):\n• À vista no Pix: ${diffFormatted}${installmentText}\n\n🚀 Nossa equipe já recebeu sua simulação para entrega e retirada expressa em SP!`;
       } else {
-        autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de venda/avaliação na Mundo Apple.\n\n📱 Aparelho: ${modelName} ${storageName}\n💵 Valor Estimado: ${valorFormatado} (Pagamento via PIX)\n📋 Código da Cotação: ${publicCode}\n\nNossa equipe já foi notificada e em instantes daremos continuidade ao seu atendimento!`;
+        autoMessage = `Olá ${custData.name}! 🍏\n\nRecebemos sua solicitação de avaliação para venda na Mundo Apple!\n\n📋 Código da Cotação: ${publicCode}\n\n📱 Aparelho: ${modelName} ${storageName}\n💵 Valor Estimado: ${valorFormatado} (Pagamento via PIX)\n\n🚀 Nossa equipe já foi notificada para agendar a retirada em SP!`;
       }
 
       try {

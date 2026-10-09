@@ -574,24 +574,30 @@ export const TradeInCalculator: React.FC = () => {
 
     const whatsappTradeInUrl = () => {
       const code = quoteResult.quote?.publicCode || "TRC-VAL";
-      const message = `Olá! Gostaria de fazer um Upgrade (Troca) na Mundo Apple Delivery:
+      const message = `Olá! Gostaria de fechar meu Upgrade (Troca) na Mundo Apple:
 
-Código da Simulação: ${code}
+📋 Código da Simulação: ${code}
 
 📱 MEU APARELHO USADO (ENTRADA):
 • Modelo: ${selectedModel?.name}
 • Armazenamento: ${selectedStorage?.displayName}
 • Cor: ${deviceColor || "Padrão"}
+• Avaliação: ${formatCurrency(tradeInValue)}
 
 ✨ PRODUTO NOVO DESEJADO:
 • Modelo: ${selectedNewProduct?.name}
 • Configuração: ${selectedNewStorage || ""} ${selectedNewColor ? `(${selectedNewColor})` : ""}
+• Valor do Novo: ${targetPrice > 0 ? formatCurrency(targetPrice) : "Sob Consulta"}
+
+💰 VALOR DA DIFERENÇA (VOLTA A PAGAR):
+• À vista no Pix: ${formatCurrency(differenceToPay)}
+${maxInstallment && differenceToPay > 0 ? `• Ou em até 18x de ${formatCurrency(maxInstallment.installmentValue)} no cartão` : ""}
 
 👤 MEUS DADOS:
 Nome: ${customerName.trim()}
 WhatsApp: ${customerWhatsapp.trim()}
 
-Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada simultânea em SP!`;
+Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
 
       return `https://wa.me/${storeConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
     };
@@ -645,6 +651,14 @@ Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada s
 
           {!isBlocked && (
             <div className="space-y-4 text-left">
+              {/* WhatsApp Notification Banner */}
+              <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3 text-xs text-emerald-800">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                <span>
+                  Disparamos uma confirmação com os dados e valores desta simulação para o seu WhatsApp (<strong>{customerWhatsapp}</strong>)!
+                </span>
+              </div>
+
               {/* Summary Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-[#D2D2D7] space-y-1">
@@ -655,7 +669,7 @@ Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada s
                     {selectedModel?.name}
                   </div>
                   <div className="text-xs text-emerald-700 font-bold">
-                    Avaliação Sob Consulta
+                    Avaliado em: + {formatCurrency(tradeInValue)}
                   </div>
                 </div>
 
@@ -667,7 +681,7 @@ Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada s
                     {selectedNewProduct?.name}
                   </div>
                   <div className="text-xs text-[#0071E3] font-bold">
-                    Sob Consulta
+                    {targetPrice > 0 ? `Valor: ${formatCurrency(targetPrice)}` : "Sob Consulta"}
                   </div>
                 </div>
               </div>
@@ -675,14 +689,23 @@ Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada s
               {/* Difference Box */}
               <div className="p-6 rounded-3xl bg-gradient-to-br from-[#1D1D1F] to-[#2D2D30] text-white space-y-3 text-center shadow-lg">
                 <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">
-                  Simulação de Upgrade
+                  Valor da Diferença (Volta a Pagar):
                 </span>
-                <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tracking-tight">
-                  Condições Especiais no WhatsApp
+                <div className="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-tight">
+                  {formatCurrency(differenceToPay)}
                 </div>
                 <p className="text-xs text-zinc-300">
-                  Consulte a melhor condição da volta com entrega e retirada rápida em SP!
+                  À vista no Pix com entrega e retirada rápida em SP!
                 </p>
+
+                {maxInstallment && differenceToPay > 0 && (
+                  <div className="pt-3 border-t border-white/10 flex items-center justify-center gap-2 text-xs text-zinc-300">
+                    <CreditCard className="w-4 h-4 text-[#0071E3]" />
+                    <span>
+                      Ou em até <strong className="text-white font-bold">18x de {formatCurrency(maxInstallment.installmentValue)}</strong> no cartão
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -805,7 +828,7 @@ Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada s
                           {p.name}
                         </span>
                         <span className="text-[11px] text-[#0071E3] font-bold">
-                          Sob Consulta
+                          {p.priceFrom > 0 ? `A partir de ${formatCurrency(p.priceFrom)}` : "Sob Consulta"}
                         </span>
                       </div>
                     </div>
@@ -889,7 +912,7 @@ Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada s
             <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 flex items-center justify-between">
               <span className="text-xs text-[#0071E3] font-semibold">Valor do Novo Lacrado:</span>
               <span className="text-sm font-bold text-[#0071E3]">
-                Sob Consulta
+                {selectedNewPrice > 0 ? formatCurrency(selectedNewPrice) : "Sob Consulta"}
               </span>
             </div>
           </div>
@@ -1573,7 +1596,7 @@ Gostaria de consultar o valor da volta e fechar a troca com entrega e retirada s
               </>
             ) : step === totalSteps ? (
               <>
-                <span>Ver Simulação da Troca</span>
+                <span>Ver Avaliação</span>
                 <ArrowRight className="w-4 h-4" />
               </>
             ) : (

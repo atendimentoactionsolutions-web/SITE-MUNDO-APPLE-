@@ -336,6 +336,27 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
     }
   };
 
+  const whatsappSaleUrl = () => {
+    const code = quotePublicCode || "COT-AVAL";
+    const val = estimatedPrice ? formatCurrency(estimatedPrice) : "A combinar";
+    const message = `Olá! Acabei de fazer uma avaliação para venda na Mundo Apple:
+
+📋 Código da Cotação: ${code}
+
+📱 MEU APARELHO:
+• Modelo: ${selectedModel?.name}
+• Armazenamento: ${selectedStorage?.displayName}
+💵 Valor Estimado: ${val} no PIX
+
+👤 MEUS DADOS:
+Nome: ${customerName.trim()}
+WhatsApp: ${customerWhatsapp.trim()}
+
+Gostaria de agendar a avaliação e retirada em SP!`;
+
+    return `https://wa.me/${storeConfig.contact.whatsapp}?text=${encodeURIComponent(message)}`;
+  };
+
   const restart = () => {
     setStep(1);
     setSelectedModel(null);
@@ -891,162 +912,197 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
         {/* ── ETAPA 7: RESULTADO DA AVALIAÇÃO & DADOS DO CLIENTE ── */}
         {step === 7 && (
           <div className="space-y-6 animate-in fade-in duration-200">
-            {/* Value Display Box */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-blue-50/60 border border-blue-200/80 text-center space-y-3">
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0071E3] block">
-                Valor estimado do seu iPhone:
-              </span>
-              <div className="text-3xl sm:text-5xl font-extrabold text-[#1D1D1F] tracking-tight font-display">
-                {estimatedPrice && estimatedPrice > 0 ? (
-                  formatCurrency(estimatedPrice)
-                ) : calculating ? (
-                  <span className="inline-flex items-center gap-2 text-xl font-semibold text-[#86868B]">
-                    <Loader2 className="w-5 h-5 animate-spin" /> Calculando proposta...
-                  </span>
-                ) : (
-                  "Sob Consulta"
-                )}
-              </div>
-              <p className="text-xs sm:text-sm text-[#6E6E73] max-w-md mx-auto leading-relaxed">
-                Esse é o valor estimado que podemos pagar pelo seu aparelho, considerando as informações fornecidas.
-              </p>
-            </div>
-
-            {/* Summary Badge List */}
-            <div className="p-4 bg-[#F5F5F7] rounded-2xl border border-[#E5E5E7] flex flex-wrap gap-2 text-xs font-semibold text-[#1D1D1F]">
-              <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
-                📱 {selectedModel?.name}
-              </span>
-              <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
-                💾 {selectedStorage?.displayName}
-              </span>
-              <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
-                🔋 Bateria:{" "}
-                {batteryHealth === "90_plus"
-                  ? "90%+"
-                  : batteryHealth === "85_89"
-                  ? "85-89%"
-                  : batteryHealth === "80_84"
-                  ? "80-84%"
-                  : "<80%"}
-              </span>
-              <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
-                ✨ Estado:{" "}
-                {physicalCondition === "excellent"
-                  ? "Excelente"
-                  : physicalCondition === "very_good"
-                  ? "Muito bom"
-                  : physicalCondition === "good"
-                  ? "Bom"
-                  : "Com avarias"}
-              </span>
-            </div>
-
-            {/* Client Form Section or Success Confirmation */}
             {quoteSuccess ? (
-              <div className="p-8 rounded-3xl bg-white border border-[#E5E5E7] text-center space-y-5 animate-in fade-in duration-300">
-                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
-                  <CheckCircle2 className="w-8 h-8" />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#1D1D1F] tracking-tight">
-                    Solicitação Enviada!
-                  </h3>
+              /* TELA DE RESULTADO (LIBERADA APÓS PREENCHER DADOS E CLICAR EM VER AVALIAÇÃO) */
+              <div className="space-y-6 animate-in fade-in duration-300">
+                {/* Value Display Box */}
+                <div className="p-6 sm:p-8 rounded-3xl bg-blue-50/60 border border-blue-200/80 text-center space-y-3">
+                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0071E3] block">
+                    Valor estimado do seu iPhone:
+                  </span>
+                  <div className="text-3xl sm:text-5xl font-extrabold text-[#1D1D1F] tracking-tight font-display">
+                    {estimatedPrice && estimatedPrice > 0 ? (
+                      formatCurrency(estimatedPrice)
+                    ) : calculating ? (
+                      <span className="inline-flex items-center gap-2 text-xl font-semibold text-[#86868B]">
+                        <Loader2 className="w-5 h-5 animate-spin" /> Calculando proposta...
+                      </span>
+                    ) : (
+                      "Sob Consulta"
+                    )}
+                    {estimatedPrice && estimatedPrice > 0 ? (
+                      <span className="text-lg sm:text-2xl text-emerald-600 font-bold ml-2">no PIX</span>
+                    ) : null}
+                  </div>
                   <p className="text-xs sm:text-sm text-[#6E6E73] max-w-md mx-auto leading-relaxed">
-                    Recebemos sua avaliação. O sistema da <strong>Mundo Apple</strong> acabou de enviar uma mensagem para o seu WhatsApp (<strong>{customerWhatsapp}</strong>) com todos os dados da sua cotação!
+                    Esse é o valor estimado que pagamos à vista no ato da retirada do seu aparelho.
                   </p>
                 </div>
 
-                <div className="bg-[#F5F5F7] p-4 rounded-2xl border border-[#E5E5E7] inline-block text-left max-w-sm w-full space-y-2 text-xs">
-                  <div className="flex justify-between border-b border-[#E5E5E7] pb-1.5">
-                    <span className="text-[#86868B]">Código da Cotação:</span>
-                    <span className="font-bold text-[#1D1D1F]">{quotePublicCode || "COT-AVAL"}</span>
+                {/* WhatsApp Notification Alert */}
+                <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-start gap-3 text-left">
+                  <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <p className="text-sm font-bold text-emerald-900">
+                      Mensagem Automática Enviada!
+                    </p>
+                    <p className="text-xs text-emerald-800 leading-relaxed">
+                      O sistema da <strong>Mundo Apple</strong> acabou de enviar todos os detalhes desta avaliação para o seu WhatsApp (<strong>{customerWhatsapp}</strong>).
+                    </p>
                   </div>
-                  <div className="flex justify-between border-b border-[#E5E5E7] pb-1.5">
-                    <span className="text-[#86868B]">Aparelho:</span>
-                    <span className="font-medium text-[#1D1D1F]">
+                </div>
+
+                {/* Summary Quote Details */}
+                <div className="bg-[#F5F5F7] p-5 rounded-2xl border border-[#E5E5E7] text-left max-w-md mx-auto space-y-2.5 text-xs">
+                  <div className="flex justify-between border-b border-[#E5E5E7] pb-2">
+                    <span className="text-[#86868B]">Código da Cotação:</span>
+                    <strong className="text-[#0071E3] font-bold text-sm tracking-wide">
+                      {quotePublicCode || "COT-AVAL"}
+                    </strong>
+                  </div>
+                  <div className="flex justify-between border-b border-[#E5E5E7] pb-2">
+                    <span className="text-[#86868B]">Aparelho Avaliado:</span>
+                    <span className="font-semibold text-[#1D1D1F]">
                       {selectedModel?.name} {selectedStorage?.displayName}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#86868B]">Valor Estimado:</span>
-                    <span className="font-bold text-emerald-600">
-                      {estimatedPrice ? formatCurrency(estimatedPrice) : ""} no PIX
+                    <span className="text-[#86868B]">Valor Estimado no PIX:</span>
+                    <span className="font-bold text-emerald-600 text-sm">
+                      {estimatedPrice ? formatCurrency(estimatedPrice) : ""}
                     </span>
                   </div>
                 </div>
 
-                <div className="pt-2">
-                  <p className="text-[11px] text-[#86868B] mb-3">
-                    Fique atento ao seu WhatsApp, nossa equipe já foi notificada.
-                  </p>
+                {/* Action Buttons */}
+                <div className="space-y-3 pt-2">
+                  <a
+                    href={whatsappSaleUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-[#00C853] hover:bg-[#00B048] text-white font-extrabold text-sm sm:text-base shadow-lg transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                  >
+                    <MessageCircle className="w-5 h-5 fill-white" />
+                    <span>Garantir Venda no WhatsApp</span>
+                  </a>
+
                   <button
                     type="button"
                     onClick={restart}
-                    className="px-6 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs sm:text-sm font-semibold rounded-full shadow-sm active:scale-95 transition-all cursor-pointer"
+                    className="px-6 py-3 border border-[#D2D2D7] text-[#1D1D1F] hover:bg-[#F5F5F7] text-xs sm:text-sm font-semibold rounded-full shadow-xs active:scale-95 transition-all cursor-pointer inline-flex items-center justify-center gap-2"
                   >
-                    Fazer nova simulação
+                    <RotateCcw className="w-4 h-4" />
+                    <span>Fazer nova simulação</span>
                   </button>
                 </div>
               </div>
             ) : (
-              <div className="p-6 rounded-3xl bg-white border border-[#E5E5E7] space-y-4">
-                <div className="text-left">
-                  <h3 className="text-lg sm:text-xl font-extrabold text-[#1D1D1F] tracking-tight">
-                    Gostou da avaliação?
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
-                    Preencha seus dados para nossa equipe entrar em contato e finalizar a venda.
+              /* FORMULÁRIO OBRIGATÓRIO ANTES DE VER O VALOR */
+              <div className="space-y-6">
+                {/* Header do Passo Final */}
+                <div className="text-left space-y-1">
+                  <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block">
+                    Último Passo: Seus Dados
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-[#1D1D1F] tracking-tight">
+                    Para onde enviamos a sua avaliação?
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#6E6E73]">
+                    Preencha seu nome e WhatsApp para liberar e ver o valor em dinheiro pelo seu iPhone.
                   </p>
                 </div>
 
-                <form onSubmit={handleFinalSubmit} className="space-y-3.5 pt-1">
-                  <div>
-                    <label className="block text-xs font-bold text-[#1D1D1F] mb-1">
-                      Nome Completo *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={customerName}
-                      onChange={(e) => setCustomerName(e.target.value)}
-                      placeholder="Seu nome"
-                      className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
-                    />
-                  </div>
+                {/* Summary Badge List */}
+                <div className="p-4 bg-[#F5F5F7] rounded-2xl border border-[#E5E5E7] flex flex-wrap gap-2 text-xs font-semibold text-[#1D1D1F]">
+                  <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    📱 {selectedModel?.name}
+                  </span>
+                  <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    💾 {selectedStorage?.displayName}
+                  </span>
+                  <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    🔋 Bateria:{" "}
+                    {batteryHealth === "90_plus"
+                      ? "90%+"
+                      : batteryHealth === "85_89"
+                      ? "85-89%"
+                      : batteryHealth === "80_84"
+                      ? "80-84%"
+                      : "<80%"}
+                  </span>
+                  <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    ✨ Estado:{" "}
+                    {physicalCondition === "excellent"
+                      ? "Excelente"
+                      : physicalCondition === "very_good"
+                      ? "Muito bom"
+                      : physicalCondition === "good"
+                      ? "Bom"
+                      : "Com avarias"}
+                  </span>
+                </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-[#1D1D1F] mb-1">
-                      WhatsApp *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={customerWhatsapp}
-                      onChange={handlePhoneChange}
-                      placeholder="(11) 99999-9999"
-                      className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
-                    />
-                  </div>
+                {/* Formulário de Identificação */}
+                <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#E5E5E7] shadow-sm space-y-4">
+                  <form onSubmit={handleFinalSubmit} className="space-y-4 text-left">
+                    <div>
+                      <label className="block text-xs font-bold text-[#1D1D1F] mb-1.5">
+                        Nome Completo: <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        placeholder="Ex: João da Silva"
+                        className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-[#D2D2D7] focus:border-[#0071E3] focus:bg-white focus:outline-hidden transition-all"
+                      />
+                    </div>
 
-                  <button
-                    type="submit"
-                    disabled={!isStepValid || submitting}
-                    className="w-full py-4 bg-[#00C853] hover:bg-[#00B048] disabled:opacity-50 text-white font-extrabold text-sm sm:text-base rounded-full shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-4"
-                  >
-                    {submitting ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        <span>Enviando proposta...</span>
-                      </>
-                    ) : (
-                      <>
-                        <MessageCircle className="w-5 h-5 fill-white" />
-                        <span>Quero vender</span>
-                      </>
-                    )}
-                  </button>
-                </form>
+                    <div>
+                      <label className="block text-xs font-bold text-[#1D1D1F] mb-1.5">
+                        WhatsApp com DDD: <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        value={customerWhatsapp}
+                        onChange={handlePhoneChange}
+                        placeholder="(11) 99999-9999"
+                        className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-[#D2D2D7] focus:border-[#0071E3] focus:bg-white focus:outline-hidden transition-all"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3 pt-3">
+                      <button
+                        type="button"
+                        onClick={() => setStep(6)}
+                        className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-[#6E6E73] hover:text-[#1D1D1F] rounded-full hover:bg-[#F5F5F7] transition-colors cursor-pointer"
+                      >
+                        <ArrowLeft className="w-3.5 h-3.5" />
+                        <span>Voltar</span>
+                      </button>
+
+                      <button
+                        type="submit"
+                        disabled={!isStepValid || submitting}
+                        className="flex-1 py-3.5 bg-[#00C853] hover:bg-[#00B048] disabled:opacity-50 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      >
+                        {submitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <span>Calculando...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Ver Avaliação</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             )}
 
@@ -1081,24 +1137,10 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
                 onClick={() => setStep((s) => Math.min(7, s + 1))}
                 className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs sm:text-sm font-semibold rounded-full shadow-sm active:scale-95 transition-all cursor-pointer"
               >
-                <span>{step === 6 ? "Ver Avaliação" : "Continuar"}</span>
+                <span>Continuar</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             )}
-          </div>
-        )}
-
-        {/* Restart Button on Final Step */}
-        {step === 7 && (
-          <div className="pt-4 text-center">
-            <button
-              type="button"
-              onClick={restart}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#86868B] hover:text-[#0071E3] transition-colors cursor-pointer"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Fazer nova simulação</span>
-            </button>
           </div>
         )}
       </div>

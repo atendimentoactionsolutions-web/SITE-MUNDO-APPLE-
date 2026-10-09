@@ -191,31 +191,71 @@ export async function sendWhatsAppMessage(rawPhone: string, text: string): Promi
       clean = "55" + clean;
     }
 
-    // Servidor WhatsApp Gratuito (Render.com) via Baileys
+    // 1. Tentar Servidor WhatsApp Gratuito (Render.com) via Baileys
     const waServerUrl = process.env.WA_SERVER_URL || "https://mundo-apple-whatsapp.onrender.com";
     const waApiSecret = process.env.WA_API_SECRET || "mundoapple2024";
 
     console.log(`[WHATSAPP] Tentando envio para ${clean} via ${waServerUrl}...`);
 
-    const res = await fetch(`${waServerUrl}/send`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": waApiSecret,
-      },
-      body: JSON.stringify({ phone: clean, message: text }),
-    });
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000);
 
-    const data = await res.json().catch(() => ({}));
-    if (res.ok && data.success) {
-      console.log(`[WHATSAPP] ✅ Mensagem entregue com sucesso para ${clean}`);
-      return { success: true };
+      const res = await fetch(`${waServerUrl}/send`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": waApiSecret,
+        },
+        body: JSON.stringify({ phone: clean, message: text }),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        console.log(`[WHATSAPP] ✅ Mensagem entregue com sucesso via Render para ${clean}`);
+        return { success: true };
+      }
+      console.warn(`[WHATSAPP] Render retornou erro ou não confirmou. Tentando Z-API...`, data);
+    } catch (renderErr) {
+      console.warn(`[WHATSAPP] Timeout ou indisponibilidade no Render. Tentando Z-API...`, renderErr);
     }
 
-    console.error(`[WHATSAPP] ❌ Erro ao enviar pelo servidor Render:`, data);
-    return { success: false, error: data?.error || "Erro no servidor WhatsApp" };
+    // 2. Fallback: Z-API Cloud WhatsApp
+    const zapiSendUrl = process.env.ZAPI_SEND_URL;
+    const zapiClientToken = process.env.ZAPI_CLIENT_TOKEN;
+
+    if (zapiSendUrl) {
+      console.log(`[WHATSAPP] Tentando envio fallback via Z-API para ${clean}...`);
+      try {
+        const zapiRes = await fetch(zapiSendUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(zapiClientToken ? { "Client-Token": zapiClientToken } : {}),
+          },
+          body: JSON.stringify({
+            phone: clean,
+            message: text,
+          }),
+        });
+
+        const zapiData = await zapiRes.json().catch(() => ({}));
+        if (zapiRes.ok && (zapiData.zaapId || zapiData.messageId || zapiData.id || !zapiData.error)) {
+          console.log(`[WHATSAPP] ✅ Mensagem entregue com sucesso via Z-API para ${clean}`);
+          return { success: true };
+        }
+        console.error(`[WHATSAPP] ❌ Erro no fallback Z-API:`, zapiData);
+      } catch (zapiErr) {
+        console.error(`[WHATSAPP] ❌ Falha de conexão no fallback Z-API:`, zapiErr);
+      }
+    }
+
+    return { success: false, error: "Falha no envio de WhatsApp (Render e Z-API)" };
   } catch (err: any) {
     console.error("[WHATSAPP] ❌ Exceção ao enviar mensagem:", err);
     return { success: false, error: err?.message || "Erro interno ao enviar mensagem" };
   }
 }
+
