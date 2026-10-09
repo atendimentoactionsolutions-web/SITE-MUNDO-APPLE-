@@ -50,6 +50,56 @@ interface StorageOption {
   capacityGb: number;
 }
 
+const colorMap: Record<string, string> = {
+  "Black": "#1D1D1F",
+  "Space Black": "#18181A",
+  "Midnight": "#1B212C",
+  "White": "#F5F5F7",
+  "Cloud White": "#FAFAFC",
+  "Starlight": "#F0EBE3",
+  "Silver": "#E3E4E6",
+  "Space Gray": "#535150",
+  "Natural": "#8E8B82",
+  "Natural Titanium": "#8E8B82",
+  "Black Titanium": "#1E1E20",
+  "White Titanium": "#F5F5F7",
+  "Desert Titanium": "#C5B49E",
+  "Deep Blue": "#223854",
+  "Dark Blue": "#223854",
+  "Blue": "#3B6B96",
+  "Mist Blue": "#6E93B2",
+  "Sky Blue": "#7EA2C6",
+  "Teal": "#43828A",
+  "Ultramarine": "#38529A",
+  "Pink": "#E8B2C0",
+  "Soft Pink": "#EAC2CE",
+  "Sage": "#829383",
+  "Lavender": "#B1A1C6",
+  "Light Gold": "#E5D4B3",
+  "Gold": "#E5D4B3",
+  "Cosmic Orange": "#D85E30",
+  "Citrus": "#D9E24C",
+  "Indigo": "#3B485A",
+  "Blush": "#E8CBCB",
+  "Green": "#4C8A68",
+  "Yellow": "#F2D358",
+  "Jet Black": "#121214",
+  "Rose Gold": "#E5B09E",
+  "Orange": "#D85E30",
+  "Purple": "#A594B8",
+  "Red": "#D32F2F",
+  "Preto": "#1D1D1F",
+  "Titânio Preto": "#1E1E20",
+  "Prateado": "#E3E4E6",
+  "Titânio Natural": "#8E8B82",
+  "Bordô": "#5A1827",
+  "Burgundy": "#5A1827",
+  "Glacier": "#B5C8D5",
+  "Céu Noturno": "#1C1F26",
+  "Branco-Estrela": "#F0EBE3",
+  "Branco": "#F5F5F7",
+};
+
 const upgradeCategories = [
   { id: "iphone", label: "iPhones", icon: Smartphone },
   { id: "mac", label: "Mac & MacBooks", icon: Laptop },
@@ -137,52 +187,93 @@ export const TradeInCalculator: React.FC = () => {
   // Derived options for selected new product
   const selectedProductStorages = useMemo(() => {
     if (!selectedNewProduct) return [];
-    if (selectedNewProduct.storage && selectedNewProduct.storage.length > 0) {
-      return selectedNewProduct.storage;
-    }
     if (selectedNewProduct.variants && selectedNewProduct.variants.length > 0) {
       const set = new Set(
         selectedNewProduct.variants.map((v) => v.storage).filter(Boolean) as string[]
       );
-      return Array.from(set);
+      const arr = Array.from(set);
+      if (arr.length > 0) return arr;
+    }
+    if (selectedNewProduct.storage && selectedNewProduct.storage.length > 0) {
+      return selectedNewProduct.storage;
     }
     return [];
   }, [selectedNewProduct]);
 
-  const selectedProductColors = useMemo(() => {
+  // Derived available colors for the currently selected storage
+  const availableColorsForStorage = useMemo(() => {
     if (!selectedNewProduct) return [];
+    if (selectedNewProduct.variants && selectedNewProduct.variants.length > 0) {
+      // 1. Try colors matching the currently selected storage
+      const matching = selectedNewProduct.variants.filter(
+        (v) => !selectedNewStorage || v.storage?.toLowerCase() === selectedNewStorage?.toLowerCase()
+      );
+      const colorsForStg = Array.from(
+        new Set(matching.map((v) => v.color).filter(Boolean) as string[])
+      );
+      if (colorsForStg.length > 0) return colorsForStg;
+
+      // 2. Fallback to all variant colors
+      const allVariantColors = Array.from(
+        new Set(selectedNewProduct.variants.map((v) => v.color).filter(Boolean) as string[])
+      );
+      if (allVariantColors.length > 0) return allVariantColors;
+    }
     if (selectedNewProduct.colors && selectedNewProduct.colors.length > 0) {
       return selectedNewProduct.colors;
     }
-    if (selectedNewProduct.variants && selectedNewProduct.variants.length > 0) {
-      const set = new Set(
-        selectedNewProduct.variants.map((v) => v.color).filter(Boolean) as string[]
-      );
-      return Array.from(set);
-    }
     return [];
-  }, [selectedNewProduct]);
+  }, [selectedNewProduct, selectedNewStorage]);
 
+  // Keep storage and color strictly synchronized with available options
   useEffect(() => {
-    if (selectedNewProduct) {
-      if (selectedProductStorages.length > 0 && !selectedNewStorage) {
+    if (!selectedNewProduct) return;
+
+    if (selectedProductStorages.length > 0) {
+      const hasValidStorage = selectedProductStorages.some(
+        (s) => s.toLowerCase() === selectedNewStorage.toLowerCase()
+      );
+      if (!selectedNewStorage || !hasValidStorage) {
         setSelectedNewStorage(selectedProductStorages[0]);
       }
-      if (selectedProductColors.length > 0 && !selectedNewColor) {
-        setSelectedNewColor(selectedProductColors[0]);
+    }
+  }, [selectedNewProduct, selectedProductStorages, selectedNewStorage]);
+
+  useEffect(() => {
+    if (!selectedNewProduct) return;
+
+    if (availableColorsForStorage.length > 0) {
+      const hasValidColor = availableColorsForStorage.some(
+        (c) => c.toLowerCase() === selectedNewColor.toLowerCase()
+      );
+      if (!selectedNewColor || !hasValidColor) {
+        setSelectedNewColor(availableColorsForStorage[0]);
       }
     }
-  }, [selectedNewProduct, selectedProductStorages, selectedProductColors, selectedNewStorage, selectedNewColor]);
+  }, [selectedNewProduct, availableColorsForStorage, selectedNewColor]);
 
-  // Calculate new target price
+  // Calculate new target price with bulletproof precision
   const selectedNewPrice = useMemo(() => {
     if (!selectedNewProduct) return 0;
     if (selectedNewProduct.variants && selectedNewProduct.variants.length > 0) {
-      const matched = selectedNewProduct.variants.find(
+      // 1. Exact match: Storage AND Color (case-insensitive)
+      let matched = selectedNewProduct.variants.find(
         (v) =>
-          (!selectedNewStorage || v.storage === selectedNewStorage) &&
-          (!selectedNewColor || v.color === selectedNewColor)
+          (!selectedNewStorage || v.storage?.toLowerCase() === selectedNewStorage.toLowerCase()) &&
+          (!selectedNewColor || v.color?.toLowerCase() === selectedNewColor.toLowerCase())
       );
+      // 2. Fallback: Match by storage alone
+      if (!matched && selectedNewStorage) {
+        matched = selectedNewProduct.variants.find(
+          (v) => v.storage?.toLowerCase() === selectedNewStorage.toLowerCase()
+        );
+      }
+      // 3. Fallback: Match by color alone
+      if (!matched && selectedNewColor) {
+        matched = selectedNewProduct.variants.find(
+          (v) => v.color?.toLowerCase() === selectedNewColor.toLowerCase()
+        );
+      }
       if (matched && matched.price > 0) return matched.price;
     }
     return selectedNewProduct.priceFrom || 0;
@@ -782,6 +873,8 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                     onClick={() => {
                       setSelectedUpgradeCategory(c.id);
                       setSelectedNewProduct(null);
+                      setSelectedNewStorage("");
+                      setSelectedNewColor("");
                     }}
                     className={`px-3.5 py-2 rounded-full text-xs font-bold shrink-0 flex items-center gap-1.5 transition-all cursor-pointer ${
                       isSel
@@ -806,6 +899,23 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                     type="button"
                     onClick={() => {
                       setSelectedNewProduct(p);
+                      const pStorages = p.variants && p.variants.length > 0
+                        ? Array.from(new Set(p.variants.map((v) => v.storage).filter(Boolean) as string[]))
+                        : (p.storage || []);
+                      const initialStorage = pStorages[0] || "";
+                      setSelectedNewStorage(initialStorage);
+
+                      const pColors = p.variants && p.variants.length > 0
+                        ? Array.from(
+                            new Set(
+                              p.variants
+                                .filter((v) => !initialStorage || v.storage?.toLowerCase() === initialStorage.toLowerCase())
+                                .map((v) => v.color)
+                                .filter(Boolean) as string[]
+                            )
+                          )
+                        : (p.colors || []);
+                      setSelectedNewColor(pColors[0] || "");
                     }}
                     className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
                       isSel
@@ -862,19 +972,39 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {selectedProductStorages.map((stg) => {
-                    const isSel = selectedNewStorage === stg;
+                    const isSel = selectedNewStorage?.toLowerCase() === stg.toLowerCase();
+                    const stgVariants = selectedNewProduct?.variants?.filter(
+                      (v) => v.storage?.toLowerCase() === stg.toLowerCase()
+                    ) || [];
+                    const minStgPrice = stgVariants.length > 0
+                      ? Math.min(...stgVariants.map((v) => v.price).filter((p) => p > 0))
+                      : 0;
+
                     return (
                       <button
                         key={stg}
                         type="button"
-                        onClick={() => setSelectedNewStorage(stg)}
-                        className={`py-3 px-3 rounded-2xl border text-center font-bold text-xs sm:text-sm transition-all cursor-pointer ${
+                        onClick={() => {
+                          setSelectedNewStorage(stg);
+                          if (stgVariants.length > 0) {
+                            const colorsForThisStg = stgVariants.map((v) => v.color).filter(Boolean) as string[];
+                            if (colorsForThisStg.length > 0 && !colorsForThisStg.some((c) => c.toLowerCase() === selectedNewColor.toLowerCase())) {
+                              setSelectedNewColor(colorsForThisStg[0]);
+                            }
+                          }
+                        }}
+                        className={`p-3 rounded-2xl border text-center transition-all cursor-pointer ${
                           isSel
-                            ? "bg-[#0071E3] text-white border-[#0071E3] shadow-sm"
+                            ? "bg-[#0071E3] text-white border-[#0071E3] shadow-md ring-2 ring-[#0071E3]/20"
                             : "bg-white border-[#D2D2D7] text-[#1D1D1F] hover:bg-[#F5F5F7]"
                         }`}
                       >
-                        {stg}
+                        <span className="block text-sm font-bold">{stg}</span>
+                        {minStgPrice > 0 && (
+                          <span className={`block text-[10px] mt-0.5 ${isSel ? "text-blue-100 font-semibold" : "text-[#86868B]"}`}>
+                            a partir de {formatCurrency(minStgPrice)}
+                          </span>
+                        )}
                       </button>
                     );
                   })}
@@ -882,26 +1012,49 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
               </div>
             )}
 
-            {selectedProductColors.length > 0 && (
+            {availableColorsForStorage.length > 0 && (
               <div className="space-y-2">
                 <label className="text-xs font-semibold text-[#1D1D1F] block">
                   Cor do Novo:
                 </label>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProductColors.map((col) => {
-                    const isSel = selectedNewColor === col;
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {availableColorsForStorage.map((col) => {
+                    const isSel = selectedNewColor?.toLowerCase() === col.toLowerCase();
+                    const colorHex = colorMap[col] || "#8E8E93";
+                    const varForColor = selectedNewProduct?.variants?.find(
+                      (v) =>
+                        (!selectedNewStorage || v.storage?.toLowerCase() === selectedNewStorage.toLowerCase()) &&
+                        v.color?.toLowerCase() === col.toLowerCase()
+                    );
+                    const colPrice = varForColor?.price;
+
                     return (
                       <button
                         key={col}
                         type="button"
                         onClick={() => setSelectedNewColor(col)}
-                        className={`px-3.5 py-2 rounded-full border text-xs font-bold transition-all cursor-pointer ${
+                        className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2.5 transition-all cursor-pointer ${
                           isSel
-                            ? "bg-[#0071E3] text-white border-[#0071E3] shadow-sm"
+                            ? "bg-[#0071E3] text-white border-[#0071E3] shadow-md ring-2 ring-[#0071E3]/20"
                             : "bg-white border-[#D2D2D7] text-[#1D1D1F] hover:bg-[#F5F5F7]"
                         }`}
                       >
-                        {col}
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span
+                            className="w-4 h-4 rounded-full border border-black/10 shrink-0 shadow-xs"
+                            style={{ backgroundColor: colorHex }}
+                          />
+                          <span className="text-xs font-bold truncate">{col}</span>
+                        </div>
+
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          {colPrice && colPrice > 0 && (
+                            <span className={`text-xs font-bold ${isSel ? "text-white" : "text-emerald-600"}`}>
+                              {formatCurrency(colPrice)}
+                            </span>
+                          )}
+                          {isSel && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                        </div>
                       </button>
                     );
                   })}
@@ -911,7 +1064,7 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
 
             <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 flex items-center justify-between">
               <span className="text-xs text-[#0071E3] font-semibold">Valor do Novo Lacrado:</span>
-              <span className="text-sm font-bold text-[#0071E3]">
+              <span className="text-lg font-bold text-[#0071E3]">
                 {selectedNewPrice > 0 ? formatCurrency(selectedNewPrice) : "Sob Consulta"}
               </span>
             </div>
