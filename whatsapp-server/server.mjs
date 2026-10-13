@@ -177,23 +177,51 @@ app.post("/send", auth, async (req, res) => {
 
   let clean = phone.replace(/\D/g, "");
   if (clean.length === 10 || clean.length === 11) clean = "55" + clean;
-  const jid = `${clean}@s.whatsapp.net`;
 
   try {
-    if (waStatus !== "CONNECTED") {
+    if (waStatus !== "CONNECTED" || !waSocket) {
       const sock = await initWhatsApp().catch(() => null);
       if (!sock || waStatus !== "CONNECTED") {
         return res.status(503).json({ success: false, error: "WhatsApp não conectado. Acesse /qr para conectar." });
       }
     }
 
-    await waSocket.sendMessage(jid, { text: message });
-    console.log(`✅ Mensagem enviada para ${clean}`);
-    return res.json({ success: true });
+    // Resolução inteligente do JID para números do Brasil (com ou sem 9º dígito)
+    let targetJid = `${clean}@s.whatsapp.net`;
+    try {
+      const check1 = await waSocket.onWhatsApp(clean);
+      if (check1 && check1.length > 0 && check1[0].exists) {
+        targetJid = check1[0].jid;
+        console.log(`[WA] JID oficial verificado para ${clean}: ${targetJid}`);
+      } else if (clean.startsWith("55") && clean.length === 13) {
+        // Tentar variação sem o 9º dígito
+        const withoutNine = clean.slice(0, 4) + clean.slice(5);
+        const check2 = await waSocket.onWhatsApp(withoutNine);
+        if (check2 && check2.length > 0 && check2[0].exists) {
+          targetJid = check2[0].jid;
+          console.log(`[WA] JID oficial verificado SEM 9º dígito para ${withoutNine}: ${targetJid}`);
+        }
+      } else if (clean.startsWith("55") && clean.length === 12) {
+        // Tentar variação com o 9º dígito
+        const withNine = clean.slice(0, 4) + "9" + clean.slice(4);
+        const check3 = await waSocket.onWhatsApp(withNine);
+        if (check3 && check3.length > 0 && check3[0].exists) {
+          targetJid = check3[0].jid;
+          console.log(`[WA] JID oficial verificado COM 9º dígito para ${withNine}: ${targetJid}`);
+        }
+      }
+    } catch (checkErr) {
+      console.warn("[WA] Aviso ao consultar onWhatsApp:", checkErr.message);
+    }
+
+    await waSocket.sendMessage(targetJid, { text: message });
+    console.log(`✅ Mensagem enviada para ${clean} (JID: ${targetJid})`);
+    return res.json({ success: true, jid: targetJid });
   } catch (err) {
     console.error("Erro ao enviar:", err);
     return res.status(500).json({ success: false, error: err.message });
   }
+
 });
 
 // POST /reconnect — força reconexão
