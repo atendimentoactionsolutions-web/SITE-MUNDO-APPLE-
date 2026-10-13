@@ -126,8 +126,15 @@ function auth(req, res, next) {
 
 // GET /status — retorna status da conexão
 app.get("/status", auth, (req, res) => {
-  res.json({ status: waStatus, user: waUser, hasQr: !!waQrCode });
+  res.json({ status: waStatus, user: waUser, hasQr: !!waQrCode, qrCodeDataUrl: waQrCode });
 });
+
+// POST /disconnect — desconecta e reseta sessão
+app.post("/disconnect", auth, async (req, res) => {
+  await initWhatsApp(true).catch(() => {});
+  res.json({ success: true, message: "Desconectado com sucesso." });
+});
+
 
 // GET /qr — retorna página HTML com QR Code para escanear
 app.get("/qr", auth, async (req, res) => {

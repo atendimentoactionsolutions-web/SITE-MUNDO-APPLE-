@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export async function POST() {
   try {
     await disconnectWhatsApp();
-    const status = getWhatsAppStatus();
+    const status = await getWhatsAppStatus();
     return NextResponse.json({ success: true, ...status });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err?.message }, { status: 500 });

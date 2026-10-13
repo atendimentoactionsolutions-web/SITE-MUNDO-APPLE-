@@ -19,13 +19,32 @@ export interface WhatsAppStatus {
   phoneNumber: string | null;
 }
 
-export function getWhatsAppStatus(): WhatsAppStatus {
+export async function getWhatsAppStatus(): Promise<WhatsAppStatus> {
+  const waServerUrl = process.env.WA_SERVER_URL || "http://127.0.0.1:3001";
+  const waApiSecret = process.env.WA_API_SECRET || "mundoapple2024";
+
+  try {
+    const res = await fetch(`${waServerUrl}/status`, {
+      headers: { "x-api-key": waApiSecret },
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return {
+        status: data.status || "DISCONNECTED",
+        qrCodeDataUrl: data.qrCodeDataUrl || null,
+        phoneNumber: data.user || null,
+      };
+    }
+  } catch (err) {}
+
   return {
     status: global.__waStatus || "DISCONNECTED",
     qrCodeDataUrl: global.__waQrCode || null,
     phoneNumber: global.__waUser || null,
   };
 }
+
 
 export async function initWhatsApp(forceReset = false): Promise<any> {
   if (forceReset) {
@@ -158,6 +177,16 @@ export async function initWhatsApp(forceReset = false): Promise<any> {
 }
 
 export async function disconnectWhatsApp() {
+  const waServerUrl = process.env.WA_SERVER_URL || "http://127.0.0.1:3001";
+  const waApiSecret = process.env.WA_API_SECRET || "mundoapple2024";
+
+  try {
+    await fetch(`${waServerUrl}/disconnect`, {
+      method: "POST",
+      headers: { "x-api-key": waApiSecret },
+    });
+  } catch (err) {}
+
   if (global.__waSocket) {
     try {
       await global.__waSocket.logout();
@@ -191,11 +220,12 @@ export async function sendWhatsAppMessage(rawPhone: string, text: string): Promi
       clean = "55" + clean;
     }
 
-    // 1. Tentar Servidor WhatsApp Gratuito (Render.com) via Baileys
-    const waServerUrl = process.env.WA_SERVER_URL || "https://mundo-apple-whatsapp.onrender.com";
+    // 1. Tentar Servidor WhatsApp Local da VPS ou Render via Baileys
+    const waServerUrl = process.env.WA_SERVER_URL || "http://127.0.0.1:3001";
     const waApiSecret = process.env.WA_API_SECRET || "mundoapple2024";
 
     console.log(`[WHATSAPP] Tentando envio para ${clean} via ${waServerUrl}...`);
+
 
     try {
       const controller = new AbortController();

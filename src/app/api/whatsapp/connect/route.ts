@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     // Wait a brief moment for QR generation
     await new Promise((r) => setTimeout(r, 1200));
 
-    const status = getWhatsAppStatus();
+    const status = await getWhatsAppStatus();
     return NextResponse.json({ success: true, ...status });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err?.message }, { status: 500 });
