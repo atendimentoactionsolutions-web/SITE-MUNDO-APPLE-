@@ -1955,10 +1955,10 @@ export const products: Product[] = [
     "name": "Apple Watch Ultra 4",
     "category": "watch",
     "subcategory": "Apple Watch Ultra",
-    "image": "/images/apple-showcase/watch-ultra-4.jpg",
+    "image": "/images/products/watch/apple-watch-ultra-4-cutout.png",
     "colorImages": {
-      "Titânio Natural": "/images/products/watch/apple-watch-ultra-natural.png",
-      "Titânio Preto": "/images/products/watch/apple-watch-ultra-black.png"
+      "Titânio Natural": "/images/products/watch/apple-watch-ultra-natural-cutout.png",
+      "Titânio Preto": "/images/products/watch/apple-watch-ultra-black-cutout.png"
     },
     "priceFrom": 5600,
     "condition": "new",
@@ -1988,7 +1988,7 @@ export const products: Product[] = [
     "name": "Apple Watch Series 12",
     "category": "watch",
     "subcategory": "Apple Watch Series",
-    "image": "/images/products/watch/apple-watch-s12-v2.png",
+    "image": "/images/products/watch/apple-watch-s12-v2-cutout.png",
     "priceFrom": 3200,
     "condition": "new",
     "availability": "available",
@@ -2063,12 +2063,12 @@ export const products: Product[] = [
     "name": "Apple Watch Series 11",
     "category": "watch",
     "subcategory": "Apple Watch Series 11",
-    "image": "/images/products/watch/apple-watch-s11-black.png",
+    "image": "/images/products/watch/apple-watch-s11-black-cutout.png",
     "colorImages": {
-      "Jet Black": "/images/products/watch/apple-watch-s11-black.png",
-      "Rose Gold": "/images/products/watch/apple-watch-s11-rosegold.png",
-      "Space Gray": "/images/products/watch/apple-watch-s11-black.png",
-      "Silver": "/images/products/watch/apple-watch-s11-silver.png"
+      "Jet Black": "/images/products/watch/apple-watch-s11-black-cutout.png",
+      "Rose Gold": "/images/products/watch/apple-watch-s11-rosegold-cutout.png",
+      "Space Gray": "/images/products/watch/apple-watch-s11-black-cutout.png",
+      "Silver": "/images/products/watch/apple-watch-s11-silver-cutout.png"
     },
     "priceFrom": 2500,
     "condition": "new",
@@ -2143,10 +2143,10 @@ export const products: Product[] = [
     "name": "Apple Watch Ultra 3 (49mm)",
     "category": "watch",
     "subcategory": "Apple Watch Ultra 3",
-    "image": "/images/products/watch/apple-watch-ultra-natural.png",
+    "image": "/images/products/watch/apple-watch-ultra-natural-cutout.png",
     "colorImages": {
-      "Black Titanium": "/images/products/watch/apple-watch-ultra-black.png",
-      "Natural Titanium": "/images/products/watch/apple-watch-ultra-natural.png"
+      "Black Titanium": "/images/products/watch/apple-watch-ultra-black-cutout.png",
+      "Natural Titanium": "/images/products/watch/apple-watch-ultra-natural-cutout.png"
     },
     "priceFrom": 4930,
     "condition": "new",
