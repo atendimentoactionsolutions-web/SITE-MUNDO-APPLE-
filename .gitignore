@@ -8,3 +8,5 @@ scripts/*.log
 .github
 /src/generated/prisma
 .whatsapp-session
+!.github/
+!.github/workflows/

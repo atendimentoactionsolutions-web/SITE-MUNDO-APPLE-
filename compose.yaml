@@ -1,0 +1,33 @@
+name: mundo-apple-site
+
+services:
+  web:
+    build:
+      context: https://github.com/atendimentoactionsolutions-web/SITE-MUNDO-APPLE-.git#main
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    init: true
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      DB_BACKUP_FILE: /app/data/db_backup.json
+    volumes:
+      - app-data:/app/data
+      - whatsapp-session:/app/.whatsapp-session
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+
+volumes:
+  app-data:
+  whatsapp-session:

@@ -1,0 +1,60 @@
+name: Deploy to Hostinger VPS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostinger-vps-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy website
+    runs-on: ubuntu-latest
+    env:
+      VPS_DEPLOY_ENABLED: ${{ vars.VPS_DEPLOY_ENABLED }}
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_PORT: ${{ secrets.VPS_PORT }}
+      VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+      VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+    steps:
+      - name: Check deployment credentials
+        run: |
+          if [ "$VPS_DEPLOY_ENABLED" != "true" ] || [ -z "$VPS_HOST" ] || [ -z "$VPS_USER" ] || [ -z "$VPS_SSH_KEY" ] || [ -z "$VPS_KNOWN_HOSTS" ]; then
+            echo "::notice::Deployment skipped. Enable VPS_DEPLOY_ENABLED and configure the VPS connection repository secrets before deployment."
+            exit 0
+          fi
+
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH
+        if: ${{ env.VPS_DEPLOY_ENABLED == 'true' && env.VPS_HOST != '' && env.VPS_USER != '' && env.VPS_SSH_KEY != '' && env.VPS_KNOWN_HOSTS != '' }}
+        run: |
+          install -m 700 -d "$HOME/.ssh"
+          printf '%s\n' "$VPS_SSH_KEY" > "$HOME/.ssh/deploy_key"
+          chmod 600 "$HOME/.ssh/deploy_key"
+          printf '%s\n' "$VPS_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/known_hosts"
+
+      - name: Prepare deployment directory
+        if: ${{ env.VPS_DEPLOY_ENABLED == 'true' && env.VPS_HOST != '' && env.VPS_USER != '' && env.VPS_SSH_KEY != '' && env.VPS_KNOWN_HOSTS != '' }}
+        run: |
+          PORT="${VPS_PORT:-22}"
+          ssh -i "$HOME/.ssh/deploy_key" -p "$PORT" "$VPS_USER@$VPS_HOST" \
+            "mkdir -p /opt/mundo-apple-site"
+          scp -i "$HOME/.ssh/deploy_key" -P "$PORT" -o StrictHostKeyChecking=yes compose.yaml \
+            "$VPS_USER@$VPS_HOST:/opt/mundo-apple-site/compose.yaml"
+
+      - name: Build and restart website
+        if: ${{ env.VPS_DEPLOY_ENABLED == 'true' && env.VPS_HOST != '' && env.VPS_USER != '' && env.VPS_SSH_KEY != '' && env.VPS_KNOWN_HOSTS != '' }}
+        run: |
+          PORT="${VPS_PORT:-22}"
+          ssh -i "$HOME/.ssh/deploy_key" -p "$PORT" "$VPS_USER@$VPS_HOST" \
+            "cd /opt/mundo-apple-site && docker compose up -d --build --remove-orphans"

@@ -2,7 +2,8 @@ import fs from "fs";
 import path from "path";
 
 // Resolving absolute path to db_backup.json inside the project
-const BACKUP_FILE = path.join(process.cwd(), "db_backup.json");
+const BACKUP_FILE =
+  process.env.DB_BACKUP_FILE || path.join(process.cwd(), "db_backup.json");
 
 // Helper to load persistent database state from local JSON file
 function loadDatabaseState() {

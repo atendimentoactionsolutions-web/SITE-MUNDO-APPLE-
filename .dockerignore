@@ -1,0 +1,13 @@
+.git
+.github
+.next
+node_modules
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+*.log
+scripts/*.log
+.whatsapp-session
+whatsapp-server
+db_backup.json
