@@ -258,7 +258,7 @@ app.post("/send", auth, async (req, res) => {
     let targetJid = `${clean}@s.whatsapp.net`;
     try {
       const check1 = await waSocket.onWhatsApp(clean);
-      if (check1 && check1.length > > 0 && check1[0].exists) {
+      if (check1 && check1.length > 0 && check1[0].exists) {
         targetJid = check1[0].jid;
         console.log(`[WA] JID oficial verificado para ${clean}: ${targetJid}`);
       } else if (clean.startsWith("55") && clean.length === 13) {
