@@ -1,14 +1,9 @@
 import React from "react";
 import { getProducts } from "@/lib/data";
-import { Hero } from "@/components/home/Hero";
-import { MarqueeTicker } from "@/components/home/MarqueeTicker";
-import { CategoryCardsGrid } from "@/components/home/CategoryCardsGrid";
-import { TradeInBanner } from "@/components/home/TradeInBanner";
+import { AppleOfficialHeroSection } from "@/components/home/AppleOfficialHeroSection";
+import { AppleOfficialPromoGrid } from "@/components/home/AppleOfficialPromoGrid";
 import { ProductSection } from "@/components/products/ProductSection";
 import { StoreLocationSection } from "@/components/home/StoreLocationSection";
-
-
-
 
 export default async function HomePage() {
   const activeProducts = await getProducts({ condition: "new" });
@@ -89,19 +84,13 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 1. Hero Apple Store Clean Editorial */}
-      <Hero />
+      {/* 1. Grandes Heroes Oficiais Apple (iPhone Duo e iPhone 18 Pro) */}
+      <AppleOfficialHeroSection />
 
-      {/* 2. Faixa Marquee Animada Infinita */}
-      <MarqueeTicker />
+      {/* 2. Promo Grid Oficial Apple 2-Colunas (Watch S12, Watch Ultra 4, iPad Air M4, Trade-In, MacBook Pro M5, AirPods 5) */}
+      <AppleOfficialPromoGrid />
 
-      {/* 3. Seção Categorias Rápidas */}
-      <CategoryCardsGrid />
-
-      {/* 5. Banner de Troca / Trade-In */}
-      <TradeInBanner />
-
-      {/* 6. Catálogo: iPhone (Novos Lacrados) */}
+      {/* 3. Catálogo Oficial Mundo Apple (Novos Lacrados com Preços do Banco de Dados) */}
       <div id="catalogo" className="scroll-mt-20" />
       <ProductSection
         id="categoria-iphone"
@@ -113,7 +102,7 @@ export default async function HomePage() {
         limit={8}
       />
 
-      {/* 6. Catálogo: MacBook */}
+      {/* Catálogo: MacBook */}
       <ProductSection
         id="categoria-macbook"
         title="MacBook"
@@ -124,7 +113,7 @@ export default async function HomePage() {
         limit={4}
       />
 
-      {/* 7. Catálogo: iPad */}
+      {/* Catálogo: iPad */}
       <ProductSection
         id="categoria-ipad"
         title="iPad"
@@ -135,7 +124,7 @@ export default async function HomePage() {
         limit={4}
       />
 
-      {/* 8. Catálogo: Apple Watch */}
+      {/* Catálogo: Apple Watch */}
       <ProductSection
         id="categoria-watch"
         title="Apple Watch"
@@ -146,7 +135,7 @@ export default async function HomePage() {
         limit={4}
       />
 
-      {/* 9. Catálogo: AirPods */}
+      {/* Catálogo: AirPods */}
       <ProductSection
         id="categoria-airpods"
         title="AirPods"
@@ -157,7 +146,7 @@ export default async function HomePage() {
         limit={4}
       />
 
-      {/* 10. Catálogo: Mac (iMac e Mac mini) */}
+      {/* Catálogo: Mac (iMac e Mac mini) */}
       {macProducts.length > 0 && (
         <ProductSection
           id="categoria-mac"
@@ -170,12 +159,12 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 11. Catálogo: Acessórios */}
+      {/* Catálogo: Acessórios */}
       {accessoriesProducts.length > 0 && (
         <ProductSection
           id="categoria-acessorios"
           title="Acessórios"
-          description="Apple Pencil, Magic Keyboard, Magic Mouse e Magic Trackpad | acessórios originais com garantia."
+          description="Apple Pencil, Magic Keyboard, Magic Mouse e Magic Trackpad originais com garantia."
           products={accessoriesProducts}
           buttonText="Ver Mais Acessórios →"
           categoryLink="/produtos?categoria=accessories"
@@ -183,7 +172,8 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 11. Localização Loja Física Santa Ifigênia */}
+      {/* 4. Localização Loja Física Santa Ifigênia */}
+      <div id="localizacao" className="scroll-mt-20" />
       <StoreLocationSection />
     </>
   );

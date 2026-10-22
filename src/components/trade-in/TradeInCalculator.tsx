@@ -20,6 +20,7 @@ import {
   Wifi,
   Sparkles,
   Zap,
+  Cpu,
   Laptop,
   Tablet,
   Watch,
@@ -110,7 +111,7 @@ const upgradeCategories = [
 ];
 
 export const TradeInCalculator: React.FC = () => {
-  const totalSteps = 17;
+  const totalSteps = 8;
   const [step, setStep] = useState(1);
 
   // 1. Desired New Sealed Product for Upgrade
@@ -292,19 +293,15 @@ export const TradeInCalculator: React.FC = () => {
   const [selectedStorage, setSelectedStorage] = useState<StorageOption | null>(null);
   const [deviceColor, setDeviceColor] = useState("");
 
-  // Single Question Answers (empty by default)
-  const [powerOnStatus, setPowerOnStatus] = useState<string>("");
-  const [icloudStatus, setIcloudStatus] = useState<string>("");
-  const [screenGlass, setScreenGlass] = useState<string>("");
-  const [screenDisplay, setScreenDisplay] = useState<string>("");
-  const [bodyBackGlass, setBodyBackGlass] = useState<string>("");
-  const [bodySides, setBodySides] = useState<string>("");
-  const [cameraRear, setCameraRear] = useState<string>("");
-  const [faceId, setFaceId] = useState<string>("");
-  const [batteryHealth, setBatteryHealth] = useState<string>("");
-  const [charging, setCharging] = useState<string>("");
-  const [networkWifi, setNetworkWifi] = useState<string>("");
-  const [screenHistory, setScreenHistory] = useState<string>("");
+  // Question Answers (Anti-Bucha Flow)
+  const [powerOnStatus, setPowerOnStatus] = useState<string>("normal");
+  const [icloudStatus, setIcloudStatus] = useState<string>("unlocked");
+  const [screenHistory, setScreenHistory] = useState<string>("original");
+  const [batteryHealth, setBatteryHealth] = useState<string>("90_plus");
+  const [screenGlass, setScreenGlass] = useState<string>("perfect");
+  const [bodyBackGlass, setBodyBackGlass] = useState<string>("perfect");
+  const [sensorsAllOk, setSensorsAllOk] = useState<boolean>(true);
+  const [selectedMalfunctions, setSelectedMalfunctions] = useState<string[]>([]);
 
   // Customer Data
   const [customerName, setCustomerName] = useState("");
@@ -421,7 +418,7 @@ export const TradeInCalculator: React.FC = () => {
     return models.filter((m) => m.name.toLowerCase().includes(q));
   }, [models, modelSearch]);
 
-  // Step Validation Checkers
+  // Step Validation Checkers (8-step flow)
   const isStepValid = useMemo(() => {
     switch (step) {
       case 1:
@@ -433,30 +430,12 @@ export const TradeInCalculator: React.FC = () => {
       case 4:
         return !!selectedStorage;
       case 5:
-        return !!powerOnStatus;
+        return powerOnStatus === "normal" && icloudStatus === "unlocked" && !!screenHistory;
       case 6:
-        return !!icloudStatus;
+        return !!batteryHealth && !!screenGlass && !!bodyBackGlass;
       case 7:
-        return !!screenGlass;
+        return true; // Sensors
       case 8:
-        return !!screenDisplay;
-      case 9:
-        return !!bodyBackGlass;
-      case 10:
-        return !!bodySides;
-      case 11:
-        return !!cameraRear;
-      case 12:
-        return !!faceId;
-      case 13:
-        return !!batteryHealth;
-      case 14:
-        return !!charging;
-      case 15:
-        return !!networkWifi;
-      case 16:
-        return !!screenHistory;
-      case 17:
         return (
           customerName.trim().length >= 2 &&
           customerWhatsapp.replace(/\D/g, "").length >= 10
@@ -471,16 +450,10 @@ export const TradeInCalculator: React.FC = () => {
     selectedStorage,
     powerOnStatus,
     icloudStatus,
-    screenGlass,
-    screenDisplay,
-    bodyBackGlass,
-    bodySides,
-    cameraRear,
-    faceId,
-    batteryHealth,
-    charging,
-    networkWifi,
     screenHistory,
+    batteryHealth,
+    screenGlass,
+    bodyBackGlass,
     customerName,
     customerWhatsapp,
   ]);
@@ -491,30 +464,49 @@ export const TradeInCalculator: React.FC = () => {
 
     try {
       setSubmitting(true);
+      const isDisplayIssue = screenGlass === "display_damaged";
+      const isScreenCracked = screenGlass === "cracked";
+      const isBackCracked = bodyBackGlass === "cracked";
+      const isBodyDented = bodyBackGlass === "heavy_dents";
+
       const payload = {
         deviceModelId: selectedModel.id,
         storageOptionId: selectedStorage.id,
         answers: {
           deviceColor: deviceColor.trim() || "Não informada",
-          powerOnStatus,
+          powerOn: powerOnStatus === "normal",
+          powerOnStatus: powerOnStatus === "normal" ? "normal" : "board_issue",
+          boardProblem: powerOnStatus === "board_issue",
           icloudStatus,
-          screenGlass,
-          screenDisplay,
-          bodyBackGlass,
-          bodySides,
-          cameraFront: "perfect",
-          cameraRear,
-          cameraGlass: "perfect",
-          faceId,
+          icloudClear: icloudStatus === "unlocked",
+          imeiRegular: icloudStatus === "unlocked",
+
+          // Peças Trocadas
+          screenHistory: screenHistory === "original" ? "original" : screenHistory === "apple_genuine" ? "apple_genuine" : screenHistory === "parallel" ? "parallel" : "original",
+          replacedPartsStatus: screenHistory === "original" ? "no" : "yes",
+          replacedParts: screenHistory === "parallel" ? ["screen"] : screenHistory === "apple_genuine" ? ["apple_genuine"] : screenHistory === "repaired_other" ? ["other_part"] : [],
+
+          // Bateria
           batteryHealth,
+
+          // Vidros e Carcaça
+          screenGlass: isScreenCracked ? "cracked" : screenGlass === "light_scratches" ? "light_scratches" : "perfect",
+          screenDisplay: isDisplayIssue ? "spots" : "perfect",
+          bodyBackGlass: isBackCracked ? "cracked" : "perfect",
+          bodySides: isBodyDented ? "heavy_dents" : bodyBackGlass === "light_scratches" ? "light_scratches" : "perfect",
+
+          // Sensores e Funcionamento
+          cameraFront: "perfect",
+          cameraRear: selectedMalfunctions.includes("camera") ? "broken" : "perfect",
+          cameraGlass: "perfect",
+          faceId: selectedMalfunctions.includes("face_id") ? "broken" : "perfect",
           audioSpeakers: "perfect",
           audioMicrophone: "perfect",
-          networkWifi,
-          networkCellular: networkWifi,
-          charging,
-          screenHistory,
-          batteryHistory: "never",
-          otherRepairs: ["none"],
+          networkWifi: selectedMalfunctions.includes("wifi") ? "broken" : "perfect",
+          networkCellular: selectedMalfunctions.includes("wifi") ? "broken" : "perfect",
+          charging: selectedMalfunctions.includes("charging") ? "broken" : "perfect",
+          malfunctions: selectedMalfunctions,
+
           customerName: customerName.trim(),
           customerWhatsapp: customerWhatsapp.trim(),
           customerCep: customerCep.trim(),
@@ -558,18 +550,14 @@ export const TradeInCalculator: React.FC = () => {
     setSelectedModel(null);
     setSelectedStorage(null);
     setDeviceColor("");
-    setPowerOnStatus("");
-    setIcloudStatus("");
-    setScreenGlass("");
-    setScreenDisplay("");
-    setBodyBackGlass("");
-    setBodySides("");
-    setCameraRear("");
-    setFaceId("");
-    setBatteryHealth("");
-    setCharging("");
-    setNetworkWifi("");
-    setScreenHistory("");
+    setPowerOnStatus("normal");
+    setIcloudStatus("unlocked");
+    setScreenHistory("original");
+    setBatteryHealth("90_plus");
+    setScreenGlass("perfect");
+    setBodyBackGlass("perfect");
+    setSensorsAllOk(true);
+    setSelectedMalfunctions([]);
     setQuoteResult(null);
     setCustomerName("");
     setCustomerWhatsapp("");
@@ -670,10 +658,11 @@ export const TradeInCalculator: React.FC = () => {
 📋 Código da Simulação: ${code}
 
 📱 MEU APARELHO USADO (ENTRADA):
-• Modelo: ${selectedModel?.name}
-• Armazenamento: ${selectedStorage?.displayName}
+• Modelo: ${selectedModel?.name} (${selectedStorage?.displayName})
 • Cor: ${deviceColor || "Padrão"}
-• Avaliação: ${formatCurrency(tradeInValue)}
+• Histórico de Peças: ${screenHistory === "original" ? "100% Original de Fábrica" : screenHistory === "apple_genuine" ? "Peça Original Apple" : screenHistory === "parallel" ? "Tela Paralela" : "Reparo Realizado"}
+• Saúde da Bateria: ${batteryHealth === "90_plus" ? "90%+" : batteryHealth === "85_89" ? "85-89%" : batteryHealth === "80_84" ? "80-84%" : "Abaixo de 80% (Manutenção)"}
+• Avaliação Pré-Aprovada: ${formatCurrency(tradeInValue)}
 
 ✨ PRODUTO NOVO DESEJADO:
 • Modelo: ${selectedNewProduct?.name}
@@ -687,6 +676,13 @@ ${maxInstallment && differenceToPay > 0 ? `• Ou em até 18x de ${formatCurrenc
 👤 MEUS DADOS:
 Nome: ${customerName.trim()}
 WhatsApp: ${customerWhatsapp.trim()}
+${customerCep ? `CEP: ${customerCep.trim()}` : ""}
+
+📋 CHECKLIST DE CONFERÊNCIA TÉCNICA NA ENTREGA:
+[ ] 1. Remover e desvincular conta iCloud no ato
+[ ] 2. Testar Face ID e Câmeras (0.5x, 1x e zoom)
+[ ] 3. Checar se há alerta de 'Peça Desconhecida' em Ajustes > Geral > Sobre
+[ ] 4. Conferir integridade física dos vidros e saúde da bateria
 
 Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
 
@@ -1189,518 +1185,508 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 5 — FUNCIONAMENTO INICIAL
+            ETAPA 5 — SEGURANÇA, PLACA & PEÇAS TROCADAS
         ---------------------------------------------------- */}
         {step === 5 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 5: Funcionamento</span>
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 5: Segurança & Originalidade</span>
               <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                O seu iPhone usado liga e funciona normalmente?
+                Triagem Técnica e Procedência
               </h2>
               <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Responda sobre a inicialização e sistema do aparelho.
+                Responda sobre a inicialização, bloqueios e histórico de peças do seu {selectedModel?.name}.
               </p>
             </div>
 
-            <div className="space-y-3">
-              <OptionCard
-                selected={powerOnStatus === "normal"}
-                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "normal")}
-                title="Liga perfeitamente e acessa a tela inicial"
-                subtitle="Sistema inicia normalmente sem travamentos."
-                icon={<Zap className="w-5 h-5 text-emerald-600" />}
-                badge="100% Funcional"
-              />
-              <OptionCard
-                selected={powerOnStatus === "glitches"}
-                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "glitches")}
-                title="Liga, mas reinicia ou trava com frequência"
-                subtitle="Apresenta desligamento repentino ou travamento ocasional."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={powerOnStatus === "no_power"}
-                onClick={() => selectOptionAndAdvance(setPowerOnStatus, "no_power")}
-                title="Não liga ou fica preso na maçã"
-                subtitle="Aparelho não dá sinal de imagem ou travado em modo de recuperação."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
+            {/* Pergunta 1: Placa-Mãe / Inicialização */}
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-[#1D1D1F] flex items-center gap-1.5">
+                <Cpu className="w-4 h-4 text-[#0071E3]" />
+                <span>1. O aparelho liga e a placa-mãe funciona normalmente?</span>
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPowerOnStatus("normal")}
+                  className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    powerOnStatus === "normal"
+                      ? "bg-emerald-50 border-emerald-500 shadow-xs ring-1 ring-emerald-500/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">Sim, liga e funciona 100% estável</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Sem desligamentos ou travamentos</span>
+                  </div>
+                  {powerOnStatus === "normal" && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setPowerOnStatus("board_issue")}
+                  className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    powerOnStatus === "board_issue"
+                      ? "bg-red-50 border-red-500 shadow-xs ring-1 ring-red-500/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-red-700">Não liga / Defeito de placa</span>
+                    <span className="block text-[11px] text-red-600">Preso na maçã ou desliga sozinho</span>
+                  </div>
+                  {powerOnStatus === "board_issue" && <Check className="w-4 h-4 text-red-600 shrink-0" />}
+                </button>
+              </div>
+
+              {powerOnStatus === "board_issue" && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-700 font-medium flex items-center gap-2 mt-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
+                  <span>Atenção: A Mundo Apple Delivery <strong>não adquire</strong> aparelhos inoperantes ou com defeito de placa-mãe.</span>
+                </div>
+              )}
+            </div>
+
+            {/* Pergunta 2: iCloud e Restrições */}
+            <div className="space-y-2 pt-2 border-t border-[#E5E5E7]">
+              <label className="text-xs font-bold text-[#1D1D1F] flex items-center gap-1.5">
+                <Lock className="w-4 h-4 text-[#0071E3]" />
+                <span>2. O iCloud está livre para remoção imediata e o IMEI limpo?</span>
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIcloudStatus("unlocked")}
+                  className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    icloudStatus === "unlocked"
+                      ? "bg-emerald-50 border-emerald-500 shadow-xs ring-1 ring-emerald-500/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">Sim, 100% liberado e sem vínculo</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Pronto para formatar no ato da troca</span>
+                  </div>
+                  {icloudStatus === "unlocked" && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIcloudStatus("locked")}
+                  className={`p-3.5 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    icloudStatus === "locked"
+                      ? "bg-red-50 border-red-500 shadow-xs ring-1 ring-red-500/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-red-700">Não, possui bloqueio ou senha</span>
+                    <span className="block text-[11px] text-red-600">iCloud vinculado ou restrição de rede</span>
+                  </div>
+                  {icloudStatus === "locked" && <Check className="w-4 h-4 text-red-600 shrink-0" />}
+                </button>
+              </div>
+
+              {icloudStatus === "locked" && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-700 font-medium flex items-center gap-2 mt-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-red-600" />
+                  <span>Atenção: Aparelhos com bloqueio de ativação (iCloud) ou operadora <strong>não são aceitos</strong> para troca.</span>
+                </div>
+              )}
+            </div>
+
+            {/* Pergunta 3: Histórico de Peças e Reparos */}
+            <div className="space-y-2 pt-2 border-t border-[#E5E5E7]">
+              <label className="text-xs font-bold text-[#1D1D1F] flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-[#0071E3]" />
+                <span>3. Histórico de Peças: Alguma peça já foi trocada ou o aparelho já foi aberto?</span>
+              </label>
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  onClick={() => setScreenHistory("original")}
+                  className={`w-full p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
+                    screenHistory === "original"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">100% Original de Fábrica (Nunca aberto)</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Todas as peças originais Apple de fabricação.</span>
+                  </div>
+                  {screenHistory === "original" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setScreenHistory("apple_genuine")}
+                  className={`w-full p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
+                    screenHistory === "apple_genuine"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">Peça trocada Original Apple</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Substituída em autorizada oficial Apple (com histórico nos Ajustes).</span>
+                  </div>
+                  {screenHistory === "apple_genuine" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setScreenHistory("parallel")}
+                  className={`w-full p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
+                    screenHistory === "parallel"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">Tela trocada por Paralela / Primeira linha</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Sem True Tone ou com aviso de 'Peça Desconhecida' nos Ajustes.</span>
+                  </div>
+                  {screenHistory === "parallel" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setScreenHistory("repaired_other")}
+                  className={`w-full p-3.5 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
+                    screenHistory === "repaired_other"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">Outro reparo (Bateria, Conector ou Câmera)</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Aparelho já passou por manutenção em assistência técnica.</span>
+                  </div>
+                  {screenHistory === "repaired_other" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+              </div>
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 6 — CONTA ICLOUD
+            ETAPA 6 — ESTADO FÍSICO & BATERIA
         ---------------------------------------------------- */}
         {step === 6 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 6: Segurança</span>
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 6: Conservação & Bateria</span>
               <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                A conta do iCloud está liberada para remoção?
+                Estado Físico e Bateria
               </h2>
               <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Você possui a senha para desvincular o iCloud e formatar o aparelho na entrega?
+                Informe com honestidade para garantir a aprovação rápida na vistoria.
               </p>
             </div>
 
-            <div className="space-y-3">
-              <OptionCard
-                selected={icloudStatus === "unlocked"}
-                onClick={() => selectOptionAndAdvance(setIcloudStatus, "unlocked")}
-                title="Sim, iCloud desbloqueado / tenho a senha"
-                subtitle="O aparelho pode ser desvinculado e formatado de fábrica normalmente."
-                icon={<Lock className="w-5 h-5 text-emerald-600" />}
-                badge="Elegível"
-              />
-              <OptionCard
-                selected={icloudStatus === "locked"}
-                onClick={() => selectOptionAndAdvance(setIcloudStatus, "locked")}
-                title="Não, possui bloqueio de ativação ou não sei a senha"
-                subtitle="Aparelho bloqueado por conta iCloud anterior ou sem senha."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
+            {/* Bateria */}
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-[#1D1D1F] flex items-center gap-1.5">
+                <BatteryCharging className="w-4 h-4 text-[#0071E3]" />
+                <span>1. Saúde da Bateria (em Ajustes &gt; Bateria &gt; Saúde):</span>
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {[
+                  { id: "90_plus", label: "90% ou mais", sub: "Excelente" },
+                  { id: "85_89", label: "85% a 89%", sub: "Muito boa" },
+                  { id: "80_84", label: "80% a 84%", sub: "Bom estado" },
+                  { id: "below_80", label: "Abaixo de 80%", sub: "Manutenção" },
+                ].map((b) => {
+                  const isSel = batteryHealth === b.id;
+                  return (
+                    <button
+                      key={b.id}
+                      type="button"
+                      onClick={() => setBatteryHealth(b.id)}
+                      className={`p-3 rounded-2xl border text-center transition-all cursor-pointer ${
+                        isSel
+                          ? "bg-[#0071E3] text-white border-[#0071E3] shadow-md ring-2 ring-[#0071E3]/20"
+                          : "bg-white border-[#D2D2D7] text-[#1D1D1F] hover:bg-[#F5F5F7]"
+                      }`}
+                    >
+                      <span className="block text-xs sm:text-sm font-bold">{b.label}</span>
+                      <span className={`block text-[10px] mt-0.5 ${isSel ? "text-blue-100" : "text-[#86868B]"}`}>
+                        {b.sub}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Tela Frontal */}
+            <div className="space-y-2 pt-2 border-t border-[#E5E5E7]">
+              <label className="text-xs font-bold text-[#1D1D1F] block">
+                2. Estado da Tela Frontal:
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setScreenGlass("perfect")}
+                  className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    screenGlass === "perfect"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">💎 Impecável (Sem Riscos)</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Vidro e display como novos.</span>
+                  </div>
+                  {screenGlass === "perfect" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setScreenGlass("light_scratches")}
+                  className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    screenGlass === "light_scratches"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">✨ Riscos Leves de Uso</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Apenas riscos superficiais normais.</span>
+                  </div>
+                  {screenGlass === "light_scratches" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setScreenGlass("cracked")}
+                  className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    screenGlass === "cracked"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">🔨 Vidro Trincado (Touch OK)</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Vidro quebrado, mas touch e imagem 100%.</span>
+                  </div>
+                  {screenGlass === "cracked" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setScreenGlass("display_damaged")}
+                  className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    screenGlass === "display_damaged"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">🚫 Manchas ou Touch Falhando</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Dano no painel OLED/LCD interno.</span>
+                  </div>
+                  {screenGlass === "display_damaged" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Traseira e Laterais */}
+            <div className="space-y-2 pt-2 border-t border-[#E5E5E7]">
+              <label className="text-xs font-bold text-[#1D1D1F] block">
+                3. Vidro Traseiro e Carcaça (Laterais):
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setBodyBackGlass("perfect")}
+                  className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    bodyBackGlass === "perfect"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">💎 Impecável (Sem Marcas)</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Traseira e bordas sem detalhes.</span>
+                  </div>
+                  {bodyBackGlass === "perfect" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setBodyBackGlass("light_scratches")}
+                  className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    bodyBackGlass === "light_scratches"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">✨ Marcas Leves de Capinha</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Micropontos normais de uso.</span>
+                  </div>
+                  {bodyBackGlass === "light_scratches" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setBodyBackGlass("cracked")}
+                  className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    bodyBackGlass === "cracked"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">🔨 Vidro Traseiro Trincado</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Trincas ou quebras no vidro posterior.</span>
+                  </div>
+                  {bodyBackGlass === "cracked" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setBodyBackGlass("heavy_dents")}
+                  className={`p-3 rounded-2xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                    bodyBackGlass === "heavy_dents"
+                      ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]/30"
+                      : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+                  }`}
+                >
+                  <div>
+                    <span className="block text-xs font-bold text-[#1D1D1F]">⚠️ Amassados ou Batidas</span>
+                    <span className="block text-[11px] text-[#6E6E73]">Carcaça com marcas profundas.</span>
+                  </div>
+                  {bodyBackGlass === "heavy_dents" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                </button>
+              </div>
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 7 — VIDRO FRONTAL DA TELA
+            ETAPA 7 — SENSORES & FUNCIONAMENTO
         ---------------------------------------------------- */}
         {step === 7 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 7: Vidro Frontal</span>
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 7: Sensores e Funções</span>
               <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Como está o vidro frontal da tela?
+                Sensores, Câmeras e Conectores
               </h2>
               <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Avalie o estado do vidro touch exterior da tela.
+                Se tudo estiver funcionando perfeitamente, avance com 1 clique!
               </p>
             </div>
 
-            <div className="space-y-3">
-              <OptionCard
-                selected={screenGlass === "perfect"}
-                onClick={() => selectOptionAndAdvance(setScreenGlass, "perfect")}
-                title="Perfeito, sem riscos ou trincados"
-                subtitle="Vidro impecável, sem arranhões visíveis."
-                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={screenGlass === "light_scratches"}
-                onClick={() => selectOptionAndAdvance(setScreenGlass, "light_scratches")}
-                title="Riscos leves superficiais"
-                subtitle="Pequenas marcas de uso perceptíveis apenas contra a luz."
-                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={screenGlass === "deep_scratches"}
-                onClick={() => selectOptionAndAdvance(setScreenGlass, "deep_scratches")}
-                title="Riscos profundos"
-                subtitle="Arranhões mais evidentes sentidos ao passar a unha."
-                icon={<Smartphone className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={screenGlass === "cracked"}
-                onClick={() => selectOptionAndAdvance(setScreenGlass, "cracked")}
-                title="Vidro trincado ou quebrado"
-                subtitle="Fissuras, rachaduras ou vidro quebrado."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
+            <button
+              type="button"
+              onClick={() => {
+                setSensorsAllOk(true);
+                setSelectedMalfunctions([]);
+              }}
+              className={`w-full p-4 rounded-2xl border text-left flex items-center justify-between gap-3 transition-all cursor-pointer ${
+                sensorsAllOk
+                  ? "bg-emerald-50 border-emerald-500 shadow-md ring-2 ring-emerald-500/30"
+                  : "bg-white border-[#D2D2D7] hover:bg-[#F5F5F7]"
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${sensorsAllOk ? "bg-emerald-600 text-white" : "bg-[#F5F5F7] text-[#1D1D1F]"}`}>
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="block text-sm font-bold text-[#1D1D1F]">Tudo funcionando 100% perfeitamente!</span>
+                  <span className="block text-xs text-[#6E6E73]">Face ID, câmeras (0.5x, 1x, zoom), conector de carga, Wi-Fi e som.</span>
+                </div>
+              </div>
+              {sensorsAllOk && <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />}
+            </button>
+
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => setSensorsAllOk(!sensorsAllOk)}
+                className="text-xs font-semibold text-[#0071E3] hover:underline cursor-pointer block mb-3"
+              >
+                {!sensorsAllOk ? "Ocultar detalhes de avarias funcionais" : "Meu aparelho tem algum detalhe técnico (clique para informar)"}
+              </button>
+
+              {!sensorsAllOk && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-3 bg-[#F5F5F7] rounded-2xl border border-[#D2D2D7]">
+                  {[
+                    { id: "face_id", label: "Face ID não funciona", sub: "Sensor TrueDepth inoperante" },
+                    { id: "camera", label: "Câmera treme ou com manchas", sub: "Problema no foco / estabilizador" },
+                    { id: "charging", label: "Conector de carga com mau contato", sub: "Não carrega ou posição específica" },
+                    { id: "wifi", label: "Wi-Fi ou sinal com falha", sub: "Quedas de conexão frequentes" },
+                  ].map((item) => {
+                    const isChecked = selectedMalfunctions.includes(item.id);
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => {
+                          if (isChecked) {
+                            setSelectedMalfunctions(selectedMalfunctions.filter((x) => x !== item.id));
+                          } else {
+                            setSelectedMalfunctions([...selectedMalfunctions, item.id]);
+                          }
+                        }}
+                        className={`p-3 rounded-xl border text-left flex items-center justify-between gap-2 transition-all cursor-pointer ${
+                          isChecked
+                            ? "bg-amber-50 border-amber-500 shadow-xs ring-1 ring-amber-500/30 text-amber-950"
+                            : "bg-white border-[#D2D2D7] hover:bg-gray-100 text-[#1D1D1F]"
+                        }`}
+                      >
+                        <div>
+                          <span className="block text-xs font-bold">{item.label}</span>
+                          <span className="block text-[10px] text-[#6E6E73]">{item.sub}</span>
+                        </div>
+                        <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 ${isChecked ? "bg-amber-600 border-amber-600 text-white" : "border-gray-300 bg-white"}`}>
+                          {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         )}
 
         {/* ----------------------------------------------------
-            ETAPA 8 — DISPLAY E TOUCH
+            ETAPA 8 — DADOS DO CLIENTE & VISTORIA PRESENCIAL
         ---------------------------------------------------- */}
         {step === 8 && (
           <div className="space-y-6 animate-in fade-in duration-200 text-left">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 8: Imagem e Touch</span>
+              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 8: Quase Lá!</span>
               <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                A imagem e o toque (touch) da tela estão perfeitos?
+                Onde enviamos sua Proposta Oficial?
               </h2>
               <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Verifique se o display não possui manchas, linhas ou toques fantasmas.
+                Preencha para calcularmos a volta exata e enviar o protocolo de atendimento.
               </p>
             </div>
 
             <div className="space-y-3">
-              <OptionCard
-                selected={screenDisplay === "perfect"}
-                onClick={() => selectOptionAndAdvance(setScreenDisplay, "perfect")}
-                title="Display 100% perfeito e touch respondendo perfeitamente"
-                subtitle="Sem manchas escuras, linhas coloridas ou falhas de toque."
-                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={screenDisplay === "spots"}
-                onClick={() => selectOptionAndAdvance(setScreenDisplay, "spots")}
-                title="Possui manchas escuras ou pixels mortos"
-                subtitle="Pequenos pontos pretos ou vazamento de cristal líquido."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={screenDisplay === "lines"}
-                onClick={() => selectOptionAndAdvance(setScreenDisplay, "lines")}
-                title="Possui listras verticais/horizontais ou touch falhando"
-                subtitle="Linhas coloridas na imagem ou partes da tela que não respondem ao toque."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 9 — VIDRO TRASEIRO
-        ---------------------------------------------------- */}
-        {step === 9 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 9: Traseira</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Como está o vidro ou acabamento da tampa traseira?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Avalie o verso do seu aparelho.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={bodyBackGlass === "perfect"}
-                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "perfect")}
-                title="Traseira impecável, sem marcas ou trincados"
-                subtitle="Vidro traseiro e logo da Apple em perfeito estado."
-                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={bodyBackGlass === "light_marks"}
-                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "light_marks")}
-                title="Marcas leves de uso ou capinha"
-                subtitle="Pequenas marcas normais de atrito do dia a dia."
-                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={bodyBackGlass === "cracked"}
-                onClick={() => selectOptionAndAdvance(setBodyBackGlass, "cracked")}
-                title="Vidro traseiro trincado ou quebrado"
-                subtitle="Fissuras ou quebras na tampa traseira."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 10 — LATERAIS E CARCAÇA
-        ---------------------------------------------------- */}
-        {step === 10 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 10: Laterais</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Como estão as laterais e quinas do iPhone?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Verifique a borda de alumínio ou titânio do aparelho.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={bodySides === "perfect"}
-                onClick={() => selectOptionAndAdvance(setBodySides, "perfect")}
-                title="Laterais impecáveis, sem amassados ou riscos"
-                subtitle="Estrutura 100% íntegra, sem amassados de queda."
-                icon={<Sparkles className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={bodySides === "light_scratches"}
-                onClick={() => selectOptionAndAdvance(setBodySides, "light_scratches")}
-                title="Pequenos riscos ou marcas leves"
-                subtitle="Marcas de uso superficiais nas bordas."
-                icon={<Smartphone className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={bodySides === "dents"}
-                onClick={() => selectOptionAndAdvance(setBodySides, "dents")}
-                title="Amassados ou marcas de queda nas quinas"
-                subtitle="Batidas evidentes ou carcaça empenada."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 11 — CÂMERAS
-        ---------------------------------------------------- */}
-        {step === 11 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 11: Câmeras</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                As câmeras e lentes traseiras estão funcionando?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Foco, zoom de 0.5x a 5x e vidro das câmeras.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={cameraRear === "perfect"}
-                onClick={() => selectOptionAndAdvance(setCameraRear, "perfect")}
-                title="Câmeras e lentes 100% perfeitas"
-                subtitle="Foco rápido, fotos nítidas e vidro das lentes sem riscos."
-                icon={<Camera className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={cameraRear === "spots"}
-                onClick={() => selectOptionAndAdvance(setCameraRear, "spots")}
-                title="Manchas pretas ou foco tremendo"
-                subtitle="Fotos saem com pequenas manchas ou vibração no foco."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={cameraRear === "broken"}
-                onClick={() => selectOptionAndAdvance(setCameraRear, "broken")}
-                title="Lente trincada ou câmera não abre"
-                subtitle="Vidro da câmera quebrado ou tela preta ao abrir a câmera."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 12 — FACE ID / BIOMETRIA
-        ---------------------------------------------------- */}
-        {step === 12 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 12: Face ID</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                O Face ID (desbloqueio facial) está funcionando?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Sensor de reconhecimento facial original da Apple.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={faceId === "perfect"}
-                onClick={() => selectOptionAndAdvance(setFaceId, "perfect")}
-                title="Face ID funciona perfeitamente"
-                subtitle="Desbloqueia instantaneamente com o rosto."
-                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={faceId === "broken"}
-                onClick={() => selectOptionAndAdvance(setFaceId, "broken")}
-                title="Face ID não funciona ou apresenta erro"
-                subtitle="Aparece 'Face ID indisponível' nos ajustes."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 13 — SAÚDE DA BATERIA
-        ---------------------------------------------------- */}
-        {step === 13 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 13: Bateria</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Qual é a saúde da bateria em Ajustes &gt; Bateria?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Verifique a porcentagem de capacidade máxima nos Ajustes do iOS.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={batteryHealth === "good"}
-                onClick={() => selectOptionAndAdvance(setBatteryHealth, "good")}
-                title="Excelente — 85% a 100%"
-                subtitle="Saúde ótima com capacidade de desempenho máxima."
-                icon={<BatteryCharging className="w-5 h-5 text-emerald-600" />}
-                badge="Alta Saúde"
-              />
-              <OptionCard
-                selected={batteryHealth === "below_85"}
-                onClick={() => selectOptionAndAdvance(setBatteryHealth, "below_85")}
-                title="Intermediária — 80% a 84%"
-                subtitle="Bateria original ainda em funcionamento sem aviso de serviço."
-                icon={<BatteryCharging className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={batteryHealth === "service_unknown"}
-                onClick={() => selectOptionAndAdvance(setBatteryHealth, "service_unknown")}
-                title="Abaixo de 80% ou mensagem de 'Manutenção'"
-                subtitle="Necessita de troca ou apresenta aviso de peça desconhecida."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 14 — CARREGAMENTO
-        ---------------------------------------------------- */}
-        {step === 14 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 14: Conector</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                O conector de carga e carregamento funcionam bem?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Entrada Lightning / USB-C e carregamento sem fio.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={charging === "perfect"}
-                onClick={() => selectOptionAndAdvance(setCharging, "perfect")}
-                title="Carrega normalmente pelo cabo e sem fio"
-                subtitle="Encaixe firme e carregamento contínuo sem mau contato."
-                icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={charging === "bad_contact"}
-                onClick={() => selectOptionAndAdvance(setCharging, "bad_contact")}
-                title="Possui mau contato no cabo"
-                subtitle="Precisa posicionar o cabo em uma posição específica para carregar."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-              <OptionCard
-                selected={charging === "broken"}
-                onClick={() => selectOptionAndAdvance(setCharging, "broken")}
-                title="Não carrega de jeito nenhum"
-                subtitle="Entrada danificada ou conector rompido."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 15 — CONECTIVIDADE (WI-FI & CHIP)
-        ---------------------------------------------------- */}
-        {step === 15 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 15: Conexões</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Wi-Fi, Bluetooth e sinal de operadora funcionam normais?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Conexão com redes sem fio e sinal 4G/5G do chip.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={networkWifi === "perfect"}
-                onClick={() => selectOptionAndAdvance(setNetworkWifi, "perfect")}
-                title="Tudo funciona perfeitamente (Wi-Fi, Bluetooth e 4G/5G)"
-                subtitle="Conecta em redes e faz chamadas normalmente."
-                icon={<Wifi className="w-5 h-5 text-emerald-600" />}
-              />
-              <OptionCard
-                selected={networkWifi === "broken"}
-                onClick={() => selectOptionAndAdvance(setNetworkWifi, "broken")}
-                title="Possui falha no Wi-Fi, Bluetooth ou sinal de operadora"
-                subtitle="Wi-Fi desabilitado (cinza) ou 'Sem Serviço' permanente."
-                icon={<AlertCircle className="w-5 h-5 text-red-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 16 — HISTÓRICO DE REPAROS
-        ---------------------------------------------------- */}
-        {step === 16 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0071E3] uppercase tracking-wider">Passo 16: Histórico</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                A tela ou bateria já foram trocadas alguma vez?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Peças originais de fábrica garantem maior valorização na compra.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <OptionCard
-                selected={screenHistory === "original"}
-                onClick={() => selectOptionAndAdvance(setScreenHistory, "original")}
-                title="Nunca foi aberto — Todas as peças originais de fábrica"
-                subtitle="Aparelho 100% original sem trocas de tela, bateria ou carcaça."
-                icon={<ShieldCheck className="w-5 h-5 text-emerald-600" />}
-                badge="Máxima Valorização"
-              />
-              <OptionCard
-                selected={screenHistory === "apple_genuine"}
-                onClick={() => selectOptionAndAdvance(setScreenHistory, "apple_genuine")}
-                title="Já teve peça trocada em Autorizada Apple (Original)"
-                subtitle="Substituição oficial com registro nos Ajustes do iOS."
-                icon={<CheckCircle2 className="w-5 h-5 text-blue-600" />}
-              />
-              <OptionCard
-                selected={screenHistory === "parallel"}
-                onClick={() => selectOptionAndAdvance(setScreenHistory, "parallel")}
-                title="Já teve peça trocada em assistência comum / paralela"
-                subtitle="Tela ou bateria trocada de primeira linha ou paralela."
-                icon={<AlertCircle className="w-5 h-5 text-amber-600" />}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* ----------------------------------------------------
-            ETAPA 17 — DADOS DO CLIENTE
-        ---------------------------------------------------- */}
-        {step === 17 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
-            <div className="space-y-1">
-              <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">Último Passo: Seus Dados</span>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F]">
-                Para onde enviamos a simulação da troca?
-              </h2>
-              <p className="text-xs sm:text-sm text-[#6E6E73]">
-                Preencha seu nome e WhatsApp para ver o valor exato da diferença a pagar.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#1D1D1F] block">
+              <div>
+                <label className="text-xs font-semibold text-[#1D1D1F] block mb-1">
                   Seu Nome Completo: <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  placeholder="Ex: João da Silva"
-                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
+                  placeholder="Ex: João Silva"
+                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-[#1D1D1F] block">
+              <div>
+                <label className="text-xs font-semibold text-[#1D1D1F] block mb-1">
                   WhatsApp com DDD: <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -1708,9 +1694,33 @@ Gostaria de agendar a troca com entrega e retirada simultânea em SP!`;
                   value={customerWhatsapp}
                   onChange={handlePhoneChange}
                   placeholder="(11) 99999-9999"
-                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
+                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
                 />
               </div>
+
+              <div>
+                <label className="text-xs font-semibold text-[#1D1D1F] block mb-1">
+                  CEP para entrega simultânea em SP (opcional):
+                </label>
+                <input
+                  type="text"
+                  value={customerCep}
+                  onChange={handleCepChange}
+                  placeholder="01001-000"
+                  className="w-full px-4 py-3 bg-[#F5F5F7] border border-[#D2D2D7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] focus:outline-hidden focus:ring-2 focus:ring-[#0071E3]"
+                />
+              </div>
+            </div>
+
+            {/* Selo de Garantia e Vistoria Presencial */}
+            <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 space-y-1.5">
+              <div className="flex items-center gap-2 text-amber-900 font-bold text-xs sm:text-sm">
+                <ShieldCheck className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>Garantia de Avaliação sob Vistoria Presencial</span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-amber-800 leading-relaxed">
+                No momento da entrega do seu novo aparelho com retirada do usado, nosso especialista realiza um teste rápido de 3 minutos (conferindo Face ID, originalidade da tela, bateria e remoção do iCloud). Estando tudo conforme informado, a troca é concluída imediatamente!
+              </p>
             </div>
           </div>
         )}

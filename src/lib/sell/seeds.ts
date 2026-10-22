@@ -374,28 +374,28 @@ export function runSeed() {
 
     // 10. HISTÓRICO DA TELA
     { id: "def-scr-hist-orig", code: "SCREEN_HIST_ORIGINAL", name: "Tela original de fábrica", category: "SCREEN_HISTORY", description: "Display genuíno que veio de fábrica.", type: "PERCENTAGE", value: 0, active: true },
-    { id: "def-scr-hist-apple", code: "SCREEN_HIST_APPLE_GENUINE", name: "Tela trocada genuína Apple (autorizada)", category: "SCREEN_HISTORY", description: "Substituída em centro autorizado Apple.", type: "PERCENTAGE", value: 2, active: true },
-    { id: "def-scr-hist-pulled", code: "SCREEN_HIST_ORIGINAL_PULLED", name: "Tela original retirada de outro aparelho", category: "SCREEN_HISTORY", description: "Display original Apple retirado de outro aparelho.", type: "PERCENTAGE", value: 5, active: true },
-    { id: "def-scr-hist-parallel", code: "SCREEN_HIST_PARALLEL", name: "Tela paralela / primeira linha", category: "SCREEN_HISTORY", description: "Display paralelo sem selo original Apple.", type: "PERCENTAGE", value: 15, active: true },
-    { id: "def-scr-hist-unknown", code: "SCREEN_HIST_UNKNOWN", name: "Não sabe informar histórico da tela", category: "SCREEN_HISTORY", description: "Histórico da tela não informado.", type: "PERCENTAGE", value: 5, active: true },
+    { id: "def-scr-hist-apple", code: "SCREEN_HIST_APPLE_GENUINE", name: "Tela trocada genuína Apple (autorizada)", category: "SCREEN_HISTORY", description: "Substituída em centro autorizado Apple.", type: "PERCENTAGE", value: 20, active: true },
+    { id: "def-scr-hist-pulled", code: "SCREEN_HIST_ORIGINAL_PULLED", name: "Tela original retirada de outro aparelho", category: "SCREEN_HISTORY", description: "Display original Apple retirado de outro aparelho.", type: "PERCENTAGE", value: 20, active: true },
+    { id: "def-scr-hist-parallel", code: "SCREEN_HIST_PARALLEL", name: "Tela paralela / primeira linha", category: "SCREEN_HISTORY", description: "Display paralelo sem selo original Apple.", type: "PERCENTAGE", value: 20, active: true },
+    { id: "def-scr-hist-unknown", code: "SCREEN_HIST_UNKNOWN", name: "Não sabe informar histórico da tela", category: "SCREEN_HISTORY", description: "Histórico da tela não informado.", type: "PERCENTAGE", value: 20, active: true },
 
     // 11. HISTÓRICO DA BATERIA
     { id: "def-bat-hist-never", code: "BATTERY_HIST_NEVER", name: "Bateria nunca trocada", category: "BATTERY_HISTORY", description: "Bateria original de fábrica.", type: "PERCENTAGE", value: 0, active: true },
-    { id: "def-bat-hist-apple", code: "BATTERY_HIST_APPLE_GENUINE", name: "Bateria trocada por genuína Apple", category: "BATTERY_HISTORY", description: "Trocada em autorizada oficial Apple.", type: "PERCENTAGE", value: 0, active: true },
-    { id: "def-bat-hist-pulled", code: "BATTERY_HIST_ORIGINAL_PULLED", name: "Bateria original retirada", category: "BATTERY_HISTORY", description: "Bateria original retirada de outro aparelho.", type: "PERCENTAGE", value: 3, active: true },
-    { id: "def-bat-hist-parallel", code: "BATTERY_HIST_PARALLEL", name: "Bateria paralela", category: "BATTERY_HISTORY", description: "Bateria paralela não genuína.", type: "PERCENTAGE", value: 7, active: true },
-    { id: "def-bat-hist-unknown", code: "BATTERY_HIST_UNKNOWN", name: "Não sabe informar histórico da bateria", category: "BATTERY_HISTORY", description: "Histórico da bateria desconhecido.", type: "PERCENTAGE", value: 3, active: true },
+    { id: "def-bat-hist-apple", code: "BATTERY_HIST_APPLE_GENUINE", name: "Bateria trocada por genuína Apple", category: "BATTERY_HISTORY", description: "Trocada em autorizada oficial Apple.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-bat-hist-pulled", code: "BATTERY_HIST_ORIGINAL_PULLED", name: "Bateria original retirada", category: "BATTERY_HISTORY", description: "Bateria original retirada de outro aparelho.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-bat-hist-parallel", code: "BATTERY_HIST_PARALLEL", name: "Bateria paralela", category: "BATTERY_HISTORY", description: "Bateria paralela não genuína.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-bat-hist-unknown", code: "BATTERY_HIST_UNKNOWN", name: "Não sabe informar histórico da bateria", category: "BATTERY_HISTORY", description: "Histórico da bateria desconhecido.", type: "PERCENTAGE", value: 10, active: true },
 
     // 12. OUTROS REPAROS JÁ REALIZADOS
     { id: "def-rep-none", code: "REPAIR_NONE", name: "Nenhum reparo", category: "OTHER_REPAIRS", description: "Aparelho nunca foi aberto para outros reparos.", type: "PERCENTAGE", value: 0, active: true },
-    { id: "def-rep-back-glass", code: "REPAIR_BACK_GLASS", name: "Tampa traseira já reparada", category: "OTHER_REPAIRS", description: "Tampa traseira já foi substituída anteriormente.", type: "PERCENTAGE", value: 3, active: true },
-    { id: "def-rep-rear-cam", code: "REPAIR_REAR_CAMERA", name: "Câmera traseira já reparada", category: "OTHER_REPAIRS", description: "Módulo de câmera traseira já trocado.", type: "PERCENTAGE", value: 5, active: true },
-    { id: "def-rep-front-cam", code: "REPAIR_FRONT_CAMERA", name: "Câmera frontal já reparada", category: "OTHER_REPAIRS", description: "Câmera frontal já trocada.", type: "PERCENTAGE", value: 5, active: true },
-    { id: "def-rep-charge", code: "REPAIR_CHARGING_PORT", name: "Conector de carga já reparado", category: "OTHER_REPAIRS", description: "Flex de carga já trocado.", type: "PERCENTAGE", value: 4, active: true },
-    { id: "def-rep-spk", code: "REPAIR_SPEAKER", name: "Alto-falante já reparado", category: "OTHER_REPAIRS", description: "Alto-falante já substituído.", type: "PERCENTAGE", value: 3, active: true },
-    { id: "def-rep-mic", code: "REPAIR_MIC", name: "Microfone já reparado", category: "OTHER_REPAIRS", description: "Microfone já reparado.", type: "PERCENTAGE", value: 3, active: true },
-    { id: "def-rep-board", code: "REPAIR_MOTHERBOARD", name: "Placa-mãe já reparada", category: "OTHER_REPAIRS", description: "Reparo em circuito integrado ou micro-solda na placa.", type: "PERCENTAGE", value: 20, active: true },
-    { id: "def-rep-other", code: "REPAIR_OTHER", name: "Outro reparo não listado (Avaliação manual)", category: "OTHER_REPAIRS", description: "Reparo não especificado.", type: "PERCENTAGE", value: 0, active: true },
+    { id: "def-rep-back-glass", code: "REPAIR_BACK_GLASS", name: "Tampa traseira já reparada", category: "OTHER_REPAIRS", description: "Tampa traseira já foi substituída anteriormente.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-rep-rear-cam", code: "REPAIR_REAR_CAMERA", name: "Câmera traseira já reparada", category: "OTHER_REPAIRS", description: "Módulo de câmera traseira já trocado.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-rep-front-cam", code: "REPAIR_FRONT_CAMERA", name: "Câmera frontal já reparada", category: "OTHER_REPAIRS", description: "Câmera frontal já trocada.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-rep-charge", code: "REPAIR_CHARGING_PORT", name: "Conector de carga já reparado", category: "OTHER_REPAIRS", description: "Flex de carga já trocado.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-rep-spk", code: "REPAIR_SPEAKER", name: "Alto-falante já reparado", category: "OTHER_REPAIRS", description: "Alto-falante já substituído.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-rep-mic", code: "REPAIR_MIC", name: "Microfone já reparado", category: "OTHER_REPAIRS", description: "Microfone já reparado.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-rep-board", code: "REPAIR_MOTHERBOARD", name: "Placa-mãe já reparada", category: "OTHER_REPAIRS", description: "Reparo em circuito integrado ou micro-solda na placa.", type: "PERCENTAGE", value: 100, active: true },
+    { id: "def-rep-other", code: "REPAIR_OTHER", name: "Outro reparo não listado (Avaliação manual)", category: "OTHER_REPAIRS", description: "Reparo não especificado.", type: "PERCENTAGE", value: 10, active: true },
 
     // 13. BLOQUEIO DE ICLOUD
     { id: "def-icloud-unlocked", code: "ICLOUD_UNLOCKED", name: "Aparelho totalmente desbloqueado", category: "ICLOUD", description: "Pronto para restauração limpa.", type: "PERCENTAGE", value: 0, active: true },
@@ -425,13 +425,13 @@ export function runSeed() {
 
     // ETAPA 5 — PEÇAS E REPAROS
     { id: "def-rep-never-opened", code: "REPAIRS_NEVER", name: "Reparos: Nunca foi aberto", category: "REPAIRS", description: "100% selado de fábrica.", type: "PERCENTAGE", value: 0, active: true },
-    { id: "def-rep-unsure", code: "REPAIRS_UNSURE", name: "Reparos: Não tenho certeza", category: "REPAIRS", description: "Histórico de peças não confirmado.", type: "PERCENTAGE", value: 3, active: true },
-    { id: "def-reparo-tela", code: "REPARO_TELA", name: "Peça substituída: Tela", category: "REPAIRS", description: "Tela já substituída.", type: "PERCENTAGE", value: 5, active: true },
-    { id: "def-reparo-bateria", code: "REPARO_BATERIA", name: "Peça substituída: Bateria", category: "REPAIRS", description: "Bateria já substituída.", type: "PERCENTAGE", value: 3, active: true },
-    { id: "def-reparo-camera", code: "REPARO_CAMERA", name: "Peça substituída: Câmera", category: "REPAIRS", description: "Câmera já substituída.", type: "PERCENTAGE", value: 5, active: true },
-    { id: "def-reparo-tampa", code: "REPARO_TAMPA", name: "Peça substituída: Tampa traseira", category: "REPAIRS", description: "Tampa traseira já substituída.", type: "PERCENTAGE", value: 3, active: true },
-    { id: "def-reparo-conector", code: "REPARO_CONECTOR", name: "Peça substituída: Conector de carga", category: "REPAIRS", description: "Conector de carga já substituído.", type: "PERCENTAGE", value: 4, active: true },
-    { id: "def-reparo-outra", code: "REPARO_OUTRA", name: "Peça substituída: Outra peça", category: "REPAIRS", description: "Outra peça já substituída.", type: "PERCENTAGE", value: 4, active: true },
+    { id: "def-rep-unsure", code: "REPAIRS_UNSURE", name: "Reparos: Não tenho certeza", category: "REPAIRS", description: "Histórico de peças não confirmado.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-reparo-tela", code: "REPARO_TELA", name: "Peça substituída: Tela", category: "REPAIRS", description: "Tela já substituída.", type: "PERCENTAGE", value: 20, active: true },
+    { id: "def-reparo-bateria", code: "REPARO_BATERIA", name: "Peça substituída: Bateria", category: "REPAIRS", description: "Bateria já substituída.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-reparo-camera", code: "REPARO_CAMERA", name: "Peça substituída: Câmera", category: "REPAIRS", description: "Câmera já substituída.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-reparo-tampa", code: "REPARO_TAMPA", name: "Peça substituída: Tampa traseira", category: "REPAIRS", description: "Tampa traseira já substituída.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-reparo-conector", code: "REPARO_CONECTOR", name: "Peça substituída: Conector de carga", category: "REPAIRS", description: "Conector de carga já substituído.", type: "PERCENTAGE", value: 10, active: true },
+    { id: "def-reparo-outra", code: "REPARO_OUTRA", name: "Peça substituída: Outra peça", category: "REPAIRS", description: "Outra peça já substituída.", type: "PERCENTAGE", value: 10, active: true },
 
     // ETAPA 6 — FUNCIONAMENTO
     { id: "def-func-perfect", code: "FUNCTIONALITY_PERFECT", name: "Funcionamento: 100% normal", category: "FUNCTIONALITY", description: "Tudo funcionando perfeitamente.", type: "PERCENTAGE", value: 0, active: true },

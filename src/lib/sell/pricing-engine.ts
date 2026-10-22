@@ -101,6 +101,10 @@ export interface CalculationAnswers {
   replacedCamera?: string;
   replacedHousing?: boolean;
   unknownPartWarning?: boolean;
+  motherboardRepaired?: boolean | string;
+  boardRepair?: string;
+  boardStatus?: string;
+  replacedPartsList?: string[];
   icloudClear?: boolean | null;
   imeiRegular?: boolean | null;
   upgradeGoal?: any;
@@ -128,7 +132,7 @@ export interface CalculationResult {
   }[];
   manualReview: boolean;
   blocked: boolean;
-  blockReason?: "ICLOUD_BLOCKED" | "IMEI_BLOCKED" | "";
+  blockReason?: "ICLOUD_BLOCKED" | "IMEI_BLOCKED" | "BOARD_PROBLEM" | "";
 }
 
 export function calculatePurchasePrice(input: CalculationInput): CalculationResult {
@@ -166,11 +170,12 @@ export function calculatePurchasePrice(input: CalculationInput): CalculationResu
     };
   }
 
-  const basePrice = price.basePrice;
-  const minimumPrice = price.minimumPrice || 0;
+  // Redução de 10% aplicada sobre os valores de avaliação dos produtos
+  const basePrice = Math.round(price.basePrice * 0.90);
+  const minimumPrice = price.minimumPrice ? Math.round(price.minimumPrice * 0.90) : 0;
   const answers = input.answers || {};
 
-  // Check 13. Bloqueio de iCloud first
+  // 1. Bloqueio de iCloud (NÃO COMPRAMOS)
   const isIcloudLocked =
     answers.icloudStatus === "locked" ||
     answers.icloudStatus === "bloqueado" ||
@@ -197,6 +202,88 @@ export function calculatePurchasePrice(input: CalculationInput): CalculationResu
       manualReview: false,
       blocked: true,
       blockReason: "ICLOUD_BLOCKED",
+    };
+  }
+
+  // 2. Bloqueio de IMEI / Operadora (NÃO COMPRAMOS)
+  const isImeiBlocked =
+    answers.imeiRegular === false ||
+    answers.icloudStatus === "imei_blocked" ||
+    answers.icloudStatus === "blocked";
+
+  if (isImeiBlocked) {
+    return {
+      basePrice,
+      minimumPrice: 0,
+      finalPrice: 0,
+      percentageDiscountTotal: 100,
+      fixedDiscountTotal: 0,
+      calculatedPrice: 0,
+      deflatorsApplied: [
+        {
+          code: "IMEI_BLOCKED",
+          name: "Bloqueio de IMEI / Operadora (NÃO COMPRAMOS)",
+          type: "PERCENTAGE",
+          value: 100,
+          discountAmount: basePrice,
+        },
+      ],
+      manualReview: false,
+      blocked: true,
+      blockReason: "IMEI_BLOCKED",
+    };
+  }
+
+  // 3. Defeito de Placa / Mexido na Placa / Aparelho que Não Liga (NÃO COMPRAMOS / BUCHA)
+  const otherReps = Array.isArray(answers.otherRepairs) ? answers.otherRepairs : [];
+  const repParts = Array.isArray(answers.replacedParts) ? answers.replacedParts : [];
+  const repPartsList = Array.isArray(answers.replacedPartsList) ? answers.replacedPartsList : [];
+  const malfList = Array.isArray(answers.malfunctions) ? answers.malfunctions : [];
+
+  const isBoardProblem =
+    answers.boardProblem === true ||
+    answers.motherboardRepaired === true ||
+    answers.motherboardRepaired === "yes" ||
+    answers.boardRepair === "yes" ||
+    answers.boardStatus === "repaired" ||
+    answers.boardStatus === "issue" ||
+    answers.boardStatus === "board_issue" ||
+    answers.powerOn === false ||
+    answers.powerOn === "no_power" ||
+    answers.powerOn === "nao" ||
+    answers.powerOnStatus === "no_power" ||
+    answers.powerOnStatus === "board_issue" ||
+    answers.powerOnStatus === "não_liga" ||
+    otherReps.includes("motherboard") ||
+    otherReps.includes("placa") ||
+    repParts.includes("motherboard") ||
+    repParts.includes("placa") ||
+    repPartsList.includes("motherboard") ||
+    repPartsList.includes("placa") ||
+    malfList.includes("board_problem") ||
+    malfList.includes("placa") ||
+    malfList.includes("reboots");
+
+  if (isBoardProblem) {
+    return {
+      basePrice,
+      minimumPrice: 0,
+      finalPrice: 0,
+      percentageDiscountTotal: 100,
+      fixedDiscountTotal: 0,
+      calculatedPrice: 0,
+      deflatorsApplied: [
+        {
+          code: "BOARD_PROBLEM",
+          name: "Defeito de Placa / Aparelho não liga (NÃO COMPRAMOS)",
+          type: "PERCENTAGE",
+          value: 100,
+          discountAmount: basePrice,
+        },
+      ],
+      manualReview: false,
+      blocked: true,
+      blockReason: "BOARD_PROBLEM" as any,
     };
   }
 
@@ -270,24 +357,67 @@ export function calculatePurchasePrice(input: CalculationInput): CalculationResu
   // 3. PEÇAS E REPAROS
   if (answers.replacedPartsStatus === "unsure" || answers.replacedPartsStatus === "Não tenho certeza") {
     addDeflator("REPAIRS_UNSURE", "Histórico de peças não confirmado", 3);
-  } else if ((answers.replacedPartsStatus === "yes" || answers.replacedPartsStatus === "Sim") && Array.isArray(answers.replacedParts)) {
-    if (answers.replacedParts.includes("screen") || answers.replacedParts.includes("Tela")) {
-      addDeflator("REPARO_TELA", "Peça substituída: Tela", 5);
+  } else if ((answers.replacedPartsStatus === "yes" || answers.replacedPartsStatus === "Sim") && (Array.isArray(answers.replacedParts) || Array.isArray(answers.replacedPartsList))) {
+    const allReplaced = [...(Array.isArray(answers.replacedParts) ? answers.replacedParts : []), ...(Array.isArray(answers.replacedPartsList) ? answers.replacedPartsList : [])];
+
+    // TELA: Abate 20% se já foi trocada
+    if (
+      allReplaced.includes("screen") ||
+      allReplaced.includes("screen_parallel") ||
+      allReplaced.includes("screen_apple") ||
+      allReplaced.includes("Tela") ||
+      allReplaced.includes("Tela paralela") ||
+      allReplaced.includes("Tela original Apple")
+    ) {
+      addDeflator("REPARO_TELA", "Peça substituída: Tela / Display", 20);
     }
-    if (answers.replacedParts.includes("battery") || answers.replacedParts.includes("Bateria")) {
-      addDeflator("REPARO_BATERIA", "Peça substituída: Bateria", 3);
+
+    // DEMAIS PEÇAS: Abatem 10% cada se já foram trocadas
+    if (
+      allReplaced.includes("battery") ||
+      allReplaced.includes("battery_parallel") ||
+      allReplaced.includes("battery_apple") ||
+      allReplaced.includes("Bateria") ||
+      allReplaced.includes("Bateria paralela")
+    ) {
+      addDeflator("REPARO_BATERIA", "Peça substituída: Bateria", 10);
     }
-    if (answers.replacedParts.includes("camera") || answers.replacedParts.includes("Câmera")) {
-      addDeflator("REPARO_CAMERA", "Peça substituída: Câmera", 5);
+
+    if (allReplaced.includes("camera_rear") || (allReplaced.includes("camera") && !allReplaced.includes("camera_front"))) {
+      addDeflator("REPARO_CAMERA_REAR", "Peça substituída: Câmera traseira", 10);
     }
-    if (answers.replacedParts.includes("back_glass") || answers.replacedParts.includes("Tampa traseira")) {
-      addDeflator("REPARO_TAMPA", "Peça substituída: Tampa traseira", 3);
+    if (allReplaced.includes("camera_front")) {
+      addDeflator("REPARO_CAMERA_FRONT", "Peça substituída: Câmera frontal (Selfie)", 10);
     }
-    if (answers.replacedParts.includes("charging_port") || answers.replacedParts.includes("Conector de carga")) {
-      addDeflator("REPARO_CONECTOR", "Peça substituída: Conector de carga", 4);
+    if (allReplaced.includes("camera_glass") || allReplaced.includes("Vidro da Câmera")) {
+      addDeflator("REPARO_VIDRO_CAMERA", "Peça substituída: Vidro da câmera", 10);
     }
-    if (answers.replacedParts.includes("other_part") || answers.replacedParts.includes("Outra peça")) {
-      addDeflator("REPARO_OUTRA", "Peça substituída: Outra peça", 4);
+    if (allReplaced.includes("back_glass") || allReplaced.includes("Tampa traseira")) {
+      addDeflator("REPARO_TAMPA", "Peça substituída: Tampa / Vidro traseiro", 10);
+    }
+    if (allReplaced.includes("housing") || allReplaced.includes("Carcaça")) {
+      addDeflator("REPARO_CARCACA", "Peça substituída: Carcaça completa / Chassi", 10);
+    }
+    if (allReplaced.includes("charging_port") || allReplaced.includes("Conector de carga")) {
+      addDeflator("REPARO_CONECTOR", "Peça substituída: Conector de carga", 10);
+    }
+    if (allReplaced.includes("speaker") || allReplaced.includes("Alto-falante")) {
+      addDeflator("REPARO_ALTOFALANTE", "Peça substituída: Alto-falante", 10);
+    }
+    if (allReplaced.includes("microphone") || allReplaced.includes("Microfone")) {
+      addDeflator("REPARO_MICROFONE", "Peça substituída: Microfone", 10);
+    }
+    if (allReplaced.includes("buttons") || allReplaced.includes("Botões")) {
+      addDeflator("REPARO_BOTOES", "Peça substituída: Botões físicos", 10);
+    }
+    if (allReplaced.includes("wifi_antenna") || allReplaced.includes("Antena Wi-Fi")) {
+      addDeflator("REPARO_WIFI", "Peça substituída: Módulo Wi-Fi / Antena", 10);
+    }
+    if (allReplaced.includes("sim_tray") || allReplaced.includes("Gaveta de Chip")) {
+      addDeflator("REPARO_SIM_TRAY", "Peça substituída: Gaveta de chip", 10);
+    }
+    if (allReplaced.includes("other_part") || allReplaced.includes("Outra peça") || allReplaced.includes("other")) {
+      addDeflator("REPARO_OUTRA", "Peça substituída: Outro componente", 10);
     }
   }
 
@@ -602,45 +732,35 @@ export function calculatePurchasePrice(input: CalculationInput): CalculationResu
 
   // 10. HISTÓRICO DA TELA
   const sHist = answers.screenHistory;
-  if (sHist === "apple_genuine") {
-    addDeflator("SCREEN_HIST_APPLE_GENUINE", "Tela trocada genuína Apple (autorizada)", 2);
-  } else if (sHist === "original_pulled") {
-    addDeflator("SCREEN_HIST_ORIGINAL_PULLED", "Tela trocada original retirada", 5);
-  } else if (sHist === "parallel") {
-    addDeflator("SCREEN_HIST_PARALLEL", "Tela trocada paralela / primeira linha", 15);
-  } else if (sHist === "unknown") {
-    addDeflator("SCREEN_HIST_UNKNOWN", "Histórico da tela não informado", 5);
+  if (sHist && sHist !== "original") {
+    addDeflator("SCREEN_HIST_REPLACED", "Histórico: Tela já substituída", 20);
   }
 
   // 11. HISTÓRICO DA BATERIA
   const bHist = answers.batteryHistory;
-  if (bHist === "original_pulled") {
-    addDeflator("BATTERY_HIST_ORIGINAL_PULLED", "Bateria trocada original retirada", 3);
-  } else if (bHist === "parallel") {
-    addDeflator("BATTERY_HIST_PARALLEL", "Bateria trocada por paralela", 7);
-  } else if (bHist === "unknown") {
-    addDeflator("BATTERY_HIST_UNKNOWN", "Histórico da bateria não informado", 3);
+  if (bHist && bHist !== "never") {
+    addDeflator("BATTERY_HIST_REPLACED", "Histórico: Bateria já trocada", 10);
   }
 
   // 12. OUTROS REPAROS JÁ REALIZADOS
   const repList = answers.otherRepairs || [];
   if (repList.includes("back_glass")) {
-    addDeflator("REPAIR_BACK_GLASS", "Reparo já realizado: Tampa traseira", 3);
+    addDeflator("REPAIR_BACK_GLASS", "Reparo já realizado: Tampa traseira", 10);
   }
   if (repList.includes("rear_camera")) {
-    addDeflator("REPAIR_REAR_CAMERA", "Reparo já realizado: Câmera traseira", 5);
+    addDeflator("REPAIR_REAR_CAMERA", "Reparo já realizado: Câmera traseira", 10);
   }
   if (repList.includes("front_camera")) {
-    addDeflator("REPAIR_FRONT_CAMERA", "Reparo já realizado: Câmera frontal", 5);
+    addDeflator("REPAIR_FRONT_CAMERA", "Reparo já realizado: Câmera frontal", 10);
   }
   if (repList.includes("charging_port")) {
-    addDeflator("REPAIR_CHARGING_PORT", "Reparo já realizado: Conector de carga", 4);
+    addDeflator("REPAIR_CHARGING_PORT", "Reparo já realizado: Conector de carga", 10);
   }
   if (repList.includes("speaker")) {
-    addDeflator("REPAIR_SPEAKER", "Reparo já realizado: Alto-falante", 3);
+    addDeflator("REPAIR_SPEAKER", "Reparo já realizado: Alto-falante", 10);
   }
   if (repList.includes("microphone")) {
-    addDeflator("REPAIR_MIC", "Reparo já realizado: Microfone", 3);
+    addDeflator("REPAIR_MIC", "Reparo já realizado: Microfone", 10);
   }
   if (repList.includes("motherboard") || answers.boardProblem) {
     addDeflator("REPAIR_MOTHERBOARD", "Reparo em placa-mãe (Avaliação técnica)", 20);
