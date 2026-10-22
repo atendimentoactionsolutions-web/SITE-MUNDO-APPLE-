@@ -1,9 +1,9 @@
 import express from "express";
-import { createServer } from "http";
 import makeWASocket, {
   useMultiFileAuthState,
   DisconnectReason,
   fetchLatestBaileysVersion,
+  makeCacheableSignalKeyStore,
 } from "@whiskeysockets/baileys";
 import pino from "pino";
 import { fileURLToPath } from "url";
@@ -16,6 +16,49 @@ const SESSION_DIR = path.join(__dirname, ".wa-session");
 const PORT = process.env.PORT || 3001;
 const API_SECRET = process.env.WA_API_SECRET || "mundoapple2024";
 
+const logger = pino({ level: "silent" });
+
+// ─── Cache em Memória para Retry Receipts (Evita "Aguardando mensagem") ───
+const messageStore = new Map();
+
+function saveMessageToStore(msg) {
+  if (!msg || !msg.key || !msg.key.id) return;
+  const key = `${msg.key.remoteJid}:${msg.key.id}`;
+  messageStore.set(key, msg.message);
+  messageStore.set(msg.key.id, msg.message);
+  // Manter no máximo 1000 mensagens em cache
+  if (messageStore.size > 2000) {
+    const firstKey = messageStore.keys().next().value;
+    if (firstKey) messageStore.delete(firstKey);
+  }
+}
+
+class SimpleNodeCache {
+  constructor() {
+    this.map = new Map();
+  }
+  get(k) {
+    return this.map.get(k);
+  }
+  set(k, v) {
+    this.map.set(k, v);
+    if (this.map.size > 5000) {
+      const firstKey = this.map.keys().next().value;
+      if (firstKey) this.map.delete(firstKey);
+    }
+    return true;
+  }
+  del(k) {
+    this.map.delete(k);
+    return 1;
+  }
+  flushAll() {
+    this.map.clear();
+  }
+}
+
+const msgRetryCounterCache = new SimpleNodeCache();
+
 // ─── Estado Global ─────────────────────────────────────────────
 let waSocket = null;
 let waStatus = "DISCONNECTED";
@@ -26,13 +69,19 @@ let waInitPromise = null;
 // ─── Init WhatsApp ─────────────────────────────────────────────
 async function initWhatsApp(forceReset = false) {
   if (forceReset) {
-    if (waSocket) { try { waSocket.end(undefined); } catch (e) {} }
+    if (waSocket) {
+      try {
+        waSocket.end(undefined);
+      } catch (e) {}
+    }
     waSocket = null;
     waInitPromise = null;
     waStatus = "DISCONNECTED";
     waQrCode = null;
     waUser = null;
-    try { if (fs.existsSync(SESSION_DIR)) fs.rmSync(SESSION_DIR, { recursive: true, force: true }); } catch (e) {}
+    try {
+      if (fs.existsSync(SESSION_DIR)) fs.rmSync(SESSION_DIR, { recursive: true, force: true });
+    } catch (e) {}
   }
 
   if (waSocket && waStatus === "CONNECTED") return waSocket;
@@ -54,14 +103,32 @@ async function initWhatsApp(forceReset = false) {
 
       const sock = makeWASocket({
         version,
-        logger: pino({ level: "silent" }),
-        auth: state,
+        logger,
+        auth: {
+          creds: state.creds,
+          keys: makeCacheableSignalKeyStore(state.keys, logger),
+        },
+        msgRetryCounterCache,
         browser: ["Mundo Apple", "Chrome", "1.0.0"],
         syncFullHistory: false,
+        markOnlineOnConnect: true,
+        generateHighQualityLinkPreview: false,
+        getMessage: async (key) => {
+          const fullKey = `${key.remoteJid}:${key.id}`;
+          return messageStore.get(fullKey) || messageStore.get(key.id) || { conversation: "" };
+        },
       });
 
       waSocket = sock;
       sock.ev.on("creds.update", saveCreds);
+
+      sock.ev.on("messages.upsert", ({ messages }) => {
+        if (Array.isArray(messages)) {
+          for (const m of messages) {
+            saveMessageToStore(m);
+          }
+        }
+      });
 
       sock.ev.on("connection.update", async (update) => {
         const { connection, lastDisconnect, qr } = update;
@@ -88,7 +155,9 @@ async function initWhatsApp(forceReset = false) {
             setTimeout(() => initWhatsApp(), 5000);
           } else {
             console.log("🚫 Logout detectado. Sessão apagada.");
-            try { fs.rmSync(SESSION_DIR, { recursive: true, force: true }); } catch (e) {}
+            try {
+              fs.rmSync(SESSION_DIR, { recursive: true, force: true });
+            } catch (e) {}
           }
         } else if (connection === "open") {
           waStatus = "CONNECTED";
@@ -134,7 +203,6 @@ app.post("/disconnect", auth, async (req, res) => {
   await initWhatsApp(true).catch(() => {});
   res.json({ success: true, message: "Desconectado com sucesso." });
 });
-
 
 // GET /qr — retorna página HTML com QR Code para escanear
 app.get("/qr", auth, async (req, res) => {
@@ -190,11 +258,10 @@ app.post("/send", auth, async (req, res) => {
     let targetJid = `${clean}@s.whatsapp.net`;
     try {
       const check1 = await waSocket.onWhatsApp(clean);
-      if (check1 && check1.length > 0 && check1[0].exists) {
+      if (check1 && check1.length > > 0 && check1[0].exists) {
         targetJid = check1[0].jid;
         console.log(`[WA] JID oficial verificado para ${clean}: ${targetJid}`);
       } else if (clean.startsWith("55") && clean.length === 13) {
-        // Tentar variação sem o 9º dígito
         const withoutNine = clean.slice(0, 4) + clean.slice(5);
         const check2 = await waSocket.onWhatsApp(withoutNine);
         if (check2 && check2.length > 0 && check2[0].exists) {
@@ -202,7 +269,6 @@ app.post("/send", auth, async (req, res) => {
           console.log(`[WA] JID oficial verificado SEM 9º dígito para ${withoutNine}: ${targetJid}`);
         }
       } else if (clean.startsWith("55") && clean.length === 12) {
-        // Tentar variação com o 9º dígito
         const withNine = clean.slice(0, 4) + "9" + clean.slice(4);
         const check3 = await waSocket.onWhatsApp(withNine);
         if (check3 && check3.length > 0 && check3[0].exists) {
@@ -214,14 +280,15 @@ app.post("/send", auth, async (req, res) => {
       console.warn("[WA] Aviso ao consultar onWhatsApp:", checkErr.message);
     }
 
-    await waSocket.sendMessage(targetJid, { text: message });
+    const sentMsg = await waSocket.sendMessage(targetJid, { text: message });
+    saveMessageToStore(sentMsg);
+
     console.log(`✅ Mensagem enviada para ${clean} (JID: ${targetJid})`);
     return res.json({ success: true, jid: targetJid });
   } catch (err) {
     console.error("Erro ao enviar:", err);
     return res.status(500).json({ success: false, error: err.message });
   }
-
 });
 
 // POST /reconnect — força reconexão
@@ -232,17 +299,9 @@ app.post("/reconnect", auth, async (req, res) => {
 
 // GET / — health check
 app.get("/", (req, res) => {
-  res.json({ service: "Mundo Apple WhatsApp Server", status: waStatus, user: waUser, version: "1.0.0" });
+  res.json({ service: "Mundo Apple WhatsApp Server", status: waStatus, user: waUser, version: "1.1.0" });
 });
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor WhatsApp rodando na porta ${PORT}`);
-
-  // Auto keep-alive: faz requisições periódicas a cada 8 minutos para impedir que o Render durma
-  const pingUrl = process.env.RENDER_EXTERNAL_URL || "https://mundo-apple-whatsapp.onrender.com";
-  setInterval(() => {
-    fetch(pingUrl)
-      .then(() => console.log(`[KEEP-ALIVE] Ping enviado para manter servidor acordado 24/7`))
-      .catch((err) => console.log(`[KEEP-ALIVE] Aviso:`, err.message));
-  }, 8 * 60 * 1000);
 });
