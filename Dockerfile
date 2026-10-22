@@ -11,7 +11,7 @@ ENV NEXT_TELEMETRY_DISABLED=1 \
 RUN apk add --no-cache libc6-compat
 
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --include=dev
 
 COPY . .
 RUN npm run build \
