@@ -33,19 +33,19 @@ export function getWhatsAppTradeInUrl(details: {
   desiredCondition?: string;
 }): string {
   let text = `Olá! Gostaria de fazer uma avaliação para troca (Trade-in).\n\n` +
-    `📱 MEU APARELHO ATUAL\n` +
-    `Modelo: ${details.currentModel}\n` +
-    `Armazenamento: ${details.storage}\n` +
-    `Estado de conservação: ${details.generalCondition}\n`;
+    `MEU APARELHO ATUAL\n` +
+    `- Modelo: ${details.currentModel}\n` +
+    `- Armazenamento: ${details.storage}\n` +
+    `- Estado de conservação: ${details.generalCondition}\n`;
 
   if (details.observations && details.observations.trim().length > 0) {
-    text += `Observações: ${details.observations.trim()}\n`;
+    text += `- Observações: ${details.observations.trim()}\n`;
   }
 
-  text += `\n🚀 APARELHO DESEJADO NO UPGRADE\n` +
-    `Modelo: ${details.desiredModel}\n` +
-    `Condição: ${details.desiredCondition || "Novo e Lacrado"}\n` +
-    `Armazenamento: ${details.desiredStorage}\n\n` +
+  text += `\nAPARELHO DESEJADO NO UPGRADE\n` +
+    `- Modelo: ${details.desiredModel}\n` +
+    `- Condição: ${details.desiredCondition || "Novo e Lacrado"}\n` +
+    `- Armazenamento: ${details.desiredStorage}\n\n` +
     `Gostaria de receber uma cotação e proposta para a troca.`;
 
   return createWhatsAppLink(text);
