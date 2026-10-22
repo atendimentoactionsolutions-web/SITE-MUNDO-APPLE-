@@ -655,30 +655,28 @@ export const TradeInCalculator: React.FC = () => {
       const code = quoteResult.quote?.publicCode || "TRC-VAL";
       const message = `Olá! Gostaria de fechar meu Upgrade (Troca) na Mundo Apple:
 
-📋 Código da Simulação: ${code}
+Código da Simulação: ${code}
 
-📱 MEU APARELHO USADO (ENTRADA):
-• Modelo: ${selectedModel?.name} (${selectedStorage?.displayName})
-• Cor: ${deviceColor || "Padrão"}
-• Histórico de Peças: ${screenHistory === "original" ? "100% Original de Fábrica" : screenHistory === "apple_genuine" ? "Peça Original Apple" : screenHistory === "parallel" ? "Tela Paralela" : "Reparo Realizado"}
-• Saúde da Bateria: ${batteryHealth === "90_plus" ? "90%+" : batteryHealth === "85_89" ? "85-89%" : batteryHealth === "80_84" ? "80-84%" : "Abaixo de 80% (Manutenção)"}
-• Avaliação Pré-Aprovada: ${formatCurrency(tradeInValue)}
+MEU APARELHO USADO (ENTRADA):
+- Modelo: ${selectedModel?.name} (${selectedStorage?.displayName})
+- Cor: ${deviceColor || "Padrão"}
+- Histórico de Peças: ${screenHistory === "original" ? "100% Original de Fábrica" : screenHistory === "apple_genuine" ? "Peça Original Apple" : screenHistory === "parallel" ? "Tela Paralela" : "Reparo Realizado"}
+- Saúde da Bateria: ${batteryHealth === "90_plus" ? "90%+" : batteryHealth === "85_89" ? "85-89%" : batteryHealth === "80_84" ? "80-84%" : "Abaixo de 80% (Manutenção)"}
+- Avaliação Pré-Aprovada: ${formatCurrency(tradeInValue)}
 
-✨ PRODUTO NOVO DESEJADO:
-• Modelo: ${selectedNewProduct?.name}
-• Configuração: ${selectedNewStorage || ""} ${selectedNewColor ? `(${selectedNewColor})` : ""}
-• Valor do Novo: ${targetPrice > 0 ? formatCurrency(targetPrice) : "Sob Consulta"}
+PRODUTO NOVO DESEJADO:
+- Modelo: ${selectedNewProduct?.name}
+- Configuração: ${selectedNewStorage || ""} ${selectedNewColor ? `(${selectedNewColor})` : ""}
+- Valor do Novo: ${targetPrice > 0 ? formatCurrency(targetPrice) : "Sob Consulta"}
 
-💰 VALOR DA DIFERENÇA (VOLTA A PAGAR):
-• À vista no Pix: ${formatCurrency(differenceToPay)}
-${maxInstallment && differenceToPay > 0 ? `• Ou em até 18x de ${formatCurrency(maxInstallment.installmentValue)} no cartão` : ""}
+VALOR DA DIFERENÇA (VOLTA A PAGAR):
+- À vista no Pix: ${formatCurrency(differenceToPay)}${maxInstallment && differenceToPay > 0 ? `\n- Ou em até 18x de ${formatCurrency(maxInstallment.installmentValue)} no cartão` : ""}
 
-👤 MEUS DADOS:
-Nome: ${customerName.trim()}
-WhatsApp: ${customerWhatsapp.trim()}
-${customerCep ? `CEP: ${customerCep.trim()}` : ""}
+MEUS DADOS:
+- Nome: ${customerName.trim()}
+- WhatsApp: ${customerWhatsapp.trim()}${customerCep ? `\n- CEP: ${customerCep.trim()}` : ""}
 
-📋 CHECKLIST DE CONFERÊNCIA TÉCNICA NA ENTREGA:
+CHECKLIST DE CONFERÊNCIA TÉCNICA NA ENTREGA:
 [ ] 1. Remover e desvincular conta iCloud no ato
 [ ] 2. Testar Face ID e Câmeras (0.5x, 1x e zoom)
 [ ] 3. Checar se há alerta de 'Peça Desconhecida' em Ajustes > Geral > Sobre
