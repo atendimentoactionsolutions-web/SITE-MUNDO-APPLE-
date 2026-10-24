@@ -1207,7 +1207,7 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                 </div>
 
                 {/* Botão de Agendamento */}
-                <div className="space-y-3 pt-2">
+                <div className="space-y-3 pt-2 text-center">
                   <a
                     href={whatsappSaleUrl()}
                     target="_blank"
@@ -1216,6 +1216,17 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                   >
                     <MessageCircle className="w-5 h-5" />
                     <span>Agendar Retirada e Receber no PIX</span>
+                  </a>
+
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent(
+                      "Olha esse simulador da Mundo Apple! Dá pra descobrir na hora quanto vale seu iPhone usado no PIX ou na troca por um novo: https://mundoappledelivery.com/vender"
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 bg-[#F5F5F7] hover:bg-[#E8E8ED] text-[#1D1D1F] border border-[#D2D2D7] font-bold text-xs sm:text-sm rounded-full transition-all flex items-center justify-center gap-2"
+                  >
+                    <span>Compartilhar simulador com um amigo no WhatsApp</span>
                   </a>
 
                   <button
