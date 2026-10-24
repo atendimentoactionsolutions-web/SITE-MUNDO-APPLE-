@@ -155,6 +155,15 @@ export const Header: React.FC = () => {
             </Link>
 
             <Link
+              href="/troca"
+              className={`px-3 py-1.5 rounded-full transition-colors ${
+                pathname === "/troca" ? "text-[#0071E3] bg-blue-50 font-bold" : "hover:text-[#0071E3] hover:bg-blue-50"
+              }`}
+            >
+              Upgrade / Troca
+            </Link>
+
+            <Link
               href="/sobre"
               className={`px-3 py-1.5 rounded-full transition-colors ${
                 pathname === "/sobre" ? "text-[#0071E3] bg-[#F5F5F7]" : "hover:text-[#0071E3] hover:bg-[#F5F5F7]"
@@ -213,8 +222,16 @@ export const Header: React.FC = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className="py-2.5 text-lg font-bold text-emerald-700 border-b border-slate-100 flex items-center justify-between"
               >
-                <span>Vender meu Produto Apple</span>
+                <span>Vender Produto Apple</span>
                 <ArrowRight className="w-4 h-4 text-emerald-700" />
+              </Link>
+              <Link
+                href="/troca"
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-2.5 text-lg font-bold text-[#0071E3] border-b border-slate-100 flex items-center justify-between"
+              >
+                <span>Upgrade / Troca</span>
+                <ArrowRight className="w-4 h-4 text-[#0071E3]" />
               </Link>
               <Link
                 href="/sobre"
@@ -222,14 +239,6 @@ export const Header: React.FC = () => {
                 className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
               >
                 <span>Sobre nós</span>
-                <ArrowRight className="w-4 h-4 text-gray-400" />
-              </Link>
-              <Link
-                href="/troca"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
-              >
-                <span>Troca de Aparelho (Trade-In)</span>
                 <ArrowRight className="w-4 h-4 text-gray-400" />
               </Link>
             </nav>
