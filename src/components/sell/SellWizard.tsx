@@ -1158,6 +1158,15 @@ Gostaria de agendar a avaliação e retirada em SP!`;
             {quoteSuccess ? (
               /* RESULTADO FINAL */
               <div className="space-y-6 animate-in fade-in duration-300">
+                {/* Banner de confirmação WhatsApp */}
+                <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3 text-xs text-emerald-800 text-left">
+                  <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <span>
+                    Enviamos os dados completos e o valor desta avaliação para o seu WhatsApp (
+                    <strong>{customerWhatsapp}</strong>)!
+                  </span>
+                </div>
+
                 <div className="p-6 sm:p-8 rounded-3xl bg-blue-50/70 border border-blue-200 text-center space-y-3">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#0071E3] block">
                     Valor Pré-Avaliado do seu iPhone:
