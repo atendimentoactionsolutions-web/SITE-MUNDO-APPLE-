@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
+import Link from "next/link";
 import { Product, ProductVariant } from "@/types/product";
 import { formatCurrency, formatConditionLabel } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
@@ -15,6 +16,7 @@ import {
   BatteryCharging,
   Check,
   CreditCard,
+  RefreshCw,
 } from "lucide-react";
 
 const colorMap: Record<string, string> = {
@@ -545,8 +547,8 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         )}
       </div>
 
-      {/* Primary WhatsApp Action */}
-      <div className="pt-2">
+      {/* Primary WhatsApp & Upgrade Actions */}
+      <div className="pt-2 space-y-2.5">
         <Button
           onClick={handleWhatsAppRedirect}
           variant="whatsapp"
@@ -556,6 +558,16 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         >
           {currentPrice > 0 ? "Comprar pelo WhatsApp" : "Consultar Valores e Disponibilidade"}
         </Button>
+
+        {product.condition !== "used" && (
+          <Link
+            href={`/troca?categoria=${encodeURIComponent(product.category)}&produto=${encodeURIComponent(product.name)}${currentStorage ? `&storage=${encodeURIComponent(currentStorage)}` : ""}${currentColor ? `&cor=${encodeURIComponent(currentColor)}` : ""}`}
+            className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 active:scale-[0.98] text-[#0071E3] bg-blue-50 hover:bg-blue-100/80 border border-blue-200 font-bold text-sm rounded-full transition-all duration-200 cursor-pointer"
+          >
+            <RefreshCw className="w-4 h-4 shrink-0" />
+            <span>Fazer Upgrade (Dar usado na troca)</span>
+          </Link>
+        )}
       </div>
 
       {/* Installments Modal */}
