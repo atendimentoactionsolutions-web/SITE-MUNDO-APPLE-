@@ -14,14 +14,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticUrls = [
     "",
-    "/produtos",
+    "/vender",
+    "/troca",
     "/iphone",
     "/mac",
     "/ipad",
     "/apple-watch",
+    "/airpods",
+    "/acessorios",
+    "/produtos",
     "/seminovos",
-    "/troca",
     "/servicos",
+    "/garantia",
     "/sobre",
     "/contato",
   ].map((route) => ({
