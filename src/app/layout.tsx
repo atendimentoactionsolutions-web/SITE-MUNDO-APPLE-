@@ -172,6 +172,45 @@ export default function RootLayout({
     }
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Como funciona para vender meu iPhone usado na Mundo Apple?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Você faz a avaliação online em menos de 1 minuto no nosso site informando modelo, capacidade, saúde da bateria e estado do aparelho. O pagamento é feito à vista via PIX imediatamente após a conferência presencial em São Paulo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso dar meu iPhone usado como entrada na troca (Upgrade) por um novo lacrado?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim! No programa de Upgrade (Trade-In) da Mundo Apple Delivery, seu iPhone usado entra como parte do pagamento na compra de qualquer iPhone, MacBook, iPad ou Apple Watch novo lacrado, e você paga apenas a diferença no PIX ou em até 18x no cartão."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Os aparelhos novos possuem garantia oficial da Apple?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim, todos os produtos novos são 100% originais, lacrados de fábrica e contam com 1 ano de garantia oficial Apple Brasil."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A Mundo Apple faz entrega rápida em São Paulo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim, realizamos entrega expressa via motoboy/portador credenciado em São Paulo e região, inclusive com retirada simultânea do seu aparelho usado na troca."
+        }
+      }
+    ]
+  };
+
   return (
     <html lang="pt-BR" className="scroll-smooth">
       <head>
@@ -188,6 +227,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       </head>
       <body className="flex flex-col min-h-screen">

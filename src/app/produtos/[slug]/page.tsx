@@ -6,6 +6,7 @@ import { ProductDetailOptions } from "@/components/products/ProductDetailOptions
 import { ProductCard } from "@/components/products/ProductCard";
 import { ShieldCheck, Truck, Store, RefreshCw, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { storeConfig } from "@/data/storeConfig";
 
 
 interface PageProps {
@@ -22,9 +23,29 @@ export async function generateMetadata({ params }: PageProps) {
     return { title: "Produto não encontrado" };
   }
 
+  const priceText = product.priceFrom > 0
+    ? ` a partir de R$ ${product.priceFrom.toLocaleString("pt-BR")}`
+    : "";
+
   return {
-    title: `${product.name} | Mundo Apple Delivery`,
-    description: product.description,
+    title: `${product.name}${priceText} em São Paulo | Mundo Apple Delivery`,
+    description: `${product.description} Compre ${product.name} com 1 ano de garantia Apple, entrega expressa em SP ou dê seu iPhone usado na troca (Upgrade).`,
+    keywords: [
+      product.name,
+      `Comprar ${product.name}`,
+      `${product.name} preço`,
+      `${product.name} São Paulo`,
+      `${product.name} Santa Ifigênia`,
+      `Troca ${product.name}`,
+      `Upgrade para ${product.name}`,
+      "Mundo Apple Delivery",
+    ],
+    openGraph: {
+      title: `${product.name}${priceText} | Mundo Apple Delivery`,
+      description: `${product.description} Aceitamos seu iPhone usado na troca com avaliação online imediata!`,
+      url: `https://mundoappledelivery.com/produtos/${product.slug}`,
+      images: product.image ? [{ url: `https://mundoappledelivery.com${product.image}` }] : [],
+    },
   };
 }
 
@@ -40,8 +61,44 @@ export default async function ProductDetailPage({ params }: PageProps) {
     .filter((p) => p.id !== product.id)
     .slice(0, 3);
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "image": product.image ? `https://mundoappledelivery.com${product.image}` : "https://mundoappledelivery.com/images/hero/hero-main.jpg",
+    "description": product.description,
+    "brand": {
+      "@type": "Brand",
+      "name": "Apple",
+    },
+    "sku": product.id,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": storeConfig.socialProof.googleRating,
+      "reviewCount": storeConfig.socialProof.googleReviewsCount,
+      "bestRating": "5",
+      "worstRating": "1",
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": `https://mundoappledelivery.com/produtos/${product.slug}`,
+      "priceCurrency": "BRL",
+      "price": product.priceFrom > 0 ? product.priceFrom : undefined,
+      "itemCondition": product.condition === "used" ? "https://schema.org/UsedCondition" : "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": storeConfig.name,
+      },
+    },
+  };
+
   return (
     <div className="pt-24 sm:pt-28 pb-20 bg-apple-gray/30 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <Container>
         {/* Back Link */}
         <div className="mb-6">
