@@ -1803,6 +1803,17 @@ Gostaria de agendar a entrega e retirada simultânea em SP!`;
                     <span>Garantir Troca no WhatsApp</span>
                   </a>
 
+                  <a
+                    href={`https://wa.me/?text=${encodeURIComponent(
+                      "Olha esse simulador de Upgrade da Mundo Apple! Dá pra calcular na hora quanto vale seu iPhone usado na troca por um novo lacrado: https://mundoappledelivery.com/troca"
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 bg-[#F5F5F7] hover:bg-[#E8E8ED] text-[#1D1D1F] border border-[#D2D2D7] font-bold text-xs sm:text-sm rounded-full transition-all flex items-center justify-center gap-2"
+                  >
+                    <span>Compartilhar simulador com um amigo no WhatsApp</span>
+                  </a>
+
                   <button
                     type="button"
                     onClick={restart}
