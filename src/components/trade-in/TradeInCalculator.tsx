@@ -148,6 +148,8 @@ export const TradeInCalculator: React.FC = () => {
   useEffect(() => {
     const cat = searchParams.get("categoria");
     const prodName = searchParams.get("produto");
+    const stgParam = searchParams.get("storage");
+    const colParam = searchParams.get("cor");
 
     if (cat && ["iphone", "mac", "ipad", "watch", "airpods", "accessories"].includes(cat.toLowerCase())) {
       setSelectedUpgradeCategory(cat.toLowerCase());
@@ -160,6 +162,8 @@ export const TradeInCalculator: React.FC = () => {
       );
       if (found) {
         setSelectedNewProduct(found);
+        if (stgParam) setSelectedNewStorage(decodeURIComponent(stgParam));
+        if (colParam) setSelectedNewColor(decodeURIComponent(colParam));
       }
     }
   }, [searchParams]);
