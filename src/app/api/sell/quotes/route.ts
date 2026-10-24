@@ -154,6 +154,65 @@ export async function POST(request: NextRequest) {
       const storageName = storage ? storage.displayName : "";
       const valorFormatado = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(calculation.finalPrice);
 
+      // Formatação completa dos detalhes do aparelho declarado pelo cliente
+      const batteryMap: Record<string, string> = {
+        "90_plus": "90% a 100% (Excelente)",
+        "85_89": "85% a 89% (Boa)",
+        "80_84": "80% a 84% (Moderada)",
+        "below_80": "Abaixo de 80% ou Manutenção",
+      };
+      const screenMap: Record<string, string> = {
+        "perfect": "Impecável / Sem riscos",
+        "light_scratches": "Riscos leves superficiais",
+        "deep_scratches": "Riscos profundos",
+        "cracked": "Vidro trincado ou quebrado",
+        "display_damaged": "Display danificado / Manchas ou listras",
+      };
+      const backMap: Record<string, string> = {
+        "perfect": "Impecável / Sem marcas",
+        "light_marks": "Riscos leves / Marcas de capinha",
+        "cracked": "Vidro traseiro trincado ou quebrado",
+        "camera_broken": "Lente da câmera trincada ou arranhada",
+      };
+      const sidesMap: Record<string, string> = {
+        "perfect": "Impecáveis / Sem detalhes",
+        "light_scratches": "Marcas leves de uso",
+        "dents": "Amassados, batidas ou marcas de queda",
+      };
+      const partsMap: Record<string, string> = {
+        "screen": "Tela / Display",
+        "battery": "Bateria",
+        "back_glass": "Tampa / Vidro Traseiro",
+        "housing": "Carcaça completa / Chassi",
+        "camera_rear": "Câmera Traseira",
+        "camera_front": "Câmera Frontal (Selfie)",
+        "camera_glass": "Vidro da Câmera",
+        "charging_port": "Conector de Carga",
+        "speaker": "Alto-falante",
+        "microphone": "Microfone",
+        "buttons": "Botões físicos",
+        "wifi_antenna": "Antena / Módulo Wi-Fi",
+        "sim_tray": "Gaveta de Chip",
+        "other": "Outro componente",
+      };
+
+      const batteryText = batteryMap[answers.batteryHealth || ""] || answers.batteryHealth || "Não informada";
+      const screenText = screenMap[answers.screenCondition || answers.screenGlass || ""] || "Impecável / Sem riscos";
+      const backText = backMap[answers.backCondition || answers.bodyBackGlass || ""] || "Impecável / Sem marcas";
+      const sidesText = sidesMap[answers.sidesCondition || answers.bodySides || ""] || "Impecáveis / Sem detalhes";
+
+      let replacedPartsText = "100% Original de fábrica (Nunca aberto)";
+      const rawParts = Array.isArray(answers.replacedParts)
+        ? answers.replacedParts
+        : Array.isArray(answers.replacedPartsList)
+        ? answers.replacedPartsList
+        : [];
+      if (answers.replacedPartsStatus === "yes" && rawParts.length > 0) {
+        replacedPartsText = rawParts.map((k: string) => partsMap[k] || k).join(", ");
+      }
+
+      const deviceDetailsBlock = `- Modelo: ${modelName}\n- Armazenamento: ${storageName}\n- Saúde da Bateria: ${batteryText}\n- Condição da Tela: ${screenText}\n- Condição da Traseira: ${backText}\n- Condição das Laterais: ${sidesText}\n- Peças Trocadas: ${replacedPartsText}\n- Placa-Mãe: 100% Original e Intacta\n- iCloud e IMEI: Liberados para formatação`;
+
       let autoMessage = "";
       if (answers.upgradeGoal && answers.upgradeGoal.productName) {
         const tradeInValue = calculation.finalPrice || 0;
@@ -171,10 +230,11 @@ export async function POST(request: NextRequest) {
         const installmentText = maxInstallment
           ? `\n- Ou em até 18x de ${new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(maxInstallment.installmentValue)} no cartão`
           : "";
+        const newConfigText = `${answers.upgradeGoal.storage || ""}${answers.upgradeGoal.color ? ` (${answers.upgradeGoal.color})` : ""}`.trim();
 
-        autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de Upgrade / Troca na Mundo Apple!\n\nCódigo da Cotação: ${publicCode}\n\nSEU APARELHO USADO (ENTRADA):\n- Modelo: ${modelName} ${storageName}\n- Valor de Avaliação: ${tradeInFormatted}\n\nNOVO DESEJADO (LACRADO):\n- Modelo: ${answers.upgradeGoal.productName} ${answers.upgradeGoal.storage || ""}\n- Valor à vista: ${targetFormatted}\n\nVALOR DA DIFERENÇA (VOLTA A PAGAR):\n- À vista no Pix: ${diffFormatted}${installmentText}\n\nNossa equipe já recebeu sua simulação para entrega e retirada expressa em SP!`;
+        autoMessage = `Olá ${custData.name}!\n\nRecebemos sua simulação de Upgrade (Troca) na Mundo Apple!\n\nCódigo da Cotação: ${publicCode}\n\nAPARELHO USADO (ENTRADA):\n${deviceDetailsBlock}\n- Valor Pré-Avaliado: ${tradeInFormatted}\n\nPRODUTO NOVO DESEJADO (LACRADO):\n- Modelo: ${answers.upgradeGoal.productName}\n- Configuração: ${newConfigText || "Padrão"}\n- Valor do Novo: ${targetFormatted}\n\nVALOR DA DIFERENÇA (VOLTA A PAGAR):\n- À vista no PIX: ${diffFormatted}${installmentText}\n\nDADOS DO CLIENTE:\n- Nome: ${custData.name}\n- WhatsApp: ${custData.whatsapp}\n\nNossa equipe já recebeu sua simulação para agendar a entrega e retirada simultânea em SP!`;
       } else {
-        autoMessage = `Olá ${custData.name}!\n\nRecebemos sua solicitação de avaliação para venda na Mundo Apple!\n\nCódigo da Cotação: ${publicCode}\n\nDADOS DO APARELHO:\n- Aparelho: ${modelName} ${storageName}\n- Valor Estimado: ${valorFormatado} (Pagamento via PIX)\n\nNossa equipe já foi notificada para agendar a retirada em SP!`;
+        autoMessage = `Olá ${custData.name}!\n\nRecebemos sua avaliação para venda do seu iPhone na Mundo Apple!\n\nCódigo da Cotação: ${publicCode}\n\nDADOS DO APARELHO:\n${deviceDetailsBlock}\n\nValor Pré-Avaliado: ${valorFormatado} no PIX\n\nDADOS DO CLIENTE:\n- Nome: ${custData.name}\n- WhatsApp: ${custData.whatsapp}\n\nNossa equipe já recebeu sua avaliação para agendar a conferência e retirada em SP!`;
       }
 
       try {
