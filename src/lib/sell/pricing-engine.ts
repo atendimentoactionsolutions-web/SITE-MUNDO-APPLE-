@@ -680,11 +680,11 @@ export function calculatePurchasePrice(input: CalculationInput): CalculationResu
     addDeflator("FACE_ID_BROKEN", "Face ID não funciona", 20);
   }
 
-  // 6. SAÚDE DA BATERIA
+  // 6. SAÚDE DA BATERIA (Legado - apenas se não tratado na etapa 1 acima)
   const bHealth = answers.batteryHealth;
-  if (bHealth === "below_85" || bHealth === "inferior a 80%" || bHealth === "80_84" || bHealth === "75_79" || bHealth === "below_75") {
+  if (bHealth === "75_79" || bHealth === "below_75") {
     addDeflator("BATTERY_HEALTH_BELOW_85", "Saúde da bateria abaixo de 85%", 5);
-  } else if (bHealth === "service_unknown" || bHealth === "service_warning" || bHealth === "unknown" || bHealth?.includes("Não sei")) {
+  } else if (bHealth === "service_warning" || bHealth === "unknown" || bHealth?.includes("Não sei")) {
     addDeflator("BATTERY_HEALTH_SERVICE", "Mensagem de manutenção / não consulta saúde", 8);
   }
 

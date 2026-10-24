@@ -340,7 +340,29 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
           screenCondition,
           backCondition,
           sidesCondition,
-          replacedPartsStatus,
+          screenGlass:
+            screenCondition === "cracked"
+              ? "cracked"
+              : screenCondition === "deep_scratches"
+              ? "deep_scratches"
+              : screenCondition === "light_scratches"
+              ? "light_scratches"
+              : "perfect",
+          screenDisplay: screenCondition === "display_damaged" ? "spots" : "perfect",
+          bodyBackGlass:
+            backCondition === "cracked"
+              ? "cracked"
+              : backCondition === "light_marks"
+              ? "light_marks"
+              : "perfect",
+          cameraGlass: backCondition === "camera_broken" ? "cracked" : "perfect",
+          bodySides:
+            sidesCondition === "dents"
+              ? "dents"
+              : sidesCondition === "light_scratches"
+              ? "light_scratches"
+              : "perfect",
+          replacedPartsStatus: replacedPartsStatus === "yes" ? "yes" : "no",
           replacedParts: selectedReplacedParts,
           replacedPartsList: selectedReplacedParts,
           boardProblem: false,
