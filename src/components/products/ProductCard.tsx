@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, ShieldCheck, Sparkles, CreditCard } from "lucide-react";
+import { MessageCircle, ShieldCheck, Sparkles, CreditCard, RefreshCw } from "lucide-react";
 import { Product, ProductVariant } from "@/types/product";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
@@ -600,8 +600,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* WhatsApp Button */}
-        <div className="pt-4 mt-2">
+        {/* WhatsApp & Upgrade Buttons */}
+        <div className="pt-4 mt-2 space-y-2">
           <button
             type="button"
             onClick={handleWhatsAppRedirect}
@@ -612,6 +612,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               {currentPrice > 0 ? "Consultar Disponibilidade" : "Consultar Valores e Disponibilidade"}
             </span>
           </button>
+
+          {!isUsed && (
+            <Link
+              href={`/troca?categoria=${encodeURIComponent(product.category)}&produto=${encodeURIComponent(product.name)}${currentStorage ? `&storage=${encodeURIComponent(currentStorage)}` : ""}${currentColor ? `&cor=${encodeURIComponent(currentColor)}` : ""}`}
+              className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 active:scale-[0.98] text-[#0071E3] bg-blue-50 hover:bg-blue-100/80 border border-blue-200/80 font-bold text-xs sm:text-sm rounded-full transition-all duration-200 cursor-pointer"
+            >
+              <RefreshCw className="w-3.5 h-3.5 shrink-0" />
+              <span>Fazer Upgrade (Dar usado na troca)</span>
+            </Link>
+          )}
         </div>
       </div>
 
