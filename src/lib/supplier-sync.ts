@@ -1,3 +1,4 @@
+import { getSiteSettings } from "./site-settings";
 import { products as baseProducts } from "@/data/products";
 import { Product, ProductVariant } from "@/types/product";
 import { saveOverrides, getProductOverrides, ProductOverrideData } from "./products-store";
@@ -63,6 +64,31 @@ function normalizeStorage(storage: string | undefined): string {
   if (norm === "2TB") return "2TB";
   if (norm === "64" || norm === "64GB") return "64GB";
   return norm;
+}
+
+
+function getCategoryMargin(category: string): number {
+  try {
+    const settings = getSiteSettings();
+    const margins = settings.categoryMargins || {
+      iphone: 300,
+      mac: 300,
+      ipad: 200,
+      watch: 200,
+      airpods: 150,
+      accessories: 100,
+    };
+    const cat = (category || "").toLowerCase();
+    if (cat === "iphone") return margins.iphone ?? 300;
+    if (cat === "mac") return margins.mac ?? 300;
+    if (cat === "ipad") return margins.ipad ?? 200;
+    if (cat === "watch") return margins.watch ?? 200;
+    if (cat === "airpods") return margins.airpods ?? 150;
+    if (cat === "accessories" || cat === "acessorios") return margins.accessories ?? 100;
+    return 0;
+  } catch (e) {
+    return 0;
+  }
 }
 
 // Map product models
@@ -223,6 +249,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       if (prod.condition !== "new") continue;
 
       const prodModelKey = getModelKey(prod.name);
+      const categoryMargin = getCategoryMargin(prod.category);
       let updatedVariants: ProductVariant[] = [];
       let minFoundPrice = Infinity;
 
@@ -252,11 +279,12 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
           }
 
           if (bestPrice && bestPrice > 0) {
+            const finalWithMargin = bestPrice + categoryMargin;
             updatedVariantsCount++;
-            if (bestPrice < minFoundPrice) minFoundPrice = bestPrice;
+            if (finalWithMargin < minFoundPrice) minFoundPrice = finalWithMargin;
             return {
               ...v,
-              price: bestPrice, // Pure price without margin
+              price: finalWithMargin,
               available: true,
             };
           }
@@ -273,7 +301,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       if (minFoundPrice !== Infinity) {
         finalPriceFrom = minFoundPrice;
       } else if (modelMinPrice && modelMinPrice > 0) {
-        finalPriceFrom = modelMinPrice;
+        finalPriceFrom = modelMinPrice + categoryMargin;
       }
 
       if (finalPriceFrom && finalPriceFrom > 0) {
