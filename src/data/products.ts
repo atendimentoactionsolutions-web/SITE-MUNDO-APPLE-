@@ -390,7 +390,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/iphone/iphone-17-pro-max.png",
-    "priceFrom": 7050,
+    "priceFrom": 7500,
     "condition": "new",
     "storage": [
       "256GB",
@@ -406,37 +406,37 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
-        "price": 7050,
+        "price": 7500,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Deep Blue",
-        "price": 7230,
+        "price": 7750,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 7250,
+        "price": 7790,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 8350,
+        "price": 8850,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 8600,
+        "price": 9200,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Deep Blue",
-        "price": 8800,
+        "price": 9400,
         "available": true
       },
       {
