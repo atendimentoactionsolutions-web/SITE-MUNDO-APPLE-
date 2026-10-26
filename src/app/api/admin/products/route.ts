@@ -3,6 +3,7 @@ import {
   getAllProductsWithOverrides,
   setProductActive,
   toggleProductsBatch,
+  updateProductPrices,
 } from "@/lib/products-store";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +28,25 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { productId, active, batch, category, condition } = body;
+    const { productId, active, batch, category, condition, priceFrom, variants } = body;
+
+    // Price update for product (and its variants if provided)
+    if (productId && (priceFrom !== undefined || variants !== undefined)) {
+      const parsedPrice = priceFrom !== undefined ? Number(priceFrom) : 0;
+      const updated = updateProductPrices(productId, parsedPrice, variants);
+      if (!updated) {
+        return NextResponse.json(
+          { success: false, error: "Produto não encontrado." },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json({
+        success: true,
+        message: `Valores de "${updated.name}" atualizados com sucesso!`,
+        product: updated,
+      });
+    }
 
     // Batch toggle (e.g., all products or all in a category)
     if (batch && typeof active === "boolean") {
