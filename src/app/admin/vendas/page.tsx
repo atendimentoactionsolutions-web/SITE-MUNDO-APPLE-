@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Loader2,
   Search,
@@ -21,7 +22,8 @@ import {
   ArrowRight,
   Clock,
   MessageCircle,
-  ExternalLink
+  ExternalLink,
+  LogOut
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { formatCurrency } from "@/utils/formatters";
@@ -47,6 +49,17 @@ export default function AdminQuotesPage() {
   const [vistoriaStatus, setVistoriaStatus] = useState("APPROVED");
   const [vistoriaPrice, setVistoriaPrice] = useState<number>(0);
   const [vistoriaIssues, setVistoriaIssues] = useState<string>("");
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/login", { method: "DELETE" });
+      router.push("/admin/login");
+      router.refresh();
+    } catch (e) {
+      router.push("/admin/login");
+    }
+  };
 
   const loadQuotes = async () => {
     setLoading(true);
@@ -169,6 +182,15 @@ export default function AdminQuotesPage() {
             >
               Deflatores
             </Link>
+
+            <button
+              onClick={handleLogout}
+              className="px-3.5 py-2.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-bold rounded-2xl transition-colors flex items-center gap-1.5 cursor-pointer"
+              title="Sair do painel"
+            >
+              <LogOut className="w-3.5 h-3.5 text-red-600" />
+              <span>Sair</span>
+            </button>
           </div>
         </div>
 
