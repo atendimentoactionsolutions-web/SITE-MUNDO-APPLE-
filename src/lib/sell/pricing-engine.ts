@@ -1,3 +1,4 @@
+import { getSiteSettings } from "@/lib/site-settings";
 import { db, Deflator } from "./db";
 import { runSeed } from "./seeds";
 
@@ -791,15 +792,18 @@ export function calculatePurchasePrice(input: CalculationInput): CalculationResu
   const finalPrice = Math.max(0, minimumPrice > 0 ? Math.max(calculatedPrice, minimumPrice) : calculatedPrice);
   const totalDiscountAmount = basePrice - finalPrice;
 
+  const siteSettings = getSiteSettings();
+  const isHidden = siteSettings.hideAllPrices;
+
   return {
-    basePrice,
-    minimumPrice,
-    calculatedPrice,
-    percentageDiscountTotal: totalDiscountAmount,
+    basePrice: isHidden ? 0 : basePrice,
+    minimumPrice: isHidden ? 0 : minimumPrice,
+    calculatedPrice: isHidden ? 0 : calculatedPrice,
+    percentageDiscountTotal: isHidden ? 0 : totalDiscountAmount,
     fixedDiscountTotal: 0,
-    finalPrice,
+    finalPrice: isHidden ? 0 : finalPrice,
     deflatorsApplied: appliedDeflators,
-    manualReview,
+    manualReview: isHidden ? true : manualReview,
     blocked: false,
     blockReason: "",
   };
