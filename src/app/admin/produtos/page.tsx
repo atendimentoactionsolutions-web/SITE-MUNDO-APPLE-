@@ -1,0 +1,541 @@
+"use client";
+
+import React, { useState, useEffect, useMemo } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import {
+  Loader2,
+  Search,
+  Filter,
+  Package,
+  Power,
+  ToggleLeft,
+  ToggleRight,
+  CheckCircle2,
+  AlertCircle,
+  Smartphone,
+  Laptop,
+  Tablet,
+  Watch,
+  Headphones,
+  Sliders,
+  Sparkles,
+  ArrowLeft,
+  RefreshCw,
+  LogOut,
+  Layers,
+} from "lucide-react";
+import { Container } from "@/components/ui/Container";
+import { formatCurrency } from "@/utils/formatters";
+import { Product } from "@/types/product";
+
+const CATEGORIES = [
+  { id: "all", name: "Todos os Produtos", icon: Layers },
+  { id: "iphone", name: "iPhones Lacrados", icon: Smartphone },
+  { id: "mac", name: "MacBooks & Mac", icon: Laptop },
+  { id: "ipad", name: "iPads", icon: Tablet },
+  { id: "watch", name: "Apple Watch", icon: Watch },
+  { id: "airpods", name: "AirPods", icon: Headphones },
+  { id: "accessories", name: "Acessórios", icon: Sparkles },
+];
+
+export default function AdminProductsPage() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [batchLoading, setBatchLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "inactive">("all");
+  const [conditionFilter, setConditionFilter] = useState<"new" | "used" | "all">("new");
+  const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/login", { method: "DELETE" });
+      router.push("/admin/login");
+      router.refresh();
+    } catch (e) {
+      router.push("/admin/login");
+    }
+  };
+
+  const loadProducts = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/admin/products");
+      const data = await res.json();
+      if (data.success) {
+        setProducts(data.products || []);
+      } else {
+        setFeedback({ type: "error", text: data.error || "Erro ao carregar produtos." });
+      }
+    } catch (e: any) {
+      setFeedback({ type: "error", text: "Erro na conexão ao carregar produtos." });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  // Filtered products list
+  const filteredProducts = useMemo(() => {
+    return products.filter((p) => {
+      // Condition filter (default "new" = produtos novos lacrados)
+      if (conditionFilter !== "all" && p.condition !== conditionFilter) {
+        return false;
+      }
+
+      // Category filter
+      if (selectedCategory !== "all") {
+        const cat = selectedCategory.toLowerCase();
+        const normCat = cat === "acessorios" ? "accessories" : cat;
+        if (p.category.toLowerCase() !== normCat) return false;
+      }
+
+      // Status filter
+      if (statusFilter === "active" && !p.active) return false;
+      if (statusFilter === "inactive" && p.active) return false;
+
+      // Search query
+      if (search.trim()) {
+        const q = search.toLowerCase();
+        const nameMatch = p.name.toLowerCase().includes(q);
+        const subMatch = p.subcategory?.toLowerCase().includes(q);
+        const slugMatch = p.slug?.toLowerCase().includes(q);
+        if (!nameMatch && !subMatch && !slugMatch) return false;
+      }
+
+      return true;
+    });
+  }, [products, conditionFilter, selectedCategory, statusFilter, search]);
+
+  // Counts by category
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, { total: number; active: number }> = {};
+    CATEGORIES.forEach((cat) => {
+      counts[cat.id] = { total: 0, active: 0 };
+    });
+
+    products.forEach((p) => {
+      if (conditionFilter !== "all" && p.condition !== conditionFilter) return;
+
+      // "all"
+      counts["all"].total++;
+      if (p.active) counts["all"].active++;
+
+      const catId = p.category.toLowerCase();
+      if (counts[catId]) {
+        counts[catId].total++;
+        if (p.active) counts[catId].active++;
+      }
+    });
+
+    return counts;
+  }, [products, conditionFilter]);
+
+  // Toggle single product active
+  const handleToggleProduct = async (product: Product) => {
+    const newStatus = !product.active;
+    setUpdatingId(product.id);
+    setFeedback(null);
+
+    // Optimistic update
+    setProducts((prev) =>
+      prev.map((p) => (p.id === product.id ? { ...p, active: newStatus } : p))
+    );
+
+    try {
+      const res = await fetch("/api/admin/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: product.id,
+          active: newStatus,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setFeedback({
+          type: "success",
+          text: `"${product.name}" agora está ${newStatus ? "ATIVO no site" : "DESATIVADO no site"}.`,
+        });
+      } else {
+        // Rollback
+        setProducts((prev) =>
+          prev.map((p) => (p.id === product.id ? { ...p, active: !newStatus } : p))
+        );
+        setFeedback({ type: "error", text: data.error || "Erro ao atualizar produto." });
+      }
+    } catch (e: any) {
+      // Rollback
+      setProducts((prev) =>
+        prev.map((p) => (p.id === product.id ? { ...p, active: !newStatus } : p))
+      );
+      setFeedback({ type: "error", text: "Erro ao comunicar com o servidor." });
+    } finally {
+      setUpdatingId(null);
+    }
+  };
+
+  // Toggle all in current category or view
+  const handleBatchToggle = async (active: boolean) => {
+    const categoryName =
+      CATEGORIES.find((c) => c.id === selectedCategory)?.name || "selecionados";
+    const confirmMsg = active
+      ? `Tem certeza que deseja ATIVAR todos os produtos de "${categoryName}"? Eles ficarão visíveis para compra e upgrade no site.`
+      : `Tem certeza que deseja DESATIVAR todos os produtos de "${categoryName}"? Eles ficarão ocultos no site e nas buscas.`;
+
+    if (!confirm(confirmMsg)) return;
+
+    setBatchLoading(true);
+    setFeedback(null);
+
+    try {
+      const res = await fetch("/api/admin/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          batch: true,
+          active,
+          category: selectedCategory,
+          condition: conditionFilter,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setFeedback({
+          type: "success",
+          text: `${data.affected} produtos foram ${active ? "ATIVADOS" : "DESATIVADOS"} com sucesso!`,
+        });
+        await loadProducts();
+      } else {
+        setFeedback({ type: "error", text: data.error || "Falha ao aplicar alteração em lote." });
+      }
+    } catch (e: any) {
+      setFeedback({ type: "error", text: "Erro na comunicação ao atualizar lote." });
+    } finally {
+      setBatchLoading(false);
+    }
+  };
+
+  return (
+    <div className="pt-24 pb-20 bg-apple-gray/20 min-h-screen text-apple-dark">
+      <Container size="large">
+        {/* Navigation Breadcrumb / Top Bar */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/vendas"
+              className="p-2 bg-white rounded-xl border border-apple-border hover:bg-apple-gray transition-colors text-apple-dark"
+              title="Voltar ao Painel Geral"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </Link>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+                  Produtos Novos Lacrados
+                </h1>
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
+                  CATÁLOGO OFICIAL
+                </span>
+              </div>
+              <p className="text-xs md:text-sm text-apple-muted mt-0.5">
+                Controle de exibição dos aparelhos novos lacrados na loja e no simulador de Upgrade.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href="/admin/vendas"
+              className="px-3.5 py-2 bg-white border border-apple-border text-xs font-bold rounded-xl hover:bg-apple-gray transition-colors shadow-2xs"
+            >
+              Painel Geral
+            </Link>
+            <Link
+              href="/admin/vendas/precos"
+              className="px-3.5 py-2 bg-white border border-apple-border text-xs font-bold rounded-xl hover:bg-apple-gray transition-colors shadow-2xs"
+            >
+              Preços de Usados
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="px-3 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-bold rounded-xl transition-colors flex items-center gap-1.5 cursor-pointer"
+              title="Sair do painel"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Sair</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Feedback Alert */}
+        {feedback && (
+          <div
+            className={`p-4 rounded-2xl mb-6 flex items-start gap-3 border shadow-sm transition-all ${
+              feedback.type === "success"
+                ? "bg-emerald-50 border-emerald-200 text-emerald-900"
+                : "bg-red-50 border-red-200 text-red-900"
+            }`}
+          >
+            {feedback.type === "success" ? (
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+            ) : (
+              <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+            )}
+            <div className="flex-1 text-sm font-medium">{feedback.text}</div>
+            <button
+              onClick={() => setFeedback(null)}
+              className="text-xs font-bold opacity-60 hover:opacity-100 ml-2"
+            >
+              Fechar
+            </button>
+          </div>
+        )}
+
+        {/* Category Filter Tabs */}
+        <div className="bg-white rounded-2xl border border-apple-border/50 p-2 shadow-2xs mb-6 overflow-x-auto">
+          <div className="flex items-center gap-1 min-w-max">
+            {CATEGORIES.map((cat) => {
+              const Icon = cat.icon;
+              const isSelected = selectedCategory === cat.id;
+              const count = categoryCounts[cat.id] || { total: 0, active: 0 };
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                    isSelected
+                      ? "bg-apple-dark text-white shadow-sm"
+                      : "text-apple-muted hover:text-apple-dark hover:bg-apple-gray/50"
+                  }`}
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span>{cat.name}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${
+                      isSelected
+                        ? "bg-white/20 text-white"
+                        : "bg-apple-gray text-apple-muted"
+                    }`}
+                  >
+                    {count.active}/{count.total}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Action Controls & Batch Operations */}
+        <div className="bg-white rounded-2xl border border-apple-border/50 p-4 shadow-2xs mb-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+          {/* Search & Status Filters */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-1">
+            <div className="relative flex-1 max-w-md">
+              <Search className="w-4 h-4 text-apple-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Buscar por nome, modelo, série..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-9 pr-4 py-2 bg-apple-gray/40 border border-apple-border/70 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/30"
+              />
+            </div>
+
+            <div className="flex items-center gap-2">
+              <select
+                value={statusFilter}
+                onChange={(e: any) => setStatusFilter(e.target.value)}
+                className="px-3 py-2 bg-apple-gray/40 border border-apple-border/70 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-apple-blue/30 cursor-pointer"
+              >
+                <option value="all">Status: Todos</option>
+                <option value="active">Somente Ativos</option>
+                <option value="inactive">Somente Desativados</option>
+              </select>
+
+              <select
+                value={conditionFilter}
+                onChange={(e: any) => setConditionFilter(e.target.value)}
+                className="px-3 py-2 bg-apple-gray/40 border border-apple-border/70 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-apple-blue/30 cursor-pointer"
+              >
+                <option value="new">Novos Lacrados</option>
+                <option value="used">Seminovos / Usados</option>
+                <option value="all">Todas as Condições</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Master Batch Buttons */}
+          <div className="flex items-center gap-2 pt-2 lg:pt-0 border-t lg:border-t-0 border-apple-border/50">
+            <button
+              onClick={() => handleBatchToggle(false)}
+              disabled={batchLoading}
+              className="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shadow-2xs disabled:opacity-50 cursor-pointer"
+              title="Desativar todos da categoria atual"
+            >
+              <Power className="w-3.5 h-3.5 text-red-600" />
+              <span>Desativar Todos ({CATEGORIES.find((c) => c.id === selectedCategory)?.name})</span>
+            </button>
+
+            <button
+              onClick={() => handleBatchToggle(true)}
+              disabled={batchLoading}
+              className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shadow-2xs disabled:opacity-50 cursor-pointer"
+              title="Ativar todos da categoria atual"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              <span>Ativar Todos</span>
+            </button>
+
+            <button
+              onClick={loadProducts}
+              disabled={loading}
+              className="p-2 bg-apple-gray hover:bg-apple-gray-hover rounded-xl text-apple-dark transition-colors cursor-pointer"
+              title="Recarregar lista"
+            >
+              <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
+            </button>
+          </div>
+        </div>
+
+        {/* Products Grid */}
+        {loading ? (
+          <div className="bg-white rounded-3xl border border-apple-border/50 p-16 flex flex-col items-center justify-center text-center shadow-2xs">
+            <Loader2 className="w-10 h-10 animate-spin text-apple-blue mb-3" />
+            <p className="text-sm text-apple-muted font-medium">Carregando catálogo de produtos...</p>
+          </div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="bg-white rounded-3xl border border-apple-border/50 p-16 flex flex-col items-center justify-center text-center shadow-2xs">
+            <Package className="w-12 h-12 text-apple-muted mb-3 opacity-40" />
+            <h3 className="text-base font-bold text-apple-dark">Nenhum produto encontrado</h3>
+            <p className="text-xs text-apple-muted mt-1 max-w-sm">
+              Não foram encontrados produtos com os filtros selecionados. Tente limpar os filtros ou a busca.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {filteredProducts.map((p) => {
+              const isUpdating = updatingId === p.id;
+              const isActive = p.active !== false;
+
+              return (
+                <div
+                  key={p.id}
+                  className={`bg-white rounded-2xl border transition-all p-4 flex flex-col justify-between shadow-2xs hover:shadow-sm ${
+                    isActive
+                      ? "border-apple-border/60 hover:border-apple-blue/40"
+                      : "border-red-200/80 bg-red-50/20 opacity-75"
+                  }`}
+                >
+                  {/* Top Bar: Category badge & Active status */}
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-apple-gray text-apple-dark/70">
+                        {p.category}
+                      </span>
+                      <span
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 ${
+                          isActive
+                            ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                            : "bg-red-100 text-red-800 border border-red-200"
+                        }`}
+                      >
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            isActive ? "bg-emerald-600" : "bg-red-600"
+                          }`}
+                        />
+                        {isActive ? "Ativo no Site" : "Desativado"}
+                      </span>
+                    </div>
+
+                    {/* Image & Title */}
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="relative w-16 h-16 bg-apple-gray/40 rounded-xl overflow-hidden shrink-0 flex items-center justify-center border border-apple-border/30">
+                        {p.image ? (
+                          <Image
+                            src={p.image}
+                            alt={p.name}
+                            fill
+                            className="object-contain p-1"
+                            sizes="64px"
+                          />
+                        ) : (
+                          <Package className="w-6 h-6 text-apple-muted" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm font-bold text-apple-dark truncate" title={p.name}>
+                          {p.name}
+                        </h3>
+                        <p className="text-[11px] text-apple-muted truncate">
+                          {p.subcategory || p.category}
+                        </p>
+                        <p className="text-xs font-extrabold text-apple-dark mt-1">
+                          {p.priceFrom && p.priceFrom > 0
+                            ? `A partir de ${formatCurrency(p.priceFrom)}`
+                            : "Sob Consulta"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Extra specs badges */}
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {p.condition && (
+                        <span className="text-[10px] px-1.5 py-0.5 bg-apple-gray rounded text-apple-muted font-medium">
+                          {p.condition === "new" ? "Novo Lacrado" : "Seminovo"}
+                        </span>
+                      )}
+                      {p.storage && p.storage.length > 0 && (
+                        <span className="text-[10px] px-1.5 py-0.5 bg-apple-gray rounded text-apple-muted font-medium">
+                          {p.storage.slice(0, 3).join(", ")}
+                          {p.storage.length > 3 && "..."}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Toggle Button Action */}
+                  <div className="pt-3 border-t border-apple-border/50 flex items-center justify-between gap-2">
+                    <span className="text-xs text-apple-muted font-medium">
+                      Exibir no site:
+                    </span>
+
+                    <button
+                      onClick={() => handleToggleProduct(p)}
+                      disabled={isUpdating || batchLoading}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer disabled:opacity-50 ${
+                        isActive
+                          ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300"
+                          : "bg-red-50 hover:bg-red-100 text-red-700 border border-red-300"
+                      }`}
+                    >
+                      {isUpdating ? (
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      ) : isActive ? (
+                        <ToggleRight className="w-4 h-4 text-emerald-600" />
+                      ) : (
+                        <ToggleLeft className="w-4 h-4 text-red-600" />
+                      )}
+                      <span>{isActive ? "Ativado" : "Desativado"}</span>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </Container>
+    </div>
+  );
+}
