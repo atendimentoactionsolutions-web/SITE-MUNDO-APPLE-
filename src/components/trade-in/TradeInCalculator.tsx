@@ -1729,10 +1729,12 @@ Gostaria de agendar a entrega e retirada simultânea em SP!`;
                       <span className="inline-flex items-center gap-2 text-xl font-semibold text-zinc-300">
                         <Loader2 className="w-5 h-5 animate-spin" /> Calculando proposta...
                       </span>
-                    ) : (
+                    ) : differenceToPay > 0 ? (
                       formatCurrency(differenceToPay)
+                    ) : (
+                      "Sob Consulta"
                     )}
-                    {!calculating && (
+                    {!calculating && differenceToPay > 0 && (
                       <span className="text-lg sm:text-2xl text-emerald-300 font-bold ml-2">
                         no PIX
                       </span>
