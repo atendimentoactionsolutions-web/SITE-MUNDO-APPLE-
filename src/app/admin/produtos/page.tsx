@@ -28,10 +28,13 @@ import {
   EyeOff,
   Eye,
   DollarSign,
+  Edit3,
+  X,
+  Save,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { formatCurrency } from "@/utils/formatters";
-import { Product } from "@/types/product";
+import { Product, ProductVariant } from "@/types/product";
 
 const CATEGORIES = [
   { id: "all", name: "Todos os Produtos", icon: Layers },
@@ -57,6 +60,12 @@ export default function AdminProductsPage() {
   // Global Price Hiding ("Modo Sob Consulta")
   const [hideAllPrices, setHideAllPrices] = useState(false);
   const [loadingPriceMode, setLoadingPriceMode] = useState(false);
+
+  // Modal de Edição de Valores do Produto
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [editPriceFrom, setEditPriceFrom] = useState<number | string>("");
+  const [editVariants, setEditVariants] = useState<ProductVariant[]>([]);
+  const [savingPrices, setSavingPrices] = useState(false);
 
   const router = useRouter();
 
@@ -238,6 +247,65 @@ export default function AdminProductsPage() {
     }
   };
 
+  // Open Edit Price Modal
+  const handleOpenEdit = (product: Product) => {
+    setEditingProduct(product);
+    setEditPriceFrom(product.priceFrom || 0);
+    setEditVariants(
+      product.variants ? product.variants.map((v) => ({ ...v })) : []
+    );
+  };
+
+  // Close Edit Price Modal
+  const handleCloseEdit = () => {
+    setEditingProduct(null);
+    setEditPriceFrom("");
+    setEditVariants([]);
+  };
+
+  // Save Product Prices
+  const handleSavePrices = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingProduct) return;
+
+    setSavingPrices(true);
+    setFeedback(null);
+
+    try {
+      const numericPriceFrom = Number(editPriceFrom) || 0;
+      const res = await fetch("/api/admin/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          productId: editingProduct.id,
+          priceFrom: numericPriceFrom,
+          variants: editVariants,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success && data.product) {
+        setProducts((prev) =>
+          prev.map((p) => (p.id === editingProduct.id ? data.product : p))
+        );
+        setFeedback({
+          type: "success",
+          text: `Valores de "${editingProduct.name}" atualizados com sucesso no site!`,
+        });
+        handleCloseEdit();
+      } else {
+        setFeedback({
+          type: "error",
+          text: data.error || "Erro ao salvar valores do produto.",
+        });
+      }
+    } catch (err: any) {
+      setFeedback({ type: "error", text: "Erro ao salvar alterações no servidor." });
+    } finally {
+      setSavingPrices(false);
+    }
+  };
+
   // Toggle all in current category or view
   const handleBatchToggle = async (active: boolean) => {
     const categoryName =
@@ -303,7 +371,7 @@ export default function AdminProductsPage() {
                 </span>
               </div>
               <p className="text-xs md:text-sm text-apple-muted mt-0.5">
-                Controle de exibição dos aparelhos novos lacrados na loja e no simulador de Upgrade.
+                Edite valores, preços por cor e capacidade, e controle a ativação dos aparelhos no site.
               </p>
             </div>
           </div>
@@ -599,11 +667,21 @@ export default function AdminProductsPage() {
                         <p className="text-[11px] text-apple-muted truncate">
                           {p.subcategory || p.category}
                         </p>
-                        <p className="text-xs font-extrabold text-apple-dark mt-1">
-                          {p.priceFrom && p.priceFrom > 0
-                            ? `A partir de ${formatCurrency(p.priceFrom)}`
-                            : "Sob Consulta"}
-                        </p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <p className="text-xs font-extrabold text-apple-dark">
+                            {p.priceFrom && p.priceFrom > 0
+                              ? `A partir de ${formatCurrency(p.priceFrom)}`
+                              : "Sob Consulta"}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => handleOpenEdit(p)}
+                            className="p-1 rounded-lg bg-blue-50 text-apple-blue hover:bg-blue-100 transition-colors"
+                            title="Editar Valores deste Produto"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </div>
                     </div>
 
@@ -612,6 +690,11 @@ export default function AdminProductsPage() {
                       {p.condition && (
                         <span className="text-[10px] px-1.5 py-0.5 bg-apple-gray rounded text-apple-muted font-medium">
                           {p.condition === "new" ? "Novo Lacrado" : "Seminovo"}
+                        </span>
+                      )}
+                      {p.variants && p.variants.length > 0 && (
+                        <span className="text-[10px] px-1.5 py-0.5 bg-blue-50 text-apple-blue rounded font-semibold">
+                          {p.variants.length} opções/cores
                         </span>
                       )}
                       {p.storage && p.storage.length > 0 && (
@@ -623,11 +706,16 @@ export default function AdminProductsPage() {
                     </div>
                   </div>
 
-                  {/* Toggle Button Action */}
+                  {/* Action Buttons: Edit Prices & Active Toggle */}
                   <div className="pt-3 border-t border-apple-border/50 flex items-center justify-between gap-2">
-                    <span className="text-xs text-apple-muted font-medium">
-                      Exibir no site:
-                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleOpenEdit(p)}
+                      className="px-2.5 py-1.5 rounded-xl text-xs font-bold bg-white hover:bg-apple-gray text-apple-dark border border-apple-border transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                    >
+                      <Edit3 className="w-3.5 h-3.5 text-apple-blue" />
+                      <span>Editar Valores</span>
+                    </button>
 
                     <button
                       onClick={() => handleToggleProduct(p)}
@@ -651,6 +739,159 @@ export default function AdminProductsPage() {
                 </div>
               );
             })}
+          </div>
+        )}
+
+        {/* MODAL DE EDIÇÃO DE VALORES */}
+        {editingProduct && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+            <div className="bg-white rounded-3xl border border-apple-border w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+              {/* Modal Header */}
+              <div className="p-5 border-b border-apple-border/70 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="relative w-12 h-12 bg-apple-gray/50 rounded-xl overflow-hidden shrink-0 flex items-center justify-center border border-apple-border/50">
+                    {editingProduct.image ? (
+                      <Image
+                        src={editingProduct.image}
+                        alt={editingProduct.name}
+                        fill
+                        className="object-contain p-1"
+                        sizes="48px"
+                      />
+                    ) : (
+                      <Package className="w-5 h-5 text-apple-muted" />
+                    )}
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-apple-dark">
+                      Editar Valores: {editingProduct.name}
+                    </h2>
+                    <p className="text-xs text-apple-muted">
+                      Altere o valor inicial ("A partir de") e os preços individuais por capacidade e cor.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCloseEdit}
+                  className="p-2 text-apple-muted hover:text-apple-dark hover:bg-apple-gray rounded-xl transition-colors cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Modal Form Body */}
+              <form onSubmit={handleSavePrices} className="p-6 space-y-6 overflow-y-auto flex-1">
+                {/* Preço "A partir de" */}
+                <div className="p-4 bg-apple-gray/40 rounded-2xl border border-apple-border/60 space-y-2">
+                  <label className="block text-xs font-bold text-apple-dark uppercase tracking-wider">
+                    Preço Principal ("A partir de"):
+                  </label>
+                  <div className="relative max-w-xs">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-apple-muted">
+                      R$
+                    </span>
+                    <input
+                      type="number"
+                      step="1"
+                      min="0"
+                      value={editPriceFrom}
+                      onChange={(e) => setEditPriceFrom(e.target.value)}
+                      placeholder="Ex: 7500"
+                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-apple-border rounded-xl text-sm font-bold text-apple-dark focus:outline-none focus:ring-2 focus:ring-apple-blue/30"
+                    />
+                  </div>
+                  <p className="text-[11px] text-apple-muted">
+                    Este valor é exibido como vitrine nos cards do site. Caso seja 0, será exibido como "Sob Consulta".
+                  </p>
+                </div>
+
+                {/* Preços das Variantes (Cores / Capacidades) */}
+                {editVariants.length > 0 ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <label className="block text-xs font-bold text-apple-dark uppercase tracking-wider">
+                        Valores por Cor & Capacidade ({editVariants.length} variantes):
+                      </label>
+                      <span className="text-[11px] text-apple-muted">
+                        Valores cobrados no PIX à vista
+                      </span>
+                    </div>
+
+                    <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                      {editVariants.map((v, idx) => (
+                        <div
+                          key={`${v.storage}-${v.color}-${idx}`}
+                          className="p-3 bg-white border border-apple-border rounded-2xl flex items-center justify-between gap-3 shadow-2xs hover:border-apple-blue/40 transition-colors"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <span className="w-2.5 h-2.5 rounded-full bg-apple-blue shrink-0" />
+                            <div>
+                              <div className="text-xs font-bold text-apple-dark">
+                                {v.storage ? `${v.storage} — ` : ""}
+                                {v.color || "Padrão"}
+                                {v.size ? ` (${v.size})` : ""}
+                              </div>
+                              <span className="text-[10px] text-apple-muted">
+                                {v.chip ? `Chip: ${v.chip} ` : ""}
+                                {v.available ? "Disponível" : "Indisponível"}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-bold text-apple-muted">R$</span>
+                            <input
+                              type="number"
+                              step="1"
+                              min="0"
+                              value={v.price}
+                              onChange={(e) => {
+                                const newPrice = Number(e.target.value) || 0;
+                                setEditVariants((prev) =>
+                                  prev.map((item, i) =>
+                                    i === idx ? { ...item, price: newPrice } : item
+                                  )
+                                );
+                              }}
+                              className="w-28 px-3 py-1.5 bg-apple-gray/40 border border-apple-border rounded-xl text-xs font-bold text-apple-dark text-right focus:outline-none focus:ring-2 focus:ring-apple-blue/30"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="p-4 bg-blue-50/50 border border-blue-200/60 rounded-2xl text-xs text-blue-900">
+                    Este produto não possui variantes individuais cadastradas. O valor principal acima define o preço do produto no site.
+                  </div>
+                )}
+
+                {/* Modal Footer Controls */}
+                <div className="pt-4 border-t border-apple-border/70 flex items-center justify-end gap-2.5">
+                  <button
+                    type="button"
+                    onClick={handleCloseEdit}
+                    disabled={savingPrices}
+                    className="px-4 py-2.5 rounded-xl text-xs font-bold border border-apple-border text-apple-dark hover:bg-apple-gray transition-colors cursor-pointer"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={savingPrices}
+                    className="px-5 py-2.5 rounded-xl text-xs font-bold bg-apple-blue hover:bg-apple-blue-hover text-white flex items-center gap-2 shadow-sm transition-all cursor-pointer disabled:opacity-50"
+                  >
+                    {savingPrices ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Save className="w-4 h-4" />
+                    )}
+                    <span>Salvar Novos Valores</span>
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         )}
       </Container>
