@@ -1,14 +1,29 @@
 import fs from "fs";
 import path from "path";
 import { products as initialProducts } from "@/data/products";
-import { Product } from "@/types/product";
+import { Product, ProductVariant } from "@/types/product";
 import { getSiteSettings } from "./site-settings";
 
 // File where overrides are stored
 const OVERRIDE_FILE = path.join(process.cwd(), "products_override.json");
 
-// Structure: { [productId: string]: { active?: boolean, priceFrom?: number, featured?: boolean } }
-type ProductOverrides = Record<string, { active?: boolean; priceFrom?: number; featured?: boolean }>;
+// Structure:
+// {
+//   [productId: string]: {
+//     active?: boolean;
+//     priceFrom?: number;
+//     featured?: boolean;
+//     variants?: ProductVariant[]; // variant prices / overrides
+//   }
+// }
+export interface ProductOverrideData {
+  active?: boolean;
+  priceFrom?: number;
+  featured?: boolean;
+  variants?: ProductVariant[];
+}
+
+type ProductOverrides = Record<string, ProductOverrideData>;
 
 // In-memory cache
 declare global {
@@ -42,7 +57,7 @@ export function saveOverrides(overrides: ProductOverrides): void {
 }
 
 /**
- * Returns all products with admin overrides applied (e.g. active toggles).
+ * Returns all products with admin overrides applied (active toggles, custom prices, variant prices).
  * Also respects global hideAllPrices setting (sets priceFrom to 0 and variant prices to 0).
  */
 export function getAllProductsWithOverrides(ignoreGlobalHidePrices = false): Product[] {
@@ -55,10 +70,11 @@ export function getAllProductsWithOverrides(ignoreGlobalHidePrices = false): Pro
     let active = override?.active !== undefined ? override.active : p.active;
     let featured = override?.featured !== undefined ? override.featured : p.featured;
     let priceFrom = override?.priceFrom !== undefined ? override.priceFrom : p.priceFrom;
+    let variants = override?.variants !== undefined ? override.variants : p.variants;
 
     if (shouldHidePrices) {
       priceFrom = 0;
-      const maskedVariants = p.variants?.map((v) => ({
+      const maskedVariants = variants?.map((v) => ({
         ...v,
         price: 0,
       }));
@@ -76,8 +92,29 @@ export function getAllProductsWithOverrides(ignoreGlobalHidePrices = false): Pro
       active,
       featured,
       priceFrom,
+      variants,
     };
   });
+}
+
+/**
+ * Update single product price and variants
+ */
+export function updateProductPrices(
+  productId: string,
+  priceFrom: number,
+  variants?: ProductVariant[]
+): Product | null {
+  const overrides = loadOverrides();
+  overrides[productId] = {
+    ...overrides[productId],
+    priceFrom,
+    ...(variants ? { variants } : {}),
+  };
+  saveOverrides(overrides);
+
+  const updated = getAllProductsWithOverrides(true).find((p) => p.id === productId);
+  return updated || null;
 }
 
 /**
