@@ -340,12 +340,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </span>
               )}
 
-              {product.featured && !isPreOrder && (
-                <span className="px-2 py-0.5 rounded-full bg-blue-50 text-[#0071E3] border border-blue-200/60 text-[9px] font-bold uppercase tracking-wider flex items-center gap-1">
-                  <Sparkles className="w-2.5 h-2.5 text-[#0071E3]" />
-                  Destaque
-                </span>
-              )}
+
             </div>
 
             <span className="text-[11px] text-[#0071E3] font-semibold flex items-center gap-1 bg-blue-50/70 px-2 py-0.5 rounded-full border border-blue-100/80">
