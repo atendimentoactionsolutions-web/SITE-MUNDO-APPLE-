@@ -9,7 +9,8 @@ export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    const list = getAllProductsWithOverrides();
+    // In admin panel, pass true to ignore global price hiding so the admin still sees the catalog prices
+    const list = getAllProductsWithOverrides(true);
     return NextResponse.json({
       success: true,
       count: list.length,
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({
         success: true,
-        message: `Status de "${updated.name}" atualizado para ${active ? "Ativo" : "Inativo"}.`,
+        message: `Status de "${updated.name}" atualizado para ${active ? "Ativo" : "Desativado"}.`,
         product: updated,
       });
     }

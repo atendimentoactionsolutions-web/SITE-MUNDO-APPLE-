@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { products as initialProducts } from "@/data/products";
 import { Product } from "@/types/product";
+import { getSiteSettings } from "./site-settings";
 
 // File where overrides are stored
 const OVERRIDE_FILE = path.join(process.cwd(), "products_override.json");
@@ -42,20 +43,40 @@ export function saveOverrides(overrides: ProductOverrides): void {
 
 /**
  * Returns all products with admin overrides applied (e.g. active toggles).
+ * Also respects global hideAllPrices setting (sets priceFrom to 0 and variant prices to 0).
  */
-export function getAllProductsWithOverrides(): Product[] {
+export function getAllProductsWithOverrides(ignoreGlobalHidePrices = false): Product[] {
   const overrides = loadOverrides();
+  const settings = getSiteSettings();
+  const shouldHidePrices = !ignoreGlobalHidePrices && settings.hideAllPrices;
+
   return initialProducts.map((p) => {
     const override = overrides[p.id];
-    if (override) {
+    let active = override?.active !== undefined ? override.active : p.active;
+    let featured = override?.featured !== undefined ? override.featured : p.featured;
+    let priceFrom = override?.priceFrom !== undefined ? override.priceFrom : p.priceFrom;
+
+    if (shouldHidePrices) {
+      priceFrom = 0;
+      const maskedVariants = p.variants?.map((v) => ({
+        ...v,
+        price: 0,
+      }));
       return {
         ...p,
-        active: override.active !== undefined ? override.active : p.active,
-        featured: override.featured !== undefined ? override.featured : p.featured,
-        priceFrom: override.priceFrom !== undefined ? override.priceFrom : p.priceFrom,
+        active,
+        featured,
+        priceFrom: 0,
+        variants: maskedVariants,
       };
     }
-    return p;
+
+    return {
+      ...p,
+      active,
+      featured,
+      priceFrom,
+    };
   });
 }
 
@@ -70,7 +91,7 @@ export function setProductActive(productId: string, active: boolean): Product | 
   };
   saveOverrides(overrides);
 
-  const updated = getAllProductsWithOverrides().find((p) => p.id === productId);
+  const updated = getAllProductsWithOverrides(true).find((p) => p.id === productId);
   return updated || null;
 }
 
