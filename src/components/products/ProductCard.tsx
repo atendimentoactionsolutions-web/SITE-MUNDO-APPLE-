@@ -323,22 +323,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {/* Top Badges */}
           <div className="flex items-center justify-between gap-2 mb-3 z-10">
             <div className="flex items-center gap-1.5 flex-wrap">
-              {isPreOrder ? (
-                <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-200/80 flex items-center gap-1 shadow-2xs">
-                  <Sparkles className="w-3 h-3 text-purple-600" />
-                  Pré-Venda
-                </span>
-              ) : (
-                <span
-                  className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                    isUsed
-                      ? "bg-amber-50 text-amber-800 border border-amber-200/60"
-                      : "bg-emerald-50 text-emerald-800 border border-emerald-200/60"
-                  }`}
-                >
-                  {isUsed ? "Seminovo" : "Lacrado"}
-                </span>
-              )}
+              <span
+                className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                  isUsed
+                    ? "bg-amber-50 text-amber-800 border border-amber-200/60"
+                    : "bg-emerald-50 text-emerald-800 border border-emerald-200/60"
+                }`}
+              >
+                {isUsed ? "Seminovo" : "Lacrado"}
+              </span>
 
 
             </div>
