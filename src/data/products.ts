@@ -8,9 +8,9 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone Duo",
     "image": "/images/products/iphone/iphone-duo-v2.png",
-    "priceFrom": 0,
+    "priceFrom": 23300,
     "condition": "new",
-    "availability": "pre_order",
+    "availability": "available",
     "storage": [
       "256GB",
       "512GB",

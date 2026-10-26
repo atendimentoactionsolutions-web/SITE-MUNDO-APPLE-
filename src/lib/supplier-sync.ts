@@ -38,8 +38,8 @@ function normalizeColor(color: string | undefined): string {
   if (norm.includes("DEEPBLUE") || norm.includes("DARKBLUE") || norm.includes("AZULESCURO")) return "DEEPBLUE";
   if (norm.includes("SILVER") || norm.includes("PRATEADO") || norm.includes("PRATA")) return "SILVER";
   if (norm.includes("NATURAL")) return "NATURAL";
-  if (norm.includes("BLACK") || norm.includes("PRETO") || norm.includes("SPACEBLACK") || norm.includes("JETBLACK")) return "BLACK";
-  if (norm.includes("WHITE") || norm.includes("BRANCO") || norm.includes("STARLIGHT") || norm.includes("ESTRELA")) return "WHITE";
+  if (norm.includes("BLACK") || norm.includes("PRETO") || norm.includes("SPACEBLACK") || norm.includes("JETBLACK") || norm.includes("CEUNOTURNO") || norm.includes("NIGHTSKY")) return "BLACK";
+  if (norm.includes("WHITE") || norm.includes("BRANCO") || norm.includes("STARLIGHT") || norm.includes("ESTRELA") || norm.includes("STARWHITE")) return "WHITE";
   if (norm.includes("DESERT") || norm.includes("DESERTO")) return "DESERT";
   if (norm.includes("PINK") || norm.includes("ROSA")) return "PINK";
   if (norm.includes("TEAL") || norm.includes("VERDEPETROLEO")) return "TEAL";
@@ -68,6 +68,7 @@ function normalizeStorage(storage: string | undefined): string {
 // Map product models
 function getModelKey(name: string): string {
   const norm = normalize(name);
+  if (norm.includes("DUO")) return "IPHONEDUO";
   if (norm.includes("18PROMAX")) return "IPHONE18PROMAX";
   if (norm.includes("18PRO")) return "IPHONE18PRO";
   if (norm.includes("18PLUS")) return "IPHONE18PLUS";

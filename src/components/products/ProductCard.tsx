@@ -283,7 +283,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const isUsed = product.condition === "used";
 
   // Check if product is on pre-order or announcement
-  const isPreOrder = product.availability === "pre_order" || product.priceFrom === 0;
+  const isPreOrder = product.priceFrom === 0 || (!product.priceFrom && product.availability === "pre_order");
 
   // Calculate 18x installment preview
   const maxInstallment = currentPrice > 0 ? getMaxInstallment(currentPrice) : null;
@@ -540,7 +540,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             )}
 
             {/* Live Dynamic Price Display OR Under Consultation */}
-            {currentPrice === 0 || isPreOrder ? (
+            {currentPrice === 0 ? (
               <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-2">
                 <div className="flex items-baseline justify-between">
                   <div>
