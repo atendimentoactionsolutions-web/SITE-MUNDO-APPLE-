@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
         storageName: storage?.displayName || "",
         basePrice: pp.basePrice,
         minimumPrice: pp.minimumPrice,
-        active: pp.active,
+        active: pp.active !== false,
       };
     });
 
@@ -33,7 +33,37 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { prices } = body; // Array of { id, basePrice, minimumPrice, imageUrl, modelId }
+    const { prices, toggleAll, active } = body;
+
+    const now = new Date().toISOString();
+
+    // Toggle ALL prices on or off
+    if (toggleAll && typeof active === "boolean") {
+      db.purchasePrices.forEach((pp, idx) => {
+        db.purchasePrices[idx] = {
+          ...pp,
+          active: active,
+          updatedAt: now,
+        };
+      });
+
+      db.purchasePrices = [...db.purchasePrices];
+
+      db.auditLogs.push({
+        id: `audit-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+        action: active ? "ENABLE_ALL_PRICES" : "DISABLE_ALL_PRICES",
+        entityName: "PurchasePrice",
+        entityId: "ALL",
+        newValue: JSON.stringify({ active }),
+        userName: "Administrador",
+        createdAt: now,
+      });
+
+      return NextResponse.json({
+        success: true,
+        message: `Todos os preços foram ${active ? "ativados" : "desativados"} com sucesso.`,
+      });
+    }
 
     if (!prices || !Array.isArray(prices)) {
       return NextResponse.json(
@@ -42,19 +72,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const now = new Date().toISOString();
-
     prices.forEach((up) => {
       const ppIndex = db.purchasePrices.findIndex((pp) => pp.id === up.id);
       if (ppIndex !== -1) {
         const oldpp = db.purchasePrices[ppIndex];
         const prevBase = oldpp.basePrice;
         const prevMin = oldpp.minimumPrice;
+        const prevActive = oldpp.active !== false;
+        const newActive = typeof up.active === "boolean" ? up.active : oldpp.active;
 
         db.purchasePrices[ppIndex] = {
           ...oldpp,
-          basePrice: Number(up.basePrice),
-          minimumPrice: Number(up.minimumPrice),
+          basePrice: up.basePrice !== undefined ? Number(up.basePrice) : oldpp.basePrice,
+          minimumPrice: up.minimumPrice !== undefined ? Number(up.minimumPrice) : oldpp.minimumPrice,
+          active: newActive,
           updatedAt: now,
         };
 
@@ -67,22 +98,22 @@ export async function POST(request: NextRequest) {
           }
         }
 
-        // Force triggers JSON database save
-        db.purchasePrices = [...db.purchasePrices];
-
         // Audit Log
         db.auditLogs.push({
           id: `audit-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
           action: "UPDATE_PURCHASE_PRICE",
           entityName: "PurchasePrice",
           entityId: oldpp.id,
-          previousValue: JSON.stringify({ basePrice: prevBase, minimumPrice: prevMin }),
-          newValue: JSON.stringify({ basePrice: up.basePrice, minimumPrice: up.minimumPrice }),
+          previousValue: JSON.stringify({ basePrice: prevBase, minimumPrice: prevMin, active: prevActive }),
+          newValue: JSON.stringify({ basePrice: up.basePrice, minimumPrice: up.minimumPrice, active: newActive }),
           userName: "Administrador",
           createdAt: now,
         });
       }
     });
+
+    // Force triggers JSON database save
+    db.purchasePrices = [...db.purchasePrices];
 
     return NextResponse.json({ success: true });
   } catch (error: any) {
