@@ -5,6 +5,7 @@ import { Product } from "@/types/product";
 import { Category } from "@/types/category";
 import { TechnicalService } from "@/types/service";
 import { getLiveEnrichedProducts } from "@/lib/pricing/live-pricing";
+import { getAllProductsWithOverrides } from "@/lib/products-store";
 
 // Abstraction layer for Data Access.
 // In the storefront, only "new" products are displayed for sale.
@@ -17,7 +18,8 @@ export async function getProducts(options?: {
   searchQuery?: string;
 }): Promise<Product[]> {
   // Use products database directly without external overrides
-  let list = products.filter((p) => p.active);
+  const allProducts = getAllProductsWithOverrides();
+  let list = allProducts.filter((p) => p.active);
 
   // Filter condition: default to "new" for storefront sales unless "all" or "used" explicitly specified
   if (options?.condition === "all") {
@@ -94,7 +96,8 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const product = products.find((p) => p.slug === slug && p.active);
+  const allProducts = getAllProductsWithOverrides();
+  const product = allProducts.find((p) => p.slug === slug && p.active);
   return product || null;
 }
 
