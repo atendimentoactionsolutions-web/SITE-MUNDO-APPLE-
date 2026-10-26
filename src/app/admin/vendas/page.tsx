@@ -161,6 +161,14 @@ export default function AdminQuotesPage() {
 
           <div className="flex flex-wrap items-center gap-2">
             <Link
+              href="/admin/produtos"
+              className="px-4 py-2.5 bg-apple-dark hover:bg-black text-white text-xs font-bold rounded-2xl transition-all shadow-sm flex items-center gap-2"
+            >
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Produtos Novos Lacrados</span>
+            </Link>
+
+            <Link
               href="/admin/vendas/precos"
               className="px-4 py-2.5 bg-apple-blue hover:bg-apple-blue-hover text-white text-xs font-bold rounded-2xl transition-all shadow-sm flex items-center gap-2"
             >
