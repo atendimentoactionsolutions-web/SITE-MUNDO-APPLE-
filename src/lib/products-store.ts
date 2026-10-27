@@ -7,15 +7,6 @@ import { getSiteSettings } from "./site-settings";
 // File where overrides are stored
 const OVERRIDE_FILE = path.join(process.cwd(), "products_override.json");
 
-// Structure:
-// {
-//   [productId: string]: {
-//     active?: boolean;
-//     priceFrom?: number;
-//     featured?: boolean;
-//     variants?: ProductVariant[]; // variant prices / overrides
-//   }
-// }
 export interface ProductOverrideData {
   active?: boolean;
   priceFrom?: number;
@@ -25,31 +16,37 @@ export interface ProductOverrideData {
 
 type ProductOverrides = Record<string, ProductOverrideData>;
 
-// In-memory cache
+// In-memory cache with timestamp to reload fresh data from disk
 declare global {
   var __productOverrides: ProductOverrides | undefined;
+  var __productOverridesLastRead: number | undefined;
 }
 
 function loadOverrides(): ProductOverrides {
-  if (global.__productOverrides) {
+  const now = Date.now();
+  // Invalidate cache every 10 seconds or read fresh from disk
+  if (global.__productOverrides && global.__productOverridesLastRead && now - global.__productOverridesLastRead < 10000) {
     return global.__productOverrides;
   }
   try {
     if (fs.existsSync(OVERRIDE_FILE)) {
       const data = fs.readFileSync(OVERRIDE_FILE, "utf-8");
       global.__productOverrides = JSON.parse(data);
+      global.__productOverridesLastRead = now;
       return global.__productOverrides || {};
     }
   } catch (err) {
     console.error("Error reading products_override.json:", err);
   }
   global.__productOverrides = {};
+  global.__productOverridesLastRead = now;
   return global.__productOverrides;
 }
 
 export function saveOverrides(overrides: ProductOverrides): void {
   try {
     global.__productOverrides = overrides;
+    global.__productOverridesLastRead = Date.now();
     fs.writeFileSync(OVERRIDE_FILE, JSON.stringify(overrides, null, 2), "utf-8");
   } catch (err) {
     console.error("Error saving products_override.json:", err);
