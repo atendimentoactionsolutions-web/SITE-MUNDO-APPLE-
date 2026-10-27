@@ -153,12 +153,25 @@ function getModelKey(name: string): string {
   if (norm.includes("IPAD11") || norm.includes("IPAD10") || norm.includes("IPAD")) return "IPAD";
 
   // Mac
+  if (norm.includes("MACBOOKPROM5MAX")) return "MACBOOKPROM5MAX";
+  if (norm.includes("MACBOOKPROM5PRO")) return "MACBOOKPROM5PRO";
   if (norm.includes("MACBOOKPROM5")) return "MACBOOKPROM5";
-  if (norm.includes("MACBOOKPROM4") || norm.includes("MACBOOKPRO")) return "MACBOOKPRO";
+  if (norm.includes("MACBOOKPROM4MAX")) return "MACBOOKPROM4MAX";
+  if (norm.includes("MACBOOKPROM4PRO")) return "MACBOOKPROM4PRO";
+  if (norm.includes("MACBOOKPROM4")) return "MACBOOKPROM4";
+  if (norm.includes("MACBOOKPROM3")) return "MACBOOKPROM3";
+  if (norm.includes("MACBOOKPRO")) return "MACBOOKPRO";
   if (norm.includes("MACBOOKAIRM5")) return "MACBOOKAIRM5";
-  if (norm.includes("MACBOOKAIRM4") || norm.includes("MACBOOKAIRM3") || norm.includes("MACBOOKAIR")) return "MACBOOKAIR";
+  if (norm.includes("MACBOOKAIRM4")) return "MACBOOKAIRM4";
+  if (norm.includes("MACBOOKAIRM3")) return "MACBOOKAIRM3";
+  if (norm.includes("MACBOOKAIRM2")) return "MACBOOKAIRM2";
+  if (norm.includes("MACBOOKAIRM1")) return "MACBOOKAIRM1";
+  if (norm.includes("MACBOOKAIR")) return "MACBOOKAIR";
   if (norm.includes("MACBOOKNEO")) return "MACBOOKNEO";
   if (norm.includes("MACSTUDIO")) return "MACSTUDIO";
+  if (norm.includes("MACMINIM4PRO")) return "MACMINIM4PRO";
+  if (norm.includes("MACMINIM4")) return "MACMINIM4";
+  if (norm.includes("MACMINIM6")) return "MACMINIM6";
   if (norm.includes("MACMINI")) return "MACMINI";
   if (norm.includes("IMAC")) return "IMAC";
 
@@ -318,20 +331,32 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
 
       // Product base priceFrom
       const modelMinPrice = priceMapModel.get(prodModelKey);
-      let finalPriceFrom = prod.priceFrom;
+      let hasValidSupplierPrice = false;
+      let finalPriceFrom = currentOverrides[prod.id]?.priceFrom || prod.priceFrom;
 
       if (minFoundPrice !== Infinity) {
         finalPriceFrom = minFoundPrice;
+        hasValidSupplierPrice = true;
       } else if (modelMinPrice && modelMinPrice > 0) {
         finalPriceFrom = modelMinPrice + categoryMargin;
+        hasValidSupplierPrice = true;
       }
 
-      if (finalPriceFrom && finalPriceFrom > 0) {
+      // If supplier has price: update it with margin.
+      // If supplier DOES NOT have this product: KEEP yesterday's price untouched!
+      if (hasValidSupplierPrice) {
         matchedProductsCount++;
         currentOverrides[prod.id] = {
           ...currentOverrides[prod.id],
           priceFrom: finalPriceFrom,
-          variants: updatedVariants.length > 0 ? updatedVariants : currentOverrides[prod.id]?.variants,
+          variants: updatedVariants.length > 0 ? updatedVariants : (currentOverrides[prod.id]?.variants || prod.variants),
+        };
+      } else {
+        // Retain original price & variants from catalog/yesterday
+        currentOverrides[prod.id] = {
+          ...currentOverrides[prod.id],
+          priceFrom: currentOverrides[prod.id]?.priceFrom || prod.priceFrom,
+          variants: currentOverrides[prod.id]?.variants || prod.variants,
         };
       }
     }
