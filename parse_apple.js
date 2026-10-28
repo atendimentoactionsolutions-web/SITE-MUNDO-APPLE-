@@ -1,14 +1,12 @@
 const fs = require('fs');
-
 const html = fs.readFileSync('apple_homepage.html', 'utf-8');
 
-// Find sections or units
-const promoRegex = /<section[^>]*class="[^"]*unit[^"]*"[^>]*>([\s\S]*?)<\/section>/gi;
-let match;
-while ((match = promoRegex.exec(html)) !== null) {
-  console.log('--- FOUND SECTION ---');
-  const text = match[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  console.log(text.slice(0, 150));
-  const imgs = match[1].match(/(?:src|srcset|data-src|url\()=?["']?([^"')\s]+)/gi) || [];
-  console.log('Images:', imgs.slice(0, 5));
-}
+const matches = html.match(/class="[^"]*(?:promo|hero|module|collection)[^"]*"/gi) || [];
+console.log('Class matches:', [...new Set(matches)].slice(0, 30));
+
+const lines = html.split('\n');
+lines.forEach((l, i) => {
+  if (l.includes('iPad mini') || l.includes('AirPods Pro') || l.includes('Apple TV') || l.includes('iPhone 16') || l.includes('iPhone')) {
+    console.log(`Line ${i}:`, l.trim().slice(0, 120));
+  }
+});
