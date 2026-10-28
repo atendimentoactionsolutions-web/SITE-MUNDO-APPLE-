@@ -65,13 +65,10 @@ export const Header: React.FC = () => {
           {/* Logo Apple (Left) */}
           <Link
             href="/"
-            aria-label="Mundo Apple Delivery — Página inicial"
-            className="flex items-center gap-2 group opacity-80 hover:opacity-100 transition-opacity select-none py-1"
+            aria-label="Página inicial"
+            className="flex items-center group opacity-80 hover:opacity-100 transition-opacity select-none py-1"
           >
             <AppleLogo className="w-4 h-4 text-white" />
-            <span className="font-semibold text-xs tracking-tight text-white font-display hidden sm:inline-block">
-              Mundo Apple
-            </span>
           </Link>
 
           {/* Desktop Navigation Links (Center) */}
