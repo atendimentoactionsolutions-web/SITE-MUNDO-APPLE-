@@ -51,12 +51,12 @@ export const AppleOfficialHeroSection: React.FC = () => {
           </p>
 
           <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5">
-            <a
-              href="#categoria-macbook"
+            <Link
+              href="/macbook-pro/proled-xdr-display"
               className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
             >
               Saiba mais
-            </a>
+            </Link>
             <a
               href={proledWhatsAppUrl}
               target="_blank"
@@ -101,12 +101,12 @@ export const AppleOfficialHeroSection: React.FC = () => {
           </p>
 
           <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5">
-            <a
-              href="#categoria-macbook"
+            <Link
+              href="/macbook-pro/proled-xdr-display"
               className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
             >
               Saiba mais
-            </a>
+            </Link>
             <a
               href={m6WhatsAppUrl}
               target="_blank"
