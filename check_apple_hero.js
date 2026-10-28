@@ -1,18 +1,33 @@
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
-https.get('https://www.apple.com/br/', { headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
-  let data = '';
-  res.on('data', c => data += c);
-  res.on('end', () => {
-    const idx1 = data.indexOf('class="section section-hero"');
-    const idx2 = data.indexOf('class="section section-promo"');
-    const heroSection = data.slice(idx1, idx2);
-    console.log('Hero section length:', heroSection.length);
-    const media = heroSection.match(/(?:src|srcset)="([^"]+)"/g) || [];
-    console.log('Media:', media);
-    const headlines = heroSection.match(/<h2[^>]*>([\s\S]*?)<\/h2>/g) || [];
-    console.log('Headlines:', headlines);
-    const subheads = heroSection.match(/<p class="tile-subhead[^"]*">([\s\S]*?)<\/p>/g) || [];
-    console.log('Subheads:', subheads);
+const urls = [
+  // Hero 1: PROLED XDR
+  'https://www.apple.com/v/homepage/images/macbook-pro-proled-xdr/a/hero_macbook_pro_proled_xdr_animated_preorder_startframe__dnrzzn9ywj2a_large_2x.jpg',
+  'https://www.apple.com/v/homepage/images/macbook-pro-proled-xdr/a/hero_macbook_pro_proled_xdr_animated_preorder_startframe__dnrzzn9ywj2a_large.jpg',
+  'https://www.apple.com/v/homepage/images/macbook-pro-proled-xdr/a/hero_macbook_pro_proled_xdr_animated_preorder__c7dgzbk10sqe_large_2x.jpg',
+  'https://www.apple.com/v/homepage/images/macbook-pro-proled-xdr/a/hero_macbook_pro_proled_xdr_animated_preorder__c7dgzbk10sqe_large.jpg',
+  // Hero 2: M6
+  'https://www.apple.com/v/homepage/images/macbook-pro-m6/a/hero_macbook_pro_m6_announce__b04jni815ck2_large_2x.jpg',
+  'https://www.apple.com/v/homepage/images/macbook-pro-m6/a/hero_macbook_pro_m6_announce__b04jni815ck2_large.jpg',
+  // Hero 3: iMac
+  'https://www.apple.com/v/homepage/images/imac-m6/a/hero_imac_m6_announce__bboowaq6op6q_large_2x.jpg',
+  'https://www.apple.com/v/homepage/images/imac-m6/a/hero_imac_m6_announce__bboowaq6op6q_large.jpg',
+];
+
+const destDir = path.join(__dirname, 'public', 'apple-official', 'images');
+
+urls.forEach(u => {
+  const filename = path.basename(u);
+  const dest = path.join(destDir, filename);
+  https.get(u, { headers: { 'User-Agent': 'Mozilla/5.0' } }, res => {
+    if (res.statusCode === 200) {
+      const file = fs.createWriteStream(dest);
+      res.pipe(file);
+      file.on('finish', () => console.log('Downloaded:', filename));
+    } else {
+      console.log('Failed:', res.statusCode, filename);
+    }
   });
 });
