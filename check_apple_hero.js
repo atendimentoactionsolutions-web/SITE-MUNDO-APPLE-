@@ -4,13 +4,15 @@ https.get('https://www.apple.com/br/', { headers: { 'User-Agent': 'Mozilla/5.0' 
   let data = '';
   res.on('data', c => data += c);
   res.on('end', () => {
-    // Find all hero units
-    const heroes = data.match(/<div class="unit-wrapper">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/gi) || [];
-    heroes.forEach((h, i) => {
-      console.log(`=== HERO ${i} ===`);
-      const imgs = h.match(/(?:src|srcset)="(?:https:\/\/www\.apple\.com)?([^"\s]+)/gi) || [];
-      console.log(h.slice(0, 300).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' '));
-      console.log('Images:', imgs);
-    });
+    const idx1 = data.indexOf('class="section section-hero"');
+    const idx2 = data.indexOf('class="section section-promo"');
+    const heroSection = data.slice(idx1, idx2);
+    console.log('Hero section length:', heroSection.length);
+    const media = heroSection.match(/(?:src|srcset)="([^"]+)"/g) || [];
+    console.log('Media:', media);
+    const headlines = heroSection.match(/<h2[^>]*>([\s\S]*?)<\/h2>/g) || [];
+    console.log('Headlines:', headlines);
+    const subheads = heroSection.match(/<p class="tile-subhead[^"]*">([\s\S]*?)<\/p>/g) || [];
+    console.log('Subheads:', subheads);
   });
 });
