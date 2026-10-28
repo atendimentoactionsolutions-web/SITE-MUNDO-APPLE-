@@ -39,10 +39,10 @@ function normalizeColor(color: string | undefined): string {
   if (norm.includes("DEEPBLUE") || norm.includes("DARKBLUE") || norm.includes("AZULESCURO")) return "DEEPBLUE";
   if (norm.includes("SILVER") || norm.includes("PRATEADO") || norm.includes("PRATA")) return "SILVER";
   if (norm.includes("NATURAL")) return "NATURAL";
-  if (norm.includes("BLACK") || norm.includes("PRETO") || norm.includes("SPACEBLACK") || norm.includes("JETBLACK") || norm.includes("CEUNOTURNO") || norm.includes("NIGHTSKY")) return "BLACK";
-  if (norm.includes("WHITE") || norm.includes("BRANCO") || norm.includes("STARLIGHT") || norm.includes("ESTRELA") || norm.includes("STARWHITE")) return "WHITE";
+  if (norm.includes("BLACK") || norm.includes("PRETO") || norm.includes("SPACEBLACK") || norm.includes("JETBLACK") || norm.includes("CEUNOTURNO") || norm.includes("NIGHTSKY") || norm.includes("SPACEGRAY") || norm.includes("CINZAESPACIAL")) return "BLACK";
+  if (norm.includes("WHITE") || norm.includes("BRANCO") || norm.includes("STARLIGHT") || norm.includes("ESTRELA") || norm.includes("STARWHITE") || norm.includes("BRANCOESTRELA")) return "WHITE";
   if (norm.includes("DESERT") || norm.includes("DESERTO")) return "DESERT";
-  if (norm.includes("PINK") || norm.includes("ROSA")) return "PINK";
+  if (norm.includes("PINK") || norm.includes("ROSA") || norm.includes("ROSE")) return "PINK";
   if (norm.includes("TEAL") || norm.includes("VERDEPETROLEO")) return "TEAL";
   if (norm.includes("ULTRAMARINE") || norm.includes("AZULMARINHO") || norm.includes("ULTRAMARINO")) return "ULTRAMARINE";
   if (norm.includes("BLUE") || norm.includes("AZUL")) return "BLUE";
@@ -53,7 +53,7 @@ function normalizeColor(color: string | undefined): string {
   return norm;
 }
 
-// Map storage aliases
+// Map storage aliases (and watch case sizes)
 function normalizeStorage(storage: string | undefined): string {
   const norm = normalize(storage);
   if (!norm) return "";
@@ -63,6 +63,12 @@ function normalizeStorage(storage: string | undefined): string {
   if (norm === "1TB" || norm === "1000GB" || norm === "1024GB") return "1TB";
   if (norm === "2TB") return "2TB";
   if (norm === "64" || norm === "64GB") return "64GB";
+  if (norm === "40MM" || norm === "40") return "40MM";
+  if (norm === "42MM" || norm === "42") return "42MM";
+  if (norm === "44MM" || norm === "44") return "44MM";
+  if (norm === "45MM" || norm === "45") return "45MM";
+  if (norm === "46MM" || norm === "46") return "46MM";
+  if (norm === "49MM" || norm === "49") return "49MM";
   return norm;
 }
 
