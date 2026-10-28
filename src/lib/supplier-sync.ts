@@ -316,27 +316,29 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       let minFoundPrice = Infinity;
 
       if (prod.variants && prod.variants.length > 0) {
-        // Read existing overrides for this product if any
-        const existingProdOverride = currentOverrides[prod.id]?.variants || prod.variants;
+        // Read base catalog variants
+        const catalogVariants = prod.variants;
 
-        updatedVariants = existingProdOverride.map((v) => {
-          const vStg = normalizeStorage(v.storage);
+        updatedVariants = catalogVariants.map((v) => {
+          // Normalize storage or size (for Watches/Keyboards)
+          const vStg = normalizeStorage(v.storage || (v as any).size);
           const vCol = normalizeColor(v.color);
 
           let bestPrice: number | undefined;
 
-          // Priority 1: exact model + storage + color
+          // Priority 1: exact model + storage/size + color
           if (vStg && vCol) {
             bestPrice = priceMapSpecific.get(`${prodModelKey}__${vStg}__${vCol}`);
           }
 
-          // Priority 2: model + storage
+          // Priority 2: model + storage/size
           if (!bestPrice && vStg) {
             bestPrice = priceMapStorage.get(`${prodModelKey}__${vStg}`);
           }
 
-          // Priority 3: model
-          if (!bestPrice) {
+          // Priority 3: Only for products without explicit storage or when model has uniform price
+          // DO NOT apply priceMapModel across different storage capacities (e.g. 512GB vs 128GB)
+          if (!bestPrice && !vStg) {
             bestPrice = priceMapModel.get(prodModelKey);
           }
 
@@ -351,6 +353,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
             };
           }
 
+          // If supplier doesn't have this variant: keep yesterday/catalog price
           if (v.price > 0 && v.price < minFoundPrice) minFoundPrice = v.price;
           return v;
         });
@@ -359,7 +362,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       // Product base priceFrom
       const modelMinPrice = priceMapModel.get(prodModelKey);
       let hasValidSupplierPrice = false;
-      let finalPriceFrom = currentOverrides[prod.id]?.priceFrom || prod.priceFrom;
+      let finalPriceFrom = prod.priceFrom;
 
       if (minFoundPrice !== Infinity) {
         finalPriceFrom = minFoundPrice;
