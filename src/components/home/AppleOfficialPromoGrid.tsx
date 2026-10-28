@@ -20,19 +20,19 @@ export const AppleOfficialPromoGrid: React.FC = () => {
           {/* ────────────────────────────────────────────────────────────────
               CARD 1: iPhone Duo (Light Theme)
           ──────────────────────────────────────────────────────────────── */}
-          <div className="relative h-[490px] sm:h-[580px] overflow-hidden bg-[#F5F5F7] text-[#1D1D1F] flex flex-col items-center text-center group">
+          <div className="relative h-[480px] sm:h-[580px] overflow-hidden bg-[#F5F5F7] text-[#1D1D1F] flex flex-col items-center text-center group">
             {/* Top Copy & CTAs */}
-            <div className="relative z-10 pt-10 sm:pt-12 px-6 flex flex-col items-center">
-              <h3 className="text-[32px] sm:text-[40px] font-semibold tracking-[-0.005em] font-display text-[#1D1D1F]">
+            <div className="relative z-10 pt-8 sm:pt-12 px-6 flex flex-col items-center">
+              <h3 className="text-[28px] sm:text-[40px] font-semibold tracking-[-0.005em] font-display text-[#1D1D1F]">
                 iPhone Duo
               </h3>
-              <p className="mt-1 text-[17px] sm:text-[19px] text-[#1D1D1F] font-normal tracking-tight">
+              <p className="mt-1 text-[16px] sm:text-[19px] text-[#1D1D1F] font-normal tracking-tight">
                 Alô. Olá.
               </p>
               <div className="flex items-center justify-center gap-3 pt-3">
                 <a
                   href="#categoria-iphone"
-                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors"
+                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors shadow-sm"
                 >
                   Saiba mais
                 </a>
@@ -47,9 +47,13 @@ export const AppleOfficialPromoGrid: React.FC = () => {
               </div>
             </div>
 
-            {/* Background Image: Duo in Hands */}
+            {/* Background Image: Duo in Hands (Responsive) */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-end justify-center">
               <picture className="w-full h-full">
+                <source
+                  media="(max-width: 734px)"
+                  srcSet="/apple-official/images/promo_iphone_duo_announce__cc65fv056p8i_small_2x.jpg"
+                />
                 <source
                   media="(min-width: 735px)"
                   srcSet="/apple-official/images/promo_iphone_duo_announce__cc65fv056p8i_large_2x.jpg"
@@ -66,19 +70,19 @@ export const AppleOfficialPromoGrid: React.FC = () => {
           {/* ────────────────────────────────────────────────────────────────
               CARD 2: iPhone 18 Pro (Dark Theme)
           ──────────────────────────────────────────────────────────────── */}
-          <div className="relative h-[490px] sm:h-[580px] overflow-hidden bg-black text-[#F5F5F7] flex flex-col items-center text-center group">
+          <div className="relative h-[480px] sm:h-[580px] overflow-hidden bg-black text-[#F5F5F7] flex flex-col items-center text-center group">
             {/* Top Copy & CTAs */}
-            <div className="relative z-10 pt-10 sm:pt-12 px-6 flex flex-col items-center">
-              <h3 className="text-[32px] sm:text-[40px] font-semibold tracking-[-0.005em] font-display text-white">
+            <div className="relative z-10 pt-8 sm:pt-12 px-6 flex flex-col items-center">
+              <h3 className="text-[28px] sm:text-[40px] font-semibold tracking-[-0.005em] font-display text-white">
                 iPhone 18 Pro
               </h3>
-              <p className="mt-1 text-[17px] sm:text-[19px] text-[#F5F5F7] font-normal tracking-tight">
+              <p className="mt-1 text-[16px] sm:text-[19px] text-[#F5F5F7] font-normal tracking-tight">
                 Muito mais Pro.
               </p>
               <div className="flex items-center justify-center gap-3 pt-3">
                 <Link
                   href="/iphone-18-pro"
-                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors"
+                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors shadow-sm"
                 >
                   Saiba mais
                 </Link>
@@ -93,9 +97,13 @@ export const AppleOfficialPromoGrid: React.FC = () => {
               </div>
             </div>
 
-            {/* Background Image: iPhone 18 Pro floating over PRO text */}
+            {/* Background Image: iPhone 18 Pro (Responsive) */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-end justify-center">
               <picture className="w-full h-full">
+                <source
+                  media="(max-width: 734px)"
+                  srcSet="/apple-official/images/promo_iphone_18_pro__9nn5m4mt2bmy_small_2x.jpg"
+                />
                 <source
                   media="(min-width: 735px)"
                   srcSet="/apple-official/images/promo_iphone_18_pro__9nn5m4mt2bmy_large_2x.jpg"
@@ -112,10 +120,10 @@ export const AppleOfficialPromoGrid: React.FC = () => {
           {/* ────────────────────────────────────────────────────────────────
               CARD 3: Apple Watch Series 12 (Dark Theme - Top Logo & Bottom Copy)
           ──────────────────────────────────────────────────────────────── */}
-          <div className="relative h-[490px] sm:h-[580px] overflow-hidden bg-black text-[#F5F5F7] flex flex-col justify-between items-center text-center group">
+          <div className="relative h-[480px] sm:h-[580px] overflow-hidden bg-black text-[#F5F5F7] flex flex-col justify-between items-center text-center group">
             {/* Top Logo */}
-            <div className="relative z-10 pt-9 sm:pt-11 px-6 flex flex-col items-center">
-              <div className="relative w-44 sm:w-52 h-8 sm:h-10">
+            <div className="relative z-10 pt-8 sm:pt-11 px-6 flex flex-col items-center">
+              <div className="relative w-40 sm:w-52 h-7 sm:h-10">
                 <Image
                   src="/apple-official/images/promo_logo_apple_watch_series_12__eck6698frlqq_large.png"
                   alt="Apple Watch Series 12"
@@ -126,9 +134,13 @@ export const AppleOfficialPromoGrid: React.FC = () => {
               </div>
             </div>
 
-            {/* Background Image: Watch Front & Back */}
+            {/* Background Image: Watch Front & Back (Responsive) */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-center justify-center">
               <picture className="w-full h-full">
+                <source
+                  media="(max-width: 734px)"
+                  srcSet="/apple-official/images/promo_apple_watch_series_12__gnlprtt8526a_small_2x.jpg"
+                />
                 <source
                   media="(min-width: 735px)"
                   srcSet="/apple-official/images/promo_apple_watch_series_12__gnlprtt8526a_large_2x.jpg"
@@ -142,14 +154,14 @@ export const AppleOfficialPromoGrid: React.FC = () => {
             </div>
 
             {/* Bottom Copy & CTAs */}
-            <div className="relative z-10 pb-8 sm:pb-10 px-6 flex flex-col items-center space-y-2.5 max-w-xs sm:max-w-sm">
-              <p className="text-[15px] sm:text-[17px] leading-[1.25] text-[#F5F5F7] font-normal tracking-tight">
+            <div className="relative z-10 pb-7 sm:pb-10 px-6 flex flex-col items-center space-y-2.5 max-w-xs sm:max-w-sm">
+              <p className="text-[14px] sm:text-[17px] leading-[1.25] text-[#F5F5F7] font-normal tracking-tight">
                 Com a medição de frequência cardíaca mais precisa em um wearable¹.
               </p>
               <div className="flex items-center justify-center gap-3 pt-1">
                 <a
                   href="#categoria-watch"
-                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors"
+                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors shadow-sm"
                 >
                   Saiba mais
                 </a>
@@ -168,10 +180,10 @@ export const AppleOfficialPromoGrid: React.FC = () => {
           {/* ────────────────────────────────────────────────────────────────
               CARD 4: iPad mini (Light Theme)
           ──────────────────────────────────────────────────────────────── */}
-          <div className="relative h-[490px] sm:h-[580px] overflow-hidden bg-[#F5F5F7] text-[#1D1D1F] flex flex-col items-center text-center group">
+          <div className="relative h-[480px] sm:h-[580px] overflow-hidden bg-[#F5F5F7] text-[#1D1D1F] flex flex-col items-center text-center group">
             {/* Top Logo, Copy & CTAs */}
-            <div className="relative z-10 pt-10 sm:pt-12 px-6 flex flex-col items-center space-y-1.5 max-w-md">
-              <div className="relative w-28 sm:w-32 h-8 sm:h-9">
+            <div className="relative z-10 pt-8 sm:pt-12 px-6 flex flex-col items-center space-y-1 max-w-md">
+              <div className="relative w-24 sm:w-32 h-7 sm:h-9">
                 <Image
                   src="/apple-official/images/promo_logo_ipad_mini_a20__dcndmemvplea_large.png"
                   alt="iPad mini"
@@ -180,16 +192,16 @@ export const AppleOfficialPromoGrid: React.FC = () => {
                   priority
                 />
               </div>
-              <p className="text-[17px] sm:text-[19px] text-[#1D1D1F] font-normal tracking-tight">
+              <p className="text-[15px] sm:text-[19px] text-[#1D1D1F] font-normal tracking-tight">
                 O mini que é o máximo.
               </p>
-              <p className="text-[13px] sm:text-[14px] text-[#6E6E73] font-normal">
+              <p className="text-[12px] sm:text-[14px] text-[#6E6E73] font-normal">
                 Confira em breve a disponibilidade
               </p>
               <div className="flex items-center justify-center gap-3 pt-2">
                 <a
                   href="#categoria-ipad"
-                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors"
+                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors shadow-sm"
                 >
                   Saiba mais
                 </a>
@@ -204,9 +216,13 @@ export const AppleOfficialPromoGrid: React.FC = () => {
               </div>
             </div>
 
-            {/* Background Image: Hand holding blue iPad mini */}
+            {/* Background Image: Hand holding blue iPad mini (Responsive) */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-end justify-center">
               <picture className="w-full h-full">
+                <source
+                  media="(max-width: 734px)"
+                  srcSet="/apple-official/images/promo_ipad_mini_a20_announce__efc6vmmxg58i_small_2x.jpg"
+                />
                 <source
                   media="(min-width: 735px)"
                   srcSet="/apple-official/images/promo_ipad_mini_a20_announce__efc6vmmxg58i_large_2x.jpg"
@@ -223,10 +239,10 @@ export const AppleOfficialPromoGrid: React.FC = () => {
           {/* ────────────────────────────────────────────────────────────────
               CARD 5: Apple TV 4K (Light Theme)
           ──────────────────────────────────────────────────────────────── */}
-          <div className="relative h-[490px] sm:h-[580px] overflow-hidden bg-[#F5F5F7] text-[#1D1D1F] flex flex-col items-center text-center group">
+          <div className="relative h-[480px] sm:h-[580px] overflow-hidden bg-[#F5F5F7] text-[#1D1D1F] flex flex-col items-center text-center group">
             {/* Top Logo, Copy & CTAs */}
-            <div className="relative z-10 pt-10 sm:pt-12 px-6 flex flex-col items-center space-y-1.5 max-w-md">
-              <div className="relative w-28 sm:w-32 h-8 sm:h-9">
+            <div className="relative z-10 pt-8 sm:pt-12 px-6 flex flex-col items-center space-y-1 max-w-md">
+              <div className="relative w-24 sm:w-32 h-7 sm:h-9">
                 <Image
                   src="/apple-official/images/promo_logo_apple_tv_4k__dmr11vmopro2_large.png"
                   alt="Apple TV 4K"
@@ -235,16 +251,16 @@ export const AppleOfficialPromoGrid: React.FC = () => {
                   priority
                 />
               </div>
-              <p className="text-[17px] sm:text-[19px] text-[#1D1D1F] font-normal tracking-tight">
+              <p className="text-[15px] sm:text-[19px] text-[#1D1D1F] font-normal tracking-tight">
                 Imagem incrível. Simplicidade incrível.
               </p>
-              <p className="text-[13px] sm:text-[14px] text-[#6E6E73] font-normal">
+              <p className="text-[12px] sm:text-[14px] text-[#6E6E73] font-normal">
                 Confira em breve a disponibilidade
               </p>
               <div className="flex items-center justify-center gap-3 pt-2">
                 <a
                   href="#categoria-acessorios"
-                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors"
+                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors shadow-sm"
                 >
                   Saiba mais
                 </a>
@@ -259,9 +275,13 @@ export const AppleOfficialPromoGrid: React.FC = () => {
               </div>
             </div>
 
-            {/* Background Image: Apple TV 4K + Siri Remote */}
+            {/* Background Image: Apple TV 4K + Siri Remote (Responsive) */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-end justify-center">
               <picture className="w-full h-full">
+                <source
+                  media="(max-width: 734px)"
+                  srcSet="/apple-official/images/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_small_2x.jpg"
+                />
                 <source
                   media="(min-width: 735px)"
                   srcSet="/apple-official/images/promo_apple_tv_4k_preorder__d4z5g4tm3qoi_large_2x.jpg"
@@ -278,19 +298,19 @@ export const AppleOfficialPromoGrid: React.FC = () => {
           {/* ────────────────────────────────────────────────────────────────
               CARD 6: AirPods Pro 3 (Light Theme)
           ──────────────────────────────────────────────────────────────── */}
-          <div className="relative h-[490px] sm:h-[580px] overflow-hidden bg-[#F5F5F7] text-[#1D1D1F] flex flex-col items-center text-center group">
+          <div className="relative h-[480px] sm:h-[580px] overflow-hidden bg-[#F5F5F7] text-[#1D1D1F] flex flex-col items-center text-center group">
             {/* Top Copy & CTAs */}
-            <div className="relative z-10 pt-10 sm:pt-12 px-6 flex flex-col items-center space-y-1.5 max-w-sm sm:max-w-md">
-              <h3 className="text-[32px] sm:text-[40px] font-semibold tracking-[-0.005em] font-display text-[#1D1D1F]">
+            <div className="relative z-10 pt-8 sm:pt-12 px-6 flex flex-col items-center space-y-1 max-w-sm sm:max-w-md">
+              <h3 className="text-[28px] sm:text-[40px] font-semibold tracking-[-0.005em] font-display text-[#1D1D1F]">
                 AirPods Pro 3
               </h3>
-              <p className="text-[15px] sm:text-[17px] leading-[1.25] text-[#1D1D1F] font-normal tracking-tight">
+              <p className="text-[14px] sm:text-[17px] leading-[1.25] text-[#1D1D1F] font-normal tracking-tight">
                 O melhor Cancelamento Ativo de Ruído do mundo em fones intra-auriculares².
               </p>
               <div className="flex items-center justify-center gap-3 pt-2">
                 <a
                   href="#categoria-airpods"
-                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors"
+                  className="px-4 py-1.5 sm:px-5 sm:py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] font-normal rounded-full transition-colors shadow-sm"
                 >
                   Saiba mais
                 </a>
@@ -305,9 +325,13 @@ export const AppleOfficialPromoGrid: React.FC = () => {
               </div>
             </div>
 
-            {/* Background Image: AirPods Pro 3 pair */}
+            {/* Background Image: AirPods Pro 3 pair (Responsive) */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden flex items-end justify-center">
               <picture className="w-full h-full">
+                <source
+                  media="(max-width: 734px)"
+                  srcSet="/apple-official/images/promo_airpods_pro_3__e4755qofhnyq_small_2x.jpg"
+                />
                 <source
                   media="(min-width: 735px)"
                   srcSet="/apple-official/images/promo_airpods_pro_3__e4755qofhnyq_large_2x.jpg"
