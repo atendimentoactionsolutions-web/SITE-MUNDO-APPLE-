@@ -1,25 +1,10 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { Play, Pause } from "lucide-react";
 import { createWhatsAppLink } from "@/utils/whatsapp";
 
 export const AppleOfficialHeroSection: React.FC = () => {
-  const [playingHero1, setPlayingHero1] = useState(true);
-  const videoRef1 = useRef<HTMLVideoElement>(null);
-
-  const toggleVideo1 = () => {
-    if (!videoRef1.current) return;
-    if (playingHero1) {
-      videoRef1.current.pause();
-      setPlayingHero1(false);
-    } else {
-      videoRef1.current.play();
-      setPlayingHero1(true);
-    }
-  };
-
   const proledWhatsAppUrl = createWhatsAppLink(
     "Olá! Vim pelo site da Mundo Apple Delivery e quero consultar valores e disponibilidade do novo *MacBook Pro com Tela PROLED XDR*. Podem me passar mais detalhes?"
   );
@@ -37,23 +22,23 @@ export const AppleOfficialHeroSection: React.FC = () => {
       {/* ──────────────────────────────────────────────────────────────────────────
           HERO 1: MacBook Pro com Tela PROLED XDR (Dark Theme - Apple Hero #1)
       ────────────────────────────────────────────────────────────────────────── */}
-      <div className="relative w-full h-[580px] sm:h-[650px] lg:h-[692px] bg-black text-[#F5F5F7] overflow-hidden flex flex-col items-center text-center group">
+      <div className="relative w-full h-[520px] sm:h-[650px] lg:h-[692px] bg-black text-[#F5F5F7] overflow-hidden flex flex-col items-center text-center group">
         {/* Top Copy & CTAs */}
-        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-10 sm:pt-14">
-          <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-white">
+        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-8 sm:pt-14">
+          <h2 className="text-[32px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-white">
             MacBook Pro
           </h2>
-          <p className="mt-1 sm:mt-1.5 text-[20px] sm:text-[24px] lg:text-[28px] font-normal leading-[1.14] text-[#F5F5F7] tracking-[0.007em]">
+          <p className="mt-1 sm:mt-1.5 text-[18px] sm:text-[24px] lg:text-[28px] font-normal leading-[1.14] text-[#F5F5F7] tracking-[0.007em]">
             Tela PROLED XDR
           </p>
-          <p className="mt-1.5 text-[14px] sm:text-[16px] text-[#86868B] font-normal">
+          <p className="mt-1 text-[13px] sm:text-[16px] text-[#86868B] font-normal">
             Confira em breve a disponibilidade
           </p>
 
-          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-3 sm:mt-5">
             <Link
               href="/macbook-pro/proled-xdr-display"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+              className="inline-flex items-center justify-center min-w-[105px] sm:min-w-[125px] px-4 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200 shadow-sm"
             >
               Saiba mais
             </Link>
@@ -61,16 +46,20 @@ export const AppleOfficialHeroSection: React.FC = () => {
               href={proledWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-transparent hover:bg-[#0071E3] text-[#2997FF] hover:text-white border border-[#2997FF] hover:border-[#0071E3] text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+              className="inline-flex items-center justify-center min-w-[105px] sm:min-w-[125px] px-4 py-2 sm:px-6 sm:py-2.5 bg-transparent hover:bg-[#0071E3] text-[#2997FF] hover:text-white border border-[#2997FF] hover:border-[#0071E3] text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
             >
               Ver preços
             </a>
           </div>
         </div>
 
-        {/* Media Background: Official Apple PROLED XDR Video / Picture */}
+        {/* Media Background: Responsive Mobile & Desktop */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden flex justify-center items-end">
           <picture className="w-full h-full flex justify-center items-end">
+            <source
+              media="(max-width: 734px)"
+              srcSet="/apple-official/images/hero_macbook_pro_proled_xdr_animated_preorder__c7dgzbk10sqe_small_2x.jpg"
+            />
             <source
               media="(min-width: 735px)"
               srcSet="/apple-official/images/hero_macbook_pro_proled_xdr_animated_preorder__c7dgzbk10sqe_large_2x.jpg"
@@ -87,23 +76,23 @@ export const AppleOfficialHeroSection: React.FC = () => {
       {/* ──────────────────────────────────────────────────────────────────────────
           HERO 2: MacBook Pro 14" M6 (Dark OLED Theme - Apple Hero #2)
       ────────────────────────────────────────────────────────────────────────── */}
-      <div className="relative w-full h-[580px] sm:h-[650px] lg:h-[692px] bg-black text-[#F5F5F7] overflow-hidden flex flex-col items-center text-center group">
+      <div className="relative w-full h-[520px] sm:h-[650px] lg:h-[692px] bg-black text-[#F5F5F7] overflow-hidden flex flex-col items-center text-center group">
         {/* Top Copy & CTAs */}
-        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-10 sm:pt-14">
-          <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-white">
+        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-8 sm:pt-14">
+          <h2 className="text-[32px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-white">
             MacBook Pro
           </h2>
-          <p className="mt-1 sm:mt-1.5 text-[20px] sm:text-[24px] lg:text-[28px] font-normal leading-[1.14] text-[#F5F5F7] tracking-[0.007em]">
+          <p className="mt-1 sm:mt-1.5 text-[18px] sm:text-[24px] lg:text-[28px] font-normal leading-[1.14] text-[#F5F5F7] tracking-[0.007em]">
             Modelo de 14 polegadas agora com M6.
           </p>
-          <p className="mt-1.5 text-[14px] sm:text-[16px] text-[#86868B] font-normal">
+          <p className="mt-1 text-[13px] sm:text-[16px] text-[#86868B] font-normal">
             Confira em breve a disponibilidade
           </p>
 
-          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-3 sm:mt-5">
             <Link
               href="/macbook-pro/proled-xdr-display"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+              className="inline-flex items-center justify-center min-w-[105px] sm:min-w-[125px] px-4 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200 shadow-sm"
             >
               Saiba mais
             </Link>
@@ -111,16 +100,20 @@ export const AppleOfficialHeroSection: React.FC = () => {
               href={m6WhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-transparent hover:bg-[#0071E3] text-[#2997FF] hover:text-white border border-[#2997FF] hover:border-[#0071E3] text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+              className="inline-flex items-center justify-center min-w-[105px] sm:min-w-[125px] px-4 py-2 sm:px-6 sm:py-2.5 bg-transparent hover:bg-[#0071E3] text-[#2997FF] hover:text-white border border-[#2997FF] hover:border-[#0071E3] text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
             >
               Comprar
             </a>
           </div>
         </div>
 
-        {/* Media Background: Official Apple Opening Laptop with Neon M6 */}
+        {/* Media Background: Responsive Mobile & Desktop */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden flex justify-center items-end">
           <picture className="w-full h-full flex justify-center items-end">
+            <source
+              media="(max-width: 734px)"
+              srcSet="/apple-official/images/hero_macbook_pro_m6_announce__b04jni815ck2_small_2x.jpg"
+            />
             <source
               media="(min-width: 735px)"
               srcSet="/apple-official/images/hero_macbook_pro_m6_announce__b04jni815ck2_large_2x.jpg"
@@ -137,13 +130,13 @@ export const AppleOfficialHeroSection: React.FC = () => {
       {/* ──────────────────────────────────────────────────────────────────────────
           HERO 3: iMac (Light Theme - Apple Hero #3)
       ────────────────────────────────────────────────────────────────────────── */}
-      <div className="relative w-full h-[580px] sm:h-[650px] lg:h-[692px] bg-[#F5F5F7] text-[#1D1D1F] overflow-hidden flex flex-col items-center text-center group">
+      <div className="relative w-full h-[520px] sm:h-[650px] lg:h-[692px] bg-[#F5F5F7] text-[#1D1D1F] overflow-hidden flex flex-col items-center text-center group">
         {/* Top Copy & CTAs */}
-        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-10 sm:pt-14">
-          <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-[#1D1D1F]">
+        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-8 sm:pt-14">
+          <h2 className="text-[32px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-[#1D1D1F]">
             iMac
           </h2>
-          <p className="mt-1 sm:mt-1.5 text-[20px] sm:text-[26px] lg:text-[30px] font-normal leading-[1.14] text-[#1D1D1F] tracking-[0.007em] flex items-center justify-center flex-wrap gap-x-1">
+          <p className="mt-1 sm:mt-1.5 text-[18px] sm:text-[26px] lg:text-[30px] font-normal leading-[1.14] text-[#1D1D1F] tracking-[0.007em] flex items-center justify-center flex-wrap gap-x-1">
             <span>Compl</span>
             <span className="inline-flex font-semibold tracking-widest text-[#0071E3]">
               <span className="text-[#34C759]">l</span>
@@ -153,18 +146,18 @@ export const AppleOfficialHeroSection: React.FC = () => {
               <span className="text-[#007AFF]">l</span>
             </span>
             <span>etão.</span>
-            <span className="w-full text-[18px] sm:text-[22px] text-[#1D1D1F] font-normal">
+            <span className="w-full text-[16px] sm:text-[22px] text-[#1D1D1F] font-normal">
               E de chip novo.
             </span>
           </p>
-          <p className="mt-1.5 text-[14px] sm:text-[16px] text-[#6E6E73] font-normal">
+          <p className="mt-1 text-[13px] sm:text-[16px] text-[#6E6E73] font-normal">
             Confira em breve a disponibilidade
           </p>
 
-          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-3 sm:mt-5">
             <a
               href="#categoria-mac"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+              className="inline-flex items-center justify-center min-w-[105px] sm:min-w-[125px] px-4 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200 shadow-sm"
             >
               Saiba mais
             </a>
@@ -172,16 +165,20 @@ export const AppleOfficialHeroSection: React.FC = () => {
               href={imacWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+              className="inline-flex items-center justify-center min-w-[105px] sm:min-w-[125px] px-4 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200 shadow-sm"
             >
               Ver preços
             </a>
           </div>
         </div>
 
-        {/* Media Background: Official Apple Fan of 7 Colored iMacs */}
+        {/* Media Background: Responsive Mobile & Desktop */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden flex justify-center items-end">
           <picture className="w-full h-full flex justify-center items-end">
+            <source
+              media="(max-width: 734px)"
+              srcSet="/apple-official/images/hero_imac_m6_announce__bboowaq6op6q_small_2x.jpg"
+            />
             <source
               media="(min-width: 735px)"
               srcSet="/apple-official/images/hero_imac_m6_announce__bboowaq6op6q_large_2x.jpg"
