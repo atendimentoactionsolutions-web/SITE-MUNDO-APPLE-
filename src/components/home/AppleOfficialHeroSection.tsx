@@ -33,7 +33,7 @@ export const AppleOfficialHeroSection: React.FC = () => {
   );
 
   return (
-    <section className="w-full flex flex-col space-y-3 bg-white pt-20 sm:pt-24">
+    <section className="w-full flex flex-col space-y-3 bg-white pt-11 sm:pt-12">
       {/* ──────────────────────────────────────────────────────────────────────────
           HERO 1: MacBook Pro com Tela PROLED XDR (Dark Theme - Apple Hero #1)
       ────────────────────────────────────────────────────────────────────────── */}
