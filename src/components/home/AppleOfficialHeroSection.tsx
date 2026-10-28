@@ -1,122 +1,181 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
+import { Play, Pause } from "lucide-react";
 import { createWhatsAppLink } from "@/utils/whatsapp";
 
 export const AppleOfficialHeroSection: React.FC = () => {
-  const duoWhatsAppUrl = createWhatsAppLink(
-    "Olá! Vim pelo site da Mundo Apple Delivery e quero encomendar/comprar o novo *iPhone Duo*. Podem me passar os detalhes?"
+  const [playingHero1, setPlayingHero1] = useState(true);
+  const [playingHero2, setPlayingHero2] = useState(true);
+  const videoRef1 = useRef<HTMLVideoElement>(null);
+  const videoRef2 = useRef<HTMLVideoElement>(null);
+
+  const toggleVideo1 = () => {
+    if (!videoRef1.current) return;
+    if (playingHero1) {
+      videoRef1.current.pause();
+      setPlayingHero1(false);
+    } else {
+      videoRef1.current.play();
+      setPlayingHero1(true);
+    }
+  };
+
+  const toggleVideo2 = () => {
+    if (!videoRef2.current) return;
+    if (playingHero2) {
+      videoRef2.current.pause();
+      setPlayingHero2(false);
+    } else {
+      videoRef2.current.play();
+      setPlayingHero2(true);
+    }
+  };
+
+  const mbpWhatsAppUrl = createWhatsAppLink(
+    "Olá! Vim pelo site da Mundo Apple Delivery e quero consultar valores e pronta entrega do novo *MacBook Pro de 14 polegadas com M6*. Podem me ajudar?"
   );
 
-  const proWhatsAppUrl = createWhatsAppLink(
-    "Olá! Vim pelo site da Mundo Apple Delivery e quero comprar o *iPhone 18 Pro*. Como funciona o pagamento e entrega expressa em SP?"
+  const imacWhatsAppUrl = createWhatsAppLink(
+    "Olá! Vim pelo site da Mundo Apple Delivery e quero saber valores e cores disponíveis do novo *iMac*. Podem me enviar o catálogo?"
   );
 
   return (
-    <section className="w-full flex flex-col space-y-3 bg-white pt-16 sm:pt-20">
+    <section className="w-full flex flex-col space-y-3 bg-white pt-20 sm:pt-24">
       {/* ──────────────────────────────────────────────────────────────────────────
-          HERO 1: iPhone Duo (Light Theme - Exact Apple.com Hero #1)
+          HERO 1: MacBook Pro 14" M6 (Dark OLED Theme - Exact Apple.com Hero #1)
       ────────────────────────────────────────────────────────────────────────── */}
-      <div className="relative w-full h-[540px] sm:h-[650px] lg:h-[692px] bg-[#F5F5F7] text-[#1D1D1F] overflow-hidden flex flex-col items-center text-center group">
+      <div className="relative w-full h-[580px] sm:h-[650px] lg:h-[692px] bg-black text-[#F5F5F7] overflow-hidden flex flex-col items-center text-center group">
         {/* Top Copy & CTAs */}
-        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-11 sm:pt-14">
-          <h2 className="text-[32px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-[#1D1D1F]">
-            iPhone Duo
-          </h2>
-          <p className="mt-1 sm:mt-1.5 text-[19px] sm:text-[24px] lg:text-[28px] font-normal leading-[1.14] text-[#1D1D1F] tracking-[0.007em]">
-            Alô. Olá.
-          </p>
-          <p className="mt-1.5 text-[14px] sm:text-[17px] text-[#6E6E73] font-normal">
-            Disponível a partir de 23/10
-          </p>
-
-          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5">
-            <a
-              href="#catalogo"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[130px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
-            >
-              Saiba mais
-            </a>
-            <a
-              href={duoWhatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[130px] px-5 py-2 sm:px-6 sm:py-2.5 bg-transparent hover:bg-[#0071E3] text-[#0066CC] hover:text-white border border-[#0066CC] hover:border-[#0071E3] text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
-            >
-              Reservar
-            </a>
-          </div>
-        </div>
-
-        {/* Responsive Official Apple Background Image */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden flex justify-center items-end">
-          <picture className="w-full h-full flex justify-center items-end">
-            <source
-              media="(max-width: 734px)"
-              srcSet="/apple-official/images/hero_iphone_duo_small_2x.jpg"
-            />
-            <source
-              media="(min-width: 735px)"
-              srcSet="/apple-official/images/hero_iphone_duo_2x.jpg"
-            />
-            <img
-              src="/apple-official/images/hero_iphone_duo_2x.jpg"
-              alt="iPhone Duo — Alô. Olá."
-              className="w-full h-full object-cover object-bottom pointer-events-none select-none"
-            />
-          </picture>
-        </div>
-      </div>
-
-      {/* ──────────────────────────────────────────────────────────────────────────
-          HERO 2: iPhone 18 Pro (Dark OLED Theme - Exact Apple.com Hero #2)
-      ────────────────────────────────────────────────────────────────────────── */}
-      <div className="relative w-full h-[540px] sm:h-[650px] lg:h-[692px] bg-black text-[#F5F5F7] overflow-hidden flex flex-col items-center text-center group">
-        {/* Top Copy & CTAs */}
-        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-11 sm:pt-14">
-          <h2 className="text-[32px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-[#F5F5F7]">
-            iPhone 18 Pro
+        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-10 sm:pt-13">
+          <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-white">
+            MacBook Pro
           </h2>
           <p className="mt-1 sm:mt-1.5 text-[19px] sm:text-[24px] lg:text-[28px] font-normal leading-[1.14] text-[#F5F5F7] tracking-[0.007em]">
-            Muito mais Pro.
+            Modelo de 14 polegadas agora com M6.
+          </p>
+          <p className="mt-1.5 text-[14px] sm:text-[16px] text-[#86868B] font-normal">
+            Confira em breve a disponibilidade
           </p>
 
           <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5">
-            <Link
-              href="/iphone-18-pro"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[130px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+            <a
+              href="#categoria-macbook"
+              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
             >
               Saiba mais
-            </Link>
+            </a>
             <a
-              href={proWhatsAppUrl}
+              href={mbpWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[130px] px-5 py-2 sm:px-6 sm:py-2.5 bg-transparent hover:bg-[#0071E3] text-[#2997FF] hover:text-white border border-[#2997FF] hover:border-[#0071E3] text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-transparent hover:bg-[#0071E3] text-[#2997FF] hover:text-white border border-[#2997FF] hover:border-[#0071E3] text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
             >
               Comprar
             </a>
           </div>
         </div>
 
-        {/* Responsive Official Apple Background Image */}
+        {/* Media Background: Official Apple Opening Laptop M6 Neon */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden flex justify-center items-end">
+          <video
+            ref={videoRef1}
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/apple-official/macbook-pro-liquid/hero-m6-startframe.jpg"
+            className="w-full h-full object-cover object-bottom"
+          >
+            <source
+              src="/apple-official/macbook-pro-liquid/anim-hero-m6.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+
+        {/* Video Control Pill (Top-Right like Apple) */}
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-white/10 opacity-75 hover:opacity-100 transition-opacity">
+          <button
+            onClick={toggleVideo1}
+            aria-label={playingHero1 ? "Pausar vídeo" : "Reproduzir vídeo"}
+            className="text-white hover:text-[#2997FF] transition-colors p-0.5"
+          >
+            {playingHero1 ? <Pause size={14} /> : <Play size={14} />}
+          </button>
+        </div>
+      </div>
+
+      {/* ──────────────────────────────────────────────────────────────────────────
+          HERO 2: iMac (Light Theme - Exact Apple.com Hero #2)
+      ────────────────────────────────────────────────────────────────────────── */}
+      <div className="relative w-full h-[580px] sm:h-[650px] lg:h-[692px] bg-[#F5F5F7] text-[#1D1D1F] overflow-hidden flex flex-col items-center text-center group">
+        {/* Top Copy & CTAs */}
+        <div className="relative z-10 flex flex-col items-center px-4 max-w-3xl pt-10 sm:pt-13">
+          <h2 className="text-[36px] sm:text-[48px] lg:text-[56px] font-semibold leading-[1.07] tracking-[-0.005em] font-display text-[#1D1D1F]">
+            iMac
+          </h2>
+          <p className="mt-1 sm:mt-1.5 text-[20px] sm:text-[26px] lg:text-[30px] font-normal leading-[1.14] text-[#1D1D1F] tracking-[0.007em] flex items-center justify-center flex-wrap gap-x-1">
+            <span>Compl</span>
+            <span className="inline-flex font-semibold tracking-widest text-[#0071E3]">
+              <span className="text-[#34C759]">l</span>
+              <span className="text-[#FF9500]">l</span>
+              <span className="text-[#FF2D55]">l</span>
+              <span className="text-[#AF52DE]">l</span>
+              <span className="text-[#007AFF]">l</span>
+            </span>
+            <span>etão.</span>
+            <span className="w-full text-[18px] sm:text-[22px] text-[#1D1D1F] font-normal">
+              E de chip novo.
+            </span>
+          </p>
+          <p className="mt-1.5 text-[14px] sm:text-[16px] text-[#6E6E73] font-normal">
+            Confira em breve a disponibilidade
+          </p>
+
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-5">
+            <a
+              href="#categoria-mac"
+              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+            >
+              Saiba mais
+            </a>
+            <a
+              href={imacWhatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center min-w-[110px] sm:min-w-[125px] px-5 py-2 sm:px-6 sm:py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-[14px] sm:text-[17px] font-normal rounded-full transition-all duration-200"
+            >
+              Ver preços
+            </a>
+          </div>
+        </div>
+
+        {/* Media Background: Official Apple Fan of 7 Colored iMacs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden flex justify-center items-end">
           <picture className="w-full h-full flex justify-center items-end">
             <source
-              media="(max-width: 734px)"
-              srcSet="/apple-official/images/hero_iphone_18_pro_small_2x.jpg"
-            />
-            <source
               media="(min-width: 735px)"
-              srcSet="/apple-official/images/hero_iphone_18_pro_2x.jpg"
+              srcSet="/apple-official/images/hero_imac_m6_announce__bboowaq6op6q_large_2x.jpg"
             />
             <img
-              src="/apple-official/images/hero_iphone_18_pro_2x.jpg"
-              alt="iPhone 18 Pro — Muito mais Pro"
+              src="/apple-official/images/hero_imac_m6_announce__bboowaq6op6q_large_2x.jpg"
+              alt="iMac — Complllllletão. E de chip novo."
               className="w-full h-full object-cover object-bottom pointer-events-none select-none"
             />
           </picture>
+        </div>
+
+        {/* Video Control Pill (Top-Right like Apple) */}
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/10 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-black/5 opacity-75 hover:opacity-100 transition-opacity">
+          <button
+            onClick={toggleVideo2}
+            aria-label={playingHero2 ? "Pausar vídeo" : "Reproduzir vídeo"}
+            className="text-[#1D1D1F] hover:text-[#0071E3] transition-colors p-0.5"
+          >
+            {playingHero2 ? <Pause size={14} /> : <Play size={14} />}
+          </button>
         </div>
       </div>
     </section>
