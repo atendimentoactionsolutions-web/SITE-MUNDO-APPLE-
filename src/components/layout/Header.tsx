@@ -137,7 +137,7 @@ export const Header: React.FC = () => {
 
               {/* Bag Dropdown */}
               {bagOpen && (
-                <div className="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] bg-[#1d1d1f] border border-white/10 rounded-2xl p-4 shadow-2xl z-50 text-white animate-in fade-in zoom-in-95 duration-150">
+                <div className="fixed right-4 top-12 sm:absolute sm:right-0 sm:top-full mt-2 w-72 max-w-[calc(100vw-2rem)] bg-[#1d1d1f] border border-white/10 rounded-2xl p-4 shadow-2xl z-50 text-white animate-in fade-in zoom-in-95 duration-150">
                   <h4 className="text-sm font-semibold mb-2">Sua Sacola Mundo Apple</h4>
                   <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
                     Entrega expressa hoje em São Paulo. Fale com um consultor para concluir seu pedido.
