@@ -164,7 +164,7 @@ export const Header: React.FC = () => {
               className="lg:hidden w-11 h-11 flex items-center justify-center hover:text-white transition-colors"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
-              aria-label="Abrir menu de navegação"
+              aria-label={mobileMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>

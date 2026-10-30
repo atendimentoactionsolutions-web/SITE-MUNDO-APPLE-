@@ -645,14 +645,14 @@ export const TradeInCalculator: React.FC = () => {
         setCalculationData(data.calculation);
       }
       if (!res.ok || !data.success || !data.quote?.publicCode) {
-        throw new Error("N?o foi poss?vel salvar sua cota??o. Tente novamente.");
+        throw new Error("Não foi possível salvar sua cotação. Tente novamente.");
       }
       const publicCode = data.quote.publicCode;
       setQuotePublicCode(publicCode);
       setQuoteSuccess(true);
     } catch (err) {
       console.error("Erro ao gerar cotação:", err);
-      setSubmitError("N?o foi poss?vel salvar sua cota??o. Confira sua conex?o e tente novamente.");
+      setSubmitError("Não foi possível salvar sua cotação. Confira sua conexão e tente novamente.");
     } finally {
       setSubmitting(false);
     }

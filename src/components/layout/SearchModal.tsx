@@ -24,7 +24,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
     const controller = new AbortController();
     fetch("/api/products/live", { signal: controller.signal, cache: "no-store" })
       .then((response) => {
-        if (!response.ok) throw new Error("Cat?logo indispon?vel");
+        if (!response.ok) throw new Error("Catálogo indisponível");
         return response.json();
       })
       .then((data) => {
