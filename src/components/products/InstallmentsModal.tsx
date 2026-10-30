@@ -26,17 +26,17 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
   const installments = calculateInstallments(cashPrice);
 
   useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     if (isOpen) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
@@ -54,15 +54,18 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-200">
+    <div onClick={onClose} className="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-xl bg-white rounded-[28px] border border-[#E5E7EB] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Simulador de Parcelamento"
+        className="relative w-full min-w-0 max-w-xl bg-white rounded-[28px] border border-[#E5E7EB] shadow-2xl overflow-hidden flex flex-col max-h-[calc(100dvh-1.5rem)] animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-5 border-b border-[#E5E7EB] flex items-center justify-between bg-[#F5F5F7]">
+        <div className="shrink-0 px-4 sm:px-6 py-4 sm:py-5 border-b border-[#E5E7EB] flex items-center justify-between bg-[#F5F5F7]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-50 text-[#0071E3] border border-blue-100 flex items-center justify-center">
+            <div className="shrink-0 w-10 h-10 rounded-2xl bg-blue-50 text-[#0071E3] border border-blue-100 flex items-center justify-center">
               <CreditCard className="w-5 h-5" />
             </div>
             <div>
@@ -78,7 +81,7 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-[#0F172A] hover:bg-slate-200 rounded-full transition-colors"
+            className="shrink-0 p-2 text-gray-400 hover:text-[#0F172A] hover:bg-slate-200 rounded-full transition-colors"
             aria-label="Fechar"
           >
             <X className="w-5 h-5" />
@@ -86,7 +89,7 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
         </div>
 
         {/* Product Price Summary Banner */}
-        <div className="px-6 py-4 bg-white border-b border-[#E5E7EB] flex items-center justify-between">
+        <div className="shrink-0 px-4 sm:px-6 py-4 bg-white border-b border-[#E5E7EB] flex flex-wrap gap-3 items-center justify-between">
           <div>
             <span className="text-[10px] uppercase font-bold text-[#64748B] block">
               Valor à vista no PIX
@@ -103,7 +106,7 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
         </div>
 
         {/* Installment Table (Scrollable) */}
-        <div className="p-4 sm:p-6 overflow-y-auto space-y-2 divide-y divide-slate-100">
+        <div className="min-h-0 p-2 sm:p-6 overflow-y-auto space-y-2 divide-y divide-slate-100">
           <div className="grid grid-cols-12 text-[11px] font-bold uppercase tracking-wider text-[#64748B] pb-2 px-3">
             <span className="col-span-3">Parcelas</span>
             <span className="col-span-4 text-right">Valor da Parcela</span>
@@ -163,7 +166,7 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
         </div>
 
         {/* Footer info */}
-        <div className="px-6 py-4 bg-[#F5F5F7] border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#64748B]">
+        <div className="shrink-0 px-4 sm:px-6 py-3 bg-[#F5F5F7] border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#64748B]">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#0071E3]" />
             <span>Passamos na maquininha na entrega ou na loja</span>
