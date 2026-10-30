@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, ShoppingBag, Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Search, ShoppingBag, Menu, X, ArrowRight } from "lucide-react";
 import { SearchModal } from "@/components/layout/SearchModal";
 import { AppleLogo } from "@/components/ui/AppleLogo";
 import { getWhatsAppGeneralUrl } from "@/utils/whatsapp";
@@ -19,7 +19,29 @@ export const Header: React.FC = () => {
   useEffect(() => {
     setMobileMenuOpen(false);
     setBagOpen(false);
+    setSearchModalOpen(false);
   }, [pathname]);
+
+  // Keep the page still while the mobile navigation is open.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileMenuOpen(false);
+    };
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setMobileMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+      desktop.removeEventListener("change", closeOnDesktop);
+    };
+  }, [mobileMenuOpen]);
 
   // Close bag when clicking outside
   useEffect(() => {
@@ -72,7 +94,7 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation Links (Center) */}
-          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 text-[12px] font-normal text-[#CECECF]">
+          <nav className="hidden lg:flex items-center space-x-5 xl:space-x-8 text-[12px] font-normal text-[#CECECF]">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -90,12 +112,12 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Right Action Icons (Search + Bag + Mobile Menu) */}
-          <div className="flex items-center gap-4 text-[#CECECF]">
+          <div className="flex items-center gap-0 sm:gap-1 text-[#CECECF]">
             {/* Search Icon */}
             <button
               type="button"
-              onClick={() => setSearchModalOpen(true)}
-              className="p-1 hover:text-white transition-colors"
+              onClick={() => { setMobileMenuOpen(false); setBagOpen(false); setSearchModalOpen(true); }}
+              className="w-11 h-11 flex items-center justify-center hover:text-white transition-colors"
               aria-label="Buscar produtos"
             >
               <Search className="w-3.5 h-3.5" />
@@ -105,8 +127,9 @@ export const Header: React.FC = () => {
             <div className="relative" ref={bagRef}>
               <button
                 type="button"
-                onClick={() => setBagOpen(!bagOpen)}
-                className="p-1 hover:text-white transition-colors relative"
+                onClick={() => { setMobileMenuOpen(false); setBagOpen(!bagOpen); }}
+                className="w-11 h-11 flex items-center justify-center hover:text-white transition-colors relative"
+                aria-expanded={bagOpen}
                 aria-label="Sacola de compras e pedidos"
               >
                 <ShoppingBag className="w-3.5 h-3.5" />
@@ -114,7 +137,7 @@ export const Header: React.FC = () => {
 
               {/* Bag Dropdown */}
               {bagOpen && (
-                <div className="absolute right-0 top-full mt-2 w-72 bg-[#1d1d1f] border border-white/10 rounded-2xl p-4 shadow-2xl z-50 text-white animate-in fade-in zoom-in-95 duration-150">
+                <div className="absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] bg-[#1d1d1f] border border-white/10 rounded-2xl p-4 shadow-2xl z-50 text-white animate-in fade-in zoom-in-95 duration-150">
                   <h4 className="text-sm font-semibold mb-2">Sua Sacola Mundo Apple</h4>
                   <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
                     Entrega expressa hoje em São Paulo. Fale com um consultor para concluir seu pedido.
@@ -134,8 +157,10 @@ export const Header: React.FC = () => {
             {/* Mobile Hamburger Button */}
             <button
               type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1 hover:text-white transition-colors"
+              onClick={() => { setBagOpen(false); setMobileMenuOpen(!mobileMenuOpen); }}
+              className="lg:hidden w-11 h-11 flex items-center justify-center hover:text-white transition-colors"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
               aria-label="Abrir menu de navegação"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -143,9 +168,11 @@ export const Header: React.FC = () => {
           </div>
         </div>
 
+      </header>
+
         {/* Mobile Fullscreen Navigation Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden fixed inset-x-0 top-11 bottom-0 bg-[#000000]/95 backdrop-blur-2xl z-40 p-6 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-top duration-200">
+          <div id="mobile-navigation" className="lg:hidden fixed inset-x-0 top-11 sm:top-12 bottom-0 bg-[#000000]/95 backdrop-blur-2xl z-40 p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] flex flex-col justify-between overflow-y-auto animate-in slide-in-from-top duration-200">
             <nav className="flex flex-col space-y-4 pt-2">
               {navItems.map((item) => (
                 <Link
@@ -175,7 +202,6 @@ export const Header: React.FC = () => {
             </div>
           </div>
         )}
-      </header>
 
       {/* Global Search Modal */}
       <SearchModal isOpen={searchModalOpen} onClose={() => setSearchModalOpen(false)} />

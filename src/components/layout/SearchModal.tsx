@@ -18,17 +18,18 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 50);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    if (!isOpen) {
       setQuery("");
+      return;
     }
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement as HTMLElement | null;
+    const timer = window.setTimeout(() => inputRef.current?.focus(), 50);
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "";
+      window.clearTimeout(timer);
+      document.body.style.overflow = previousOverflow;
+      previousFocus?.focus();
     };
   }, [isOpen]);
 
@@ -67,7 +68,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       <div className="absolute inset-0" onClick={onClose} />
 
       {/* Modal Container */}
-      <div className="relative z-10 w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-apple-border overflow-hidden flex flex-col max-h-[80vh] animate-in zoom-in-95 duration-200">
+      <div role="dialog" aria-modal="true" aria-label="Busca de produtos" className="relative z-10 w-full min-w-0 max-w-2xl bg-white rounded-3xl shadow-2xl border border-apple-border overflow-hidden flex flex-col max-h-[calc(100dvh-5rem)] sm:max-h-[80dvh] animate-in zoom-in-95 duration-200">
         {/* Search Header */}
         <div className="flex items-center gap-3 px-5 py-4 border-b border-apple-border/70 bg-apple-gray/30">
           <Search className="w-5 h-5 text-apple-muted shrink-0" />
@@ -77,11 +78,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar iPhone, MacBook, iPad, AirPods, Watch..."
-            className="flex-1 bg-transparent text-sm sm:text-base font-medium text-apple-dark focus:outline-none placeholder:text-apple-muted"
+            aria-label="Buscar produtos"
+            className="min-w-0 flex-1 bg-transparent text-base font-medium text-apple-dark focus:outline-none placeholder:text-apple-muted"
           />
           {query ? (
             <button
               type="button"
+              aria-label="Limpar busca"
               onClick={() => setQuery("")}
               className="p-1 rounded-full text-apple-muted hover:bg-apple-gray"
             >
@@ -95,7 +98,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-apple-dark hover:bg-apple-gray rounded-full transition-colors ml-1"
+            aria-label="Fechar busca"
+            className="shrink-0 p-1.5 text-apple-dark hover:bg-apple-gray rounded-full transition-colors ml-1"
           >
             <X className="w-5 h-5" />
           </button>
@@ -152,7 +156,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                         <h4 className="text-sm font-semibold text-apple-dark truncate group-hover:text-apple-blue transition-colors">
                           {product.name}
                         </h4>
-                        <div className="flex items-center gap-2 text-xs">
+                        <div className="flex flex-wrap items-center gap-x-2 text-xs">
                           {price > 0 ? (
                             <span className="font-extrabold text-apple-dark">
                               {formatCurrency(price)}
@@ -183,7 +187,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         </div>
 
         {/* Modal Footer */}
-        <div className="px-5 py-3 bg-apple-gray/40 border-t border-apple-border/60 flex items-center justify-between text-xs text-apple-muted">
+        <div className="px-5 py-3 bg-apple-gray/40 border-t border-apple-border/60 flex flex-wrap gap-3 items-center justify-between text-xs text-apple-muted">
           <div className="flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-apple-blue" />
             <span>Mundo Apple Delivery • Pronta Entrega</span>
