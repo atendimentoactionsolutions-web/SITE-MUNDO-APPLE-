@@ -71,11 +71,12 @@ for (const name of ['ProductCard', 'ProductDetailOptions']) {
   test(`${name}: colors without variants remain selectable`, () => {
     const render = componentHarness(`src/components/products/${name}.tsx`, name);
     const props = { product };
-    const button = nodes(render(props)).find(n => n.type === 'button' && nodes(n.props.children).some(child => child.props?.children === 'White'));
+    const isWhiteButton = n => n.type === 'button' && (n.props.title === 'White' || nodes(n.props.children).some(child => child.props?.children === 'White'));
+    const button = nodes(render(props)).find(isWhiteButton);
     assert.ok(button, 'White selector exists');
     button.props.onClick();
-    const selected = nodes(render(props)).find(n => n.type === 'button' && nodes(n.props.children).some(child => child.props?.children === 'White'));
-    assert.match(selected.props.className, /bg-apple-blue\/10|bg-\[#0071E3\]\/10/);
+    const selected = nodes(render(props)).find(isWhiteButton);
+    assert.match(selected.props.className, /bg-apple-blue\/10|ring-2 ring-offset-2/);
   });
 
   test(`${name}: a zero-price variant never inherits another configuration's price`, () => {
