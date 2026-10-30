@@ -45,12 +45,13 @@ export async function getProducts(options?: {
 
   // Filter search query
   if (options?.searchQuery) {
-    const query = options.searchQuery.toLowerCase();
+    const normalize = (value: string) => value.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const query = normalize(options.searchQuery);
     list = list.filter(
       (p) =>
-        p.name.toLowerCase().includes(query) ||
-        p.description?.toLowerCase().includes(query) ||
-        p.subcategory?.toLowerCase().includes(query)
+        [p.name, p.category, p.description, p.subcategory].some(
+          (value) => value !== undefined && normalize(value).includes(query)
+        )
     );
   }
 

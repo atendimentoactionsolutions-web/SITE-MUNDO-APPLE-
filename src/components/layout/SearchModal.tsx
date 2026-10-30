@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search, X, MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 import { Product } from "@/types/product";
-import { products } from "@/data/products";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
 
@@ -17,20 +16,30 @@ interface SearchModalProps {
 
 export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState("");
-  const [catalog, setCatalog] = useState<Product[]>(products);
+  const [catalog, setCatalog] = useState<Product[]>([]);
+  const [catalogLoading, setCatalogLoading] = useState(false);
+  const [catalogError, setCatalogError] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
     const controller = new AbortController();
+    setCatalogLoading(true);
+    setCatalogError(false);
     fetch("/api/products/live", { signal: controller.signal, cache: "no-store" })
       .then((response) => {
         if (!response.ok) throw new Error("Catálogo indisponível");
         return response.json();
       })
       .then((data) => {
-        if (data.success && Array.isArray(data.products)) setCatalog(data.products);
+        if (!data.success || !Array.isArray(data.products)) throw new Error("Invalid catalog");
+        setCatalog(data.products);
       })
-      .catch(() => { /* Retain the last available catalog while offline. */ });
+      .catch(() => {
+        if (!controller.signal.aborted) setCatalogError(true);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setCatalogLoading(false);
+      });
     return () => controller.abort();
   }, [isOpen]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -131,7 +140,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
             </span>
           </div>
 
-          {filteredProducts.length === 0 ? (
+          {catalogLoading || catalogError ? (
+            <p role="status" className="py-12 text-center text-sm text-apple-muted">
+              {catalogLoading ? "Carregando catálogo..." : "Não foi possível atualizar o catálogo. Feche a busca e tente novamente."}
+            </p>
+          ) : filteredProducts.length === 0 ? (
             <div className="py-12 text-center space-y-3 break-words">
               <p className="text-sm font-semibold text-apple-dark">
                 Nenhum produto encontrado para &ldquo;{query}&rdquo;
