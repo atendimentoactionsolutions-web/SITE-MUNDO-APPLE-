@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, X, MessageCircle, ArrowRight, Sparkles } from "lucide-react";
+import { Product } from "@/types/product";
 import { products } from "@/data/products";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
@@ -15,6 +16,22 @@ interface SearchModalProps {
 
 export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState("");
+  const [catalog, setCatalog] = useState<Product[]>(products);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const controller = new AbortController();
+    fetch("/api/products/live", { signal: controller.signal, cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Cat?logo indispon?vel");
+        return response.json();
+      })
+      .then((data) => {
+        if (data.success && Array.isArray(data.products)) setCatalog(data.products);
+      })
+      .catch(() => { /* Retain the last available catalog while offline. */ });
+    return () => controller.abort();
+  }, [isOpen]);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -46,20 +63,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
 
   if (!isOpen) return null;
 
-  const filteredProducts = query.trim()
-    ? products.filter(
-        (p) =>
-          p.active &&
-          (p.name.toLowerCase().includes(query.toLowerCase()) ||
-            p.category.toLowerCase().includes(query.toLowerCase()) ||
-            p.subcategory?.toLowerCase().includes(query.toLowerCase()) ||
-            p.description?.toLowerCase().includes(query.toLowerCase()))
+  const normalizedQuery = query.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const storefrontProducts = catalog.filter((p) => p.active && p.condition === "new");
+  const filteredProducts = normalizedQuery
+    ? storefrontProducts.filter((p) =>
+        [p.name, p.category, p.subcategory, p.description].some((value) =>
+          value?.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(normalizedQuery)
+        )
       )
-    : products.filter((p) => p.active && p.featured).slice(0, 6);
+    : storefrontProducts.filter((p) => p.featured).slice(0, 6);
 
   const handleWhatsAppProduct = (productName: string, price: number) => {
     const text = `Olá! Vi o *${productName}* no site (${price > 0 ? formatCurrency(price) : "Preço sob consulta"}) e gostaria de saber mais informações e disponibilidade!`;
-    window.open(createWhatsAppLink(text), "_blank");
+    window.open(createWhatsAppLink(text), "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -115,7 +131,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           </div>
 
           {filteredProducts.length === 0 ? (
-            <div className="py-12 text-center space-y-3">
+            <div className="py-12 text-center space-y-3 break-words">
               <p className="text-sm font-semibold text-apple-dark">
                 Nenhum produto encontrado para &ldquo;{query}&rdquo;
               </p>
@@ -134,7 +150,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           ) : (
             <div className="divide-y divide-apple-border/40">
               {filteredProducts.map((product) => {
-                const price = product.priceFrom || (product.variants && product.variants[0]?.price) || 0;
+                const price = product.priceFrom ?? product.variants?.[0]?.price ?? 0;
                 return (
                   <div
                     key={product.id}
@@ -153,9 +169,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                         <span className="text-[10px] font-bold text-apple-blue uppercase tracking-wider block">
                           {product.subcategory || product.category}
                         </span>
-                        <h4 className="text-sm font-semibold text-apple-dark truncate group-hover:text-apple-blue transition-colors">
+                        <Link href={`/produtos/${product.slug}`} onClick={onClose} className="block text-sm font-semibold text-apple-dark truncate group-hover:text-apple-blue transition-colors">
                           {product.name}
-                        </h4>
+                        </Link>
                         <div className="flex flex-wrap items-center gap-x-2 text-xs">
                           {price > 0 ? (
                             <span className="font-extrabold text-apple-dark">

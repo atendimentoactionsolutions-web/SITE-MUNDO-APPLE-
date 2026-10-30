@@ -157,7 +157,7 @@ export const TradeInCalculator: React.FC = () => {
 
     if (prodName) {
       const decoded = prodName.toLowerCase();
-      const found = products.find(
+      const found = liveCatalog.find(
         (p) => p.name.toLowerCase() === decoded && p.active && p.condition === "new"
       );
       if (found) {
@@ -166,7 +166,7 @@ export const TradeInCalculator: React.FC = () => {
         if (colParam) setSelectedNewColor(colParam);
       }
     }
-  }, [searchParams]);
+  }, [searchParams, liveCatalog]);
 
   useEffect(() => {
     if (newProductsInCategory.length > 0 && !selectedNewProduct) {

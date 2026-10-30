@@ -154,16 +154,19 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
       setActiveVariant(undefined);
       setCustomStorage(product.storage?.[0] || "");
     }
+    setCustomOptions({});
   }, [product]);
 
+  const [customOptions, setCustomOptions] = useState<Record<string, string>>({});
+
   // Derived active properties
-  const currentSize = activeVariant?.size || activeVariant?.screenSize || sizeList[0] || "";
-  const currentChip = activeVariant?.chip || chipList[0] || "";
-  const currentRam = activeVariant?.ram || ramList[0] || "";
+  const currentSize = activeVariant?.size || activeVariant?.screenSize || customOptions.size || sizeList[0] || "";
+  const currentChip = activeVariant?.chip || customOptions.chip || chipList[0] || "";
+  const currentRam = activeVariant?.ram || customOptions.ram || ramList[0] || "";
   const currentStorage = hasVariants
     ? (activeVariant?.storage || customStorage || storageList[0] || "")
     : (customStorage || storageList[0] || "");
-  const currentColor = activeVariant?.color || colorList[0] || product.colors?.[0] || "";
+  const currentColor = activeVariant?.color || customOptions.color || colorList[0] || product.colors?.[0] || "";
   const currentPrice = activeVariant?.price ?? product.priceFrom ?? 0;
 
   // 3. Dynamic options filtering
@@ -215,7 +218,10 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
       setCustomStorage(value);
     }
 
-    if (!hasVariants || !product.variants) return;
+    if (!hasVariants || !product.variants) {
+      setCustomOptions((previous) => ({ ...previous, [attribute]: value }));
+      return;
+    }
 
     // Filter variants that match the clicked attribute
     const candidates = product.variants.filter((v) => {

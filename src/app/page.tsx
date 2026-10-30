@@ -176,7 +176,7 @@ export default async function HomePage() {
       {/* 4. Localização Loja Física Santa Ifigênia */}
       <div id="localizacao" className="scroll-mt-20" />
       <StoreLocationSection />
-      <FAQSection />
+      <div id="faq" className="scroll-mt-20"><FAQSection /></div>
     </>
   );
 }
