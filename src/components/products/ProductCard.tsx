@@ -159,7 +159,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     ? (activeVariant?.storage || customStorage || storageList[0] || "")
     : (customStorage || storageList[0] || "");
   const currentColor = activeVariant?.color || colorList[0] || product.colors?.[0] || "";
-  const currentPrice = activeVariant?.price || product.priceFrom || 0;
+  const currentPrice = activeVariant?.price ?? product.priceFrom ?? 0;
 
   // 3. Dynamic options filtering — eliminates non-existent options so customers never get confused
   const availableChipList = useMemo(() => {
@@ -566,7 +566,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
                 {/* Installments Option Preview & Modal Trigger */}
                 {maxInstallment && (
-                  <div className="bg-[#F5F5F7] rounded-xl p-2.5 border border-[#E5E5E7] flex items-center justify-between">
+                  <div className="bg-[#F5F5F7] rounded-xl p-2.5 border border-[#E5E5E7] flex flex-wrap gap-2 items-center justify-between">
                     <div className="text-[11px] text-[#6E6E73]">
                       <span className="block font-medium">
                         ou em até <strong className="text-[#1D1D1F] font-semibold">18x de {formatCurrency(maxInstallment.installmentValue)}</strong>

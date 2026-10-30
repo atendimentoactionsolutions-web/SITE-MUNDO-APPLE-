@@ -3,6 +3,7 @@ import { getProducts } from "@/lib/data";
 import { AppleOfficialHeroSection } from "@/components/home/AppleOfficialHeroSection";
 import { AppleOfficialPromoGrid } from "@/components/home/AppleOfficialPromoGrid";
 import { ProductSection } from "@/components/products/ProductSection";
+import { FAQSection } from "@/components/home/FAQSection";
 import { StoreLocationSection } from "@/components/home/StoreLocationSection";
 
 export default async function HomePage() {
@@ -175,6 +176,7 @@ export default async function HomePage() {
       {/* 4. Localização Loja Física Santa Ifigênia */}
       <div id="localizacao" className="scroll-mt-20" />
       <StoreLocationSection />
+      <FAQSection />
     </>
   );
 }

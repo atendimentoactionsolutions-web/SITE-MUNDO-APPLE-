@@ -57,8 +57,11 @@ export const Header: React.FC = () => {
   // Global shortcut (Cmd+K / Ctrl+K)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setBagOpen(false);
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
+        setMobileMenuOpen(false);
+        setBagOpen(false);
         setSearchModalOpen(true);
       }
     };
@@ -94,7 +97,7 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation Links (Center) */}
-          <nav className="hidden lg:flex items-center space-x-5 xl:space-x-8 text-[12px] font-normal text-[#CECECF]">
+          <nav className="hidden lg:flex items-center gap-4 text-[12px] font-normal text-[#CECECF]">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (

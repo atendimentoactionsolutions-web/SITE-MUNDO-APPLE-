@@ -164,7 +164,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
     ? (activeVariant?.storage || customStorage || storageList[0] || "")
     : (customStorage || storageList[0] || "");
   const currentColor = activeVariant?.color || colorList[0] || product.colors?.[0] || "";
-  const currentPrice = activeVariant?.price || product.priceFrom || 0;
+  const currentPrice = activeVariant?.price ?? product.priceFrom ?? 0;
 
   // 3. Dynamic options filtering
   const availableChipList = useMemo(() => {
@@ -344,7 +344,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         </div>
 
         {maxInstallment && (
-          <div className="bg-white/80 rounded-2xl p-3 border border-apple-border/80 flex items-center justify-between gap-3">
+          <div className="bg-white/80 rounded-2xl p-3 border border-apple-border/80 flex flex-wrap items-center justify-between gap-3">
             <div className="text-xs text-apple-muted">
               <span>
                 ou em até{" "}

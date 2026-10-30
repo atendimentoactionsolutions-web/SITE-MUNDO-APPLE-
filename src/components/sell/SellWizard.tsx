@@ -75,6 +75,7 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
   const [calculationData, setCalculationData] = useState<any>(null);
   const [calculating, setCalculating] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [quoteSuccess, setQuoteSuccess] = useState(false);
   const [quotePublicCode, setQuotePublicCode] = useState("");
 
@@ -123,12 +124,17 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
       return;
     }
 
+    let cancelled = false;
+    setStorageOptions([]);
+    setSelectedStorage(null);
     const modelId = selectedModel.id;
     async function loadStorages() {
       try {
         setLoadingStorages(true);
-        const res = await fetch(`/api/sell/models/${modelId}/storages`);
+        const res = await fetch(`/api/sell/models/${encodeURIComponent(modelId)}/storages`);
         const data = await res.json();
+        if (cancelled) return;
+        if (!res.ok || !data.success) throw new Error("Falha ao carregar capacidades");
         const list = data.storageOptions || data.storages || [];
         if (Array.isArray(list) && list.length > 0) {
           setStorageOptions(list);
@@ -147,10 +153,11 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
       } catch (err) {
         console.error("Erro ao carregar armazenamentos:", err);
       } finally {
-        setLoadingStorages(false);
+        if (!cancelled) setLoadingStorages(false);
       }
     }
     loadStorages();
+    return () => { cancelled = true; };
   }, [selectedModel?.id]);
 
   const togglePartSelection = (key: string) => {
@@ -162,17 +169,22 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
   // Cálculo de Preço Reativo
   useEffect(() => {
     if (!selectedModel || !selectedStorage) {
+      setCalculating(false);
       setEstimatedPrice(null);
       setCalculationData(null);
       return;
     }
 
     if (boardStatus === "board_issue" || icloudStatus === "locked") {
+      setCalculating(false);
       setEstimatedPrice(0);
       setCalculationData({ blocked: true, finalPrice: 0 });
       return;
     }
 
+    let cancelled = false;
+    setEstimatedPrice(null);
+    setCalculationData(null);
     async function calculate() {
       try {
         setCalculating(true);
@@ -222,18 +234,19 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
           body: JSON.stringify(payload),
         });
         const data = await res.json();
-        if (data.success && data.calculation) {
+        if (!cancelled && res.ok && data.success && data.calculation) {
           setEstimatedPrice(data.calculation.finalPrice);
           setCalculationData(data.calculation);
         }
       } catch (err) {
         console.error("Erro no cálculo:", err);
       } finally {
-        setCalculating(false);
+        if (!cancelled) setCalculating(false);
       }
     }
 
     calculate();
+    return () => { cancelled = true; };
   }, [
     selectedModel,
     selectedStorage,
@@ -325,6 +338,8 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
   // Submit Final
   const handleFinalSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
+    if (submitting) return;
+    setSubmitError("");
     if (!selectedModel || !selectedStorage || !customerName || !customerWhatsapp) return;
     if (boardStatus === "board_issue" || icloudStatus === "locked") return;
 
@@ -386,13 +401,15 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
       });
 
       const data = await res.json().catch(() => ({}));
-      const publicCode = data?.quote?.publicCode || "COT-AVAL";
+      if (!res.ok || !data.success || !data.quote?.publicCode) {
+        throw new Error("N?o foi poss?vel salvar sua cota??o. Tente novamente.");
+      }
+      const publicCode = data.quote.publicCode;
       setQuotePublicCode(publicCode);
       setQuoteSuccess(true);
     } catch (err) {
       console.error("Erro ao gerar cotação:", err);
-      setQuotePublicCode("COT-AVAL");
-      setQuoteSuccess(true);
+      setSubmitError("N?o foi poss?vel salvar sua cota??o. Confira sua conex?o e tente novamente.");
     } finally {
       setSubmitting(false);
     }
@@ -1296,6 +1313,7 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                 {/* Formulário */}
                 <div className="p-6 rounded-3xl bg-white border border-[#E5E5E7] shadow-xs space-y-4 text-left">
                   <form onSubmit={handleFinalSubmit} className="space-y-4">
+                    {submitError && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{submitError}</p>}
                     <div>
                       <label className="block text-xs font-bold text-[#1D1D1F] mb-1.5">
                         Nome Completo: <span className="text-red-500">*</span>
