@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, X, MessageCircle, ArrowRight, Sparkles } from "lucide-react";
@@ -78,7 +79,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
     window.open(createWhatsAppLink(text), "_blank", "noopener,noreferrer");
   };
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[10000] flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
       {/* Backdrop click to close */}
       <div className="absolute inset-0" onClick={onClose} />
@@ -218,6 +219,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
           </Link>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

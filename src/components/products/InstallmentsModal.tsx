@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { X, CreditCard, ShieldCheck, CheckCircle2, MessageCircle } from "lucide-react";
 import { formatCurrency } from "@/utils/formatters";
 import { calculateInstallments } from "@/utils/installments";
@@ -53,7 +54,7 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
     window.open(link, "_blank", "noopener,noreferrer");
   };
 
-  return (
+  return createPortal(
     <div onClick={onClose} className="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-md animate-in fade-in duration-200">
       <div
         role="dialog"
@@ -180,6 +181,7 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
