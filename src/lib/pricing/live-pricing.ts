@@ -1,101 +1,5 @@
-/**
- * Live Pricing Engine
- * Connects to the Render supplier catalog API (https://mundo-apple-buscador.onrender.com/api/products),
- * matches prices for existing store products per variant (including color differentiation),
- * and applies the user-defined profit margins:
- *   - iPhones: + R$ 750,00
- *   - MacBook Air: + R$ 1.000,00
- *   - MacBook Pro / Mac Mini / iMac: + R$ 1.300,00
- *   - iPad 11ª Geração: + R$ 450,00
- *   - iPad Air: + R$ 750,00
- *   - iPad Pro: + R$ 850,00
- *   - AirPods: + R$ 500,00
- *   - Apple Watch: + R$ 500,00
- *   - Accessories: DO NOT TOUCH (static catalog prices)
- */
-
+/** Live supplier prices for existing catalog models, without markups. */
 import { Product, ProductVariant } from "@/types/product";
-
-// Profit margins configured by store owner
-export const CATEGORY_MARGINS: Record<string, number> = {
-  iphone: 750,
-  mac: 1300,
-  imac: 1300,
-  airpods: 500,
-  watch: 500,
-};
-
-/**
- * Returns the exact margin for a given product based on owner specifications:
- * - MacBook Air: R$ 1.000,00
- * - Other Macs (MacBook Pro, iMac, Mac mini): R$ 1.300,00
- * - iPad 11: R$ 450,00
- * - iPad Air: R$ 750,00
- * - iPad Pro: R$ 850,00
- * - iPhone: R$ 750,00
- * - AirPods: R$ 500,00
- * - Apple Watch: R$ 500,00
- * - Accessories: undefined (no margin / do not touch)
- */
-export function getProductMargin(product: Product): number | null {
-  const cat = product.category.toLowerCase();
-  const slug = product.slug.toLowerCase();
-  const name = product.name.toLowerCase();
-
-  // Accessories
-  if (cat === "accessories" || cat === "acessorios") {
-    if (slug.includes("airtag-pack") || name.includes("4 pack")) return 350;
-    if (slug.includes("airtag") || name.includes("airtag")) return 100;
-    if (slug.includes("pencil")) return 200;
-    if (slug.includes("magic-mouse") || name.includes("magic mouse")) return 430;
-    if (slug.includes("keyboard") || name.includes("magic keyboard")) return 400;
-    if (slug.includes("folio")) return 400;
-    if (slug.includes("apple-tv") || name.includes("apple tv")) return 500;
-    return 100;
-  }
-
-  // iPhones
-  if (cat === "iphone") {
-    if (slug.includes("18") || name.includes("18")) {
-      return 1100; // iPhone 18 Series: + R$ 1.100
-    }
-    return 750; // iPhone 17 / 16 / 15: + R$ 750
-  }
-
-  // Macs & MacBooks
-  if (cat === "mac") {
-    if (slug.includes("imac") || name.includes("imac")) {
-      return 1500; // iMac 24" M4: + R$ 1.500
-    }
-    if (slug.includes("air") || name.includes("air")) {
-      return 1000; // MacBook Air: + R$ 1.000
-    }
-    return 1300; // MacBook Pro, Mac mini, MacBook Neo: + R$ 1.300
-  }
-
-  // iPads
-  if (cat === "ipad") {
-    if (slug.includes("pro") || name.includes("pro")) {
-      return 850; // iPad Pro: + R$ 850
-    }
-    if (slug.includes("air") || name.includes("air")) {
-      return 750; // iPad Air: + R$ 750
-    }
-    return 500; // iPad 11 / outros: + R$ 500
-  }
-
-  // Apple Watch: R$ 500,00
-  if (cat === "watch") {
-    return 500;
-  }
-
-  // AirPods
-  if (cat === "airpods") {
-    return 400;
-  }
-
-  return null;
-}
 
 export interface RenderSupplierItem {
   id: string;
@@ -203,77 +107,6 @@ let lastFetchTimestamp = 0;
 const CACHE_TTL_MS = 60 * 1000;
 const BUSCADOR_URL = "https://mundo-apple-buscador.onrender.com";
 
-// ─── Margens ao vivo do Buscador (mesma regra da "Loja Física") ───
-export interface BuscadorMargins {
-  categories: Record<string, number>;
-  products: Record<string, number>;
-}
-
-const DEFAULT_MARGINS: BuscadorMargins = {
-  categories: {
-    SEMINOVOS: 600, IPH18: 1300, IPH: 750, MCB_AIR: 1000, MCB_PRO: 1300, MCB_MAX: 2500,
-    IPAD: 500, RLG: 500, IMAC: 1500, PODS: 400, ACSS: 100, FOLIO: 400, PENCIL: 200,
-    AIRTAG_UNIT: 100, AIRTAG_PACK: 350, MAGIC_KEY: 400, MAGIC_MOUSE: 430, APPLE_TV: 500,
-  },
-  products: {},
-};
-
-let lastGoodMargins: BuscadorMargins = DEFAULT_MARGINS;
-
-export async function fetchBuscadorMargins(): Promise<BuscadorMargins> {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 8000);
-  try {
-    const res = await fetch(`${BUSCADOR_URL}/api/margins`, {
-      signal: controller.signal,
-      next: { revalidate: 60 },
-    });
-    clearTimeout(timeoutId);
-    if (!res.ok) return lastGoodMargins;
-    const data = await res.json();
-    if (data?.success && data.margins?.categories) {
-      lastGoodMargins = {
-        categories: { ...DEFAULT_MARGINS.categories, ...data.margins.categories },
-        products: data.margins.products || {},
-      };
-    }
-  } catch (err) {
-    clearTimeout(timeoutId);
-    console.warn("[LivePricing] Falha ao buscar margens, usando últimas conhecidas:", err);
-  }
-  return lastGoodMargins;
-}
-
-/** Porte fiel de getProductRetailPrice() do buscador (margem para um item novo). */
-export function getRetailMargin(item: RenderSupplierItem, margins: BuscadorMargins): number {
-  const n = (item.name || "").trim().toUpperCase();
-  const c = (item.category || "").trim().toUpperCase();
-  const m = margins.categories;
-
-  const custom = margins.products?.[n];
-  if (custom !== undefined) return Number(custom) || 0;
-  if (n.includes("IPHONE 18") || n.includes("IPH 18")) return m.IPH18 ?? 1300;
-
-  if (n.includes("FOLIO") || n.includes("SMART FOLIO")) return m.FOLIO ?? 400;
-  if (n.includes("PENCIL")) return m.PENCIL ?? 200;
-  if (n.includes("AIRTAG") && ["4 PACK", "4-PACK", "4PACK", "PACOTE", "4PK", "4 UN", "4UN"].some((k) => n.includes(k)))
-    return m.AIRTAG_PACK ?? 350;
-  if (n.includes("AIRTAG")) return m.AIRTAG_UNIT ?? 100;
-  if (["MAGIC KEY", "MAGIC KEYBOARD", "SMART KEYBOARD", "SMART KEY"].some((k) => n.includes(k))) return m.MAGIC_KEY ?? 400;
-  if (n.includes("MAGIC MOUSE") || (n.includes("MOUSE") && (c === "ACSS" || n.includes("APPLE")))) return m.MAGIC_MOUSE ?? 430;
-  if (["APPLE TV", "APPLETV", "TV 4K", "TV HD"].some((k) => n.includes(k))) return m.APPLE_TV ?? 500;
-  if (c === "IPH" || n.includes("IPHONE")) return m.IPH ?? 750;
-  if ((n.includes("MACBOOK") || c === "MCB") && n.includes("MAX")) return m.MCB_MAX ?? 2500;
-  if (n.includes("MACBOOK AIR") || n.includes("AIR M") || (c === "MCB" && n.includes("AIR"))) return m.MCB_AIR ?? 1000;
-  if (c === "MCB" || ["MACBOOK", "MAC MINI", "MAC STUDIO", "MAC PRO"].some((k) => n.includes(k))) return m.MCB_PRO ?? 1300;
-  if (c === "IPAD" || c === "IPD" || n.includes("IPAD")) return m.IPAD ?? 500;
-  if (c === "RLG" || n.includes("WATCH") || n.includes("SERIES") || n.includes("ULTRA")) return m.RLG ?? 500;
-  if (c === "IMAC" || n.includes("IMAC")) return m.IMAC ?? 1500;
-  if (c === "PODS" || n.includes("AIRPOD")) return m.PODS ?? 400;
-  if (c === "ACSS" || n.includes("MAGIC")) return m.ACSS ?? 100;
-  return m.DEFAULT ?? 500;
-}
-
 /**
  * Fetch products from the Render Buscador API with timeout protection
  */
@@ -312,8 +145,7 @@ export async function fetchRenderSupplierProducts(): Promise<RenderSupplierItem[
 function findBestSupplierPrice(
   product: Product,
   variant: ProductVariant | undefined,
-  supplierItems: RenderSupplierItem[],
-  margins: BuscadorMargins = lastGoodMargins
+  supplierItems: RenderSupplierItem[]
 ): number | null {
   const prodSlug = product.slug.toLowerCase();
   const prodCat = product.category.toLowerCase();
@@ -552,22 +384,21 @@ function findBestSupplierPrice(
 
   if (!candidates.length) return null;
 
-  // Preço de venda = menor oferta do fornecedor + margem do buscador (igual à Loja Física)
+  // Use the lowest matching supplier offer without markup or rounding.
   const retailPrices = candidates
     .filter((c) => c.price > 0)
-    .map((c) => c.price + getRetailMargin(c, margins));
+    .map((c) => c.price);
   if (!retailPrices.length) return null;
-  return Math.round(Math.min(...retailPrices));
+  return Math.min(...retailPrices);
 }
 
 /**
- * Enriches the base products list with live supplier prices + buscador margins.
+ * Enriches the base products list with exact live supplier prices.
  * Falls back safely to base prices if no supplier price is found.
  */
 export function applyLivePrices(
   baseProducts: Product[],
-  supplierItems: RenderSupplierItem[],
-  margins: BuscadorMargins = lastGoodMargins
+  supplierItems: RenderSupplierItem[]
 ): Product[] {
   if (!supplierItems || supplierItems.length === 0) {
     return baseProducts;
@@ -583,7 +414,7 @@ export function applyLivePrices(
 
     if (product.variants && product.variants.length > 0) {
       const updatedVariants = product.variants.map((variant) => {
-        const retail = findBestSupplierPrice(product, variant, supplierItems, margins);
+        const retail = findBestSupplierPrice(product, variant, supplierItems);
         return retail !== null && retail > 0 ? { ...variant, price: retail } : variant;
       });
 
@@ -594,7 +425,7 @@ export function applyLivePrices(
         updatedProduct.priceFrom = Math.min(...activePrices);
       }
     } else {
-      const retail = findBestSupplierPrice(product, undefined, supplierItems, margins);
+      const retail = findBestSupplierPrice(product, undefined, supplierItems);
       if (retail !== null && retail > 0) {
         updatedProduct.priceFrom = retail;
       }
@@ -615,12 +446,9 @@ export async function getLiveEnrichedProducts(baseProducts: Product[]): Promise<
   }
 
   try {
-    const [supplierItems, margins] = await Promise.all([
-      fetchRenderSupplierProducts(),
-      fetchBuscadorMargins(),
-    ]);
+    const supplierItems = await fetchRenderSupplierProducts();
     if (supplierItems && supplierItems.length > 0) {
-      const enriched = applyLivePrices(baseProducts, supplierItems, margins);
+      const enriched = applyLivePrices(baseProducts, supplierItems);
       cachedEnrichedProducts = enriched;
       lastFetchTimestamp = now;
       return enriched;
