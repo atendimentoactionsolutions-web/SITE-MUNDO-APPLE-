@@ -4,6 +4,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MessageCircle, ShieldCheck, Sparkles, CreditCard, RefreshCw } from "lucide-react";
+import { useLiveProduct } from "./LivePricesProvider";
 import { Product, ProductVariant } from "@/types/product";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
@@ -68,9 +69,10 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
-  product,
+  product: initialProduct,
   priority = false,
 }) => {
+  const product = useLiveProduct(initialProduct);
   const [isInstallmentsModalOpen, setIsInstallmentsModalOpen] = useState(false);
 
   const hasVariants = Boolean(product.variants && product.variants.length > 0);
@@ -141,7 +143,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   useEffect(() => {
     if (product.variants && product.variants.length > 0) {
       setActiveVariant((prev) => {
-        if (prev && product.variants!.some((v) => v === prev)) return prev;
+        const matching = prev && product.variants!.find(v => (["storage", "color", "size", "screenSize", "chip", "ram"] as const).every(key => v[key] === prev[key]));
+        if (matching) return matching;
         return product.variants![0];
       });
       setCustomStorage(product.variants[0].storage || "");

@@ -4,9 +4,10 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const ts=require('typescript');
 function load(file, imports={}) {
+ imports = { './supplier-feed': { fetchSupplierItems: async () => [{name:'iPhone 17',storage:'256GB',color:'BLACK',price:4000.25,category:'IPH'}] }, './supplier-status': { readSyncStatus: () => null, writeSyncStatus() {} }, ...imports };
  const module={exports:{}};
  const code=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS}}).outputText;
- vm.runInNewContext(code,{module,exports:module.exports,require:n=>imports[n],console,global:{},fetch:async()=>({ok:true,json:async()=>({data:[{name:'iPhone 17',storage:'256GB',color:'BLACK',price:4000.25,category:'IPH'}]})}),setTimeout,clearTimeout,AbortController});
+ vm.runInNewContext(code,{module,exports:module.exports,require:n=>imports[n],console,global:{},process,fetch:async()=>({ok:true,json:async()=>({data:[{name:'iPhone 17',storage:'256GB',color:'BLACK',price:4000.25,category:'IPH'}]})}),setTimeout,clearTimeout,AbortController});
  return module.exports;
 }
 const product={id:'phone',name:'iPhone 17',slug:'iphone-17',category:'iphone',condition:'new',priceFrom:4750,variants:[{storage:'256GB',color:'BLACK',price:4750,available:true}]};

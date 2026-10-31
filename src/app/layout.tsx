@@ -1,3 +1,4 @@
+import { LivePricesProvider } from "@/components/products/LivePricesProvider";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -236,7 +237,7 @@ export default function RootLayout({
       <body className="flex flex-col min-h-screen">
         <GoogleAnalytics />
         <Header />
-        <main className="flex-grow">{children}</main>
+        <LivePricesProvider><main className="flex-grow">{children}</main></LivePricesProvider>
         <Footer />
       </body>
     </html>

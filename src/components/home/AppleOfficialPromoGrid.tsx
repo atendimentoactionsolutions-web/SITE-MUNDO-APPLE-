@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
+import { useLivePrice } from "@/components/products/LivePricesProvider";
 import Image from "next/image";
 import Link from "next/link";
 import { createWhatsAppLink } from "@/utils/whatsapp";
 import { formatCurrency } from "@/utils/formatters";
 
-export const AppleOfficialPromoGrid: React.FC<{ duoPrice: number }> = ({ duoPrice }) => {
+export const AppleOfficialPromoGrid: React.FC<{ duoPrice: number }> = ({ duoPrice: initialDuoPrice }) => {
+  const duoPrice = useLivePrice("iphone-duo", initialDuoPrice);
   const getProductWhatsAppUrl = (name: string) => {
     return createWhatsAppLink(
       `Olá! Vim pelo site da Mundo Apple Delivery e quero saber valores e disponibilidade do *${name}*. Pode me atender?`

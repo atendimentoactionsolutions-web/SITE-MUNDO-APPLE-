@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
+import { useLiveProduct } from "./LivePricesProvider";
 import { Product, ProductVariant } from "@/types/product";
 import { formatCurrency, formatConditionLabel } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
@@ -77,7 +78,8 @@ interface ProductDetailOptionsProps {
   product: Product;
 }
 
-export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ product }) => {
+export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ product: initialProduct }) => {
+  const product = useLiveProduct(initialProduct);
   const [isInstallmentsModalOpen, setIsInstallmentsModalOpen] = useState(false);
   const hasVariants = Boolean(product.variants && product.variants.length > 0);
 
@@ -146,7 +148,8 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
   useEffect(() => {
     if (product.variants && product.variants.length > 0) {
       setActiveVariant((prev) => {
-        if (prev && product.variants!.some((v) => v === prev)) return prev;
+        const matching = prev && product.variants!.find(v => (["storage", "color", "size", "screenSize", "chip", "ram"] as const).every(key => v[key] === prev[key]));
+        if (matching) return matching;
         return product.variants![0];
       });
       setCustomStorage(product.variants[0].storage || "");

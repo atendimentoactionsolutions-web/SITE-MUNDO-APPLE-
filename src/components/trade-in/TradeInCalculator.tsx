@@ -1,4 +1,5 @@
 "use client";
+import { useLiveCatalog } from "@/components/products/LivePricesProvider";
 
 import React, { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
@@ -112,23 +113,7 @@ export const TradeInCalculator: React.FC = () => {
 
   // 1. Desired New Sealed Product for Upgrade
   const [selectedUpgradeCategory, setSelectedUpgradeCategory] = useState<string>("iphone");
-  const [liveCatalog, setLiveCatalog] = useState<Product[]>(products);
-
-  useEffect(() => {
-    let isMounted = true;
-    fetch("/api/products/live")
-      .then((res) => res.json())
-      .then((data) => {
-        if (isMounted && data && Array.isArray(data.products) && data.products.length > 0) {
-          setLiveCatalog(data.products);
-        }
-      })
-      .catch((err) => console.warn("Fallback to static products:", err));
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const liveCatalog = useLiveCatalog(products);
 
   const newProductsInCategory = useMemo(() => {
     return liveCatalog.filter(
@@ -140,6 +125,9 @@ export const TradeInCalculator: React.FC = () => {
   }, [selectedUpgradeCategory, liveCatalog]);
 
   const [selectedNewProduct, setSelectedNewProduct] = useState<Product | null>(null);
+  useEffect(() => {
+    setSelectedNewProduct(previous => previous ? liveCatalog.find(p => p.id === previous.id) || previous : null);
+  }, [liveCatalog]);
   const [selectedNewStorage, setSelectedNewStorage] = useState<string>("");
   const [selectedNewColor, setSelectedNewColor] = useState<string>("");
 

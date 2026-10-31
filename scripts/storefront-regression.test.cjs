@@ -27,6 +27,8 @@ function componentHarness(file, exportName, extra = {}) {
   }).outputText;
   const mod = { exports: {} };
   const imports = {
+    './LivePricesProvider': { useLiveProduct: p => p },
+    '@/components/products/LivePricesProvider': { useLiveCatalog: p => p, useLivePrice: (_, p) => p },
     react: hooks,
     'react-dom': { createPortal: (children, target) => ({ portal: children, target }) },
     'react/jsx-runtime': require('react/jsx-runtime'),
