@@ -21,6 +21,7 @@ export default function WhatsAppAdminPage() {
   const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
+  const [connectionError, setConnectionError] = useState<string | null>(null);
 
   // Test send state
   const [testPhone, setTestPhone] = useState("");
@@ -36,6 +37,9 @@ export default function WhatsAppAdminPage() {
         setStatus(data.status);
         setQrCodeDataUrl(data.qrCodeDataUrl);
         setPhoneNumber(data.phoneNumber);
+        setConnectionError(data.error || null);
+      } else {
+        setConnectionError(data.error || "Nao foi possivel conectar ao servico WhatsApp.");
       }
     } catch (err) {
       console.error("Erro ao obter status do WhatsApp:", err);
@@ -55,6 +59,7 @@ export default function WhatsAppAdminPage() {
   const handleConnect = async (forceReset = false) => {
     try {
       setActionLoading(true);
+      setConnectionError(null);
       setStatus("CONNECTING");
       const res = await fetch("/api/whatsapp/connect", {
         method: "POST",
@@ -68,6 +73,8 @@ export default function WhatsAppAdminPage() {
         setPhoneNumber(data.phoneNumber);
       }
     } catch (err) {
+      setConnectionError("Falha ao conectar ao servidor. Tente novamente.");
+      setStatus("DISCONNECTED");
       console.error("Erro ao conectar WhatsApp:", err);
     } finally {
       setActionLoading(false);
@@ -145,6 +152,10 @@ export default function WhatsAppAdminPage() {
           </p>
         </div>
 
+        {connectionError && (
+          <p role="alert" className="mb-4 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{connectionError}</p>
+        )}
+
         {/* Status Card */}
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 mb-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-slate-100">
@@ -211,7 +222,7 @@ export default function WhatsAppAdminPage() {
                 </button>
               ) : (
                 <button
-                  onClick={() => handleConnect(true)}
+                  onClick={() => handleConnect(status === "SCAN_QR")}
                   disabled={actionLoading}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm transition"
                 >

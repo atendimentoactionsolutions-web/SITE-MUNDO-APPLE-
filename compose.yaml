@@ -2,6 +2,7 @@ name: mundo-apple-site
 
 services:
   web:
+    image: mundo-apple-site-web
     build:
       context: https://github.com/atendimentoactionsolutions-web/SITE-MUNDO-APPLE-.git#main
       dockerfile: Dockerfile
@@ -14,9 +15,9 @@ services:
       PORT: 3000
       HOSTNAME: 0.0.0.0
       DB_BACKUP_FILE: /app/data/db_backup.json
+      WA_SERVER_URL: http://whatsapp:3001
     volumes:
       - app-data:/app/data
-      - whatsapp-session:/app/.whatsapp-session
     healthcheck:
       test:
         - CMD
@@ -26,6 +27,22 @@ services:
       interval: 30s
       timeout: 5s
       start_period: 60s
+      retries: 3
+
+  whatsapp:
+    image: mundo-apple-site-web
+    pull_policy: never
+    restart: unless-stopped
+    init: true
+    command: ["node", "scripts/whatsapp-worker.mjs"]
+    environment:
+      PORT: 3001
+    volumes:
+      - whatsapp-session:/app/.whatsapp-session
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3001/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
       retries: 3
 
 volumes:
