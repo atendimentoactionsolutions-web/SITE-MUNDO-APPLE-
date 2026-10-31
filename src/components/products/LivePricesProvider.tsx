@@ -31,7 +31,7 @@ export function LivePricesProvider({ children }: { children: React.ReactNode }) 
 }
 export function useLiveProduct(product: Product): Product {
   const live = useContext(LivePricesContext);
-  return live ? freshProduct(live.products?.find(p => p.id === product.id) || product, live.now) : product;
+  return React.useMemo(() => live ? freshProduct(live.products?.find(p => p.id === product.id) || product, live.now) : product, [live?.products, live?.now, product]);
 }
 export function useLiveCatalog(fallback: Product[]): Product[] {
   const live = useContext(LivePricesContext);

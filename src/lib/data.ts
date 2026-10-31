@@ -97,6 +97,7 @@ export async function getFeaturedProducts(): Promise<Product[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
+  noStore();
   const allProducts = getAllProductsWithOverrides();
   const product = allProducts.find((p) => p.slug === slug && p.active);
   return product || null;
