@@ -3,15 +3,6 @@ import path from "path";
 
 const SETTINGS_FILE = path.join(process.cwd(), "site_settings.json");
 
-export interface CategoryMargins {
-  iphone: number;      // default: 300
-  mac: number;         // default: 300 (MacBook, iMac, Mac mini)
-  ipad: number;        // default: 200
-  watch: number;       // default: 200
-  airpods: number;     // default: 150
-  accessories: number; // default: 100
-}
-
 export interface SiteSettings {
   hideAllPrices: boolean; // When true, all prices across the site become "Sob Consulta"
   categoryMargins: CategoryMargins;
@@ -42,12 +33,7 @@ export function getSiteSettings(): SiteSettings {
       const data = fs.readFileSync(SETTINGS_FILE, "utf-8");
       const parsed = JSON.parse(data);
       global.__siteSettings = {
-        ...DEFAULT_SETTINGS,
-        ...parsed,
-        categoryMargins: {
-          ...DEFAULT_SETTINGS.categoryMargins,
-          ...(parsed.categoryMargins || {}),
-        },
+        hideAllPrices: typeof parsed.hideAllPrices === "boolean" ? parsed.hideAllPrices : false,
       };
       return global.__siteSettings!;
     }
@@ -61,12 +47,7 @@ export function getSiteSettings(): SiteSettings {
 export function updateSiteSettings(settings: Partial<SiteSettings>): SiteSettings {
   const current = getSiteSettings();
   const updated: SiteSettings = {
-    ...current,
-    ...settings,
-    categoryMargins: {
-      ...current.categoryMargins,
-      ...(settings.categoryMargins || {}),
-    },
+    hideAllPrices: settings.hideAllPrices ?? current.hideAllPrices,
   };
   global.__siteSettings = updated;
   try {

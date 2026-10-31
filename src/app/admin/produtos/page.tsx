@@ -68,15 +68,6 @@ export default function AdminProductsPage() {
   const [savingPrices, setSavingPrices] = useState(false);
   const [syncingSupplier, setSyncingSupplier] = useState(false);
   const [lastSyncInfo, setLastSyncInfo] = useState<any>(null);
-  const [margins, setMargins] = useState({
-    iphone: 300,
-    mac: 300,
-    ipad: 200,
-    watch: 200,
-    airpods: 150,
-    accessories: 100,
-  });
-  const [savingMargins, setSavingMargins] = useState(false);
 
   const router = useRouter();
 
@@ -96,9 +87,6 @@ export default function AdminProductsPage() {
       const data = await res.json();
       if (data.success && data.settings) {
         setHideAllPrices(Boolean(data.settings.hideAllPrices));
-        if (data.settings.categoryMargins) {
-          setMargins(data.settings.categoryMargins);
-        }
       }
     } catch (e) {
       console.error("Failed to load settings:", e);
@@ -217,36 +205,6 @@ export default function AdminProductsPage() {
   }, [products, conditionFilter]);
 
   // Toggle single product active
-    const handleSaveMargins = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    setSavingMargins(true);
-    setFeedback(null);
-    try {
-      const res = await fetch("/api/admin/settings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          categoryMargins: margins,
-          resyncNow: true,
-        }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setFeedback({
-          type: "success",
-          text: "Margens de lucro atualizadas e preços sincronizados com sucesso no site!",
-        });
-        await loadProducts();
-      } else {
-        setFeedback({ type: "error", text: data.error || "Erro ao salvar margens." });
-      }
-    } catch (err) {
-      setFeedback({ type: "error", text: "Erro ao comunicar com o servidor." });
-    } finally {
-      setSavingMargins(false);
-    }
-  };
-
   const handleSyncSupplier = async () => {
     if (!confirm("Deseja sincronizar agora os preços de todos os produtos novos lacrados direto do fornecedor (sem margem)?\n\nOs preços do catálogo da loja e do simulador de Upgrade serão atualizados instantaneamente.")) {
       return;
@@ -540,7 +498,7 @@ export default function AdminProductsPage() {
           </div>
         </div>
 
-        {/* Live Supplier Sync & Category Margins Controls Box */}
+        {/* Live Supplier Sync Controls Box */}
         <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 rounded-3xl p-6 mb-6 text-white shadow-lg border border-indigo-800/50">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-white/10">
             <div className="flex items-start sm:items-center gap-3.5">
@@ -550,15 +508,15 @@ export default function AdminProductsPage() {
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-base font-bold tracking-tight text-white">
-                    Sincronização Ao Vivo & Margens de Lucro
+                    Preços do fornecedor
                   </h3>
                   <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    AUTO A CADA 5 MIN
+                    SEM ACRÉSCIMO
                   </span>
                 </div>
                 <p className="text-xs text-blue-200/80 mt-1 max-w-2xl leading-relaxed">
-                  Os valores base são capturados diretamente do fornecedor e acrescidos da margem configurada abaixo. Os produtos e o simulador de Upgrade refletem essa margem ao vivo.
+                  Os produtos novos usam o valor do fornecedor, sem acréscimo. Sincronize para atualizar os valores do catálogo e do simulador de Upgrade.
                 </p>
               </div>
             </div>
@@ -566,7 +524,7 @@ export default function AdminProductsPage() {
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={handleSyncSupplier}
-                disabled={syncingSupplier || savingMargins}
+                disabled={syncingSupplier}
                 className="px-4 py-2.5 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-white flex items-center justify-center gap-2 transition-all cursor-pointer border border-white/20 disabled:opacity-50"
                 title="Forçar sincronização com a tabela do fornecedor agora"
               >
@@ -574,125 +532,9 @@ export default function AdminProductsPage() {
                 <span>{syncingSupplier ? "Sincronizando..." : "Sincronizar Agora"}</span>
               </button>
 
-              <button
-                onClick={() => handleSaveMargins()}
-                disabled={savingMargins || syncingSupplier}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-50"
-              >
-                {savingMargins ? (
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                ) : (
-                  <Save className="w-3.5 h-3.5" />
-                )}
-                <span>Salvar Margens & Aplicar</span>
-              </button>
             </div>
           </div>
 
-          {/* Grid de Margens Configuráveis */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-5">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
-              <span className="text-[10px] uppercase font-bold text-blue-300 block mb-1">
-                iPhones
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="text-xs font-bold text-white/60">+ R$</span>
-                <input
-                  type="number"
-                  step="10"
-                  min="0"
-                  value={margins.iphone}
-                  onChange={(e) => setMargins({ ...margins, iphone: Number(e.target.value) || 0 })}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs font-extrabold text-white text-right focus:outline-none focus:ring-1 focus:ring-amber-400"
-                />
-              </div>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
-              <span className="text-[10px] uppercase font-bold text-blue-300 block mb-1">
-                MacBooks & iMac
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="text-xs font-bold text-white/60">+ R$</span>
-                <input
-                  type="number"
-                  step="10"
-                  min="0"
-                  value={margins.mac}
-                  onChange={(e) => setMargins({ ...margins, mac: Number(e.target.value) || 0 })}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs font-extrabold text-white text-right focus:outline-none focus:ring-1 focus:ring-amber-400"
-                />
-              </div>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
-              <span className="text-[10px] uppercase font-bold text-blue-300 block mb-1">
-                iPads
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="text-xs font-bold text-white/60">+ R$</span>
-                <input
-                  type="number"
-                  step="10"
-                  min="0"
-                  value={margins.ipad}
-                  onChange={(e) => setMargins({ ...margins, ipad: Number(e.target.value) || 0 })}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs font-extrabold text-white text-right focus:outline-none focus:ring-1 focus:ring-amber-400"
-                />
-              </div>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
-              <span className="text-[10px] uppercase font-bold text-blue-300 block mb-1">
-                Apple Watch
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="text-xs font-bold text-white/60">+ R$</span>
-                <input
-                  type="number"
-                  step="10"
-                  min="0"
-                  value={margins.watch}
-                  onChange={(e) => setMargins({ ...margins, watch: Number(e.target.value) || 0 })}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs font-extrabold text-white text-right focus:outline-none focus:ring-1 focus:ring-amber-400"
-                />
-              </div>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
-              <span className="text-[10px] uppercase font-bold text-blue-300 block mb-1">
-                AirPods
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="text-xs font-bold text-white/60">+ R$</span>
-                <input
-                  type="number"
-                  step="10"
-                  min="0"
-                  value={margins.airpods}
-                  onChange={(e) => setMargins({ ...margins, airpods: Number(e.target.value) || 0 })}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs font-extrabold text-white text-right focus:outline-none focus:ring-1 focus:ring-amber-400"
-                />
-              </div>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-3">
-              <span className="text-[10px] uppercase font-bold text-blue-300 block mb-1">
-                Acessórios
-              </span>
-              <div className="flex items-center gap-1">
-                <span className="text-xs font-bold text-white/60">+ R$</span>
-                <input
-                  type="number"
-                  step="10"
-                  min="0"
-                  value={margins.accessories}
-                  onChange={(e) => setMargins({ ...margins, accessories: Number(e.target.value) || 0 })}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs font-extrabold text-white text-right focus:outline-none focus:ring-1 focus:ring-amber-400"
-                />
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Feedback Alert */}

@@ -22,28 +22,17 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { hideAllPrices, categoryMargins, resyncNow } = body;
+    const { hideAllPrices, resyncNow } = body;
 
     const payload: any = {};
     if (typeof hideAllPrices === "boolean") {
       payload.hideAllPrices = hideAllPrices;
     }
-    if (categoryMargins && typeof categoryMargins === "object") {
-      payload.categoryMargins = {
-        iphone: Number(categoryMargins.iphone) || 0,
-        mac: Number(categoryMargins.mac) || 0,
-        ipad: Number(categoryMargins.ipad) || 0,
-        watch: Number(categoryMargins.watch) || 0,
-        airpods: Number(categoryMargins.airpods) || 0,
-        accessories: Number(categoryMargins.accessories) || 0,
-      };
-    }
-
     const updated = updateSiteSettings(payload);
 
-    // If resyncNow requested or margins updated, trigger recalculation
+    // Synchronize exact supplier prices when requested.
     let syncResult = null;
-    if (resyncNow || categoryMargins) {
+    if (resyncNow) {
       syncResult = await syncSupplierPrices();
     }
 

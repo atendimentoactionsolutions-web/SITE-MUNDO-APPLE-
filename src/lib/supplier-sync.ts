@@ -1,4 +1,3 @@
-import { getSiteSettings } from "./site-settings";
 import { products as baseProducts } from "@/data/products";
 import { Product, ProductVariant } from "@/types/product";
 import { saveOverrides, getProductOverrides, ProductOverrideData } from "./products-store";
@@ -72,30 +71,6 @@ function normalizeStorage(storage: string | undefined): string {
   return norm;
 }
 
-
-function getCategoryMargin(category: string): number {
-  try {
-    const settings = getSiteSettings();
-    const margins = settings.categoryMargins || {
-      iphone: 300,
-      mac: 300,
-      ipad: 200,
-      watch: 200,
-      airpods: 150,
-      accessories: 100,
-    };
-    const cat = (category || "").toLowerCase();
-    if (cat === "iphone") return margins.iphone ?? 300;
-    if (cat === "mac") return margins.mac ?? 300;
-    if (cat === "ipad") return margins.ipad ?? 200;
-    if (cat === "watch") return margins.watch ?? 200;
-    if (cat === "airpods") return margins.airpods ?? 150;
-    if (cat === "accessories" || cat === "acessorios") return margins.accessories ?? 100;
-    return 0;
-  } catch (e) {
-    return 0;
-  }
-}
 
 // Map product models
 function getModelKey(name: string): string {
@@ -343,12 +318,12 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
           }
 
           if (bestPrice && bestPrice > 0) {
-            const finalWithMargin = bestPrice + categoryMargin;
+            const supplierPrice = bestPrice;
             updatedVariantsCount++;
-            if (finalWithMargin < minFoundPrice) minFoundPrice = finalWithMargin;
+            if (supplierPrice < minFoundPrice) minFoundPrice = supplierPrice;
             return {
               ...v,
-              price: finalWithMargin,
+              price: supplierPrice,
               available: true,
             };
           }
@@ -368,11 +343,11 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
         finalPriceFrom = minFoundPrice;
         hasValidSupplierPrice = true;
       } else if (modelMinPrice && modelMinPrice > 0) {
-        finalPriceFrom = modelMinPrice + categoryMargin;
+        finalPriceFrom = modelMinPrice;
         hasValidSupplierPrice = true;
       }
 
-      // If supplier has price: update it with margin.
+      // If supplier has price: use its exact price without any markup.
       // If supplier DOES NOT have this product: KEEP yesterday's price untouched!
       if (hasValidSupplierPrice) {
         matchedProductsCount++;
