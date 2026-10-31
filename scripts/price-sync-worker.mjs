@@ -18,13 +18,12 @@ export async function syncOnce({ fetcher = fetch, endpoint = process.env.SYNC_EN
 }
 export function createScheduler(run = syncOnce, now = Date.now) {
   let busy = false;
-  let lastAttempt = 0;
-  let previousSuccess = false;
+  let lastAttempt = null;
   const tick = async () => {
-    if (busy || now() - lastAttempt < (previousSuccess ? 60000 : 10000)) return;
+    if (busy || (lastAttempt !== null && now() - lastAttempt < 600000)) return;
     busy = true;
     lastAttempt = now();
-    try { previousSuccess = await run(); }
+    try { await run(); }
     finally { busy = false; }
   };
   return tick;

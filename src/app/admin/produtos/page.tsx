@@ -209,7 +209,7 @@ export default function AdminProductsPage() {
       try { const data = await fetch("/api/admin/supplier-sync", { cache: "no-store" }).then(r => r.json()); if (data.success) setLastSyncInfo(data.lastSync); } catch {}
     };
     refresh();
-    const timer = setInterval(refresh, 15000);
+    const timer = setInterval(refresh, 600000);
     return () => clearInterval(timer);
   }, []);
 
@@ -525,7 +525,7 @@ export default function AdminProductsPage() {
                   </span>
                 </div>
                 <p className="text-xs text-blue-200/80 mt-1 max-w-2xl leading-relaxed">
-                  Os produtos novos usam o valor do fornecedor, sem acréscimo. Atualização automática a cada 1 minuto, 24 horas por dia.
+                  Os produtos novos usam o valor do fornecedor, sem acréscimo. Atualização automática a cada 10 minutos, 24 horas por dia.
                 </p>
               </div>
             </div>

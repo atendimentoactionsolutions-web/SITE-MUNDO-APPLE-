@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import { products as initialProducts } from "@/data/products";
 import { Product, ProductVariant } from "@/types/product";
-import { isFreshPrice } from "./supplier-status";
 import { getSiteSettings } from "./site-settings";
 
 // File where overrides are stored
@@ -71,12 +70,6 @@ export function getAllProductsWithOverrides(ignoreGlobalHidePrices = false): Pro
     let variants = override?.variants !== undefined ? override.variants : p.variants;
 
     const supplierUpdatedAt = override?.supplierUpdatedAt;
-    if (process.env.SUPPLIER_REQUIRE_FRESH === "true" && p.condition === "new") {
-      variants = variants?.map(v => isFreshPrice(v.supplierUpdatedAt) ? v : { ...v, price: 0, available: false });
-      const currentPrices = variants?.map(v => v.price).filter(price => price > 0) || [];
-      priceFrom = variants?.length ? (currentPrices.length ? Math.min(...currentPrices) : 0) : (isFreshPrice(supplierUpdatedAt) ? priceFrom : 0);
-    }
-
     if (shouldHidePrices) {
       priceFrom = 0;
       const maskedVariants = variants?.map((v) => ({

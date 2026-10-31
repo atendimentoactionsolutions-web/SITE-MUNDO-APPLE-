@@ -333,9 +333,10 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       let finalPriceFrom = prod.priceFrom;
 
       if (minFoundPrice !== Infinity) {
-        finalPriceFrom = minFoundPrice;
+        const retainedPrices = updatedVariants.map(v => v.price).filter(price => Number.isFinite(price) && price > 0);
+        finalPriceFrom = Math.min(...retainedPrices);
         hasValidSupplierPrice = true;
-      } else if (modelMinPrice && modelMinPrice > 0) {
+      } else if (!prod.variants?.length && modelMinPrice && modelMinPrice > 0) {
         finalPriceFrom = modelMinPrice;
         hasValidSupplierPrice = true;
       }
@@ -367,7 +368,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       success: true,
       timestamp: new Date().toISOString(),
       lastSuccessfulAt: syncedAt,
-      intervalMs: 60000,
+      intervalMs: 600000,
       totalSupplierItems: newItems.length,
       matchedProductsCount,
       updatedVariantsCount,
@@ -385,7 +386,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       matchedProductsCount: 0,
       updatedVariantsCount: 0,
       lastSuccessfulAt: readSyncStatus()?.lastSuccessfulAt,
-      intervalMs: 60000,
+      intervalMs: 600000,
       errors: [error?.message || "Erro desconhecido na sincronização."],
     };
     try { writeSyncStatus(result); } catch (persistError) { console.error("Erro ao registrar sincronizacao:", persistError); }

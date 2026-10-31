@@ -20,7 +20,6 @@ services:
       WA_SERVER_URL: http://whatsapp:3001
       PRODUCT_OVERRIDES_FILE: /app/data/products_override.json
       SUPPLIER_STATUS_FILE: /app/data/supplier_sync_status.json
-      SUPPLIER_REQUIRE_FRESH: "true"
     volumes:
       - app-data:/app/data
     healthcheck:
@@ -61,7 +60,7 @@ services:
     volumes:
       - app-data:/app/data
     healthcheck:
-      test: ["CMD", "node", "-e", "const fs=require('fs'); const s=JSON.parse(fs.readFileSync('/app/data/price-worker.json')); process.exit(Date.now()-Date.parse(s.lastAttemptAt)<90000?0:1)"]
+      test: ["CMD", "node", "-e", "const fs=require('fs'); const s=JSON.parse(fs.readFileSync('/app/data/price-worker.json')); process.exit(Date.now()-Date.parse(s.lastAttemptAt)<720000?0:1)"]
       interval: 30s
       timeout: 5s
       retries: 3
