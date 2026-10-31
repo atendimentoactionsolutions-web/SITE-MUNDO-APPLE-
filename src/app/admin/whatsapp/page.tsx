@@ -71,6 +71,10 @@ export default function WhatsAppAdminPage() {
         setStatus(data.status);
         setQrCodeDataUrl(data.qrCodeDataUrl);
         setPhoneNumber(data.phoneNumber);
+        setConnectionError(data.error || null);
+      } else {
+        setStatus("DISCONNECTED");
+        setConnectionError(data.error || "Nao foi possivel gerar o QR Code.");
       }
     } catch (err) {
       setConnectionError("Falha ao conectar ao servidor. Tente novamente.");
