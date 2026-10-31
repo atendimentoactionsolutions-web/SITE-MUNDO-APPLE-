@@ -236,9 +236,11 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen">
         <GoogleAnalytics />
-        <Header />
-        <LivePricesProvider><main className="flex-grow">{children}</main></LivePricesProvider>
-        <Footer />
+        <LivePricesProvider>
+          <Header />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </LivePricesProvider>
       </body>
     </html>
   );

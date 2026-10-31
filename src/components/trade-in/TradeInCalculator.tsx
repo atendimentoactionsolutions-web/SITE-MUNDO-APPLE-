@@ -609,6 +609,7 @@ export const TradeInCalculator: React.FC = () => {
           imeiRegular: true,
           upgradeGoal: {
             category: selectedUpgradeCategory,
+            productId: selectedNewProduct?.id,
             productName: selectedNewProduct?.name,
             storage: selectedNewStorage,
             color: selectedNewColor,
@@ -633,14 +634,15 @@ export const TradeInCalculator: React.FC = () => {
         setCalculationData(data.calculation);
       }
       if (!res.ok || !data.success || !data.quote?.publicCode) {
-        throw new Error("Não foi possível salvar sua cotação. Tente novamente.");
+        if (data.latestProduct) setSelectedNewProduct(data.latestProduct);
+        throw new Error(data.error || "Não foi possível salvar sua cotação. Tente novamente.");
       }
       const publicCode = data.quote.publicCode;
       setQuotePublicCode(publicCode);
       setQuoteSuccess(true);
     } catch (err) {
       console.error("Erro ao gerar cotação:", err);
-      setSubmitError("Não foi possível salvar sua cotação. Confira sua conexão e tente novamente.");
+      setSubmitError(err instanceof Error ? err.message : "Não foi possível salvar sua cotação. Tente novamente.");
     } finally {
       setSubmitting(false);
     }

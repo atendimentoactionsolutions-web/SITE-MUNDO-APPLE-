@@ -1,3 +1,4 @@
+import { getAllProductsWithOverrides } from "@/lib/products-store";
 import { NextRequest, NextResponse } from "next/server";
 import { db, SellQuote, QuoteAnswer, QuoteDeflator, Customer } from "@/lib/sell/db";
 import { calculatePurchasePrice } from "@/lib/sell/pricing-engine";
@@ -21,6 +22,16 @@ export async function POST(request: NextRequest) {
         { success: false, error: "Missing quote calculation details" },
         { status: 400 }
       );
+    }
+
+    if (answers.upgradeGoal?.productName) {
+      const goal = answers.upgradeGoal;
+      const product = getAllProductsWithOverrides().find(p => p.active && p.condition === "new" && (goal.productId ? p.id === goal.productId : p.name === goal.productName));
+      const variant = product?.variants?.find(v => (!goal.storage || v.storage === goal.storage) && (!goal.color || v.color === goal.color));
+      const currentPrice = product?.variants?.length ? (variant?.available ? variant.price : 0) : (product?.priceFrom || 0);
+      if (!currentPrice) return NextResponse.json({ success: false, error: "Aguardando preco atualizado do fornecedor. Tente novamente em instantes." }, { status: 503 });
+      if (Number(goal.newPrice) !== currentPrice) return NextResponse.json({ success: false, error: "O preco mudou. Confira o novo valor e envie a simulacao novamente.", latestProduct: product }, { status: 409 });
+      goal.newPrice = currentPrice;
     }
 
     // 1. Calculate price on server

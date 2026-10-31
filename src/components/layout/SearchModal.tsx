@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, X, MessageCircle, ArrowRight, Sparkles } from "lucide-react";
+import { useLiveCatalog } from "@/components/products/LivePricesProvider";
 import { Product } from "@/types/product";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
@@ -17,6 +18,7 @@ interface SearchModalProps {
 export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState("");
   const [catalog, setCatalog] = useState<Product[]>([]);
+  const liveCatalog = useLiveCatalog(catalog);
   const [catalogLoading, setCatalogLoading] = useState(false);
   const [catalogError, setCatalogError] = useState(false);
 
@@ -74,7 +76,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
   if (!isOpen) return null;
 
   const normalizedQuery = query.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const storefrontProducts = catalog.filter((p) => p.active && p.condition === "new");
+  const storefrontProducts = liveCatalog.filter((p) => p.active && p.condition === "new");
   const filteredProducts = normalizedQuery
     ? storefrontProducts.filter((p) =>
         [p.name, p.category, p.subcategory, p.description].some((value) =>
