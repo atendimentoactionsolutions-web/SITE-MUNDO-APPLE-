@@ -2,12 +2,14 @@ import fs from "fs";
 import path from "path";
 import { products as initialProducts } from "@/data/products";
 import { Product, ProductVariant } from "@/types/product";
+import { isFreshPrice } from "./supplier-status";
 import { getSiteSettings } from "./site-settings";
 
 // File where overrides are stored
-const OVERRIDE_FILE = path.join(process.cwd(), "products_override.json");
+const OVERRIDE_FILE = process.env.PRODUCT_OVERRIDES_FILE || path.join(process.cwd(), "products_override.json");
 
 export interface ProductOverrideData {
+  supplierUpdatedAt?: string;
   active?: boolean;
   priceFrom?: number;
   featured?: boolean;
@@ -25,7 +27,7 @@ declare global {
 function loadOverrides(): ProductOverrides {
   const now = Date.now();
   // Invalidate cache every 10 seconds or read fresh from disk
-  if (global.__productOverrides && global.__productOverridesLastRead && now - global.__productOverridesLastRead < 10000) {
+  if (global.__productOverrides && global.__productOverridesLastRead && now - global.__productOverridesLastRead < 1000) {
     return global.__productOverrides;
   }
   try {
@@ -44,13 +46,12 @@ function loadOverrides(): ProductOverrides {
 }
 
 export function saveOverrides(overrides: ProductOverrides): void {
-  try {
-    global.__productOverrides = overrides;
-    global.__productOverridesLastRead = Date.now();
-    fs.writeFileSync(OVERRIDE_FILE, JSON.stringify(overrides, null, 2), "utf-8");
-  } catch (err) {
-    console.error("Error saving products_override.json:", err);
-  }
+  fs.mkdirSync(path.dirname(OVERRIDE_FILE), { recursive: true });
+  const temporary = OVERRIDE_FILE + ".tmp";
+  fs.writeFileSync(temporary, JSON.stringify(overrides, null, 2), "utf-8");
+  fs.renameSync(temporary, OVERRIDE_FILE);
+  global.__productOverrides = overrides;
+  global.__productOverridesLastRead = Date.now();
 }
 
 /**
@@ -68,6 +69,13 @@ export function getAllProductsWithOverrides(ignoreGlobalHidePrices = false): Pro
     let featured = override?.featured !== undefined ? override.featured : p.featured;
     let priceFrom = override?.priceFrom !== undefined ? override.priceFrom : p.priceFrom;
     let variants = override?.variants !== undefined ? override.variants : p.variants;
+
+    const supplierUpdatedAt = override?.supplierUpdatedAt;
+    if (process.env.SUPPLIER_REQUIRE_FRESH === "true" && p.condition === "new") {
+      variants = variants?.map(v => isFreshPrice(v.supplierUpdatedAt) ? v : { ...v, price: 0, available: false });
+      const currentPrices = variants?.map(v => v.price).filter(price => price > 0) || [];
+      priceFrom = variants?.length ? (currentPrices.length ? Math.min(...currentPrices) : 0) : (isFreshPrice(supplierUpdatedAt) ? priceFrom : 0);
+    }
 
     if (shouldHidePrices) {
       priceFrom = 0;

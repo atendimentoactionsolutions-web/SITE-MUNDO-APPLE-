@@ -1,10 +1,9 @@
-import { products } from "@/data/products";
+import { unstable_noStore as noStore } from "next/cache";
 import { categories } from "@/data/categories";
 import { technicalServices } from "@/data/services";
 import { Product } from "@/types/product";
 import { Category } from "@/types/category";
 import { TechnicalService } from "@/types/service";
-import { getLiveEnrichedProducts } from "@/lib/pricing/live-pricing";
 import { getAllProductsWithOverrides } from "@/lib/products-store";
 
 // Abstraction layer for Data Access.
@@ -18,6 +17,7 @@ export async function getProducts(options?: {
   searchQuery?: string;
 }): Promise<Product[]> {
   // Use products database directly without external overrides
+  noStore();
   const allProducts = getAllProductsWithOverrides();
   let list = allProducts.filter((p) => p.active);
 

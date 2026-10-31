@@ -5,6 +5,7 @@ export interface ProductVariant {
   storage?: string;
   color?: string;
   price: number;
+  supplierUpdatedAt?: string;
   available: boolean;
   image?: string;
   screenSize?: string;
@@ -23,6 +24,7 @@ export interface Product {
   colorImages?: Record<string, string>;
   gallery?: string[];
   priceFrom: number;
+  supplierUpdatedAt?: string;
   condition: ConditionType;
   screenSizes?: string[];
   sizes?: string[]; // For milimetragem (ex: 40mm, 44mm, 42mm, 46mm, 49mm)

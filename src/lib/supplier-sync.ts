@@ -1,8 +1,9 @@
+import { fetchSupplierItems } from "./supplier-feed";
+import { readSyncStatus, writeSyncStatus } from "./supplier-status";
 import { products as baseProducts } from "@/data/products";
 import { Product, ProductVariant } from "@/types/product";
 import { saveOverrides, getProductOverrides, ProductOverrideData } from "./products-store";
 
-const SUPPLIER_API_URL = "https://srv2058756.hstgr.cloud/api/products";
 
 export interface SupplierSyncResult {
   success: boolean;
@@ -11,6 +12,8 @@ export interface SupplierSyncResult {
   matchedProductsCount: number;
   updatedVariantsCount: number;
   errors?: string[];
+  lastSuccessfulAt?: string;
+  intervalMs?: number;
 }
 
 // Memory cache for background sync timing
@@ -215,17 +218,8 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
   global.__syncInProgress = true;
 
   try {
-    const res = await fetch(SUPPLIER_API_URL, {
-      headers: { "User-Agent": "MundoAppleSync/1.0" },
-      next: { revalidate: 0 },
-    });
-
-    if (!res.ok) {
-      throw new Error(`Falha HTTP ao consultar fornecedor: ${res.status}`);
-    }
-
-    const json = await res.json();
-    const rawItems: any[] = json.data || [];
+    const rawItems = await fetchSupplierItems();
+    const syncedAt = new Date().toISOString();
 
     // Filter ONLY new products (condition NOVO, not seminovo, category not SEMI)
     const newItems = rawItems.filter(
@@ -323,6 +317,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
             return {
               ...v,
               price: supplierPrice,
+              supplierUpdatedAt: syncedAt,
               available: true,
             };
           }
@@ -352,6 +347,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
         currentOverrides[prod.id] = {
           ...currentOverrides[prod.id],
           priceFrom: finalPriceFrom,
+          supplierUpdatedAt: syncedAt,
           variants: updatedVariants.length > 0 ? updatedVariants : (currentOverrides[prod.id]?.variants || prod.variants),
         };
       } else {
@@ -370,11 +366,14 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
     const result: SupplierSyncResult = {
       success: true,
       timestamp: new Date().toISOString(),
+      lastSuccessfulAt: syncedAt,
+      intervalMs: 60000,
       totalSupplierItems: newItems.length,
       matchedProductsCount,
       updatedVariantsCount,
     };
 
+    writeSyncStatus(result);
     global.__lastSupplierSync = result;
     return result;
   } catch (error: any) {
@@ -385,6 +384,8 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       totalSupplierItems: 0,
       matchedProductsCount: 0,
       updatedVariantsCount: 0,
+      lastSuccessfulAt: readSyncStatus()?.lastSuccessfulAt,
+      intervalMs: 60000,
       errors: [error?.message || "Erro desconhecido na sincronização."],
     };
     global.__lastSupplierSync = result;
@@ -395,5 +396,5 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
 }
 
 export function getLastSupplierSync(): SupplierSyncResult | null {
-  return global.__lastSupplierSync || null;
+  return readSyncStatus() || global.__lastSupplierSync || null;
 }

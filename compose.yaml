@@ -16,6 +16,9 @@ services:
       HOSTNAME: 0.0.0.0
       DB_BACKUP_FILE: /app/data/db_backup.json
       WA_SERVER_URL: http://whatsapp:3001
+      PRODUCT_OVERRIDES_FILE: /app/data/products_override.json
+      SUPPLIER_STATUS_FILE: /app/data/supplier_sync_status.json
+      SUPPLIER_REQUIRE_FRESH: "true"
     volumes:
       - app-data:/app/data
     healthcheck:
@@ -44,6 +47,23 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
+
+  price-sync:
+    image: mundo-apple-site-web
+    pull_policy: never
+    restart: unless-stopped
+    init: true
+    command: ["node", "scripts/price-sync-worker.mjs"]
+    environment:
+      SYNC_ENDPOINT: http://web:3000/api/cron/sync-supplier
+    volumes:
+      - app-data:/app/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "const fs=require('fs'); const s=JSON.parse(fs.readFileSync('/app/data/price-worker.json')); process.exit(Date.now()-Date.parse(s.lastAttemptAt)<90000?0:1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
 
 volumes:
   app-data:

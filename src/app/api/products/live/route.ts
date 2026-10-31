@@ -1,3 +1,4 @@
+import { getLastSupplierSync } from "@/lib/supplier-sync";
 import { NextResponse } from "next/server";
 import { getAllProductsWithOverrides } from "@/lib/products-store";
 
@@ -10,6 +11,7 @@ export async function GET() {
     return NextResponse.json({
       success: true,
       timestamp: new Date().toISOString(),
+      supplierSync: getLastSupplierSync(),
       count: list.length,
       products: list,
     });
