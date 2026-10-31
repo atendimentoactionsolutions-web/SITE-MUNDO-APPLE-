@@ -16,22 +16,26 @@ export async function syncOnce({ fetcher = fetch, endpoint = process.env.SYNC_EN
     return false;
   }
 }
-async function main() {
+export function createScheduler(run = syncOnce, now = Date.now) {
   let busy = false;
   let lastAttempt = 0;
   let previousSuccess = false;
-  const record = state => {
-    fs.mkdirSync('/app/data', { recursive: true });
-    fs.writeFileSync('/app/data/price-worker.json.tmp', JSON.stringify(state));
-    fs.renameSync('/app/data/price-worker.json.tmp', '/app/data/price-worker.json');
-  };
   const tick = async () => {
-    if (busy || Date.now() - lastAttempt < (previousSuccess ? 60000 : 10000)) return;
+    if (busy || now() - lastAttempt < (previousSuccess ? 60000 : 10000)) return;
     busy = true;
-    lastAttempt = Date.now();
-    try { previousSuccess = await syncOnce({ record }); }
+    lastAttempt = now();
+    try { previousSuccess = await run(); }
     finally { busy = false; }
   };
+  return tick;
+}
+async function main() {
+  const record = state => {
+    fs.mkdirSync("/app/data", { recursive: true });
+    fs.writeFileSync("/app/data/price-worker.json.tmp", JSON.stringify(state));
+    fs.renameSync("/app/data/price-worker.json.tmp", "/app/data/price-worker.json");
+  };
+  const tick = createScheduler(() => syncOnce({ record }));
   await tick();
   setInterval(() => tick().catch(error => console.error(error.message)), 1000);
 }
