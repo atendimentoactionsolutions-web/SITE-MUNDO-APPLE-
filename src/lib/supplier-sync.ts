@@ -291,7 +291,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
 
       if (prod.variants && prod.variants.length > 0) {
         // Read base catalog variants
-        const catalogVariants = prod.variants;
+        const catalogVariants = currentOverrides[prod.id]?.variants || prod.variants;
 
         updatedVariants = catalogVariants.map((v) => {
           // Normalize storage or size (for Watches/Keyboards)
@@ -328,7 +328,6 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
           }
 
           // If supplier doesn't have this variant: keep yesterday/catalog price
-          if (v.price > 0 && v.price < minFoundPrice) minFoundPrice = v.price;
           return v;
         });
       }
