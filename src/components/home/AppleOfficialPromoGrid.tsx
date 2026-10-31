@@ -4,8 +4,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { createWhatsAppLink } from "@/utils/whatsapp";
+import { formatCurrency } from "@/utils/formatters";
 
-export const AppleOfficialPromoGrid: React.FC = () => {
+export const AppleOfficialPromoGrid: React.FC<{ duoPrice: number }> = ({ duoPrice }) => {
   const getProductWhatsAppUrl = (name: string) => {
     return createWhatsAppLink(
       `Olá! Vim pelo site da Mundo Apple Delivery e quero saber valores e disponibilidade do *${name}*. Pode me atender?`
@@ -29,6 +30,12 @@ export const AppleOfficialPromoGrid: React.FC = () => {
               <p className="mt-1 text-[16px] sm:text-[19px] text-[#1D1D1F] font-normal tracking-tight">
                 Alô. Olá.
               </p>
+              {duoPrice > 0 && (
+                <p className="mt-2 text-[18px] sm:text-[22px] font-semibold text-[#1D1D1F]" data-testid="iphone-duo-price">
+                  A partir de {formatCurrency(duoPrice)}
+                  <span className="ml-1 text-[13px] sm:text-[14px] font-normal">à vista</span>
+                </p>
+              )}
               <div className="flex items-center justify-center gap-3 pt-3">
                 <a
                   href="#categoria-iphone"
@@ -37,7 +44,7 @@ export const AppleOfficialPromoGrid: React.FC = () => {
                   Saiba mais
                 </a>
                 <a
-                  href={getProductWhatsAppUrl("iPhone Duo")}
+                  href={createWhatsAppLink(`Olá! Quero comprar o iPhone Duo${duoPrice > 0 ? ` a partir de ${formatCurrency(duoPrice)}` : ""}. Pode confirmar a capacidade e a cor disponíveis?`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-1.5 sm:px-5 sm:py-2 bg-transparent hover:bg-[#0071E3] text-[#0066CC] hover:text-white border border-[#0066CC] hover:border-[#0071E3] text-[14px] font-normal rounded-full transition-colors"

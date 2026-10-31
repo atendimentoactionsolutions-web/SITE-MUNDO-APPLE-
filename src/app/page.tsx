@@ -89,7 +89,7 @@ export default async function HomePage() {
       <AppleOfficialHeroSection />
 
       {/* 2. Promo Grid Oficial Apple 2-Colunas (Watch S12, Watch Ultra 4, iPad Air M4, Trade-In, MacBook Pro M5, AirPods 5) */}
-      <AppleOfficialPromoGrid />
+      <AppleOfficialPromoGrid duoPrice={activeProducts.find((product) => product.id === "iphone-duo")?.priceFrom ?? 0} />
 
       {/* 3. Catálogo Oficial Mundo Apple (Novos Lacrados com Preços do Banco de Dados) */}
       <div id="catalogo" className="scroll-mt-20" />
