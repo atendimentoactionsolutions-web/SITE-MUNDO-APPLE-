@@ -286,7 +286,6 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       if (prod.condition !== "new") continue;
 
       const prodModelKey = getModelKey(prod.name);
-      const categoryMargin = getCategoryMargin(prod.category);
       let updatedVariants: ProductVariant[] = [];
       let minFoundPrice = Infinity;
 

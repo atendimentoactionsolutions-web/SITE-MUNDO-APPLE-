@@ -5,19 +5,10 @@ const SETTINGS_FILE = path.join(process.cwd(), "site_settings.json");
 
 export interface SiteSettings {
   hideAllPrices: boolean; // When true, all prices across the site become "Sob Consulta"
-  categoryMargins: CategoryMargins;
 }
 
 const DEFAULT_SETTINGS: SiteSettings = {
   hideAllPrices: false,
-  categoryMargins: {
-    iphone: 300,
-    mac: 300,
-    ipad: 200,
-    watch: 200,
-    airpods: 150,
-    accessories: 100,
-  },
 };
 
 declare global {
