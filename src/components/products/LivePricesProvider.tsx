@@ -1,14 +1,18 @@
 ﻿"use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { freshProduct, MAX_PRICE_AGE_MS } from "@/utils/live-prices";
 import type { Product } from "@/types/product";
 
-const LivePricesContext = createContext<Product[] | null>(null);
+const LivePricesContext = createContext<{ products: Product[] | null; now: number; startedAt: number } | null>(null);
 export function LivePricesProvider({ children }: { children: React.ReactNode }) {
+  const [startedAt] = useState(Date.now);
+  const [now, setNow] = useState(Date.now);
   const [products, setProducts] = useState<Product[] | null>(null);
   useEffect(() => {
     let active = true;
     let busy = false;
     const refresh = async () => {
+      setNow(Date.now());
       if (busy) return;
       busy = true;
       try {
@@ -23,14 +27,18 @@ export function LivePricesProvider({ children }: { children: React.ReactNode }) 
     window.addEventListener("focus", refresh);
     return () => { active = false; clearInterval(timer); window.removeEventListener("focus", refresh); };
   }, []);
-  return <LivePricesContext.Provider value={products}>{children}</LivePricesContext.Provider>;
+  return <LivePricesContext.Provider value={{ products, now, startedAt }}>{children}</LivePricesContext.Provider>;
 }
 export function useLiveProduct(product: Product): Product {
-  return useContext(LivePricesContext)?.find(p => p.id === product.id) || product;
+  const live = useContext(LivePricesContext);
+  return live ? freshProduct(live.products?.find(p => p.id === product.id) || product, live.now) : product;
 }
 export function useLiveCatalog(fallback: Product[]): Product[] {
-  return useContext(LivePricesContext) || fallback;
+  const live = useContext(LivePricesContext);
+  return React.useMemo(() => live ? (live.products || fallback).map(p => freshProduct(p, live.now)) : fallback, [live?.products, live?.now, fallback]);
 }
 export function useLivePrice(id: string, fallback: number): number {
-  return useContext(LivePricesContext)?.find(p => p.id === id)?.priceFrom ?? fallback;
+  const live = useContext(LivePricesContext);
+  const product = live?.products?.find(p => p.id === id);
+  return product ? freshProduct(product, live!.now).priceFrom : (live && live.now - live.startedAt > MAX_PRICE_AGE_MS ? 0 : fallback);
 }
