@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     init: true
+    extra_hosts:
+      - "srv2058756.hstgr.cloud:host-gateway"
     ports:
       - "${WEB_PORT:-3000}:3000"
     environment:
