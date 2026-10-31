@@ -94,6 +94,7 @@ export function getAllProductsWithOverrides(ignoreGlobalHidePrices = false): Pro
 
     return {
       ...p,
+      supplierUpdatedAt,
       active,
       featured,
       priceFrom,

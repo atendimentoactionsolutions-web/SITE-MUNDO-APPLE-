@@ -270,7 +270,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       }
     }
 
-    const currentOverrides = getProductOverrides();
+    const currentOverrides = { ...getProductOverrides() };
     let matchedProductsCount = 0;
     let updatedVariantsCount = 0;
 
@@ -388,6 +388,7 @@ export async function syncSupplierPrices(): Promise<SupplierSyncResult> {
       intervalMs: 60000,
       errors: [error?.message || "Erro desconhecido na sincronização."],
     };
+    try { writeSyncStatus(result); } catch (persistError) { console.error("Erro ao registrar sincronizacao:", persistError); }
     global.__lastSupplierSync = result;
     return result;
   } finally {

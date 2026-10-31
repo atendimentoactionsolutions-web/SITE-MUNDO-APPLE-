@@ -204,6 +204,15 @@ export default function AdminProductsPage() {
     return counts;
   }, [products, conditionFilter]);
 
+  useEffect(() => {
+    const refresh = async () => {
+      try { const data = await fetch("/api/admin/supplier-sync", { cache: "no-store" }).then(r => r.json()); if (data.success) setLastSyncInfo(data.lastSync); } catch {}
+    };
+    refresh();
+    const timer = setInterval(refresh, 15000);
+    return () => clearInterval(timer);
+  }, []);
+
   // Toggle single product active
   const handleSyncSupplier = async () => {
     if (!confirm("Deseja sincronizar agora os preços de todos os produtos novos lacrados direto do fornecedor (sem margem)?\n\nOs preços do catálogo da loja e do simulador de Upgrade serão atualizados instantaneamente.")) {
@@ -516,7 +525,7 @@ export default function AdminProductsPage() {
                   </span>
                 </div>
                 <p className="text-xs text-blue-200/80 mt-1 max-w-2xl leading-relaxed">
-                  Os produtos novos usam o valor do fornecedor, sem acréscimo. Sincronize para atualizar os valores do catálogo e do simulador de Upgrade.
+                  Os produtos novos usam o valor do fornecedor, sem acréscimo. Atualização automática a cada 1 minuto, 24 horas por dia.
                 </p>
               </div>
             </div>
@@ -535,6 +544,11 @@ export default function AdminProductsPage() {
             </div>
           </div>
 
+        </div>
+
+        <div className="mb-6 text-xs text-apple-muted" role="status">
+          {lastSyncInfo?.lastSuccessfulAt ? `Ultima sincronizacao: ${new Date(lastSyncInfo.lastSuccessfulAt).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}` : "Aguardando primeira sincronizacao automatica."}
+          {lastSyncInfo?.success === false && <p className="mt-1 text-red-700">Falha no fornecedor. Nova tentativa automatica: {lastSyncInfo.errors?.join(", ")}</p>}
         </div>
 
         {/* Feedback Alert */}
