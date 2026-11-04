@@ -13,16 +13,12 @@ export default async function AccessoriesCategoryPage() {
   const products = await getProducts({ category: "accessories" });
 
   return (
-    <div className="pt-28 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-20 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
-        <SectionHeading
-          eyebrow="Acessórios Originais"
-          title="O complemento perfeito para o seu Apple."
-          subtitle="Magic Mouse, Apple Pencil e AirTags 100% originais, novos e lacrados de fábrica com garantia Apple."
-        />
+        
 
         {/* Value Highlights */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 -mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 mt-2">
           <div className="bg-white p-4 rounded-2xl border border-apple-border/60 shadow-sm flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-apple-blue/10 text-apple-blue flex items-center justify-center shrink-0">
               <Mouse className="w-5 h-5" />
