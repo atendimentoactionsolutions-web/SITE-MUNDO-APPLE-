@@ -38,16 +38,12 @@ export default async function IPadCategoryPage({ searchParams }: PageProps) {
   ];
 
   return (
-    <div className="pt-28 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-20 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
-        <SectionHeading
-          eyebrow="Linha iPad"
-          title="Sua tela mágica para tudo."
-          subtitle="iPad Pro M5, iPad Air M4, iPad mini 7 e iPad 11ª Geração. 100% novos e lacrados com 1 ano de garantia Apple."
-        />
+        
 
         {/* Value Highlights */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 -mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 mt-2">
           <div className="bg-white p-4 rounded-2xl border border-apple-border/60 shadow-sm flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-apple-blue/10 text-apple-blue flex items-center justify-center shrink-0">
               <Zap className="w-5 h-5" />
