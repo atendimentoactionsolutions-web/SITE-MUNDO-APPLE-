@@ -26,13 +26,9 @@ export const metadata = {
 
 export default function TradeInPage() {
   return (
-    <div className="pt-28 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-20 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
-        <SectionHeading
-          eyebrow="Upgrade Inteligente"
-          title="Seu iPhone vale na troca."
-          subtitle="A forma mais rápida, segura e econômica de atualizar seu aparelho na Mundo Apple Delivery."
-        />
+        
 
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
