@@ -37,13 +37,8 @@ export default async function IPhoneCategoryPage() {
   });
 
   return (
-    <div className="pt-28 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-20 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
-        <SectionHeading
-          eyebrow="Linha iPhone"
-          title="Os smartphones mais inovadores do mundo."
-          subtitle="Aparelhos 100% novos e lacrados na caixa com 1 ano de garantia oficial Apple e entrega rápida."
-        />
 
         <ProductGrid products={sortedProducts} />
       </Container>
