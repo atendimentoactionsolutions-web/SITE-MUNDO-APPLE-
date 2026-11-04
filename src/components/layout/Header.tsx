@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, ShoppingBag, Menu, X, ArrowRight } from "lucide-react";
+import { Search, Menu, X, ArrowRight } from "lucide-react";
 import { SearchModal } from "@/components/layout/SearchModal";
 import { AppleLogo } from "@/components/ui/AppleLogo";
 import { getWhatsAppGeneralUrl } from "@/utils/whatsapp";
@@ -124,37 +124,6 @@ export const Header: React.FC = () => {
             >
               <Search className="w-3.5 h-3.5" />
             </button>
-
-            {/* Shopping Bag / Atendimento */}
-            <div className="relative" ref={bagRef}>
-              <button
-                type="button"
-                onClick={() => { setMobileMenuOpen(false); setBagOpen(!bagOpen); }}
-                className="w-11 h-11 flex items-center justify-center hover:text-white transition-colors relative"
-                aria-expanded={bagOpen}
-                aria-label="Sacola de compras e pedidos"
-              >
-                <ShoppingBag className="w-3.5 h-3.5" />
-              </button>
-
-              {/* Bag Dropdown */}
-              {bagOpen && (
-                <div className="fixed right-4 top-12 sm:absolute sm:right-0 sm:top-full mt-2 w-72 max-w-[calc(100vw-2rem)] bg-[#1d1d1f] border border-white/10 rounded-2xl p-4 shadow-2xl z-50 text-white animate-in fade-in zoom-in-95 duration-150">
-                  <h4 className="text-sm font-semibold mb-2">Sua Sacola Mundo Apple</h4>
-                  <p className="text-xs text-zinc-400 mb-4 leading-relaxed">
-                    Entrega expressa hoje em São Paulo. Fale com um consultor para concluir seu pedido.
-                  </p>
-                  <a
-                    href={getWhatsAppGeneralUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full text-center py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-semibold rounded-full transition-colors"
-                  >
-                    Atendimento no WhatsApp
-                  </a>
-                </div>
-              )}
-            </div>
 
             {/* Mobile Hamburger Button */}
             <button
