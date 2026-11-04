@@ -2,2226 +2,2369 @@
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE DUO 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Night sky • R$ 16.150,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Star white • R$ 16.160,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Night sky",
+        "price": 16150.0,
+        "raw_line": "Night sky • R$ 16.150,00"
+      },
+      {
+        "raw_color": "Star white",
+        "price": 16160.0,
+        "raw_line": "Star white • R$ 16.160,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE DUO 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Star white • R$ 17.300,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Night sky • R$ 17.350,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Star white",
+        "price": 17300.0,
+        "raw_line": "Star white • R$ 17.300,00"
+      },
+      {
+        "raw_color": "Night sky",
+        "price": 17350.0,
+        "raw_line": "Night sky • R$ 17.350,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE DUO 1TB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Star white • R$ 24.500,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Night sky • R$ 28.499,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Star white",
+        "price": 24500.0,
+        "raw_line": "Star white • R$ 24.500,00"
+      },
+      {
+        "raw_color": "Night sky",
+        "price": 28499.0,
+        "raw_line": "Night sky • R$ 28.499,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE DUO 2TB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Star white • R$ 28.100,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Night sky • R$ 30.850,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Star white",
+        "price": 28100.0,
+        "raw_line": "Star white • R$ 28.100,00"
+      },
+      {
+        "raw_color": "Night sky",
+        "price": 30850.0,
+        "raw_line": "Night sky • R$ 30.850,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 18 PRO MAX 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 9.850,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Burgundy • R$ 10.150,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Glacier • R$ 10.150,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 10.250,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 9850.0,
+        "raw_line": "Silver • R$ 9.850,00"
+      },
+      {
+        "raw_color": "Burgundy",
+        "price": 10150.0,
+        "raw_line": "Burgundy • R$ 10.150,00"
+      },
+      {
+        "raw_color": "Glacier",
+        "price": 10150.0,
+        "raw_line": "Glacier • R$ 10.150,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 10250.0,
+        "raw_line": "Black • R$ 10.250,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 18 PRO MAX 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Glacier • R$ 11.740,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Burgundy • R$ 11.900,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 11.950,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 12.050,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Glacier",
+        "price": 11740.0,
+        "raw_line": "Glacier • R$ 11.740,00"
+      },
+      {
+        "raw_color": "Burgundy",
+        "price": 11900.0,
+        "raw_line": "Burgundy • R$ 11.900,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 11950.0,
+        "raw_line": "Black • R$ 11.950,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 12050.0,
+        "raw_line": "Silver • R$ 12.050,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 18 PRO MAX 1TB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 14.500,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 14.500,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Glacier • R$ 14.500,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Burgundy • R$ 15.050,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 14500.0,
+        "raw_line": "Black • R$ 14.500,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 14500.0,
+        "raw_line": "Silver • R$ 14.500,00"
+      },
+      {
+        "raw_color": "Glacier",
+        "price": 14500.0,
+        "raw_line": "Glacier • R$ 14.500,00"
+      },
+      {
+        "raw_color": "Burgundy",
+        "price": 15050.0,
+        "raw_line": "Burgundy • R$ 15.050,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 18 PRO MAX 2TB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 19.740,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Burgundy • R$ 19.880,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Glacier • R$ 19.900,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 19740.0,
+        "raw_line": "Black • R$ 19.740,00"
+      },
+      {
+        "raw_color": "Burgundy",
+        "price": 19880.0,
+        "raw_line": "Burgundy • R$ 19.880,00"
+      },
+      {
+        "raw_color": "Glacier",
+        "price": 19900.0,
+        "raw_line": "Glacier • R$ 19.900,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 18 PRO 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Burgundy • R$ 9.040,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 9.100,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 9.100,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Glacier • R$ 9.180,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Burgundy",
+        "price": 9040.0,
+        "raw_line": "Burgundy • R$ 9.040,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 9100.0,
+        "raw_line": "Silver • R$ 9.100,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 9100.0,
+        "raw_line": "Black • R$ 9.100,00"
+      },
+      {
+        "raw_color": "Glacier",
+        "price": 9180.0,
+        "raw_line": "Glacier • R$ 9.180,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 18 PRO 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Burgundy • R$ 9.770,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 10.150,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Glacier • R$ 10.150,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 10.150,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Burgundy",
+        "price": 9770.0,
+        "raw_line": "Burgundy • R$ 9.770,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 10150.0,
+        "raw_line": "Silver • R$ 10.150,00"
+      },
+      {
+        "raw_color": "Glacier",
+        "price": 10150.0,
+        "raw_line": "Glacier • R$ 10.150,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 10150.0,
+        "raw_line": "Black • R$ 10.150,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 18 PRO 1TB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Glacier • R$ 12.260,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Burgundy • R$ 13.000,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 13.090,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Glacier",
+        "price": 12260.0,
+        "raw_line": "Glacier • R$ 12.260,00"
+      },
+      {
+        "raw_color": "Burgundy",
+        "price": 13000.0,
+        "raw_line": "Burgundy • R$ 13.000,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 13090.0,
+        "raw_line": "Black • R$ 13.090,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 PRO MAX 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Deep blue • R$ 7.965,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cosmic orange • R$ 7.975,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 8.280,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Deep blue",
+        "price": 7965.0,
+        "raw_line": "Deep blue • R$ 7.965,00"
+      },
+      {
+        "raw_color": "Cosmic orange",
+        "price": 7975.0,
+        "raw_line": "Cosmic orange • R$ 7.975,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 8280.0,
+        "raw_line": "Silver • R$ 8.280,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 PRO MAX 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cosmic orange • R$ 9.250,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Deep blue • R$ 9.450,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 9.550,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Cosmic orange",
+        "price": 9250.0,
+        "raw_line": "Cosmic orange • R$ 9.250,00"
+      },
+      {
+        "raw_color": "Deep blue",
+        "price": 9450.0,
+        "raw_line": "Deep blue • R$ 9.450,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 9550.0,
+        "raw_line": "Silver • R$ 9.550,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 PRO MAX 1TB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cosmic orange • R$ 11.149,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 11.249,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Deep blue • R$ 11.349,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Cosmic orange",
+        "price": 11149.0,
+        "raw_line": "Cosmic orange • R$ 11.149,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 11249.0,
+        "raw_line": "Silver • R$ 11.249,00"
+      },
+      {
+        "raw_color": "Deep blue",
+        "price": 11349.0,
+        "raw_line": "Deep blue • R$ 11.349,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 PRO MAX 2TB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cosmic orange • R$ 12.100,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 12.850,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Cosmic orange",
+        "price": 12100.0,
+        "raw_line": "Cosmic orange • R$ 12.100,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 12850.0,
+        "raw_line": "Silver • R$ 12.850,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 PRO 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cosmic orange • R$ 7.650,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Deep blue • R$ 7.950,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 8.000,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Cosmic orange",
+        "price": 7650.0,
+        "raw_line": "Cosmic orange • R$ 7.650,00"
+      },
+      {
+        "raw_color": "Deep blue",
+        "price": 7950.0,
+        "raw_line": "Deep blue • R$ 7.950,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 8000.0,
+        "raw_line": "Silver • R$ 8.000,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 PRO 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cosmic orange • R$ 8.950,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Deep blue • R$ 9.200,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Silver • R$ 9.300,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Cosmic orange",
+        "price": 8950.0,
+        "raw_line": "Cosmic orange • R$ 8.950,00"
+      },
+      {
+        "raw_color": "Deep blue",
+        "price": 9200.0,
+        "raw_line": "Deep blue • R$ 9.200,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 9300.0,
+        "raw_line": "Silver • R$ 9.300,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 AIR 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Light gold • R$ 6.150,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Space black • R$ 6.150,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Sky blue • R$ 6.200,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cloud white • R$ 6.300,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Light gold",
+        "price": 6150.0,
+        "raw_line": "Light gold • R$ 6.150,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 6150.0,
+        "raw_line": "Space black • R$ 6.150,00"
+      },
+      {
+        "raw_color": "Sky blue",
+        "price": 6200.0,
+        "raw_line": "Sky blue • R$ 6.200,00"
+      },
+      {
+        "raw_color": "Cloud white",
+        "price": 6300.0,
+        "raw_line": "Cloud white • R$ 6.300,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 AIR 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cloud white • R$ 6.840,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Sky blue • R$ 6.840,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Light gold • R$ 6.840,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Space black • R$ 6.840,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Cloud white",
+        "price": 6840.0,
+        "raw_line": "Cloud white • R$ 6.840,00"
+      },
+      {
+        "raw_color": "Sky blue",
+        "price": 6840.0,
+        "raw_line": "Sky blue • R$ 6.840,00"
+      },
+      {
+        "raw_color": "Light gold",
+        "price": 6840.0,
+        "raw_line": "Light gold • R$ 6.840,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 6840.0,
+        "raw_line": "Space black • R$ 6.840,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 AIR 1TB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Sky blue • R$ 7.800,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Light gold • R$ 7.800,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Cloud white • R$ 7.900,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Space black • R$ 7.900,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Sky blue",
+        "price": 7800.0,
+        "raw_line": "Sky blue • R$ 7.800,00"
+      },
+      {
+        "raw_color": "Light gold",
+        "price": 7800.0,
+        "raw_line": "Light gold • R$ 7.800,00"
+      },
+      {
+        "raw_color": "Cloud white",
+        "price": 7900.0,
+        "raw_line": "Cloud white • R$ 7.900,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 7900.0,
+        "raw_line": "Space black • R$ 7.900,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Sage • R$ 6.150,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Mist blue • R$ 6.350,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 6.350,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Lavender • R$ 6.380,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "White • R$ 6.380,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Sage",
+        "price": 6150.0,
+        "raw_line": "Sage • R$ 6.150,00"
+      },
+      {
+        "raw_color": "Mist blue",
+        "price": 6350.0,
+        "raw_line": "Mist blue • R$ 6.350,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 6350.0,
+        "raw_line": "Black • R$ 6.350,00"
+      },
+      {
+        "raw_color": "Lavender",
+        "price": 6380.0,
+        "raw_line": "Lavender • R$ 6.380,00"
+      },
+      {
+        "raw_color": "White",
+        "price": 6380.0,
+        "raw_line": "White • R$ 6.380,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17E 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "White • R$ 4.800,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Soft pink • R$ 4.850,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 4.900,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "White",
+        "price": 4800.0,
+        "raw_line": "White • R$ 4.800,00"
+      },
+      {
+        "raw_color": "Soft pink",
+        "price": 4850.0,
+        "raw_line": "Soft pink • R$ 4.850,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 4900.0,
+        "raw_line": "Black • R$ 4.900,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 17E 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 5.700,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Soft pink • R$ 5.700,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "White • R$ 5.700,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 5700.0,
+        "raw_line": "Black • R$ 5.700,00"
+      },
+      {
+        "raw_color": "Soft pink",
+        "price": 5700.0,
+        "raw_line": "Soft pink • R$ 5.700,00"
+      },
+      {
+        "raw_color": "White",
+        "price": 5700.0,
+        "raw_line": "White • R$ 5.700,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 16 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "White • R$ 5.250,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Teal • R$ 5.250,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 5.300,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Ultramarine • R$ 5.340,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Pink • R$ 5.540,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "White",
+        "price": 5250.0,
+        "raw_line": "White • R$ 5.250,00"
+      },
+      {
+        "raw_color": "Teal",
+        "price": 5250.0,
+        "raw_line": "Teal • R$ 5.250,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 5300.0,
+        "raw_line": "Black • R$ 5.300,00"
+      },
+      {
+        "raw_color": "Ultramarine",
+        "price": 5340.0,
+        "raw_line": "Ultramarine • R$ 5.340,00"
+      },
+      {
+        "raw_color": "Pink",
+        "price": 5540.0,
+        "raw_line": "Pink • R$ 5.540,00"
+      }
+    ]
   },
   {
     "section": "IPHONES NOVOS",
     "config_name": "IPHONE 15 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Black • R$ 4.740,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Blue • R$ 4.748,00",
-    "variants": []
-  },
-  {
-    "section": "IPHONES NOVOS",
-    "config_name": "Pink • R$ 4.900,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 4740.0,
+        "raw_line": "Black • R$ 4.740,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 4748.0,
+        "raw_line": "Blue • R$ 4.748,00"
+      },
+      {
+        "raw_color": "Pink",
+        "price": 4900.0,
+        "raw_line": "Pink • R$ 4.900,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 11\" WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 7.840,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 7.950,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 7840.0,
+        "raw_line": "Space black • R$ 7.840,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 7950.0,
+        "raw_line": "Silver • R$ 7.950,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 11\" WIFI 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 8.850,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 8850.0,
+        "raw_line": "Space black • R$ 8.850,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 11\" WIFI + CELULAR 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 10.850,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 10850.0,
+        "raw_line": "Space black • R$ 10.850,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 13\" WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 9.450,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 9450.0,
+        "raw_line": "Space black • R$ 9.450,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 13\" WIFI 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 9.800,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 10.999,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 9800.0,
+        "raw_line": "Silver • R$ 9.800,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 10999.0,
+        "raw_line": "Space black • R$ 10.999,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 13\" WIFI 1TB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 11.700,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 12.700,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 11700.0,
+        "raw_line": "Silver • R$ 11.700,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 12700.0,
+        "raw_line": "Space black • R$ 12.700,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 13\" WIFI 2TB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 13.000,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 13000.0,
+        "raw_line": "Space black • R$ 13.000,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 13\" WIFI + CELULAR 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 10.450,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 10450.0,
+        "raw_line": "Space black • R$ 10.450,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 13\" WIFI + CELULAR 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 11.350,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 11.350,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 11350.0,
+        "raw_line": "Space black • R$ 11.350,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 11350.0,
+        "raw_line": "Silver • R$ 11.350,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 13\" WIFI + CELULAR 1TB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 12.900,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 13.250,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 12900.0,
+        "raw_line": "Silver • R$ 12.900,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 13250.0,
+        "raw_line": "Space black • R$ 13.250,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M5 13\" WIFI + CELULAR 2TB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 13.300,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 14.799,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 13300.0,
+        "raw_line": "Silver • R$ 13.300,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 14799.0,
+        "raw_line": "Space black • R$ 14.799,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M4 11\" WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 8.200,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 8.200,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 8200.0,
+        "raw_line": "Space black • R$ 8.200,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 8200.0,
+        "raw_line": "Silver • R$ 8.200,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M4 13\" WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 9.200,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 9200.0,
+        "raw_line": "Space black • R$ 9.200,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M4 13\" WIFI 512GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 9.999,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 9999.0,
+        "raw_line": "Space black • R$ 9.999,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD PRO M4 13\" WIFI + CELULAR 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 8.940,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space black • R$ 9.040,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 8940.0,
+        "raw_line": "Silver • R$ 8.940,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 9040.0,
+        "raw_line": "Space black • R$ 9.040,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M4 11\" WIFI 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 5.700,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Purple • R$ 5.700,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 5.700,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 6.249,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space gray",
+        "price": 5700.0,
+        "raw_line": "Space gray • R$ 5.700,00"
+      },
+      {
+        "raw_color": "Purple",
+        "price": 5700.0,
+        "raw_line": "Purple • R$ 5.700,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 5700.0,
+        "raw_line": "Blue • R$ 5.700,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 6249.0,
+        "raw_line": "Starlight • R$ 6.249,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M4 11\" WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 6.650,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Purple • R$ 6.750,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 6.940,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 7.100,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Blue",
+        "price": 6650.0,
+        "raw_line": "Blue • R$ 6.650,00"
+      },
+      {
+        "raw_color": "Purple",
+        "price": 6750.0,
+        "raw_line": "Purple • R$ 6.750,00"
+      },
+      {
+        "raw_color": "Space gray",
+        "price": 6940.0,
+        "raw_line": "Space gray • R$ 6.940,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 7100.0,
+        "raw_line": "Starlight • R$ 7.100,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M4 11\" WIFI + CELULAR 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 7.450,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 7.450,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space gray",
+        "price": 7450.0,
+        "raw_line": "Space gray • R$ 7.450,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 7450.0,
+        "raw_line": "Blue • R$ 7.450,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M4 13\" WIFI 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 6.850,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 7.650,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Purple • R$ 7.650,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 8.249,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space gray",
+        "price": 6850.0,
+        "raw_line": "Space gray • R$ 6.850,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 7650.0,
+        "raw_line": "Blue • R$ 7.650,00"
+      },
+      {
+        "raw_color": "Purple",
+        "price": 7650.0,
+        "raw_line": "Purple • R$ 7.650,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 8249.0,
+        "raw_line": "Starlight • R$ 8.249,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M4 13\" WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 8.849,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 8.849,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Purple • R$ 8.849,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 8.849,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Starlight",
+        "price": 8849.0,
+        "raw_line": "Starlight • R$ 8.849,00"
+      },
+      {
+        "raw_color": "Space gray",
+        "price": 8849.0,
+        "raw_line": "Space gray • R$ 8.849,00"
+      },
+      {
+        "raw_color": "Purple",
+        "price": 8849.0,
+        "raw_line": "Purple • R$ 8.849,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 8849.0,
+        "raw_line": "Blue • R$ 8.849,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M4 13\" WIFI + CELULAR 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 8.249,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 8.249,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 8.249,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Purple • R$ 9.450,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space gray",
+        "price": 8249.0,
+        "raw_line": "Space gray • R$ 8.249,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 8249.0,
+        "raw_line": "Blue • R$ 8.249,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 8249.0,
+        "raw_line": "Starlight • R$ 8.249,00"
+      },
+      {
+        "raw_color": "Purple",
+        "price": 9450.0,
+        "raw_line": "Purple • R$ 9.450,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M4 13\" WIFI + CELULAR 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 9.450,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Starlight",
+        "price": 9450.0,
+        "raw_line": "Starlight • R$ 9.450,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M3 11\" WIFI 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 5.100,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 5.500,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Purple • R$ 5.750,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 5.750,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space gray",
+        "price": 5100.0,
+        "raw_line": "Space gray • R$ 5.100,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 5500.0,
+        "raw_line": "Blue • R$ 5.500,00"
+      },
+      {
+        "raw_color": "Purple",
+        "price": 5750.0,
+        "raw_line": "Purple • R$ 5.750,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 5750.0,
+        "raw_line": "Starlight • R$ 5.750,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M3 11\" WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 5.590,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 6.600,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 6.650,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Purple • R$ 6.650,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space gray",
+        "price": 5590.0,
+        "raw_line": "Space gray • R$ 5.590,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 6600.0,
+        "raw_line": "Blue • R$ 6.600,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 6650.0,
+        "raw_line": "Starlight • R$ 6.650,00"
+      },
+      {
+        "raw_color": "Purple",
+        "price": 6650.0,
+        "raw_line": "Purple • R$ 6.650,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M3 11\" WIFI + CELULAR 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 6.150,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Blue",
+        "price": 6150.0,
+        "raw_line": "Blue • R$ 6.150,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M3 13\" WIFI 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Purple • R$ 5.840,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 6.050,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 7.100,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Purple",
+        "price": 5840.0,
+        "raw_line": "Purple • R$ 5.840,00"
+      },
+      {
+        "raw_color": "Space gray",
+        "price": 6050.0,
+        "raw_line": "Space gray • R$ 6.050,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 7100.0,
+        "raw_line": "Blue • R$ 7.100,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD AIR M3 13\" WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 8.249,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space gray",
+        "price": 8249.0,
+        "raw_line": "Space gray • R$ 8.249,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "SMART FOLIO IPAD AIR 13\"",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Charcoal gray • R$ 1.430,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Charcoal gray",
+        "price": 1430.0,
+        "raw_line": "Charcoal gray • R$ 1.430,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD MINI 7 WIFI 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 4.250,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 4.590,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Blue",
+        "price": 4250.0,
+        "raw_line": "Blue • R$ 4.250,00"
+      },
+      {
+        "raw_color": "Space gray",
+        "price": 4590.0,
+        "raw_line": "Space gray • R$ 4.590,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD MINI 7 WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Space gray • R$ 5.249,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space gray",
+        "price": 5249.0,
+        "raw_line": "Space gray • R$ 5.249,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD MINI 6 WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Starlight • R$ 3.740,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Starlight",
+        "price": 3740.0,
+        "raw_line": "Starlight • R$ 3.740,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD 11 WIFI 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 3.450,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Pink • R$ 3.450,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 3.500,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Yellow • R$ 3.550,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Blue",
+        "price": 3450.0,
+        "raw_line": "Blue • R$ 3.450,00"
+      },
+      {
+        "raw_color": "Pink",
+        "price": 3450.0,
+        "raw_line": "Pink • R$ 3.450,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 3500.0,
+        "raw_line": "Silver • R$ 3.500,00"
+      },
+      {
+        "raw_color": "Yellow",
+        "price": 3550.0,
+        "raw_line": "Yellow • R$ 3.550,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD 11 WIFI 256GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Blue • R$ 4.230,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Silver • R$ 4.350,00",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Pink • R$ 4.550,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Blue",
+        "price": 4230.0,
+        "raw_line": "Blue • R$ 4.230,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 4350.0,
+        "raw_line": "Silver • R$ 4.350,00"
+      },
+      {
+        "raw_color": "Pink",
+        "price": 4550.0,
+        "raw_line": "Pink • R$ 4.550,00"
+      }
+    ]
   },
   {
     "section": "IPADS",
     "config_name": "IPAD 11 WIFI + CELULAR 128GB",
-    "variants": []
-  },
-  {
-    "section": "IPADS",
-    "config_name": "Pink • R$ 4.700,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Pink",
+        "price": 4700.0,
+        "raw_line": "Pink • R$ 4.700,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 PRO 16\" 24GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 20.400,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 20.750,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 20400.0,
+        "raw_line": "Space black • R$ 20.400,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 20750.0,
+        "raw_line": "Silver • R$ 20.750,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 PRO 16\" 48GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 27.300,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 27.300,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 27300.0,
+        "raw_line": "Silver • R$ 27.300,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 27300.0,
+        "raw_line": "Space black • R$ 27.300,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 PRO 14\" 24GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 17.600,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 17.900,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 17600.0,
+        "raw_line": "Silver • R$ 17.600,00"
+      },
+      {
+        "raw_color": "Space black",
+        "price": 17900.0,
+        "raw_line": "Space black • R$ 17.900,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 PRO 14\" 24GB 2TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 19.100,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 20.300,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 19100.0,
+        "raw_line": "Space black • R$ 19.100,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 20300.0,
+        "raw_line": "Silver • R$ 20.300,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 14\" 16GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 14.250,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 14.250,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 14250.0,
+        "raw_line": "Space black • R$ 14.250,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 14250.0,
+        "raw_line": "Silver • R$ 14.250,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 14\" 24GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 16.400,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 16.599,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 16400.0,
+        "raw_line": "Space black • R$ 16.400,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 16599.0,
+        "raw_line": "Silver • R$ 16.599,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 14\" 32GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 18.300,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 18.700,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 18300.0,
+        "raw_line": "Space black • R$ 18.300,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 18700.0,
+        "raw_line": "Silver • R$ 18.700,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 14\" 24GB 2TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 20.799,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 23.100,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 20799.0,
+        "raw_line": "Space black • R$ 20.799,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 23100.0,
+        "raw_line": "Silver • R$ 23.100,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 MAX 16\" 36GB 2TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 28.800,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 28.800,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 28800.0,
+        "raw_line": "Space black • R$ 28.800,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 28800.0,
+        "raw_line": "Silver • R$ 28.800,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M5 MAX 16\" 48GB 2TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 36.350,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 36350.0,
+        "raw_line": "Space black • R$ 36.350,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M5 13\" 16GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Sky blue • R$ 8.990,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Starlight • R$ 8.990,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 9.000,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Midnight • R$ 9.030,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Sky blue",
+        "price": 8990.0,
+        "raw_line": "Sky blue • R$ 8.990,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 8990.0,
+        "raw_line": "Starlight • R$ 8.990,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 9000.0,
+        "raw_line": "Silver • R$ 9.000,00"
+      },
+      {
+        "raw_color": "Midnight",
+        "price": 9030.0,
+        "raw_line": "Midnight • R$ 9.030,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M5 13\" 16GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Sky blue • R$ 12.200,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Starlight • R$ 13.100,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Sky blue",
+        "price": 12200.0,
+        "raw_line": "Sky blue • R$ 12.200,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 13100.0,
+        "raw_line": "Starlight • R$ 13.100,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M5 13\" 24GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Midnight • R$ 13.240,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Starlight • R$ 13.250,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Sky blue • R$ 13.250,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 13.290,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 13240.0,
+        "raw_line": "Midnight • R$ 13.240,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 13250.0,
+        "raw_line": "Starlight • R$ 13.250,00"
+      },
+      {
+        "raw_color": "Sky blue",
+        "price": 13250.0,
+        "raw_line": "Sky blue • R$ 13.250,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 13290.0,
+        "raw_line": "Silver • R$ 13.290,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M5 15\" 16GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Midnight • R$ 11.090,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 11.300,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Sky blue • R$ 11.300,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Starlight • R$ 11.300,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 11090.0,
+        "raw_line": "Midnight • R$ 11.090,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 11300.0,
+        "raw_line": "Silver • R$ 11.300,00"
+      },
+      {
+        "raw_color": "Sky blue",
+        "price": 11300.0,
+        "raw_line": "Sky blue • R$ 11.300,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 11300.0,
+        "raw_line": "Starlight • R$ 11.300,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M5 15\" 24GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Midnight • R$ 15.499,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 15499.0,
+        "raw_line": "Midnight • R$ 15.499,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MAC STUDIO M5 MAX 36GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Padrão • R$ 24.700,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 24700.0,
+        "raw_line": "Padrão • R$ 24.700,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M4 PRO 16\" 24GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 16.240,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 16.550,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 16240.0,
+        "raw_line": "Space black • R$ 16.240,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 16550.0,
+        "raw_line": "Silver • R$ 16.550,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M4 PRO 16\" 48GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 31.799,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 31799.0,
+        "raw_line": "Space black • R$ 31.799,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M4 PRO 14\" 24GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 15.150,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 15.150,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 15150.0,
+        "raw_line": "Space black • R$ 15.150,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 15150.0,
+        "raw_line": "Silver • R$ 15.150,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MAC MINI M4 PRO 24GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Padrão • R$ 12.500,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 12500.0,
+        "raw_line": "Padrão • R$ 12.500,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK PRO M4 MAX 16\" 36GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Space black • R$ 24.000,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Space black",
+        "price": 24000.0,
+        "raw_line": "Space black • R$ 24.000,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M4 13\" 16GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 9.900,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 9900.0,
+        "raw_line": "Silver • R$ 9.900,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M4 13\" 16GB 1TB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Sky blue • R$ 9.340,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 9.390,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Sky blue",
+        "price": 9340.0,
+        "raw_line": "Sky blue • R$ 9.340,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 9390.0,
+        "raw_line": "Silver • R$ 9.390,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M4 15\" 16GB 256GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Sky blue • R$ 10.350,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Sky blue",
+        "price": 10350.0,
+        "raw_line": "Sky blue • R$ 10.350,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M4 15\" 16GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Midnight • R$ 9.790,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Sky blue • R$ 10.390,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 9790.0,
+        "raw_line": "Midnight • R$ 9.790,00"
+      },
+      {
+        "raw_color": "Sky blue",
+        "price": 10390.0,
+        "raw_line": "Sky blue • R$ 10.390,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK AIR M4 15\" 24GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Starlight • R$ 11.840,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Starlight",
+        "price": 11840.0,
+        "raw_line": "Starlight • R$ 11.840,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MAC MINI M4 16GB 256GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Padrão • R$ 6.800,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 6800.0,
+        "raw_line": "Padrão • R$ 6.800,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MAC MINI M4 16GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Padrão • R$ 7.400,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 7400.0,
+        "raw_line": "Padrão • R$ 7.400,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MAC MINI M4 24GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Padrão • R$ 10.490,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 10490.0,
+        "raw_line": "Padrão • R$ 10.490,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MAC STUDIO M4 MAX 36GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Padrão • R$ 23.200,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 23200.0,
+        "raw_line": "Padrão • R$ 23.200,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "IMAC M4 24\" 16GB 256GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Green • R$ 12.699,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Blue • R$ 12.750,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 13.000,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Green",
+        "price": 12699.0,
+        "raw_line": "Green • R$ 12.699,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 12750.0,
+        "raw_line": "Blue • R$ 12.750,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 13000.0,
+        "raw_line": "Silver • R$ 13.000,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "IMAC M4 24\" - 4 SAIDAS 16GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Pink • R$ 18.099,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 18.150,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Pink",
+        "price": 18099.0,
+        "raw_line": "Pink • R$ 18.099,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 18150.0,
+        "raw_line": "Silver • R$ 18.150,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "IMAC M4 24\" - 4 SAIDAS 24GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 19.600,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Blue • R$ 19.600,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Green • R$ 19.600,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Silver",
+        "price": 19600.0,
+        "raw_line": "Silver • R$ 19.600,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 19600.0,
+        "raw_line": "Blue • R$ 19.600,00"
+      },
+      {
+        "raw_color": "Green",
+        "price": 19600.0,
+        "raw_line": "Green • R$ 19.600,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK NEO 13\" 8GB 256GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Citrus • R$ 6.499,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Indigo • R$ 6.540,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Blush • R$ 6.590,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 6.850,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Citrus",
+        "price": 6499.0,
+        "raw_line": "Citrus • R$ 6.499,00"
+      },
+      {
+        "raw_color": "Indigo",
+        "price": 6540.0,
+        "raw_line": "Indigo • R$ 6.540,00"
+      },
+      {
+        "raw_color": "Blush",
+        "price": 6590.0,
+        "raw_line": "Blush • R$ 6.590,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 6850.0,
+        "raw_line": "Silver • R$ 6.850,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MACBOOK NEO 13\" 8GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Citrus • R$ 6.900,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Indigo • R$ 7.140,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Blush • R$ 7.190,00",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Silver • R$ 7.280,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Citrus",
+        "price": 6900.0,
+        "raw_line": "Citrus • R$ 6.900,00"
+      },
+      {
+        "raw_color": "Indigo",
+        "price": 7140.0,
+        "raw_line": "Indigo • R$ 7.140,00"
+      },
+      {
+        "raw_color": "Blush",
+        "price": 7190.0,
+        "raw_line": "Blush • R$ 7.190,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 7280.0,
+        "raw_line": "Silver • R$ 7.280,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MAC MINI M6 16GB 256GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Padrão • R$ 7.300,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 7300.0,
+        "raw_line": "Padrão • R$ 7.300,00"
+      }
+    ]
   },
   {
     "section": "MACBOOKS & MACS",
     "config_name": "MAC MINI M6 16GB 512GB",
-    "variants": []
-  },
-  {
-    "section": "MACBOOKS & MACS",
-    "config_name": "Padrão • R$ 8.450,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 8450.0,
+        "raw_line": "Padrão • R$ 8.450,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH ULTRA 3 CAIXA NATURAL 49MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Natural • R$ 5.449,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Natural",
+        "price": 5449.0,
+        "raw_line": "Natural • R$ 5.449,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH ULTRA 3 CAIXA PRETA 49MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Black • R$ 5.350,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 5350.0,
+        "raw_line": "Black • R$ 5.350,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH ULTRA 2 CAIXA NATURAL 49MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Natural • R$ 5.049,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Natural",
+        "price": 5049.0,
+        "raw_line": "Natural • R$ 5.049,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH ULTRA 2 CAIXA PRETA 49MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Black • R$ 5.250,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 5250.0,
+        "raw_line": "Black • R$ 5.250,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH ULTRA 4 CAIXA NATURAL 49MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Natural • R$ 6.150,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Natural",
+        "price": 6150.0,
+        "raw_line": "Natural • R$ 6.150,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH ULTRA 4 CAIXA PRETA 49MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Black • R$ 5.990,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 5990.0,
+        "raw_line": "Black • R$ 5.990,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH S10 46MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Rose gold • R$ 2.700,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Jet black • R$ 3.150,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Rose gold",
+        "price": 2700.0,
+        "raw_line": "Rose gold • R$ 2.700,00"
+      },
+      {
+        "raw_color": "Jet black",
+        "price": 3150.0,
+        "raw_line": "Jet black • R$ 3.150,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH SE 2 44MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Midnight • R$ 2.040,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 2040.0,
+        "raw_line": "Midnight • R$ 2.040,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH SE 2 40MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Midnight • R$ 2.120,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 2120.0,
+        "raw_line": "Midnight • R$ 2.120,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH SE 2 GPS + CELULAR 44MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Midnight • R$ 2.150,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 2150.0,
+        "raw_line": "Midnight • R$ 2.150,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH SE 3 44MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Midnight • R$ 2.400,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Starlight • R$ 3.150,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 2400.0,
+        "raw_line": "Midnight • R$ 2.400,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 3150.0,
+        "raw_line": "Starlight • R$ 3.150,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH SE 3 40MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Midnight • R$ 2.250,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Starlight • R$ 2.330,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 2250.0,
+        "raw_line": "Midnight • R$ 2.250,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 2330.0,
+        "raw_line": "Starlight • R$ 2.330,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH SE 3 GPS + CELULAR 40MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Midnight • R$ 2.450,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Starlight • R$ 2.500,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 2450.0,
+        "raw_line": "Midnight • R$ 2.450,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 2500.0,
+        "raw_line": "Starlight • R$ 2.500,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH SE 3 GPS + CELULAR 44MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Midnight • R$ 2.630,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Starlight • R$ 2.850,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 2630.0,
+        "raw_line": "Midnight • R$ 2.630,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 2850.0,
+        "raw_line": "Starlight • R$ 2.850,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH S11 46MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Rose gold • R$ 2.950,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Silver • R$ 2.990,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Space gray • R$ 3.000,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Jet black • R$ 3.100,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Rose gold",
+        "price": 2950.0,
+        "raw_line": "Rose gold • R$ 2.950,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 2990.0,
+        "raw_line": "Silver • R$ 2.990,00"
+      },
+      {
+        "raw_color": "Space gray",
+        "price": 3000.0,
+        "raw_line": "Space gray • R$ 3.000,00"
+      },
+      {
+        "raw_color": "Jet black",
+        "price": 3100.0,
+        "raw_line": "Jet black • R$ 3.100,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH S11 42MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Rose gold • R$ 2.880,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Silver • R$ 3.200,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Jet black • R$ 3.200,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Space gray • R$ 3.200,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Rose gold",
+        "price": 2880.0,
+        "raw_line": "Rose gold • R$ 2.880,00"
+      },
+      {
+        "raw_color": "Silver",
+        "price": 3200.0,
+        "raw_line": "Silver • R$ 3.200,00"
+      },
+      {
+        "raw_color": "Jet black",
+        "price": 3200.0,
+        "raw_line": "Jet black • R$ 3.200,00"
+      },
+      {
+        "raw_color": "Space gray",
+        "price": 3200.0,
+        "raw_line": "Space gray • R$ 3.200,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH S12 42MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Black • R$ 3.580,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Space gray • R$ 3.580,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Light gold • R$ 3.650,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Dark bronze • R$ 3.650,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 3580.0,
+        "raw_line": "Black • R$ 3.580,00"
+      },
+      {
+        "raw_color": "Space gray",
+        "price": 3580.0,
+        "raw_line": "Space gray • R$ 3.580,00"
+      },
+      {
+        "raw_color": "Light gold",
+        "price": 3650.0,
+        "raw_line": "Light gold • R$ 3.650,00"
+      },
+      {
+        "raw_color": "Dark bronze",
+        "price": 3650.0,
+        "raw_line": "Dark bronze • R$ 3.650,00"
+      }
+    ]
   },
   {
     "section": "APPLE WATCHES",
     "config_name": "APPLE WATCH S12 46MM",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Black • R$ 3.850,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Light gold • R$ 3.950,00",
-    "variants": []
-  },
-  {
-    "section": "APPLE WATCHES",
-    "config_name": "Dark bronze • R$ 4.000,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 3850.0,
+        "raw_line": "Black • R$ 3.850,00"
+      },
+      {
+        "raw_color": "Light gold",
+        "price": 3950.0,
+        "raw_line": "Light gold • R$ 3.950,00"
+      },
+      {
+        "raw_color": "Dark bronze",
+        "price": 4000.0,
+        "raw_line": "Dark bronze • R$ 4.000,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS MAX 2",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Purple • R$ 3.290,00",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Orange • R$ 3.290,00",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Starlight • R$ 3.350,00",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Midnight • R$ 3.350,00",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Blue • R$ 3.350,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Purple",
+        "price": 3290.0,
+        "raw_line": "Purple • R$ 3.290,00"
+      },
+      {
+        "raw_color": "Orange",
+        "price": 3290.0,
+        "raw_line": "Orange • R$ 3.290,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 3350.0,
+        "raw_line": "Starlight • R$ 3.350,00"
+      },
+      {
+        "raw_color": "Midnight",
+        "price": 3350.0,
+        "raw_line": "Midnight • R$ 3.350,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 3350.0,
+        "raw_line": "Blue • R$ 3.350,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS MAX SMART CASE",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Midnight • R$ 3.130,00",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Starlight • R$ 3.130,00",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Blue • R$ 3.400,00",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Purple • R$ 3.650,00",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Orange • R$ 3.650,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Midnight",
+        "price": 3130.0,
+        "raw_line": "Midnight • R$ 3.130,00"
+      },
+      {
+        "raw_color": "Starlight",
+        "price": 3130.0,
+        "raw_line": "Starlight • R$ 3.130,00"
+      },
+      {
+        "raw_color": "Blue",
+        "price": 3400.0,
+        "raw_line": "Blue • R$ 3.400,00"
+      },
+      {
+        "raw_color": "Purple",
+        "price": 3650.0,
+        "raw_line": "Purple • R$ 3.650,00"
+      },
+      {
+        "raw_color": "Orange",
+        "price": 3650.0,
+        "raw_line": "Orange • R$ 3.650,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS PRO 2",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.800,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1800.0,
+        "raw_line": "Padrão • R$ 1.800,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS PRO 3",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.850,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1850.0,
+        "raw_line": "Padrão • R$ 1.850,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS PRO LIGHTNING",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.260,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1260.0,
+        "raw_line": "Padrão • R$ 1.260,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS 4",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.190,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1190.0,
+        "raw_line": "Padrão • R$ 1.190,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS 4 ANC",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.379,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1379.0,
+        "raw_line": "Padrão • R$ 1.379,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS 3",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.090,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1090.0,
+        "raw_line": "Padrão • R$ 1.090,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS 2",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.300,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1300.0,
+        "raw_line": "Padrão • R$ 1.300,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS 5",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.440,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1440.0,
+        "raw_line": "Padrão • R$ 1.440,00"
+      }
+    ]
   },
   {
     "section": "AIRPODS",
     "config_name": "AIRPODS 5 WIRELESS CHARGING CASE",
-    "variants": []
-  },
-  {
-    "section": "AIRPODS",
-    "config_name": "Padrão • R$ 1.460,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1460.0,
+        "raw_line": "Padrão • R$ 1.460,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "APPLE PENCIL PRO",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 1.000,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1000.0,
+        "raw_line": "Padrão • R$ 1.000,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "APPLE PENCIL 2",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 800,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 800.0,
+        "raw_line": "Padrão • R$ 800,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "APPLE PENCIL COM ADAPTADOR",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 900,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 900.0,
+        "raw_line": "Padrão • R$ 900,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "APPLE PENCIL USB-C",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 760,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 760.0,
+        "raw_line": "Padrão • R$ 760,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "MAGIC KEYBOARD 11\"",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Black • R$ 2.690,00",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "White • R$ 3.050,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 2690.0,
+        "raw_line": "Black • R$ 2.690,00"
+      },
+      {
+        "raw_color": "White",
+        "price": 3050.0,
+        "raw_line": "White • R$ 3.050,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "MAGIC KEYBOARD 12.9\"",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Black • R$ 1.389,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 1389.0,
+        "raw_line": "Black • R$ 1.389,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "MAGIC KEYBOARD 13\"",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "White • R$ 3.400,00",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Black • R$ 3.850,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "White",
+        "price": 3400.0,
+        "raw_line": "White • R$ 3.400,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 3850.0,
+        "raw_line": "Black • R$ 3.850,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "MAGIC KEYBOARD TOUCH ID",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "White • R$ 1.740,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "White",
+        "price": 1740.0,
+        "raw_line": "White • R$ 1.740,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "MAGIC KEYBOARD TOUCH ID + NUMERICO",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Black • R$ 2.000,00",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "White • R$ 2.699,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Black",
+        "price": 2000.0,
+        "raw_line": "Black • R$ 2.000,00"
+      },
+      {
+        "raw_color": "White",
+        "price": 2699.0,
+        "raw_line": "White • R$ 2.699,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "MAGIC MOUSE 2",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "White • R$ 1.060,00",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Black • R$ 1.120,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "White",
+        "price": 1060.0,
+        "raw_line": "White • R$ 1.060,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 1120.0,
+        "raw_line": "Black • R$ 1.120,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "MAGIC MOUSE 3",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "White • R$ 1.020,00",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Black • R$ 1.129,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "White",
+        "price": 1020.0,
+        "raw_line": "White • R$ 1.020,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 1129.0,
+        "raw_line": "Black • R$ 1.129,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "MAGIC TRACKPAD",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "White • R$ 1.120,00",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Black • R$ 1.220,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "White",
+        "price": 1120.0,
+        "raw_line": "White • R$ 1.120,00"
+      },
+      {
+        "raw_color": "Black",
+        "price": 1220.0,
+        "raw_line": "Black • R$ 1.220,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "AIRTAG 1 PACK",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 325,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 325.0,
+        "raw_line": "Padrão • R$ 325,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "AIRTAG 2 4 PACK",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 1.100,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1100.0,
+        "raw_line": "Padrão • R$ 1.100,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "AIRTAG 4 PACK",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 920,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 920.0,
+        "raw_line": "Padrão • R$ 920,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "APPLE TV 4K 64GB",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 1.999,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1999.0,
+        "raw_line": "Padrão • R$ 1.999,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "APPLE TV 4K 128GB",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 2.099,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 2099.0,
+        "raw_line": "Padrão • R$ 2.099,00"
+      }
+    ]
   },
   {
     "section": "ACESSÓRIOS",
     "config_name": "SMART KEYBOARD",
-    "variants": []
-  },
-  {
-    "section": "ACESSÓRIOS",
-    "config_name": "Padrão • R$ 1.240,00",
-    "variants": []
+    "variants": [
+      {
+        "raw_color": "Padrão",
+        "price": 1240.0,
+        "raw_line": "Padrão • R$ 1.240,00"
+      }
+    ]
   }
 ]
