@@ -22,7 +22,9 @@ import {
   Sliders,
   Sparkles,
   ArrowLeft,
-  RefreshCw, ArrowDownCircle, Zap,
+  RefreshCw,
+  ArrowDownCircle,
+  Zap,
   LogOut,
   Layers,
   EyeOff,
@@ -31,6 +33,9 @@ import {
   Edit3,
   X,
   Save,
+  FileText,
+  UploadCloud,
+  Check,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { formatCurrency } from "@/utils/formatters";
@@ -61,13 +66,16 @@ export default function AdminProductsPage() {
   const [hideAllPrices, setHideAllPrices] = useState(false);
   const [loadingPriceMode, setLoadingPriceMode] = useState(false);
 
-  // Modal de Edição de Valores do Produto
+  // Modal de Edição de Valores do Produto Individual
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [editPriceFrom, setEditPriceFrom] = useState<number | string>("");
   const [editVariants, setEditVariants] = useState<ProductVariant[]>([]);
   const [savingPrices, setSavingPrices] = useState(false);
-  const [syncingSupplier, setSyncingSupplier] = useState(false);
-  const [lastSyncInfo, setLastSyncInfo] = useState<any>(null);
+
+  // Modal de Importação em Massa (Colar Lista Oficial)
+  const [importModalOpen, setImportModalOpen] = useState(false);
+  const [importText, setImportText] = useState("");
+  const [importing, setImporting] = useState(false);
 
   const router = useRouter();
 
@@ -119,7 +127,7 @@ export default function AdminProductsPage() {
       } else {
         setFeedback({ type: "error", text: data.error || "Erro ao atualizar configuração." });
       }
-    } catch (e) {
+    } catch (e: any) {
       setFeedback({ type: "error", text: "Erro ao comunicar com o servidor." });
     } finally {
       setLoadingPriceMode(false);
@@ -127,17 +135,17 @@ export default function AdminProductsPage() {
   };
 
   const loadProducts = async () => {
-    setLoading(true);
     try {
+      setLoading(true);
       const res = await fetch("/api/admin/products");
       const data = await res.json();
-      if (data.success) {
-        setProducts(data.products || []);
+      if (data.success && data.products) {
+        setProducts(data.products);
       } else {
-        setFeedback({ type: "error", text: data.error || "Erro ao carregar produtos." });
+        setFeedback({ type: "error", text: data.error || "Erro ao carregar catálogo." });
       }
-    } catch (e: any) {
-      setFeedback({ type: "error", text: "Erro na conexão ao carregar produtos." });
+    } catch (err: any) {
+      setFeedback({ type: "error", text: "Erro na conexão com o servidor." });
     } finally {
       setLoading(false);
     }
@@ -147,103 +155,6 @@ export default function AdminProductsPage() {
     loadProducts();
     loadSettings();
   }, []);
-
-  // Filtered products list
-  const filteredProducts = useMemo(() => {
-    return products.filter((p) => {
-      // Condition filter (default "new" = produtos novos lacrados)
-      if (conditionFilter !== "all" && p.condition !== conditionFilter) {
-        return false;
-      }
-
-      // Category filter
-      if (selectedCategory !== "all") {
-        const cat = selectedCategory.toLowerCase();
-        const normCat = cat === "acessorios" ? "accessories" : cat;
-        if (p.category.toLowerCase() !== normCat) return false;
-      }
-
-      // Status filter
-      if (statusFilter === "active" && !p.active) return false;
-      if (statusFilter === "inactive" && p.active) return false;
-
-      // Search query
-      if (search.trim()) {
-        const q = search.toLowerCase();
-        const nameMatch = p.name.toLowerCase().includes(q);
-        const subMatch = p.subcategory?.toLowerCase().includes(q);
-        const slugMatch = p.slug?.toLowerCase().includes(q);
-        if (!nameMatch && !subMatch && !slugMatch) return false;
-      }
-
-      return true;
-    });
-  }, [products, conditionFilter, selectedCategory, statusFilter, search]);
-
-  // Counts by category
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, { total: number; active: number }> = {};
-    CATEGORIES.forEach((cat) => {
-      counts[cat.id] = { total: 0, active: 0 };
-    });
-
-    products.forEach((p) => {
-      if (conditionFilter !== "all" && p.condition !== conditionFilter) return;
-
-      // "all"
-      counts["all"].total++;
-      if (p.active) counts["all"].active++;
-
-      const catId = p.category.toLowerCase();
-      if (counts[catId]) {
-        counts[catId].total++;
-        if (p.active) counts[catId].active++;
-      }
-    });
-
-    return counts;
-  }, [products, conditionFilter]);
-
-  useEffect(() => {
-    const refresh = async () => {
-      try { const data = await fetch("/api/admin/supplier-sync", { cache: "no-store" }).then(r => r.json()); if (data.success) setLastSyncInfo(data.lastSync); } catch {}
-    };
-    refresh();
-    const timer = setInterval(refresh, 600000);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Toggle single product active
-  const handleSyncSupplier = async () => {
-    if (!confirm("Deseja sincronizar agora os preços de todos os produtos novos lacrados direto do fornecedor (sem margem)?\n\nOs preços do catálogo da loja e do simulador de Upgrade serão atualizados instantaneamente.")) {
-      return;
-    }
-
-    setSyncingSupplier(true);
-    setFeedback(null);
-
-    try {
-      const res = await fetch("/api/admin/supplier-sync", { method: "POST" });
-      const data = await res.json();
-      if (data.success) {
-        setLastSyncInfo(data);
-        setFeedback({
-          type: "success",
-          text: `Sincronização ao vivo concluída com sucesso! ${data.matchedProductsCount} produtos e ${data.updatedVariantsCount} opções/cores atualizados com preço puro do fornecedor.`,
-        });
-        await loadProducts();
-      } else {
-        setFeedback({
-          type: "error",
-          text: (data.errors && data.errors.join(", ")) || data.error || "Erro ao sincronizar com fornecedor.",
-        });
-      }
-    } catch (err) {
-      setFeedback({ type: "error", text: "Erro ao comunicar com a API do fornecedor." });
-    } finally {
-      setSyncingSupplier(false);
-    }
-  };
 
   const handleToggleProduct = async (product: Product) => {
     const newStatus = !product.active;
@@ -348,6 +259,46 @@ export default function AdminProductsPage() {
     }
   };
 
+  // Process Imported Catalog Text
+  const handleImportCatalog = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!importText.trim()) {
+      alert("Por favor, cole o texto da lista antes de prosseguir.");
+      return;
+    }
+
+    setImporting(true);
+    setFeedback(null);
+
+    try {
+      const res = await fetch("/api/admin/catalog/import-list", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ catalogText: importText }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setFeedback({
+          type: "success",
+          text: `Lista oficial processada com sucesso! ${data.stats.activeProducts} produtos ativados (${data.stats.variants} variantes com preços atualizados) e ${data.stats.deactivatedProducts} produtos ausentes desativados.`,
+        });
+        setImportModalOpen(false);
+        setImportText("");
+        await loadProducts();
+      } else {
+        setFeedback({
+          type: "error",
+          text: data.error || "Erro ao processar a lista enviada.",
+        });
+      }
+    } catch (err: any) {
+      setFeedback({ type: "error", text: "Erro na conexão ao importar lista." });
+    } finally {
+      setImporting(false);
+    }
+  };
+
   // Toggle all in current category or view
   const handleBatchToggle = async (active: boolean) => {
     const categoryName =
@@ -390,6 +341,35 @@ export default function AdminProductsPage() {
     }
   };
 
+  // Filter products by category, search, status, and condition
+  const filteredProducts = useMemo(() => {
+    return products.filter((p) => {
+      // Category filter
+      if (selectedCategory !== "all" && p.category !== selectedCategory) {
+        return false;
+      }
+      // Status filter
+      if (statusFilter === "active" && !p.active) return false;
+      if (statusFilter === "inactive" && p.active) return false;
+      // Condition filter
+      if (conditionFilter !== "all" && p.condition !== conditionFilter) {
+        return false;
+      }
+      // Search term
+      if (search.trim()) {
+        const q = search.toLowerCase();
+        const matchName = p.name.toLowerCase().includes(q);
+        const matchSub = p.subcategory?.toLowerCase().includes(q);
+        const matchSlug = p.slug.toLowerCase().includes(q);
+        return matchName || matchSub || matchSlug;
+      }
+      return true;
+    });
+  }, [products, selectedCategory, statusFilter, conditionFilter, search]);
+
+  const activeCount = useMemo(() => products.filter((p) => p.active).length, [products]);
+  const inactiveCount = useMemo(() => products.filter((p) => !p.active).length, [products]);
+
   return (
     <div className="pt-24 pb-20 bg-apple-gray/20 min-h-screen text-apple-dark">
       <Container size="large">
@@ -413,12 +393,19 @@ export default function AdminProductsPage() {
                 </span>
               </div>
               <p className="text-xs md:text-sm text-apple-muted mt-0.5">
-                Edite valores, preços por cor e capacidade, e controle a ativação dos aparelhos no site.
+                Edite valores, atualize pela lista oficial diária e controle a ativação dos produtos no site.
               </p>
             </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setImportModalOpen(true)}
+              className="px-4 py-2 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs font-bold rounded-xl transition-all shadow-sm hover:shadow flex items-center gap-2 cursor-pointer active:scale-95"
+            >
+              <UploadCloud className="w-4 h-4" />
+              <span>Colar Lista Diária Oficial</span>
+            </button>
             <Link
               href="/admin/vendas"
               className="px-3.5 py-2 bg-white border border-apple-border text-xs font-bold rounded-xl hover:bg-apple-gray transition-colors shadow-2xs"
@@ -521,270 +508,394 @@ export default function AdminProductsPage() {
             ) : (
               <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
             )}
-            <div className="flex-1 text-sm font-medium">{feedback.text}</div>
+            <div className="flex-1 text-xs md:text-sm font-medium">{feedback.text}</div>
             <button
               onClick={() => setFeedback(null)}
-              className="text-xs font-bold opacity-60 hover:opacity-100 ml-2"
+              className="text-current opacity-60 hover:opacity-100 p-1"
             >
-              Fechar
+              <X className="w-4 h-4" />
             </button>
           </div>
         )}
 
-        {/* Category Filter Tabs */}
-        <div className="bg-white rounded-2xl border border-apple-border/50 p-2 shadow-2xs mb-6 overflow-x-auto">
-          <div className="flex items-center gap-1 min-w-max">
+        {/* Metric Summary Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6">
+          <div className="p-4 bg-white rounded-2xl border border-apple-border/70 shadow-2xs">
+            <span className="text-[11px] font-semibold text-apple-muted block mb-1">
+              Total Cadastrado
+            </span>
+            <span className="text-2xl font-bold tracking-tight text-apple-dark">
+              {products.length}
+            </span>
+            <span className="text-[10px] text-apple-muted block mt-1">
+              Modelos no sistema
+            </span>
+          </div>
+
+          <div className="p-4 bg-white rounded-2xl border border-apple-border/70 shadow-2xs">
+            <span className="text-[11px] font-semibold text-emerald-700 block mb-1">
+              Ativos no Site
+            </span>
+            <span className="text-2xl font-bold tracking-tight text-emerald-600">
+              {activeCount}
+            </span>
+            <span className="text-[10px] text-emerald-700/80 block mt-1">
+              Visíveis para clientes
+            </span>
+          </div>
+
+          <div className="p-4 bg-white rounded-2xl border border-apple-border/70 shadow-2xs">
+            <span className="text-[11px] font-semibold text-apple-muted block mb-1">
+              Ocultos / Desativados
+            </span>
+            <span className="text-2xl font-bold tracking-tight text-apple-muted">
+              {inactiveCount}
+            </span>
+            <span className="text-[10px] text-apple-muted block mt-1">
+              Fora do ar
+            </span>
+          </div>
+
+          <div className="p-4 bg-white rounded-2xl border border-apple-border/70 shadow-2xs flex flex-col justify-between">
+            <span className="text-[11px] font-semibold text-apple-muted block">
+              Ações Rápidas em Lote
+            </span>
+            <div className="flex items-center gap-2 mt-2">
+              <button
+                onClick={() => handleBatchToggle(true)}
+                disabled={batchLoading}
+                className="flex-1 py-1.5 px-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-[11px] rounded-lg border border-emerald-200 transition-colors flex items-center justify-center gap-1 cursor-pointer disabled:opacity-50"
+              >
+                <Power className="w-3 h-3" />
+                <span>Ativar Todos</span>
+              </button>
+              <button
+                onClick={() => handleBatchToggle(false)}
+                disabled={batchLoading}
+                className="flex-1 py-1.5 px-2 bg-red-50 hover:bg-red-100 text-red-700 font-bold text-[11px] rounded-lg border border-red-200 transition-colors flex items-center justify-center gap-1 cursor-pointer disabled:opacity-50"
+              >
+                <Power className="w-3 h-3" />
+                <span>Ocultar Todos</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Filter Bar */}
+        <div className="bg-white p-4 rounded-2xl border border-apple-border/70 mb-6 shadow-2xs space-y-4">
+          {/* Categories Pill Bar */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none">
             {CATEGORIES.map((cat) => {
               const Icon = cat.icon;
               const isSelected = selectedCategory === cat.id;
-              const count = categoryCounts[cat.id] || { total: 0, active: 0 };
+              const count =
+                cat.id === "all"
+                  ? products.length
+                  : products.filter((p) => p.category === cat.id).length;
+
               return (
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                     isSelected
                       ? "bg-apple-dark text-white shadow-sm"
-                      : "text-apple-muted hover:text-apple-dark hover:bg-apple-gray/50"
+                      : "bg-apple-gray/50 hover:bg-apple-gray text-apple-dark border border-apple-border/40"
                   }`}
                 >
-                  <Icon className="w-4 h-4 shrink-0" />
+                  <Icon className="w-3.5 h-3.5" />
                   <span>{cat.name}</span>
                   <span
-                    className={`text-[10px] px-1.5 py-0.5 rounded-full font-semibold ${
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
                       isSelected
                         ? "bg-white/20 text-white"
-                        : "bg-apple-gray text-apple-muted"
+                        : "bg-white text-apple-muted border border-apple-border/50"
                     }`}
                   >
-                    {count.active}/{count.total}
+                    {count}
                   </span>
                 </button>
               );
             })}
           </div>
-        </div>
 
-        {/* Action Controls & Batch Operations */}
-        <div className="bg-white rounded-2xl border border-apple-border/50 p-4 shadow-2xs mb-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
-          {/* Search & Status Filters */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-1">
-            <div className="relative flex-1 max-w-md">
+          {/* Search and Secondary Filters */}
+          <div className="flex flex-col md:flex-row items-center gap-3 pt-2 border-t border-apple-border/40">
+            {/* Search Input */}
+            <div className="relative flex-1 w-full">
               <Search className="w-4 h-4 text-apple-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Buscar por nome, modelo, série..."
+                placeholder="Buscar por modelo, cor, capacidade..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 bg-apple-gray/40 border border-apple-border/70 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-apple-blue/30"
+                className="w-full pl-9 pr-4 py-2 bg-apple-gray/40 border border-apple-border/60 rounded-xl text-xs text-apple-dark focus:outline-none focus:border-[#0071E3] transition-colors"
               />
+              {search && (
+                <button
+                  onClick={() => setSearch("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-apple-muted hover:text-apple-dark p-1"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              )}
             </div>
 
-            <div className="flex items-center gap-2">
-              <select
-                value={statusFilter}
-                onChange={(e: any) => setStatusFilter(e.target.value)}
-                className="px-3 py-2 bg-apple-gray/40 border border-apple-border/70 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-apple-blue/30 cursor-pointer"
-              >
-                <option value="all">Status: Todos</option>
-                <option value="active">Somente Ativos</option>
-                <option value="inactive">Somente Desativados</option>
-              </select>
-
-              <select
-                value={conditionFilter}
-                onChange={(e: any) => setConditionFilter(e.target.value)}
-                className="px-3 py-2 bg-apple-gray/40 border border-apple-border/70 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-apple-blue/30 cursor-pointer"
-              >
-                <option value="new">Novos Lacrados</option>
-                <option value="used">Seminovos / Usados</option>
-                <option value="all">Todas as Condições</option>
-              </select>
+            {/* Status Filter */}
+            <div className="flex items-center gap-1.5 w-full md:w-auto">
+              <span className="text-[11px] font-semibold text-apple-muted whitespace-nowrap hidden lg:inline">
+                Status:
+              </span>
+              <div className="inline-flex rounded-xl bg-apple-gray/50 p-0.5 border border-apple-border/40 text-xs font-medium w-full md:w-auto">
+                <button
+                  onClick={() => setStatusFilter("all")}
+                  className={`flex-1 md:flex-none px-3 py-1.5 rounded-lg transition-all ${
+                    statusFilter === "all"
+                      ? "bg-white text-apple-dark shadow-2xs font-bold"
+                      : "text-apple-muted hover:text-apple-dark"
+                  }`}
+                >
+                  Todos ({products.length})
+                </button>
+                <button
+                  onClick={() => setStatusFilter("active")}
+                  className={`flex-1 md:flex-none px-3 py-1.5 rounded-lg transition-all ${
+                    statusFilter === "active"
+                      ? "bg-white text-emerald-600 shadow-2xs font-bold"
+                      : "text-apple-muted hover:text-apple-dark"
+                  }`}
+                >
+                  Ativos ({activeCount})
+                </button>
+                <button
+                  onClick={() => setStatusFilter("inactive")}
+                  className={`flex-1 md:flex-none px-3 py-1.5 rounded-lg transition-all ${
+                    statusFilter === "inactive"
+                      ? "bg-white text-red-600 shadow-2xs font-bold"
+                      : "text-apple-muted hover:text-apple-dark"
+                  }`}
+                >
+                  Ocultos ({inactiveCount})
+                </button>
+              </div>
             </div>
-          </div>
-
-          {/* Master Batch Buttons */}
-          <div className="flex items-center gap-2 pt-2 lg:pt-0 border-t lg:border-t-0 border-apple-border/50">
-            <button
-              onClick={() => handleBatchToggle(false)}
-              disabled={batchLoading}
-              className="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shadow-2xs disabled:opacity-50 cursor-pointer"
-              title="Desativar todos da categoria atual"
-            >
-              <Power className="w-3.5 h-3.5 text-red-600" />
-              <span>Desativar Todos ({CATEGORIES.find((c) => c.id === selectedCategory)?.name})</span>
-            </button>
-
-            <button
-              onClick={() => handleBatchToggle(true)}
-              disabled={batchLoading}
-              className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shadow-2xs disabled:opacity-50 cursor-pointer"
-              title="Ativar todos da categoria atual"
-            >
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Ativar Todos</span>
-            </button>
-
-            <button
-              onClick={loadProducts}
-              disabled={loading}
-              className="p-2 bg-apple-gray hover:bg-apple-gray-hover rounded-xl text-apple-dark transition-colors cursor-pointer"
-              title="Recarregar lista"
-            >
-              <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
-            </button>
           </div>
         </div>
 
-        {/* Products Grid */}
+        {/* Products Table / List */}
         {loading ? (
-          <div className="bg-white rounded-3xl border border-apple-border/50 p-16 flex flex-col items-center justify-center text-center shadow-2xs">
-            <Loader2 className="w-10 h-10 animate-spin text-apple-blue mb-3" />
-            <p className="text-sm text-apple-muted font-medium">Carregando catálogo de produtos...</p>
+          <div className="py-20 flex flex-col items-center justify-center bg-white rounded-3xl border border-apple-border">
+            <Loader2 className="w-8 h-8 animate-spin text-[#0071E3] mb-3" />
+            <p className="text-xs text-apple-muted font-medium">Carregando catálogo completo...</p>
           </div>
         ) : filteredProducts.length === 0 ? (
-          <div className="bg-white rounded-3xl border border-apple-border/50 p-16 flex flex-col items-center justify-center text-center shadow-2xs">
-            <Package className="w-12 h-12 text-apple-muted mb-3 opacity-40" />
+          <div className="py-20 text-center bg-white rounded-3xl border border-apple-border">
+            <Package className="w-12 h-12 text-apple-muted/50 mx-auto mb-3" />
             <h3 className="text-base font-bold text-apple-dark">Nenhum produto encontrado</h3>
-            <p className="text-xs text-apple-muted mt-1 max-w-sm">
-              Não foram encontrados produtos com os filtros selecionados. Tente limpar os filtros ou a busca.
+            <p className="text-xs text-apple-muted mt-1 max-w-sm mx-auto">
+              Tente mudar o termo de busca ou selecione outra categoria nos filtros acima.
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {filteredProducts.map((p) => {
-              const isUpdating = updatingId === p.id;
-              const isActive = p.active !== false;
-
-              return (
-                <div
-                  key={p.id}
-                  className={`bg-white rounded-2xl border transition-all p-4 flex flex-col justify-between shadow-2xs hover:shadow-sm ${
-                    isActive
-                      ? "border-apple-border/60 hover:border-apple-blue/40"
-                      : "border-red-200/80 bg-red-50/20 opacity-75"
-                  }`}
-                >
-                  {/* Top Bar: Category badge & Active status */}
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-apple-gray text-apple-dark/70">
-                        {p.category}
-                      </span>
-                      <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 ${
-                          isActive
-                            ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
-                            : "bg-red-100 text-red-800 border border-red-200"
+          <div className="bg-white rounded-3xl border border-apple-border/70 overflow-hidden shadow-2xs">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr className="border-b border-apple-border/60 bg-apple-gray/30 text-apple-muted uppercase tracking-wider text-[10px] font-bold">
+                    <th className="py-3.5 px-4">Produto</th>
+                    <th className="py-3.5 px-4 hidden sm:table-cell">Categoria</th>
+                    <th className="py-3.5 px-4">Preço no Site</th>
+                    <th className="py-3.5 px-4 hidden md:table-cell">Variantes (Cores/Capacidades)</th>
+                    <th className="py-3.5 px-4 text-center">Status</th>
+                    <th className="py-3.5 px-4 text-right">Ações</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-apple-border/40">
+                  {filteredProducts.map((p) => {
+                    const isUpdating = updatingId === p.id;
+                    return (
+                      <tr
+                        key={p.id}
+                        className={`hover:bg-apple-gray/20 transition-colors ${
+                          !p.active ? "opacity-60 bg-apple-gray/10" : ""
                         }`}
                       >
-                        <span
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            isActive ? "bg-emerald-600" : "bg-red-600"
-                          }`}
-                        />
-                        {isActive ? "Ativo no Site" : "Desativado"}
-                      </span>
-                    </div>
+                        {/* Image & Name */}
+                        <td className="py-3.5 px-4">
+                          <div className="flex items-center gap-3">
+                            <div className="relative w-11 h-11 bg-apple-gray/40 rounded-xl overflow-hidden shrink-0 flex items-center justify-center border border-apple-border/40">
+                              {p.image ? (
+                                <Image
+                                  src={p.image}
+                                  alt={p.name}
+                                  fill
+                                  className="object-contain p-1"
+                                  sizes="44px"
+                                />
+                              ) : (
+                                <Package className="w-5 h-5 text-apple-muted" />
+                              )}
+                            </div>
+                            <div className="min-w-0">
+                              <span className="font-bold text-apple-dark text-xs sm:text-sm block truncate">
+                                {p.name}
+                              </span>
+                              <span className="text-[10px] text-apple-muted block truncate">
+                                {p.subcategory || p.slug}
+                              </span>
+                            </div>
+                          </div>
+                        </td>
 
-                    {/* Image & Title */}
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="relative w-16 h-16 bg-apple-gray/40 rounded-xl overflow-hidden shrink-0 flex items-center justify-center border border-apple-border/30">
-                        {p.image ? (
-                          <Image
-                            src={p.image}
-                            alt={p.name}
-                            fill
-                            className="object-contain p-1"
-                            sizes="64px"
-                          />
-                        ) : (
-                          <Package className="w-6 h-6 text-apple-muted" />
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-sm font-bold text-apple-dark truncate" title={p.name}>
-                          {p.name}
-                        </h3>
-                        <p className="text-[11px] text-apple-muted truncate">
-                          {p.subcategory || p.category}
-                        </p>
-                        <div className="flex items-center gap-2 mt-1">
-                          <p className="text-xs font-extrabold text-apple-dark">
-                            {p.priceFrom && p.priceFrom > 0
-                              ? `A partir de ${formatCurrency(p.priceFrom)}`
-                              : "Sob Consulta"}
-                          </p>
+                        {/* Category */}
+                        <td className="py-3.5 px-4 hidden sm:table-cell">
+                          <span className="capitalize text-apple-dark font-medium px-2 py-0.5 rounded-md bg-apple-gray/60 text-[11px]">
+                            {p.category}
+                          </span>
+                        </td>
+
+                        {/* Price */}
+                        <td className="py-3.5 px-4">
+                          <div>
+                            <span className="text-[10px] text-apple-muted block">A partir de</span>
+                            <span className="font-extrabold text-apple-dark text-xs sm:text-sm">
+                              {formatCurrency(p.priceFrom || 0)}
+                            </span>
+                          </div>
+                        </td>
+
+                        {/* Variants Count */}
+                        <td className="py-3.5 px-4 hidden md:table-cell">
+                          <span className="text-apple-muted font-medium">
+                            {p.variants && p.variants.length > 0
+                              ? `${p.variants.length} combinações cadastradas`
+                              : "Sem variantes"}
+                          </span>
+                        </td>
+
+                        {/* Toggle Status */}
+                        <td className="py-3.5 px-4 text-center">
                           <button
-                            type="button"
+                            onClick={() => handleToggleProduct(p)}
+                            disabled={isUpdating}
+                            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold transition-all cursor-pointer ${
+                              p.active
+                                ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
+                                : "bg-red-100 text-red-700 hover:bg-red-200"
+                            } ${isUpdating ? "opacity-50 pointer-events-none" : ""}`}
+                            title={p.active ? "Clique para ocultar do site" : "Clique para ativar no site"}
+                          >
+                            {isUpdating ? (
+                              <Loader2 className="w-3 h-3 animate-spin" />
+                            ) : p.active ? (
+                              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                            ) : (
+                              <Power className="w-3 h-3 text-red-600" />
+                            )}
+                            <span>{p.active ? "Ativo" : "Oculto"}</span>
+                          </button>
+                        </td>
+
+                        {/* Actions */}
+                        <td className="py-3.5 px-4 text-right">
+                          <button
                             onClick={() => handleOpenEdit(p)}
-                            className="p-1 rounded-lg bg-blue-50 text-apple-blue hover:bg-blue-100 transition-colors"
-                            title="Editar Valores deste Produto"
+                            className="inline-flex items-center gap-1 px-3 py-1.5 bg-apple-gray/60 hover:bg-apple-gray text-apple-dark rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                            title="Editar valores e variantes"
                           >
                             <Edit3 className="w-3.5 h-3.5" />
+                            <span className="hidden sm:inline">Editar</span>
                           </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Extra specs badges */}
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {p.condition && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-apple-gray rounded text-apple-muted font-medium">
-                          {p.condition === "new" ? "Novo Lacrado" : "Seminovo"}
-                        </span>
-                      )}
-                      {p.variants && p.variants.length > 0 && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-blue-50 text-apple-blue rounded font-semibold">
-                          {p.variants.length} opções/cores
-                        </span>
-                      )}
-                      {p.storage && p.storage.length > 0 && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-apple-gray rounded text-apple-muted font-medium">
-                          {p.storage.slice(0, 3).join(", ")}
-                          {p.storage.length > 3 && "..."}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Action Buttons: Edit Prices & Active Toggle */}
-                  <div className="pt-3 border-t border-apple-border/50 flex items-center justify-between gap-2">
-                    <button
-                      type="button"
-                      onClick={() => handleOpenEdit(p)}
-                      className="px-2.5 py-1.5 rounded-xl text-xs font-bold bg-white hover:bg-apple-gray text-apple-dark border border-apple-border transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
-                    >
-                      <Edit3 className="w-3.5 h-3.5 text-apple-blue" />
-                      <span>Editar Valores</span>
-                    </button>
-
-                    <button
-                      onClick={() => handleToggleProduct(p)}
-                      disabled={isUpdating || batchLoading}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer disabled:opacity-50 ${
-                        isActive
-                          ? "bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300"
-                          : "bg-red-50 hover:bg-red-100 text-red-700 border border-red-300"
-                      }`}
-                    >
-                      {isUpdating ? (
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      ) : isActive ? (
-                        <ToggleRight className="w-4 h-4 text-emerald-600" />
-                      ) : (
-                        <ToggleLeft className="w-4 h-4 text-red-600" />
-                      )}
-                      <span>{isActive ? "Ativado" : "Desativado"}</span>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
-        {/* MODAL DE EDIÇÃO DE VALORES */}
+        {/* Modal de Importação em Massa (Colar Lista Oficial) */}
+        {importModalOpen && (
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+            <div className="bg-white rounded-3xl border border-apple-border w-full max-w-2xl flex flex-col shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+              <div className="p-5 border-b border-apple-border/70 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#0071E3] flex items-center justify-center shrink-0">
+                    <UploadCloud className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-bold text-apple-dark">
+                      Importar / Atualizar Catálogo via Lista Oficial
+                    </h2>
+                    <p className="text-xs text-apple-muted">
+                      Cole o texto da lista diária completa abaixo para sincronizar todos os preços e variantes.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setImportModalOpen(false)}
+                  className="p-2 text-apple-muted hover:text-apple-dark rounded-xl hover:bg-apple-gray transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <form onSubmit={handleImportCatalog} className="p-6 flex flex-col gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-apple-dark flex items-center justify-between">
+                    <span>Texto da Lista Oficial (com seções e valores em R$)</span>
+                    <span className="text-[11px] text-apple-muted font-normal">
+                      Ex: IPHONES NOVOS, IPADS, MACBOOKS...
+                    </span>
+                  </label>
+                  <textarea
+                    rows={12}
+                    value={importText}
+                    onChange={(e) => setImportText(e.target.value)}
+                    placeholder="Cole aqui o texto completo da lista oficial enviada todos os dias..."
+                    className="w-full p-4 font-mono text-xs bg-apple-gray/30 border border-apple-border/70 rounded-2xl focus:outline-none focus:border-[#0071E3] text-apple-dark resize-y"
+                    required
+                  />
+                </div>
+
+                <div className="p-4 rounded-2xl bg-blue-50/60 border border-blue-200 text-blue-900 text-xs space-y-1 leading-relaxed">
+                  <p className="font-bold">Como funciona a atualização:</p>
+                  <ul className="list-disc list-inside space-y-0.5 text-[11px] text-blue-800">
+                    <li>Os produtos e capacidades presentes na lista terão seus valores atualizados ao centavo.</li>
+                    <li>O valor "A partir de" será recalculado automaticamente para a menor opção ativa.</li>
+                    <li>Qualquer produto ausente da lista será mantido no sistema, mas desativado do site público.</li>
+                  </ul>
+                </div>
+
+                <div className="pt-2 flex items-center justify-end gap-3 border-t border-apple-border/50">
+                  <button
+                    type="button"
+                    onClick={() => setImportModalOpen(false)}
+                    className="px-4 py-2.5 rounded-xl border border-apple-border text-xs font-bold text-apple-dark hover:bg-apple-gray transition-colors"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={importing || !importText.trim()}
+                    className="px-6 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                  >
+                    {importing ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Check className="w-4 h-4" />
+                    )}
+                    <span>{importing ? "Processando Lista..." : "Atualizar Catálogo com a Lista"}</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {/* Modal de Edição de Preços Individual */}
         {editingProduct && (
           <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
             <div className="bg-white rounded-3xl border border-apple-border w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in-95 duration-200">
@@ -814,115 +925,112 @@ export default function AdminProductsPage() {
                   </div>
                 </div>
                 <button
-                  type="button"
                   onClick={handleCloseEdit}
-                  className="p-2 text-apple-muted hover:text-apple-dark hover:bg-apple-gray rounded-xl transition-colors cursor-pointer"
+                  className="p-2 text-apple-muted hover:text-apple-dark rounded-xl hover:bg-apple-gray transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              {/* Modal Form Body */}
-              <form onSubmit={handleSavePrices} className="p-6 space-y-6 overflow-y-auto flex-1">
-                {/* Preço "A partir de" */}
-                <div className="p-4 bg-apple-gray/40 rounded-2xl border border-apple-border/60 space-y-2">
-                  <label className="block text-xs font-bold text-apple-dark uppercase tracking-wider">
-                    Preço Principal ("A partir de"):
+              {/* Modal Body / Form */}
+              <form onSubmit={handleSavePrices} className="flex-1 overflow-y-auto p-5 space-y-5">
+                {/* Master PriceFrom */}
+                <div className="bg-apple-gray/30 p-4 rounded-2xl border border-apple-border/50">
+                  <label className="block text-xs font-bold text-apple-dark mb-1">
+                    Preço de Entrada ("A partir de") em R$
                   </label>
-                  <div className="relative max-w-xs">
+                  <div className="relative">
                     <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-apple-muted">
                       R$
                     </span>
                     <input
                       type="number"
-                      step="1"
-                      min="0"
+                      step="0.01"
                       value={editPriceFrom}
                       onChange={(e) => setEditPriceFrom(e.target.value)}
-                      placeholder="Ex: 7500"
-                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-apple-border rounded-xl text-sm font-bold text-apple-dark focus:outline-none focus:ring-2 focus:ring-apple-blue/30"
+                      className="w-full pl-10 pr-4 py-2.5 bg-white border border-apple-border rounded-xl text-sm font-bold text-apple-dark focus:outline-none focus:border-[#0071E3]"
+                      placeholder="0.00"
+                      required
                     />
                   </div>
-                  <p className="text-[11px] text-apple-muted">
-                    Este valor é exibido como vitrine nos cards do site. Caso seja 0, será exibido como "Sob Consulta".
-                  </p>
                 </div>
 
-                {/* Preços das Variantes (Cores / Capacidades) */}
-                {editVariants.length > 0 ? (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <label className="block text-xs font-bold text-apple-dark uppercase tracking-wider">
-                        Valores por Cor & Capacidade ({editVariants.length} variantes):
-                      </label>
-                      <span className="text-[11px] text-apple-muted">
-                        Valores cobrados no PIX à vista
-                      </span>
-                    </div>
-
-                    <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+                {/* Variants Editor */}
+                {editVariants.length > 0 && (
+                  <div>
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-apple-muted mb-3">
+                      Preços por Opção / Capacidade / Cor
+                    </h3>
+                    <div className="space-y-2.5">
                       {editVariants.map((v, idx) => (
                         <div
-                          key={`${v.storage}-${v.color}-${idx}`}
-                          className="p-3 bg-white border border-apple-border rounded-2xl flex items-center justify-between gap-3 shadow-2xs hover:border-apple-blue/40 transition-colors"
+                          key={idx}
+                          className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-white border border-apple-border/70 rounded-xl hover:border-apple-border transition-colors text-xs"
                         >
-                          <div className="flex items-center gap-2.5">
-                            <span className="w-2.5 h-2.5 rounded-full bg-apple-blue shrink-0" />
-                            <div>
-                              <div className="text-xs font-bold text-apple-dark">
-                                {v.storage ? `${v.storage} — ` : ""}
-                                {v.color || "Padrão"}
-                                {v.size ? ` (${v.size})` : ""}
-                              </div>
-                              <span className="text-[10px] text-apple-muted">
-                                {v.chip ? `Chip: ${v.chip} ` : ""}
-                                {v.available ? "Disponível" : "Indisponível"}
+                          <div className="flex items-center gap-2 min-w-0">
+                            {v.storage && (
+                              <span className="font-bold px-2 py-0.5 rounded bg-apple-gray text-apple-dark text-[11px]">
+                                {v.storage}
                               </span>
-                            </div>
+                            )}
+                            {v.screenSize && (
+                              <span className="font-semibold px-2 py-0.5 rounded bg-apple-gray text-apple-dark text-[11px]">
+                                {v.screenSize}
+                              </span>
+                            )}
+                            {v.chip && (
+                              <span className="font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 text-[10px]">
+                                {v.chip}
+                              </span>
+                            )}
+                            {v.ram && (
+                              <span className="font-semibold px-1.5 py-0.5 rounded bg-apple-gray text-apple-muted text-[10px]">
+                                {v.ram}
+                              </span>
+                            )}
+                            {v.color && (
+                              <span className="text-apple-dark font-medium truncate">
+                                {v.color}
+                              </span>
+                            )}
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-bold text-apple-muted">R$</span>
+                            <span className="text-[11px] font-bold text-apple-muted">R$</span>
                             <input
                               type="number"
-                              step="1"
-                              min="0"
+                              step="0.01"
                               value={v.price}
                               onChange={(e) => {
-                                const newPrice = Number(e.target.value) || 0;
+                                const val = parseFloat(e.target.value) || 0;
                                 setEditVariants((prev) =>
                                   prev.map((item, i) =>
-                                    i === idx ? { ...item, price: newPrice } : item
+                                    i === idx ? { ...item, price: val } : item
                                   )
                                 );
                               }}
-                              className="w-28 px-3 py-1.5 bg-apple-gray/40 border border-apple-border rounded-xl text-xs font-bold text-apple-dark text-right focus:outline-none focus:ring-2 focus:ring-apple-blue/30"
+                              className="w-28 px-3 py-1.5 bg-apple-gray/20 border border-apple-border rounded-lg text-xs font-bold text-apple-dark text-right focus:outline-none focus:border-[#0071E3]"
                             />
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
-                ) : (
-                  <div className="p-4 bg-blue-50/50 border border-blue-200/60 rounded-2xl text-xs text-blue-900">
-                    Este produto não possui variantes individuais cadastradas. O valor principal acima define o preço do produto no site.
-                  </div>
                 )}
 
-                {/* Modal Footer Controls */}
-                <div className="pt-4 border-t border-apple-border/70 flex items-center justify-end gap-2.5">
+                {/* Modal Footer */}
+                <div className="pt-4 border-t border-apple-border/70 flex items-center justify-end gap-3">
                   <button
                     type="button"
                     onClick={handleCloseEdit}
-                    disabled={savingPrices}
-                    className="px-4 py-2.5 rounded-xl text-xs font-bold border border-apple-border text-apple-dark hover:bg-apple-gray transition-colors cursor-pointer"
+                    className="px-4 py-2 rounded-xl text-xs font-semibold text-apple-muted hover:text-apple-dark hover:bg-apple-gray transition-colors cursor-pointer"
                   >
                     Cancelar
                   </button>
                   <button
                     type="submit"
                     disabled={savingPrices}
-                    className="px-5 py-2.5 rounded-xl text-xs font-bold bg-apple-blue hover:bg-apple-blue-hover text-white flex items-center gap-2 shadow-sm transition-all cursor-pointer disabled:opacity-50"
+                    className="px-5 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
                   >
                     {savingPrices ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
