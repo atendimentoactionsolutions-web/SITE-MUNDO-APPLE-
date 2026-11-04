@@ -4,7 +4,15 @@ export async function POST(request: NextRequest) {
   try {
     const { username, password } = await request.json();
 
-    if (username === "adm" && password === "adm") {
+    const normalizedUser = (username || "").trim().toLowerCase();
+    const normalizedPass = (password || "").trim();
+
+    // Accept "mundoapple" / "mundoapple" or legacy "adm" / "adm"
+    const isValid =
+      (normalizedUser === "mundoapple" && normalizedPass === "mundoapple") ||
+      (normalizedUser === "adm" && normalizedPass === "adm");
+
+    if (isValid) {
       const response = NextResponse.json({ success: true });
       // Set secure auth cookie valid for 7 days
       response.cookies.set("admin_session", "authenticated_adm", {
