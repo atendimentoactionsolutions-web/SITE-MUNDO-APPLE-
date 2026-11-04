@@ -7,24 +7,23 @@ def run():
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect('179.236.75.100', port=22, username='root', password='@Vaidatudocerto2026', timeout=15)
-    print("Connected! Triggering deploy...")
+    print("Connected! Checking status and waiting if build still running...")
     
-    # Run deploy script
-    stdin, stdout, stderr = ssh.exec_command('/usr/local/bin/deploy-site')
-    
-    # Stream output
-    for line in iter(stdout.readline, ""):
-        print(line, end="")
-    for line in iter(stderr.readline, ""):
-        print("STDERR:", line, end="")
-        
-    exit_status = stdout.channel.recv_exit_status()
-    print(f"\nDeploy exited with status code: {exit_status}")
-    
-    # Check pm2 status
-    stdin, stdout, stderr = ssh.exec_command('pm2 status mundo-apple-site')
-    print("PM2 Status:")
+    # Check if npm run build is running on server
+    stdin, stdout, stderr = ssh.exec_command('ps aux | grep -E "next build|deploy-site"')
+    print("Process check:")
     print(stdout.read().decode('utf-8', 'replace'))
+    
+    # Let's run deploy-site cleanly
+    stdin, stdout, stderr = ssh.exec_command('/usr/local/bin/deploy-site')
+    out = stdout.read().decode('utf-8', 'replace')
+    err = stderr.read().decode('utf-8', 'replace')
+    print("DEPLOY STDOUT:\n" + out)
+    if err:
+        print("DEPLOY STDERR:\n" + err)
+        
+    stdin, stdout, stderr = ssh.exec_command('pm2 status mundo-apple-site')
+    print("PM2 STATUS:\n" + stdout.read().decode('utf-8', 'replace'))
     
     ssh.close()
 
