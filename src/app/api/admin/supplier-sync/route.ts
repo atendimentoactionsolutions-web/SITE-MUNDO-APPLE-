@@ -1,24 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
-import { syncSupplierPrices, getLastSupplierSync } from "@/lib/supplier-sync";
+import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const last = getLastSupplierSync();
   return NextResponse.json({
     success: true,
-    lastSync: last,
+    lastSync: null,
+    manualMode: true,
   });
 }
 
-export async function POST(request: NextRequest) {
-  try {
-    const result = await syncSupplierPrices();
-    return NextResponse.json(result);
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message },
-      { status: 500 }
-    );
-  }
+export async function POST() {
+  return NextResponse.json({
+    success: false,
+    error: "A sincronização automática foi desativada. Todos os valores agora são gerenciados manualmente no painel.",
+  });
 }
