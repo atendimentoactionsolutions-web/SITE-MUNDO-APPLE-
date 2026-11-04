@@ -542,19 +542,6 @@ Gostaria de agendar a avaliação e retirada em SP!`;
 
   return (
     <div className="max-w-3xl mx-auto">
-      {/* ── Cabeçalho Principal ── */}
-      <div className="text-center mb-6 sm:mb-8">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-[#0071E3] bg-blue-50 px-3 py-1 rounded-full border border-blue-100 inline-block mb-2">
-          Avaliação de Usados
-        </span>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-[#1D1D1F] tracking-tight font-display">
-          Venda seu iPhone na Mundo Apple
-        </h1>
-        <p className="text-xs sm:text-sm text-[#6E6E73] mt-1.5 max-w-lg mx-auto">
-          Cotação rápida e objetiva. Pagamento imediato via PIX na retirada presencial.
-        </p>
-      </div>
-
       {/* ── Card Principal Interativo ── */}
       <div className="bg-white rounded-3xl border border-[#E5E5E7] p-5 sm:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
         {/* Barra de Progresso Superior (Passos 1 a 8) */}
