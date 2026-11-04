@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { storeConfig } from "@/data/storeConfig";
-import { Instagram, MessageCircle, MapPin, Clock, Star, Zap } from "lucide-react";
+import { Instagram, MessageCircle, MapPin, Clock, Star, Zap, Lock } from "lucide-react";
 import { getWhatsAppGeneralUrl } from "@/utils/whatsapp";
 import { AppleLogo } from "@/components/ui/AppleLogo";
 
@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-4 space-y-5">
             <Link
               href="/"
-              aria-label="Mundo Apple Delivery — Página inicial"
+              aria-label="Mundo Apple Delivery – Página inicial"
               className="flex items-center gap-2 group transition-opacity hover:opacity-80 select-none"
             >
               <AppleLogo className="w-6 h-6 text-[#1D1D1F]" />
@@ -188,7 +188,15 @@ export const Footer: React.FC = () => {
         <div className="pt-8 border-t border-[#D2D2D7] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6E6E73]">
           <p>© {new Date().getFullYear()} {storeConfig.name}. Todos os direitos reservados.</p>
           <div className="flex items-center gap-6">
-            <span>Rua Santa Ifigênia, 361 • Loja 24 • São Paulo - SP</span>
+            <span>Rua Santa Ifigênia, 361 – Loja 24 – São Paulo - SP</span>
+            <Link
+              href="/admin/login"
+              className="inline-flex items-center gap-1 text-[#86868B] hover:text-[#1D1D1F] transition-colors text-[11px] font-medium"
+              title="Acesso Administrativo"
+            >
+              <Lock className="w-3 h-3" />
+              <span>Painel ADM</span>
+            </Link>
           </div>
         </div>
       </Container>
