@@ -44,38 +44,7 @@ export default async function MacCategoryPage({ searchParams }: PageProps) {
       <Container>
         
 
-        {/* Value Highlights */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 mt-2">
-          <div className="bg-white p-4 rounded-2xl border border-apple-border/60 shadow-sm flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-apple-blue/10 text-apple-blue flex items-center justify-center shrink-0">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-apple-dark">Chips M5 & M4</h4>
-              <p className="text-[11px] text-apple-muted">Velocidade e IA de última geração</p>
-            </div>
-          </div>
-
-          <div className="bg-white p-4 rounded-2xl border border-apple-border/60 shadow-sm flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0">
-              <BatteryCharging className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-apple-dark">Bateria para o dia todo</h4>
-              <p className="text-[11px] text-apple-muted">Até 22 horas de autonomia</p>
-            </div>
-          </div>
-
-          <div className="bg-white p-4 rounded-2xl border border-apple-border/60 shadow-sm flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-apple-dark">100% Originais</h4>
-              <p className="text-[11px] text-apple-muted">1 ano de garantia oficial Apple</p>
-            </div>
-          </div>
-        </div>
+        
 
         {/* Subcategory Filter Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 no-scrollbar">
