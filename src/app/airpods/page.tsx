@@ -14,16 +14,12 @@ export default async function AirPodsCategoryPage() {
   const products = await getProducts({ category: "airpods" });
 
   return (
-    <div className="pt-28 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-20 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
-        <SectionHeading
-          eyebrow="Linha AirPods"
-          title="Mágica como você nunca ouviu."
-          subtitle="AirPods 4, AirPods Pro e AirPods Max com áudio espacial, cancelamento ativo de ruído e 1 ano de garantia Apple."
-        />
+        
 
         {/* Value Highlights */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 -mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 mt-2">
           <div className="bg-white p-4 rounded-2xl border border-apple-border/60 shadow-sm flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-apple-blue/10 text-apple-blue flex items-center justify-center shrink-0">
               <Music className="w-5 h-5" />
