@@ -39,16 +39,12 @@ export default async function WatchCategoryPage({ searchParams }: PageProps) {
   ];
 
   return (
-    <div className="pt-28 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-20 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
-        <SectionHeading
-          eyebrow="Linha Apple Watch"
-          title="O dispositivo definitivo no seu pulso."
-          subtitle="Apple Watch Series 12, Series 11, Ultra e SE para saúde, esportes, segurança e alta conectividade."
-        />
+        
 
         {/* Value Highlights */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 -mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 mt-2">
           <div className="bg-white p-4 rounded-2xl border border-apple-border/60 shadow-sm flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-600 flex items-center justify-center shrink-0">
               <HeartPulse className="w-5 h-5" />
