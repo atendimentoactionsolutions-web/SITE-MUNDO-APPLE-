@@ -79,7 +79,6 @@ export const Header: React.FC = () => {
     { label: "Upgrade / Troca", href: "/troca" },
     { label: "Vender", href: "/vender" },
     { label: "Acessórios", href: "/acessorios" },
-    { label: "Suporte", href: "/sobre" },
   ];
 
   return (
