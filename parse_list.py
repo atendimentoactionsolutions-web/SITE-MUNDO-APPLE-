@@ -1,14 +1,14 @@
 import json
 import re
 
-with open(r'c:\Users\Mundo Apple\Downloads\comando_antigravity_catalogo_mundo_apple.txt', 'r', encoding='utf-8', errors='replace') as f:
+with open(r'c:\Users\Mundo Apple\Downloads\comando_antigravity_catalogo_mundo_apple.txt', 'r', encoding='utf-8') as f:
     raw_lines = f.readlines()
 
 # Find the official list bounds
 start = 0
 end = len(raw_lines)
 for i, l in enumerate(raw_lines):
-    if 'IN' in l and 'CIO DA LISTA OFICIAL' in l:
+    if 'INÍCIO DA LISTA OFICIAL' in l or ('IN' in l and 'CIO DA LISTA OFICIAL' in l):
         start = i + 1
     if 'FIM DA LISTA OFICIAL' in l:
         end = i
@@ -19,7 +19,7 @@ current_section = None
 current_config = None
 configs = [] # {section, config_name, variants: [{color, price}]}
 
-variant_line_re = re.compile(r'^(.*?)\s*[\u2013\u2014\-\ufffd]\s*R\$\s*([\d\.\,]+)$')
+variant_line_re = re.compile(r'^(.*?)\s*[•\u2022\u2013\u2014\-]\s*R\$\s*([\d\.\,]+)$')
 
 for idx in range(start, end):
     line = raw_lines[idx].strip()
@@ -30,7 +30,7 @@ for idx in range(start, end):
     if line.startswith('---'):
         continue
     
-    # If previous line was section header before '---'
+    # If next line is section divider '---'
     if idx + 1 < len(raw_lines) and raw_lines[idx+1].strip().startswith('---'):
         current_section = line
         print(f"\nSECTION: {current_section}")
@@ -73,6 +73,5 @@ for s, count in sections.items():
     var_count = sum(len(c['variants']) for c in configs if c['section'] == s)
     print(f"  {s}: {count} configs, {var_count} variants")
 
-# Let's save the parsed structure to JSON for inspection
 with open('parsed_whitelist.json', 'w', encoding='utf-8') as f:
     json.dump(configs, f, indent=2, ensure_ascii=False)
