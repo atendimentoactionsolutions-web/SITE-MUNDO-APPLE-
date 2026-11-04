@@ -6,22 +6,9 @@ import { getWhatsAppGeneralUrl } from "@/utils/whatsapp";
 
 export const StoreLocationSection: React.FC = () => {
   return (
-    <section className="py-20 sm:py-28 bg-white border-t border-[#E5E7EB]" id="localizacao">
+    <section className="py-12 sm:py-16 bg-white border-t border-[#E5E7EB]" id="localizacao">
       <Container size="large">
-        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] border border-[#E5E7EB] text-xs font-bold uppercase tracking-wider text-[#0071E3]">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Atendimento Presencial</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0F172A] font-display tracking-tight leading-tight">
-            Visite nossa loja física
-          </h2>
-
-          <p className="text-sm sm:text-base text-[#475569] font-normal leading-relaxed">
-            Localização privilegiada no polo tecnológico de São Paulo, na Santa Ifigênia.
-          </p>
-        </div>
+        
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Store Information Card */}
