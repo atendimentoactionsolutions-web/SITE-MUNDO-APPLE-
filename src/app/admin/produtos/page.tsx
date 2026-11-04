@@ -507,50 +507,6 @@ export default function AdminProductsPage() {
           </div>
         </div>
 
-        {/* Live Supplier Sync Controls Box */}
-        <div className="bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 rounded-3xl p-6 mb-6 text-white shadow-lg border border-indigo-800/50">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-white/10">
-            <div className="flex items-start sm:items-center gap-3.5">
-              <div className="p-3 bg-white/10 rounded-2xl shrink-0 backdrop-blur-xs">
-                <Zap className="w-6 h-6 text-amber-400" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="text-base font-bold tracking-tight text-white">
-                    Preços do fornecedor
-                  </h3>
-                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    SEM ACRÉSCIMO
-                  </span>
-                </div>
-                <p className="text-xs text-blue-200/80 mt-1 max-w-2xl leading-relaxed">
-                  Os produtos novos usam o valor do fornecedor, sem acréscimo. Atualização automática a cada 10 minutos, 24 horas por dia.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0">
-              <button
-                onClick={handleSyncSupplier}
-                disabled={syncingSupplier}
-                className="px-4 py-2.5 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-white flex items-center justify-center gap-2 transition-all cursor-pointer border border-white/20 disabled:opacity-50"
-                title="Forçar sincronização com a tabela do fornecedor agora"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 text-blue-300 ${syncingSupplier ? "animate-spin" : ""}`} />
-                <span>{syncingSupplier ? "Sincronizando..." : "Sincronizar Agora"}</span>
-              </button>
-
-            </div>
-          </div>
-
-        </div>
-
-        <div className="mb-6 text-xs text-apple-muted" role="status">
-          {lastSyncInfo?.lastSuccessfulAt ? `Ultima sincronizacao: ${new Date(lastSyncInfo.lastSuccessfulAt).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })}` : "Aguardando primeira sincronizacao automatica."}
-          {lastSyncInfo?.success === false && <p className="mt-1 text-red-700">Falha no fornecedor. Nova tentativa automatica: {lastSyncInfo.errors?.join(", ")}</p>}
-        </div>
-
         {/* Feedback Alert */}
         {feedback && (
           <div
