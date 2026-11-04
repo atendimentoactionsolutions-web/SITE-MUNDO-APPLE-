@@ -167,9 +167,7 @@ export const Header: React.FC = () => {
               >
                 Falar com Consultor no WhatsApp
               </a>
-              <p className="text-center text-xs text-zinc-500">
-                Mundo Apple Delivery • 1 ano de garantia
-              </p>
+
             </div>
           </div>
         )}
