@@ -3268,7 +3268,7 @@ export const products: Product[] = [
     "description": "Design ultrafino com tela de 15.3 polegadas, chip M4 e bateria que dura o dia todo.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
-    "active": true,
+    "active": false,
     "chips": [
       "M4"
     ]
