@@ -334,5 +334,10 @@
   "watch-ultra4-black": {
     "asset": "watch-case-49-titanium-black-ultra4_VW_PF",
     "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-case-49-titanium-black-ultra4_VW_PF?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "magic-mouse-usbc-black": {
+    "asset": "MXK63",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MXK63?wid=1000&hei=1000&fmt=jpeg&qlt=90",
+    "reference": "https://www.apple.com/shop/product/mxk63am/a/magic-mouse-usb-c-black-multi-touch-surface"
   }
 }

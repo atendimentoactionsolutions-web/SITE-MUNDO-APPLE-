@@ -211,6 +211,7 @@ test('repaired accessories, tablets and computers never reuse unrelated product 
     assert.ok(fs.existsSync(path.join(__dirname, '../public', products[id].image)), id);
   }
   const { getProductColorImage } = loadProductColors();
+  assert.equal(getProductColorImage(products['magic-mouse-3'], 'Black'), '/images/products/verified/magic-mouse-usbc-black.jpg');
   for (const id of ['apple-watch-ultra-3', 'apple-watch-ultra-4']) {
     assert.notEqual(getProductColorImage(products[id], 'Black'), getProductColorImage(products[id], 'Natural'), id);
   }

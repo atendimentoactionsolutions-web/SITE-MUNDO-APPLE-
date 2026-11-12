@@ -2421,7 +2421,7 @@ export const products: Product[] = [
     "image": "/images/products/accessories/magic-mouse-white.png",
     "colorImages": {
       "White": "/images/products/accessories/magic-mouse-white.png",
-      "Black": "/images/products/accessories/magic-mouse-3-black.png"
+      "Black": "/images/products/verified/magic-mouse-usbc-black.jpg"
     },
     "priceFrom": 1020.0,
     "condition": "new",
