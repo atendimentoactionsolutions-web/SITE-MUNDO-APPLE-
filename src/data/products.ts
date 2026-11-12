@@ -7,7 +7,7 @@ export const products: Product[] = [
     "name": "iPhone Duo",
     "category": "iphone",
     "subcategory": "iPhone Duo",
-    "image": "/images/products/iphone/iphone-duo-v2.png",
+    "image": "/images/products/verified/iphone-duo-night-sky.jpg",
     "priceFrom": 16150.0,
     "condition": "new",
     "availability": "available",
@@ -74,7 +74,11 @@ export const products: Product[] = [
     "description": "Design revolucionário com duas telas e expansão contínua. Equipado com Apple Intelligence e o silício A20 Pro para uma nova era de produtividade.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
-    "active": true
+    "active": true,
+    "colorImages": {
+      "Night Sky": "/images/products/verified/iphone-duo-night-sky.jpg",
+      "Star White": "/images/products/verified/iphone-duo-star-white.jpg"
+    }
   },
   {
     "id": "iphone-18-pro-max",
@@ -82,12 +86,12 @@ export const products: Product[] = [
     "name": "iPhone 18 Pro Max",
     "category": "iphone",
     "subcategory": "iPhone 18 Series",
-    "image": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
+    "image": "/images/products/verified/iphone18-pro-max-black.jpg",
     "colorImages": {
-      "Black": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Glacier": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
+      "Black": "/images/products/verified/iphone18-pro-max-black.jpg",
+      "Silver": "/images/products/verified/iphone18-pro-max-silver.jpg",
+      "Burgundy": "/images/products/verified/iphone18-pro-max-burgundy.jpg",
+      "Glacier": "/images/products/verified/iphone18-pro-max-glacier.jpg"
     },
     "priceFrom": 9850.0,
     "condition": "new",
@@ -206,12 +210,12 @@ export const products: Product[] = [
     "name": "iPhone 18 Pro",
     "category": "iphone",
     "subcategory": "iPhone 18 Series",
-    "image": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
+    "image": "/images/products/verified/iphone18-pro-black.jpg",
     "colorImages": {
-      "Black": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Glacier": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Burgundy": "/images/products/iphone/iphone-18-pro-all-colors.jpg",
-      "Silver": "/images/products/iphone/iphone-18-pro-all-colors.jpg"
+      "Black": "/images/products/verified/iphone18-pro-black.jpg",
+      "Silver": "/images/products/verified/iphone18-pro-silver.jpg",
+      "Burgundy": "/images/products/verified/iphone18-pro-burgundy.jpg",
+      "Glacier": "/images/products/verified/iphone18-pro-glacier.jpg"
     },
     "priceFrom": 9040.0,
     "condition": "new",
@@ -305,7 +309,7 @@ export const products: Product[] = [
     "name": "iPhone 17 Pro Max",
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
-    "image": "/images/products/iphone/iphone-17-pro-max.png",
+    "image": "/images/products/verified/iphone17-pro-max-cosmicorange.jpg",
     "priceFrom": 7965.0,
     "condition": "new",
     "storage": [
@@ -391,9 +395,9 @@ export const products: Product[] = [
     "warranty": "1 ano de garantia oficial Apple",
     "active": true,
     "colorImages": {
-      "Cosmic Orange": "/images/products/iphone/iphone-17-pro-max.png",
-      "Deep Blue": "/images/products/iphone/iphone-17-pro-max.png",
-      "Silver": "/images/products/iphone/iphone-17-pro-max.png"
+      "Cosmic Orange": "/images/products/verified/iphone17-pro-max-cosmicorange.jpg",
+      "Deep Blue": "/images/products/verified/iphone17-pro-max-deepblue.jpg",
+      "Silver": "/images/products/verified/iphone17-pro-max-silver.jpg"
     }
   },
   {
@@ -402,7 +406,7 @@ export const products: Product[] = [
     "name": "iPhone 17 Pro",
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
-    "image": "/images/products/iphone/iphone-17-pro-max.png",
+    "image": "/images/products/verified/iphone17-pro-cosmicorange.jpg",
     "priceFrom": 7650.0,
     "condition": "new",
     "storage": [
@@ -456,9 +460,9 @@ export const products: Product[] = [
     "warranty": "1 ano de garantia oficial Apple",
     "active": true,
     "colorImages": {
-      "Cosmic Orange": "/images/products/iphone/iphone-17-pro-max.png",
-      "Silver": "/images/products/iphone/iphone-17-pro-max.png",
-      "Deep Blue": "/images/products/iphone/iphone-17-pro-max.png"
+      "Cosmic Orange": "/images/products/verified/iphone17-pro-cosmicorange.jpg",
+      "Deep Blue": "/images/products/verified/iphone17-pro-deepblue.jpg",
+      "Silver": "/images/products/verified/iphone17-pro-silver.jpg"
     }
   },
   {
@@ -467,7 +471,7 @@ export const products: Product[] = [
     "name": "iPhone 17 Air",
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
-    "image": "/images/products/iphone/iphone-17-air.png",
+    "image": "/images/products/verified/iphone-air-spaceblack.jpg",
     "priceFrom": 6150.0,
     "condition": "new",
     "storage": [
@@ -559,10 +563,10 @@ export const products: Product[] = [
     "warranty": "1 ano de garantia oficial Apple",
     "active": true,
     "colorImages": {
-      "Light Gold": "/images/products/iphone/iphone-17-air.png",
-      "Space Black": "/images/products/iphone/iphone-17-air.png",
-      "Sky Blue": "/images/products/iphone/iphone-17-air.png",
-      "Cloud White": "/images/products/iphone/iphone-17-air.png"
+      "Space Black": "/images/products/verified/iphone-air-spaceblack.jpg",
+      "Cloud White": "/images/products/verified/iphone-air-cloudwhite.jpg",
+      "Sky Blue": "/images/products/verified/iphone-air-skyblue.jpg",
+      "Light Gold": "/images/products/verified/iphone-air-lightgold.jpg"
     }
   },
   {
@@ -571,7 +575,7 @@ export const products: Product[] = [
     "name": "iPhone 17e",
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
-    "image": "/images/products/iphone/iphone-17-generic.png",
+    "image": "/images/products/verified/iphone17e-white.jpg",
     "priceFrom": 4800.0,
     "condition": "new",
     "storage": [
@@ -625,9 +629,9 @@ export const products: Product[] = [
     "warranty": "1 ano de garantia oficial Apple",
     "active": true,
     "colorImages": {
-      "White": "/images/products/iphone/iphone-17-generic.png",
-      "Soft Pink": "/images/products/iphone/iphone-17-generic.png",
-      "Black": "/images/products/iphone/iphone-17-generic.png"
+      "White": "/images/products/verified/iphone17e-white.jpg",
+      "Soft Pink": "/images/products/verified/iphone17e-softpink.jpg",
+      "Black": "/images/products/verified/iphone17e-black.jpg"
     }
   },
   {
@@ -636,7 +640,7 @@ export const products: Product[] = [
     "name": "iPhone 17",
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
-    "image": "/images/products/iphone/iphone-17-normal.png",
+    "image": "/images/products/verified/iphone17-sage.jpg",
     "priceFrom": 6150.0,
     "condition": "new",
     "storage": [
@@ -685,11 +689,11 @@ export const products: Product[] = [
     "warranty": "1 ano de garantia oficial Apple",
     "active": true,
     "colorImages": {
-      "Sage": "/images/products/iphone/iphone-17-normal.png",
-      "Mist Blue": "/images/products/iphone/iphone-17-normal.png",
-      "Black": "/images/products/iphone/iphone-17-normal.png",
-      "Lavender": "/images/products/iphone/iphone-17-normal.png",
-      "White": "/images/products/iphone/iphone-17-normal.png"
+      "Sage": "/images/products/verified/iphone17-sage.jpg",
+      "Lavender": "/images/products/verified/iphone17-lavender.jpg",
+      "Mist Blue": "/images/products/verified/iphone17-mistblue.jpg",
+      "White": "/images/products/verified/iphone17-white.jpg",
+      "Black": "/images/products/verified/iphone17-black.jpg"
     }
   },
   {
@@ -764,9 +768,9 @@ export const products: Product[] = [
     "colorImages": {
       "Black": "/images/products/iphone/iphone-15-black.png",
       "Blue": "/images/products/iphone/iphone-15-blue.png",
-      "Pink": "/images/products/iphone/iphone-15-black.png",
-      "Green": "/images/products/iphone/iphone-15-black.png",
-      "Yellow": "/images/products/iphone/iphone-15-black.png"
+      "Pink": "/images/products/verified/iphone15-pink.jpg",
+      "Green": "/images/products/verified/iphone15-green.jpg",
+      "Yellow": "/images/products/verified/iphone15-yellow.jpg"
     },
     "priceFrom": 4740.0,
     "condition": "new",
@@ -1099,7 +1103,7 @@ export const products: Product[] = [
       "Midnight": "/images/products/mac/macbook-air-midnight.png",
       "Starlight": "/images/products/mac/macbook-air-starlight.png",
       "Silver": "/images/products/mac/macbook-air-silver.png",
-      "Sky Blue": "/images/products/mac/macbook-air-spacegray.png"
+      "Sky Blue": "/images/products/verified/air-sky-blue.jpg"
     },
     "priceFrom": 8990.0,
     "condition": "new",
@@ -1272,12 +1276,12 @@ export const products: Product[] = [
     "name": "MacBook Neo 13\"",
     "category": "mac",
     "subcategory": "Apple A18 Pro • 4 Cores Exclusivas",
-    "image": "/images/products/mac/macbook-neo-citrus.png",
+    "image": "/images/products/verified/neo-citrus.jpg",
     "colorImages": {
-      "Citrus": "/images/products/mac/macbook-neo-citrus.png",
-      "Indigo": "/images/products/mac/macbook-neo-indigo.png",
-      "Blush": "/images/products/mac/macbook-neo-blush.png",
-      "Silver": "/images/products/mac/macbook-neo-silver.png"
+      "Citrus": "/images/products/verified/neo-citrus.jpg",
+      "Blush": "/images/products/verified/neo-blush.jpg",
+      "Indigo": "/images/products/verified/neo-indigo.jpg",
+      "Silver": "/images/products/verified/neo-silver.jpg"
     },
     "priceFrom": 6499.0,
     "condition": "new",
@@ -1474,7 +1478,7 @@ export const products: Product[] = [
     "name": "Mac Studio M4 Max",
     "category": "mac",
     "subcategory": "Potência Extrema para Estúdios • Chip M4 Max",
-    "image": "/images/products/mac/mac-mini-m4-clean.png",
+    "image": "/images/products/verified/studio.jpg",
     "priceFrom": 23200.0,
     "condition": "new",
     "chips": [
@@ -1797,12 +1801,12 @@ export const products: Product[] = [
     "name": "iPad mini 7",
     "category": "ipad",
     "subcategory": "iPad mini",
-    "image": "/images/products/ipad/ipad-11-colors.png",
+    "image": "/images/products/verified/mini7-gray.jpg",
     "colorImages": {
-      "Space Gray": "/images/products/ipad/ipad-pro-spaceblack.png",
-      "Blue": "/images/products/ipad/ipad-11-blue.png",
-      "Purple": "/images/products/ipad/ipad-11-pink.png",
-      "Starlight": "/images/products/ipad/ipad-11-silver.png"
+      "Space Gray": "/images/products/verified/mini7-gray.jpg",
+      "Blue": "/images/products/verified/mini7-blue.jpg",
+      "Purple": "/images/products/verified/mini7-purple.jpg",
+      "Starlight": "/images/products/verified/mini7-starlight.jpg"
     },
     "priceFrom": 4250.0,
     "condition": "new",
@@ -1945,10 +1949,10 @@ export const products: Product[] = [
     "name": "Apple Watch Ultra 4",
     "category": "watch",
     "subcategory": "Apple Watch Ultra",
-    "image": "/images/products/watch/apple-watch-ultra-4-cutout.png",
+    "image": "/images/products/verified/watch-ultra4-natural.jpg",
     "colorImages": {
-      "Titânio Natural": "/images/products/watch/apple-watch-ultra-natural-cutout.png",
-      "Titânio Preto": "/images/products/watch/apple-watch-ultra-black-cutout.png"
+      "Natural": "/images/products/verified/watch-ultra4-natural.jpg",
+      "Black": "/images/products/verified/watch-ultra4-black.jpg"
     },
     "priceFrom": 5990.0,
     "condition": "new",
@@ -1985,7 +1989,7 @@ export const products: Product[] = [
     "name": "Apple Watch Series 12",
     "category": "watch",
     "subcategory": "Apple Watch Series",
-    "image": "/images/products/watch/apple-watch-s12-v2-cutout.png",
+    "image": "/images/products/verified/watch-s12-black.jpg",
     "priceFrom": 3580.0,
     "condition": "new",
     "availability": "available",
@@ -2046,7 +2050,13 @@ export const products: Product[] = [
     "description": "Perfil ultrafino, display OLED de alta eficiência e novos sensores com inteligência avançada para monitoramento contínuo de saúde.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
-    "active": true
+    "active": true,
+    "colorImages": {
+      "Black": "/images/products/verified/watch-s12-black.jpg",
+      "Dark Bronze": "/images/products/verified/watch-s12-darkbronze.jpg",
+      "Light Gold": "/images/products/verified/watch-s12-lightgold.jpg",
+      "Space Gray": "/images/products/verified/watch-s12-spacegray.jpg"
+    }
   },
   {
     "id": "apple-watch-s11",
@@ -2058,7 +2068,7 @@ export const products: Product[] = [
     "colorImages": {
       "Jet Black": "/images/products/watch/apple-watch-s11-black-cutout.png",
       "Rose Gold": "/images/products/watch/apple-watch-s11-rosegold-cutout.png",
-      "Space Gray": "/images/products/watch/apple-watch-s11-black-cutout.png",
+      "Space Gray": "/images/products/verified/watch-s11-spacegray.jpg",
       "Silver": "/images/products/watch/apple-watch-s11-silver-cutout.png"
     },
     "priceFrom": 2880.0,
@@ -2136,8 +2146,8 @@ export const products: Product[] = [
     "subcategory": "Apple Watch Ultra 3",
     "image": "/images/products/watch/apple-watch-ultra-natural-cutout.png",
     "colorImages": {
-      "Black Titanium": "/images/products/watch/apple-watch-ultra-black-cutout.png",
-      "Natural Titanium": "/images/products/watch/apple-watch-ultra-natural-cutout.png"
+      "Natural": "/images/products/watch/apple-watch-ultra-natural-cutout.png",
+      "Black": "/images/products/watch/apple-watch-ultra-black-cutout.png"
     },
     "priceFrom": 5350.0,
     "condition": "new",
@@ -2285,7 +2295,7 @@ export const products: Product[] = [
     "name": "AirPods 4",
     "category": "airpods",
     "subcategory": "AirPods",
-    "image": "/images/products/airpods/airpods-4.png",
+    "image": "/images/products/verified/airpods4.jpg",
     "priceFrom": 1190.0,
     "condition": "new",
     "description": "Áudio Espacial Personalizado com rastreamento dinâmico da cabeça, estojo de recarga USB-C e até 30 horas de áudio.",
@@ -2308,7 +2318,7 @@ export const products: Product[] = [
     "name": "AirPods 4 ANC",
     "category": "airpods",
     "subcategory": "AirPods",
-    "image": "/images/products/airpods/airpods-4-anc.png",
+    "image": "/images/products/verified/airpods4.jpg",
     "priceFrom": 1379.0,
     "condition": "new",
     "description": "Cancelamento Ativo de Ruído de última geração, Modo Ambiente, Áudio Adaptativo e estojo com alto-falante integrado para o recurso Buscar.",
@@ -2803,7 +2813,7 @@ export const products: Product[] = [
     "name": "iPad Air M4",
     "category": "ipad",
     "subcategory": "iPad Air",
-    "image": "/images/products/ipad/ipad-pro-m4.png",
+    "image": "/images/products/verified/air-11-spacegray.jpg",
     "priceFrom": 5700.0,
     "condition": "new",
     "availability": "available",
@@ -3014,7 +3024,27 @@ export const products: Product[] = [
     "description": "Equipado com o potente chip Apple M4, disponível nos tamanhos de 11 e 13 polegadas, compatível com Apple Pencil Pro e Magic Keyboard.",
     "warranty": "1 ano de garantia oficial Apple",
     "featured": true,
-    "active": true
+    "active": true,
+    "colorImages": {
+      "Space Gray": "/images/products/verified/air-11-spacegray.jpg",
+      "Blue": "/images/products/verified/air-11-blue.jpg",
+      "Purple": "/images/products/verified/air-11-purple.jpg",
+      "Starlight": "/images/products/verified/air-11-starlight.jpg"
+    },
+    "sizeColorImages": {
+      "11\"": {
+        "Space Gray": "/images/products/verified/air-11-spacegray.jpg",
+        "Blue": "/images/products/verified/air-11-blue.jpg",
+        "Purple": "/images/products/verified/air-11-purple.jpg",
+        "Starlight": "/images/products/verified/air-11-starlight.jpg"
+      },
+      "13\"": {
+        "Space Gray": "/images/products/verified/air-13-spacegray.jpg",
+        "Blue": "/images/products/verified/air-13-blue.jpg",
+        "Purple": "/images/products/verified/air-13-purple.jpg",
+        "Starlight": "/images/products/verified/air-13-starlight.jpg"
+      }
+    }
   },
   {
     "id": "airpods-pro-2",
@@ -3022,7 +3052,7 @@ export const products: Product[] = [
     "name": "AirPods Pro (2ª Geração) USB-C",
     "category": "airpods",
     "subcategory": "AirPods",
-    "image": "/images/products/airpods/airpods-pro-2.png",
+    "image": "/images/products/verified/airpods-pro2-usbc.jpg",
     "priceFrom": 1800.0,
     "condition": "new",
     "availability": "available",
@@ -3177,7 +3207,9 @@ export const products: Product[] = [
     "image": "/images/products/mac/macbook-air-midnight.png",
     "colorImages": {
       "Midnight": "/images/products/mac/macbook-air-midnight.png",
-      "Starlight": "/images/products/mac/macbook-air-starlight.png"
+      "Starlight": "/images/products/mac/macbook-air-starlight.png",
+      "Sky Blue": "/images/products/verified/air-sky-blue.jpg",
+      "Silver": "/images/products/mac/macbook-air-silver.png"
     },
     "priceFrom": 9340.0,
     "condition": "new",
@@ -3363,12 +3395,12 @@ export const products: Product[] = [
     "name": "iPad Air M3",
     "category": "ipad",
     "subcategory": "iPad Air M3",
-    "image": "/images/products/ipad/ipad-11-colors.png",
+    "image": "/images/products/verified/air-11-spacegray.jpg",
     "colorImages": {
-      "Blue": "/images/products/ipad/ipad-11-blue.png",
-      "Space Gray": "/images/products/ipad/ipad-pro-spaceblack.png",
-      "Purple": "/images/products/ipad/ipad-11-pink.png",
-      "Starlight": "/images/products/ipad/ipad-11-silver.png"
+      "Space Gray": "/images/products/verified/air-11-spacegray.jpg",
+      "Blue": "/images/products/verified/air-11-blue.jpg",
+      "Purple": "/images/products/verified/air-11-purple.jpg",
+      "Starlight": "/images/products/verified/air-11-starlight.jpg"
     },
     "priceFrom": 5100.0,
     "condition": "new",
@@ -3498,7 +3530,21 @@ export const products: Product[] = [
     ],
     "description": "Leve, potente e versátil com chip Apple M3, tela Liquid Retina brilhante e suporte completo ao Apple Pencil.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "sizeColorImages": {
+      "11\"": {
+        "Space Gray": "/images/products/verified/air-11-spacegray.jpg",
+        "Blue": "/images/products/verified/air-11-blue.jpg",
+        "Purple": "/images/products/verified/air-11-purple.jpg",
+        "Starlight": "/images/products/verified/air-11-starlight.jpg"
+      },
+      "13\"": {
+        "Space Gray": "/images/products/verified/air-13-spacegray.jpg",
+        "Blue": "/images/products/verified/air-13-blue.jpg",
+        "Purple": "/images/products/verified/air-13-purple.jpg",
+        "Starlight": "/images/products/verified/air-13-starlight.jpg"
+      }
+    }
   },
   {
     "id": "ipad-pro-m2-12-9",
@@ -3544,9 +3590,9 @@ export const products: Product[] = [
     "name": "Smart Folio para iPad Air 13\"",
     "category": "accessories",
     "subcategory": "Acessórios iPad",
-    "image": "/images/products/accessories/magic-keyboard.png",
+    "image": "/images/products/verified/smart-folio-air-13.jpg",
     "colorImages": {
-      "Charcoal Gray": "/images/products/accessories/magic-keyboard.png"
+      "Charcoal Gray": "/images/products/verified/smart-folio-air-13.jpg"
     },
     "priceFrom": 1430.0,
     "condition": "new",
@@ -3570,9 +3616,9 @@ export const products: Product[] = [
     "name": "iPad mini 6",
     "category": "ipad",
     "subcategory": "iPad mini",
-    "image": "/images/products/ipad/ipad-11-silver.png",
+    "image": "/images/products/verified/mini6-starlight.jpg",
     "colorImages": {
-      "Starlight": "/images/products/ipad/ipad-11-silver.png"
+      "Starlight": "/images/products/verified/mini6-starlight.jpg"
     },
     "priceFrom": 3740.0,
     "condition": "new",
@@ -3683,11 +3729,11 @@ export const products: Product[] = [
     "name": "Apple Watch Series 9",
     "category": "watch",
     "subcategory": "Apple Watch Series 9",
-    "image": "/images/products/watch/apple-watch-s11-black.png",
+    "image": "/images/products/verified/watch-s9-red.jpg",
     "colorImages": {
-      "Red": "/images/products/watch/apple-watch-s11-rosegold.png",
-      "Midnight": "/images/products/watch/apple-watch-s11-black.png",
-      "Pink": "/images/products/watch/apple-watch-s11-rosegold.png"
+      "Red": "/images/products/verified/watch-s9-red.jpg",
+      "Pink": "/images/products/verified/watch-s9-pink.jpg",
+      "Midnight": "/images/products/verified/watch-s9-midnight.jpg"
     },
     "priceFrom": 2000,
     "condition": "new",
@@ -3870,7 +3916,7 @@ export const products: Product[] = [
     "name": "AirPods Pro (Lightning)",
     "category": "airpods",
     "subcategory": "AirPods Pro",
-    "image": "/images/products/airpods/airpods-pro-2.png",
+    "image": "/images/products/verified/airpods-pro2-lightning.jpg",
     "priceFrom": 1260.0,
     "condition": "new",
     "colors": [
@@ -3893,7 +3939,7 @@ export const products: Product[] = [
     "name": "AirPods (3ª Geração)",
     "category": "airpods",
     "subcategory": "AirPods",
-    "image": "/images/products/airpods/airpods-4.png",
+    "image": "/images/products/verified/airpods3.jpg",
     "priceFrom": 1090.0,
     "condition": "new",
     "colors": [
@@ -3916,7 +3962,7 @@ export const products: Product[] = [
     "name": "AirPods (2ª Geração)",
     "category": "airpods",
     "subcategory": "AirPods",
-    "image": "/images/products/airpods/airpods-4.png",
+    "image": "/images/products/verified/airpods2.jpg",
     "priceFrom": 1300.0,
     "condition": "new",
     "colors": [
@@ -3962,7 +4008,7 @@ export const products: Product[] = [
     "name": "Apple Pencil com Adaptador USB-C (1ª Geração)",
     "category": "accessories",
     "subcategory": "Apple Pencil",
-    "image": "/images/products/accessories/apple-pencil-usbc.png",
+    "image": "/images/products/verified/pencil-firstgen.jpg",
     "priceFrom": 900.0,
     "condition": "new",
     "colors": [
@@ -3977,7 +4023,11 @@ export const products: Product[] = [
     ],
     "description": "Sensibilidade à pressão e à inclinação com traço instantâneo. Inclui adaptador de USB-C para Apple Pencil.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": true
+    "active": true,
+    "gallery": [
+      "/images/products/verified/pencil-firstgen.jpg",
+      "/images/products/verified/pencil-adapter.jpg"
+    ]
   },
   {
     "id": "magic-keyboard-11",
@@ -3985,10 +4035,10 @@ export const products: Product[] = [
     "name": "Magic Keyboard para iPad Pro / Air 11\"",
     "category": "accessories",
     "subcategory": "Teclados",
-    "image": "/images/products/accessories/magic-keyboard.png",
+    "image": "/images/products/verified/keyboard-ipad-11-black.jpg",
     "colorImages": {
-      "Black": "/images/products/accessories/magic-keyboard.png",
-      "White": "/images/products/accessories/magic-keyboard.png"
+      "Black": "/images/products/verified/keyboard-ipad-11-black.jpg",
+      "White": "/images/products/verified/keyboard-ipad-11-white.jpg"
     },
     "priceFrom": 2690.0,
     "condition": "new",
@@ -4021,7 +4071,7 @@ export const products: Product[] = [
     "name": "Magic Keyboard para iPad Pro 12.9\"",
     "category": "accessories",
     "subcategory": "Teclados",
-    "image": "/images/products/accessories/magic-keyboard.png",
+    "image": "/images/products/verified/keyboard-ipad-12-9-black.jpg",
     "priceFrom": 1389.0,
     "condition": "new",
     "sizes": [
@@ -4047,10 +4097,10 @@ export const products: Product[] = [
     "name": "Magic Keyboard para iPad Pro / Air 13\"",
     "category": "accessories",
     "subcategory": "Teclados",
-    "image": "/images/products/accessories/magic-keyboard.png",
+    "image": "/images/products/verified/keyboard-ipad-13-white.jpg",
     "colorImages": {
-      "Black": "/images/products/accessories/magic-keyboard.png",
-      "White": "/images/products/accessories/magic-keyboard.png"
+      "Black": "/images/products/verified/keyboard-ipad-13-black.jpg",
+      "White": "/images/products/verified/keyboard-ipad-13-white.jpg"
     },
     "priceFrom": 3400.0,
     "condition": "new",
@@ -4083,7 +4133,7 @@ export const products: Product[] = [
     "name": "Magic Keyboard Folio",
     "category": "accessories",
     "subcategory": "Teclados",
-    "image": "/images/products/accessories/magic-keyboard.png",
+    "image": "/images/products/verified/keyboard-folio.jpg",
     "priceFrom": 2300,
     "condition": "new",
     "colors": [
@@ -4106,7 +4156,7 @@ export const products: Product[] = [
     "name": "Magic Keyboard com Touch ID",
     "category": "accessories",
     "subcategory": "Teclados Mac",
-    "image": "/images/products/accessories/magic-keyboard.png",
+    "image": "/images/products/verified/keyboard-touchid-white.jpg",
     "priceFrom": 1740.0,
     "condition": "new",
     "colors": [
@@ -4129,10 +4179,10 @@ export const products: Product[] = [
     "name": "Magic Keyboard com Touch ID e Teclado Numérico",
     "category": "accessories",
     "subcategory": "Teclados Mac",
-    "image": "/images/products/accessories/magic-keyboard.png",
+    "image": "/images/products/verified/keyboard-numeric-white.jpg",
     "colorImages": {
-      "White": "/images/products/accessories/magic-keyboard.png",
-      "Black": "/images/products/accessories/magic-keyboard.png"
+      "White": "/images/products/verified/keyboard-numeric-white.jpg",
+      "Black": "/images/products/verified/keyboard-numeric-black.jpg"
     },
     "priceFrom": 2000.0,
     "condition": "new",
@@ -4162,10 +4212,10 @@ export const products: Product[] = [
     "name": "Magic Trackpad",
     "category": "accessories",
     "subcategory": "Acessórios Mac",
-    "image": "/images/products/accessories/magic-mouse.png",
+    "image": "/images/products/verified/trackpad-white.jpg",
     "colorImages": {
-      "White": "/images/products/accessories/magic-mouse.png",
-      "Black": "/images/products/accessories/magic-mouse.png"
+      "White": "/images/products/verified/trackpad-white.jpg",
+      "Black": "/images/products/verified/trackpad-black.jpg"
     },
     "priceFrom": 1120.0,
     "condition": "new",
@@ -4195,7 +4245,7 @@ export const products: Product[] = [
     "name": "Apple TV 4K 64GB (Wi-Fi)",
     "category": "accessories",
     "subcategory": "Apple TV",
-    "image": "/images/products/accessories/apple-tv.png",
+    "image": "/images/products/verified/tv-4k.jpg",
     "priceFrom": 1999.0,
     "condition": "new",
     "storage": [
@@ -4221,7 +4271,7 @@ export const products: Product[] = [
     "name": "Apple TV 4K 128GB (Wi-Fi + Ethernet)",
     "category": "accessories",
     "subcategory": "Apple TV",
-    "image": "/images/products/accessories/apple-tv.png",
+    "image": "/images/products/verified/tv-4k.jpg",
     "priceFrom": 2099.0,
     "condition": "new",
     "storage": [
@@ -4247,7 +4297,7 @@ export const products: Product[] = [
     "name": "Smart Keyboard",
     "category": "accessories",
     "subcategory": "Teclados",
-    "image": "/images/products/accessories/magic-keyboard.png",
+    "image": "/images/products/verified/smart-keyboard.jpg",
     "priceFrom": 1240.0,
     "condition": "new",
     "colors": [
@@ -4331,7 +4381,7 @@ export const products: Product[] = [
     "name": "iPhone 15 Plus",
     "category": "iphone",
     "subcategory": "iPhone 15 Series",
-    "image": "/images/products/iphone/iphone-15-all-colors.jpg",
+    "image": "/images/products/verified/iphone15-pink.jpg",
     "priceFrom": 5149,
     "condition": "new",
     "storage": [
@@ -4350,7 +4400,10 @@ export const products: Product[] = [
     ],
     "description": "Dynamic Island, câmera principal de 48 MP e conector USB-C com bateria para o dia todo.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": false
+    "active": false,
+    "colorImages": {
+      "Pink": "/images/products/verified/iphone15-pink.jpg"
+    }
   },
   {
     "id": "iphone-14-plus",
@@ -4358,7 +4411,7 @@ export const products: Product[] = [
     "name": "iPhone 14 Plus",
     "category": "iphone",
     "subcategory": "iPhone 14 Series",
-    "image": "/images/products/iphone/iphone-15-all-colors.jpg",
+    "image": "/images/products/verified/iphone14-plus-midnight.jpg",
     "priceFrom": 2900,
     "condition": "new",
     "storage": [
@@ -4377,7 +4430,10 @@ export const products: Product[] = [
     ],
     "description": "Grande tela Super Retina XDR de 6,7 polegadas, bateria duradoura e fotos incríveis com pouca luz.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": false
+    "active": false,
+    "colorImages": {
+      "Midnight": "/images/products/verified/iphone14-plus-midnight.jpg"
+    }
   },
   {
     "id": "iphone-13",
@@ -4385,7 +4441,7 @@ export const products: Product[] = [
     "name": "iPhone 13",
     "category": "iphone",
     "subcategory": "iPhone 13 Series",
-    "image": "/images/products/iphone/iphone-15-all-colors.jpg",
+    "image": "/images/products/verified/iphone13-midnight.jpg",
     "priceFrom": 3650,
     "condition": "new",
     "storage": [
@@ -4411,7 +4467,11 @@ export const products: Product[] = [
     ],
     "description": "Chip A15 Bionic super-rápido, modo Cinema e sistema avançado de câmera dupla.",
     "warranty": "1 ano de garantia oficial Apple",
-    "active": false
+    "active": false,
+    "colorImages": {
+      "Midnight": "/images/products/verified/iphone13-midnight.jpg",
+      "Starlight": "/images/products/verified/iphone13-starlight.jpg"
+    }
   },
   {
     "id": "mac-studio-m5-max",
@@ -4419,7 +4479,7 @@ export const products: Product[] = [
     "name": "Mac Studio M5 Max",
     "category": "mac",
     "subcategory": "Potência Extrema para Estúdios • Chip M5 Max",
-    "image": "/images/products/mac/mac-mini-m4-clean.png",
+    "image": "/images/products/verified/studio.jpg",
     "priceFrom": 24700.0,
     "condition": "new",
     "chips": [

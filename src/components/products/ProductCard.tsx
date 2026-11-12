@@ -239,8 +239,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   // 5. Dynamic image switching
   const displayedImage = useMemo(() => {
-    return getProductColorImage(product, currentColor, activeVariant?.image);
-  }, [activeVariant, currentColor, product.colorImages, product.image]);
+    return getProductColorImage(product, currentColor, activeVariant?.image, currentSize);
+  }, [activeVariant, currentColor, currentSize, product.colorImages, product.sizeColorImages, product.image]);
 
   const isUsed = product.condition === "used";
 

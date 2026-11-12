@@ -120,7 +120,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
     : (customStorage || storageList[0] || "");
   const currentColor = activeVariant?.color || customOptions.color || colorList[0] || product.colors?.[0] || "";
   const currentPrice = activeVariant?.price ?? product.priceFrom ?? 0;
-  const selectedImage = getProductColorImage(product, currentColor, activeVariant?.image);
+  const selectedImage = getProductColorImage(product, currentColor, activeVariant?.image, currentSize);
   useEffect(() => {
     onImageChange?.(selectedImage);
   }, [selectedImage, onImageChange]);

@@ -1,0 +1,338 @@
+{
+  "keyboard-ipad-11-black": {
+    "asset": "MXQT2",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MXQT2?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "keyboard-ipad-11-white": {
+    "asset": "MJQJ3",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MJQJ3?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "keyboard-ipad-12-9-black": {
+    "asset": "MXQU2",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MXQU2?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "keyboard-ipad-13-white": {
+    "asset": "MWR43",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MWR43?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "keyboard-ipad-13-black": {
+    "asset": "MWR53",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MWR53?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "keyboard-folio": {
+    "asset": "MQDP3",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MQDP3?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "keyboard-touchid-white": {
+    "asset": "MJLY4",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MJLY4?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "keyboard-numeric-white": {
+    "asset": "MJM64",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MJM64?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "keyboard-numeric-black": {
+    "asset": "MJM74",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MJM74?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "smart-keyboard": {
+    "asset": "MX3L2",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MX3L2?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "smart-folio-air-13": {
+    "asset": "MWK93",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MWK93?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "trackpad-white": {
+    "asset": "MXK93",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MXK93?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "trackpad-black": {
+    "asset": "MXKA3",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MXKA3?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "studio": {
+    "asset": "mac-studio-summary-select-202608",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mac-studio-summary-select-202608?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "neo-citrus": {
+    "asset": "macbook-neo-citrus-cto-hero-202603",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-neo-citrus-cto-hero-202603?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "neo-blush": {
+    "asset": "macbook-neo-blush-cto-hero-202603",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-neo-blush-cto-hero-202603?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "neo-indigo": {
+    "asset": "macbook-neo-indigo-cto-hero-202603",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-neo-indigo-cto-hero-202603?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "neo-silver": {
+    "asset": "macbook-neo-silver-cto-hero-202603",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/macbook-neo-silver-cto-hero-202603?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-sky-blue": {
+    "asset": "mba13-skyblue-select-202503",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mba13-skyblue-select-202503?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-11-spacegray": {
+    "asset": "ipad-air-select-11in-wifi-spacegray-202405",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-11in-wifi-spacegray-202405?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-11-blue": {
+    "asset": "ipad-air-select-11in-wifi-blue-202405",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-11in-wifi-blue-202405?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-11-purple": {
+    "asset": "ipad-air-select-11in-wifi-purple-202405",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-11in-wifi-purple-202405?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-11-starlight": {
+    "asset": "ipad-air-select-11in-wifi-starlight-202405",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-11in-wifi-starlight-202405?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-13-spacegray": {
+    "asset": "ipad-air-select-13in-wifi-spacegray-202405",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-13in-wifi-spacegray-202405?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-13-blue": {
+    "asset": "ipad-air-select-13in-wifi-blue-202405",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-13in-wifi-blue-202405?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-13-purple": {
+    "asset": "ipad-air-select-13in-wifi-purple-202405",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-13in-wifi-purple-202405?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "air-13-starlight": {
+    "asset": "ipad-air-select-13in-wifi-starlight-202405",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-13in-wifi-starlight-202405?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "mini7-gray": {
+    "asset": "ipad-mini-select-wifi-spacegray-202410",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-mini-select-wifi-spacegray-202410?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "mini7-blue": {
+    "asset": "ipad-mini-select-wifi-blue-202410",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-mini-select-wifi-blue-202410?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "mini7-purple": {
+    "asset": "ipad-mini-select-wifi-purple-202410",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-mini-select-wifi-purple-202410?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "mini7-starlight": {
+    "asset": "ipad-mini-select-wifi-starlight-202410",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-mini-select-wifi-starlight-202410?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "mini6-starlight": {
+    "asset": "ipad-mini-select-wifi-starlight-202109",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-mini-select-wifi-starlight-202109?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone15-pink": {
+    "asset": "iphone-15-pink-select-202309",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-15-pink-select-202309?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone15-green": {
+    "asset": "iphone-15-green-select-202309",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-15-green-select-202309?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone15-yellow": {
+    "asset": "iphone-15-yellow-select-202309",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-15-yellow-select-202309?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone14-plus-midnight": {
+    "asset": "iphone-14-plus-midnight-select-202209",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-14-plus-midnight-select-202209?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone-duo-night-sky": {
+    "asset": "iphone-duo-finish-select-night-sky-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-duo-finish-select-night-sky-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone-duo-star-white": {
+    "asset": "iphone-duo-finish-select-star-white-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-duo-finish-select-star-white-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone18-pro-black": {
+    "asset": "iphone-18-pro-finish-select-black-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-black-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone18-pro-silver": {
+    "asset": "iphone-18-pro-finish-select-silver-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-silver-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone18-pro-burgundy": {
+    "asset": "iphone-18-pro-finish-select-burgundy-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-burgundy-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone18-pro-glacier": {
+    "asset": "iphone-18-pro-finish-select-glacier-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-finish-select-glacier-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone18-pro-max-black": {
+    "asset": "iphone-18-pro-max-finish-select-black-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-black-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone18-pro-max-silver": {
+    "asset": "iphone-18-pro-max-finish-select-silver-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-silver-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone18-pro-max-burgundy": {
+    "asset": "iphone-18-pro-max-finish-select-burgundy-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-burgundy-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone18-pro-max-glacier": {
+    "asset": "iphone-18-pro-max-finish-select-glacier-202609",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-18-pro-max-finish-select-glacier-202609?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-pro-cosmicorange": {
+    "asset": "iphone-17-pro-finish-select-cosmicorange-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-finish-select-cosmicorange-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-pro-deepblue": {
+    "asset": "iphone-17-pro-finish-select-deepblue-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-finish-select-deepblue-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-pro-silver": {
+    "asset": "iphone-17-pro-finish-select-silver-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-finish-select-silver-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-pro-max-cosmicorange": {
+    "asset": "iphone-17-pro-max-finish-select-cosmicorange-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-max-finish-select-cosmicorange-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-pro-max-deepblue": {
+    "asset": "iphone-17-pro-max-finish-select-deepblue-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-max-finish-select-deepblue-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-pro-max-silver": {
+    "asset": "iphone-17-pro-max-finish-select-silver-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-pro-max-finish-select-silver-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-sage": {
+    "asset": "iphone-17-finish-select-sage-202509_GEO_US",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-sage-202509_GEO_US?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-lavender": {
+    "asset": "iphone-17-finish-select-lavender-202509_GEO_US",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-lavender-202509_GEO_US?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-mistblue": {
+    "asset": "iphone-17-finish-select-mistblue-202509_GEO_US",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-mistblue-202509_GEO_US?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-white": {
+    "asset": "iphone-17-finish-select-white-202509_GEO_US",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-white-202509_GEO_US?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17-black": {
+    "asset": "iphone-17-finish-select-black-202509_GEO_US",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17-finish-select-black-202509_GEO_US?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17e-white": {
+    "asset": "iphone-17e-finish-select-white-202603",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17e-finish-select-white-202603?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17e-softpink": {
+    "asset": "iphone-17e-finish-select-softpink-202603",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17e-finish-select-softpink-202603?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone17e-black": {
+    "asset": "iphone-17e-finish-select-black-202603",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-17e-finish-select-black-202603?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone-air-spaceblack": {
+    "asset": "iphone-air-finish-select-spaceblack-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-air-finish-select-spaceblack-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone-air-cloudwhite": {
+    "asset": "iphone-air-finish-select-cloudwhite-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-air-finish-select-cloudwhite-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone-air-skyblue": {
+    "asset": "iphone-air-finish-select-skyblue-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-air-finish-select-skyblue-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone-air-lightgold": {
+    "asset": "iphone-air-finish-select-lightgold-202509",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-air-finish-select-lightgold-202509?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "airpods2": {
+    "asset": "MRXJ2",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MRXJ2?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "airpods3": {
+    "asset": "MME73",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MME73?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "airpods4": {
+    "asset": "airpods-4-hero-select-202409",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-4-hero-select-202409?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "airpods-pro2-usbc": {
+    "asset": "MTJV3",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MTJV3?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "airpods-pro2-lightning": {
+    "asset": "MQD83",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MQD83?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone13-midnight": {
+    "asset": "iphone-13-midnight-select-2021",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-13-midnight-select-2021?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "iphone13-starlight": {
+    "asset": "iphone-13-starlight-select-2021",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone-13-starlight-select-2021?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "tv-4k": {
+    "asset": "apple-tv-4k-hero-select-202210",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/apple-tv-4k-hero-select-202210?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "pencil-firstgen": {
+    "asset": "MK0C2",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MK0C2?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "pencil-adapter": {
+    "asset": "MWML3",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MWML3?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "watch-s9-red": {
+    "image": "https://www.apple.com/newsroom/images/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/article/Apple-Watch-S9-red-aluminum-Sport-Band-PRODUCT-RED-230912_inline.jpg.large.jpg",
+    "reference": "https://www.apple.com/newsroom/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/"
+  },
+  "watch-s9-pink": {
+    "image": "https://www.apple.com/newsroom/images/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/article/Apple-Watch-S9-pink-aluminum-Sport-Band-pink-230912_inline.jpg.large.jpg",
+    "reference": "https://www.apple.com/newsroom/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/"
+  },
+  "watch-s9-midnight": {
+    "image": "https://www.apple.com/newsroom/images/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/article/Apple-Watch-S9-midnight-aluminum-Sport-Loop-midnight-230912_inline.jpg.large.jpg",
+    "reference": "https://www.apple.com/newsroom/2023/09/apple-introduces-the-advanced-new-apple-watch-series-9/"
+  },
+  "watch-s11-spacegray": {
+    "asset": "watch-case-46-aluminum-spacegray-cell-s11_VW_PF",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-case-46-aluminum-spacegray-cell-s11_VW_PF?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "watch-s12-black": {
+    "asset": "watch-case-42-aluminum-black-nc-s12_VW_PF",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-case-42-aluminum-black-nc-s12_VW_PF?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "watch-s12-darkbronze": {
+    "asset": "watch-case-42-aluminum-darkbronze-nc-s12_VW_PF",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-case-42-aluminum-darkbronze-nc-s12_VW_PF?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "watch-s12-lightgold": {
+    "asset": "watch-case-42-aluminum-lightgold-nc-s12_VW_PF",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-case-42-aluminum-lightgold-nc-s12_VW_PF?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "watch-s12-spacegray": {
+    "asset": "watch-case-42-aluminum-spacegray-nc-s12_VW_PF",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-case-42-aluminum-spacegray-nc-s12_VW_PF?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "watch-ultra4-natural": {
+    "asset": "watch-case-49-titanium-natural-ultra4_VW_PF",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-case-49-titanium-natural-ultra4_VW_PF?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  },
+  "watch-ultra4-black": {
+    "asset": "watch-case-49-titanium-black-ultra4_VW_PF",
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-case-49-titanium-black-ultra4_VW_PF?wid=1000&hei=1000&fmt=jpeg&qlt=90"
+  }
+}

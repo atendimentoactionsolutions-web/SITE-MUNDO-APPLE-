@@ -181,3 +181,37 @@ test('every catalog finish has a defined swatch, including inactive products', (
     }
   }
 });
+
+test('product photos follow both selected finish and screen size', () => {
+  const { getProductColorImage } = loadProductColors();
+  const product = { image: '/air-default.jpg', colorImages: { Purple: '/air-purple.jpg' }, sizeColorImages: {
+    '11"': { Purple: '/air-11-purple.jpg' }, '13"': { Purple: '/air-13-purple.jpg' },
+  } };
+  assert.equal(getProductColorImage(product, 'Purple', undefined, '11"'), '/air-11-purple.jpg');
+  assert.equal(getProductColorImage(product, 'Purple', undefined, '13"'), '/air-13-purple.jpg');
+  assert.equal(getProductColorImage(product, 'Purple'), '/air-purple.jpg');
+  assert.equal(getProductColorImage(product, 'Purple', '/exact-variant.jpg', '13"'), '/exact-variant.jpg');
+});
+
+test('repaired accessories, tablets and computers never reuse unrelated product images', () => {
+  const module = { exports: {} };
+  const code = ts.transpileModule(fs.readFileSync(path.join(__dirname, '../src/data/products.ts'), 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+  vm.runInNewContext(code, { module, exports: module.exports });
+  const products = Object.fromEntries(module.exports.products.map(product => [product.id, product]));
+  const expected = {
+    'magic-keyboard-11': 'keyboard-ipad-11-black', 'magic-keyboard-12-9': 'keyboard-ipad-12-9-black',
+    'magic-keyboard-13': 'keyboard-ipad-13-white', 'magic-keyboard-touch-id': 'keyboard-touchid-white',
+    'magic-keyboard-touch-id-numeric': 'keyboard-numeric-white', 'magic-trackpad': 'trackpad-white',
+    'smart-folio-ipad-air-13': 'smart-folio-air-13', 'apple-tv-4k-64gb': 'tv-4k',
+    'apple-tv-4k-128gb': 'tv-4k', 'mac-studio-m4-max': 'studio', 'mac-studio-m5-max': 'studio',
+    'ipad-mini-7': 'mini7-gray', 'ipad-mini-6': 'mini6-starlight', 'macbook-neo-13': 'neo-citrus',
+  };
+  for (const [id, asset] of Object.entries(expected)) {
+    assert.equal(products[id].image, `/images/products/verified/${asset}.jpg`, id);
+    assert.ok(fs.existsSync(path.join(__dirname, '../public', products[id].image)), id);
+  }
+  const { getProductColorImage } = loadProductColors();
+  for (const id of ['apple-watch-ultra-3', 'apple-watch-ultra-4']) {
+    assert.notEqual(getProductColorImage(products[id], 'Black'), getProductColorImage(products[id], 'Natural'), id);
+  }
+});

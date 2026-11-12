@@ -22,6 +22,7 @@ export interface Product {
   subcategory?: string;
   image: string;
   colorImages?: Record<string, string>;
+  sizeColorImages?: Record<string, Record<string, string>>;
   gallery?: string[];
   priceFrom: number;
   supplierUpdatedAt?: string;

@@ -87,9 +87,11 @@ export function getProductColorHex(color: string): string {
   return normalizedPalette[normalizeProductColor(color)] || '#8E8E93';
 }
 
-export function getProductColorImage(product: { image: string; colorImages?: Record<string, string> }, color: string, variantImage?: string): string {
+export function getProductColorImage(product: { image: string; colorImages?: Record<string, string>; sizeColorImages?: Record<string, Record<string, string>> }, color: string, variantImage?: string, size?: string): string {
   if (variantImage) return variantImage;
   const key = normalizeProductColor(color);
-  const match = Object.entries(product.colorImages || {}).find(([name]) => normalizeProductColor(name) === key);
+  const sized = size && product.sizeColorImages?.[size];
+  const images = sized || product.colorImages || {};
+  const match = Object.entries(images).find(([name]) => normalizeProductColor(name) === key);
   return match?.[1] || product.image;
 }
