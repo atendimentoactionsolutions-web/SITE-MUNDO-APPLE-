@@ -47,55 +47,7 @@ interface StorageOption {
   capacityGb: number;
 }
 
-const colorMap: Record<string, string> = {
-  "Black": "#1D1D1F",
-  "Space Black": "#18181A",
-  "Midnight": "#1B212C",
-  "White": "#F5F5F7",
-  "Cloud White": "#FAFAFC",
-  "Starlight": "#F0EBE3",
-  "Silver": "#E3E4E6",
-  "Space Gray": "#535150",
-  "Natural": "#8E8B82",
-  "Natural Titanium": "#8E8B82",
-  "Black Titanium": "#1E1E20",
-  "White Titanium": "#F5F5F7",
-  "Desert Titanium": "#C5B49E",
-  "Deep Blue": "#223854",
-  "Dark Blue": "#223854",
-  "Blue": "#3B6B96",
-  "Mist Blue": "#6E93B2",
-  "Sky Blue": "#7EA2C6",
-  "Teal": "#43828A",
-  "Ultramarine": "#38529A",
-  "Pink": "#E8B2C0",
-  "Soft Pink": "#EAC2CE",
-  "Sage": "#829383",
-  "Lavender": "#B1A1C6",
-  "Light Gold": "#E5D4B3",
-  "Gold": "#E5D4B3",
-  "Cosmic Orange": "#D85E30",
-  "Citrus": "#D9E24C",
-  "Indigo": "#3B485A",
-  "Blush": "#E8CBCB",
-  "Green": "#4C8A68",
-  "Yellow": "#F2D358",
-  "Jet Black": "#121214",
-  "Rose Gold": "#E5B09E",
-  "Orange": "#D85E30",
-  "Purple": "#A594B8",
-  "Red": "#D32F2F",
-  "Preto": "#1D1D1F",
-  "Titânio Preto": "#1E1E20",
-  "Prateado": "#E3E4E6",
-  "Titânio Natural": "#8E8B82",
-  "Bordô": "#5A1827",
-  "Burgundy": "#5A1827",
-  "Glacier": "#B5C8D5",
-  "Céu Noturno": "#1C1F26",
-  "Branco-Estrela": "#F0EBE3",
-  "Branco": "#F5F5F7",
-};
+import { getProductColorHex } from "@/utils/product-colors";
 
 const upgradeCategories = [
   { id: "iphone", label: "iPhones", icon: Smartphone },
@@ -1022,7 +974,7 @@ Gostaria de agendar a entrega e retirada simultânea em SP!`;
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {availableColorsForStorage.map((col) => {
                     const isSel = selectedNewColor?.toLowerCase() === col.toLowerCase();
-                    const colorHex = colorMap[col] || "#8E8E93";
+                    const colorHex = getProductColorHex(col);
                     const varForColor = selectedNewProduct?.variants?.find(
                       (v) =>
                         (!selectedNewStorage ||

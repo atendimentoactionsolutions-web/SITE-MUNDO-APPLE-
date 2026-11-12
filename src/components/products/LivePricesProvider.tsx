@@ -14,7 +14,7 @@ export function LivePricesProvider({ children }: { children: React.ReactNode }) 
       try {
         const response = await fetch("/api/products/live", { cache: "no-store", signal: AbortSignal.timeout(10000) });
         const data = await response.json();
-        if (active && response.ok && data.success && Array.isArray(data.products) && data.products.length > 0) setProducts(data.products);
+        if (active && response.ok && data.success && Array.isArray(data.products)) setProducts(data.products);
       } catch { console.warn("Mantendo os ultimos precos conhecidos."); }
       finally { busy = false; }
     };

@@ -1,8 +1,7 @@
 import { getProductBySlug, getProducts } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { ProductGallery } from "@/components/products/ProductGallery";
-import { ProductDetailOptions } from "@/components/products/ProductDetailOptions";
+import { ProductDetailPresentation } from "@/components/products/ProductDetailPresentation";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ShieldCheck, Truck, Store, RefreshCw, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -112,21 +111,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
         </div>
 
         {/* Product Detail Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 bg-white rounded-3xl p-6 sm:p-10 border border-apple-border shadow-apple-card mb-16">
-          {/* Left Column: Gallery */}
-          <div className="lg:col-span-7">
-            <ProductGallery
-              mainImage={product.image}
-              gallery={product.gallery}
-              name={product.name}
-            />
-          </div>
-
-          {/* Right Column: Options & CTAs */}
-          <div className="lg:col-span-5">
-            <ProductDetailOptions product={product} />
-          </div>
-        </div>
+        <ProductDetailPresentation product={product} />
 
         {/* Specs & Description Section */}
         <div className="bg-white rounded-3xl p-8 sm:p-10 border border-apple-border shadow-apple-card mb-16 space-y-8">

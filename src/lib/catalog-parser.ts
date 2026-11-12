@@ -210,7 +210,7 @@ export function parseCatalogText(
       const screenSize = szMatch ? szMatch[1] : undefined;
       const ramMatch = cfg.match(/(\d+GB)\s+(\d+(?:GB|TB))/);
       const ram = ramMatch ? ramMatch[1] : undefined;
-      const storage = ramMatch ? ramMatch[2] : undefined;
+      const storage = ramMatch ? ramMatch[2] : cfg.match(/(\d+(?:GB|TB))$/)?.[1];
 
       let chip: string | undefined = undefined;
       if (cfg.includes("M5 PRO")) chip = "M5 Pro";
@@ -249,7 +249,7 @@ export function parseCatalogText(
       else if (cfg.startsWith("APPLE WATCH SE 3")) pid = "apple-watch-se-3";
       else if (cfg.startsWith("APPLE WATCH SE 2")) pid = "apple-watch-se-2";
 
-      const szMatch = cfg.match(/(40mm|42mm|44mm|46mm|49mm)/i);
+      const szMatch = cfg.match(/(40mm|41mm|42mm|44mm|45mm|46mm|49mm)/i);
       const size = szMatch ? szMatch[1].toLowerCase() : undefined;
       const conn = cfg.includes("CELULAR") || cfg.includes("CELLULAR") ? "GPS + Cellular" : "GPS";
 
@@ -262,7 +262,7 @@ export function parseCatalogText(
             price: v.price,
             available: true,
           };
-          if (cfg.includes("SE")) {
+          if (cfg.includes("SE") || cfg.startsWith("APPLE WATCH S9")) {
             item.chip = conn;
           }
           productVariants[pid].push(item);
@@ -303,12 +303,14 @@ export function parseCatalogText(
       else if (cfg.includes("MAGIC KEYBOARD 11")) pid = "magic-keyboard-11";
       else if (cfg.includes("MAGIC KEYBOARD 12.9")) pid = "magic-keyboard-12-9";
       else if (cfg.includes("MAGIC KEYBOARD 13")) pid = "magic-keyboard-13";
+      else if (cfg.includes("MAGIC KEYBOARD FOLIO")) pid = "magic-keyboard-folio";
       else if (cfg.includes("TOUCH ID + NUMERICO") || cfg.includes("NUMÉRICO")) pid = "magic-keyboard-touch-id-numeric";
       else if (cfg.includes("TOUCH ID")) pid = "magic-keyboard-touch-id";
       else if (cfg.includes("MAGIC MOUSE 2")) pid = "magic-mouse-2";
       else if (cfg.includes("MAGIC MOUSE 3")) pid = "magic-mouse-3";
       else if (cfg.includes("MAGIC TRACKPAD")) pid = "magic-trackpad";
       else if (cfg.includes("AIRTAG 2 4 PACK")) pid = "airtag-2-4pack";
+      else if (cfg.includes("AIRTAG 2 1 PACK")) pid = "airtag-2-1pack";
       else if (cfg.includes("AIRTAG 1 PACK")) pid = "airtag-1pack";
       else if (cfg.includes("AIRTAG 4 PACK")) pid = "airtag-4pack";
       else if (cfg.includes("APPLE TV 4K 64GB")) pid = "apple-tv-4k-64gb";

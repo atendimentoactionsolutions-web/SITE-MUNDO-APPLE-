@@ -65,11 +65,11 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
       >
         {/* Header */}
         <div className="shrink-0 px-4 sm:px-6 py-4 sm:py-5 border-b border-[#E5E7EB] flex items-center justify-between bg-[#F5F5F7]">
-          <div className="flex items-center gap-3">
+          <div className="min-w-0 flex items-center gap-3">
             <div className="shrink-0 w-10 h-10 rounded-2xl bg-blue-50 text-[#0071E3] border border-blue-100 flex items-center justify-center">
               <CreditCard className="w-5 h-5" />
             </div>
-            <div>
+            <div className="min-w-0 break-words">
               <h3 className="text-base sm:text-lg font-bold text-[#0F172A] font-display">
                 Simulador de Parcelamento
               </h3>
@@ -109,9 +109,9 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
         {/* Installment Table (Scrollable) */}
         <div className="min-h-0 p-2 sm:p-6 overflow-y-auto space-y-2 divide-y divide-slate-100">
           <div className="grid grid-cols-12 text-[11px] font-bold uppercase tracking-wider text-[#64748B] pb-2 px-3">
-            <span className="col-span-3">Parcelas</span>
+            <span className="col-span-2">Parcelas</span>
             <span className="col-span-4 text-right">Valor da Parcela</span>
-            <span className="col-span-3 text-right">Total no Cartão</span>
+            <span className="col-span-4 text-right">Total no Cartão</span>
             <span className="col-span-2 text-right">Ação</span>
           </div>
 
@@ -125,7 +125,7 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
               }`}
             >
               {/* Parcelas */}
-              <div className="col-span-3 font-bold text-[#0F172A] flex items-center gap-1.5">
+              <div className="col-span-2 font-bold text-[#0F172A] flex items-center gap-1.5">
                 <span>{opt.installments}x</span>
                 {(opt.installments === 12 || opt.installments === 18) && (
                   <span className="text-[9px] bg-[#0071E3] text-white px-1.5 py-0.5 rounded-full font-extrabold hidden sm:inline">
@@ -135,12 +135,12 @@ export const InstallmentsModal: React.FC<InstallmentsModalProps> = ({
               </div>
 
               {/* Valor Parcela */}
-              <div className="col-span-4 text-right font-extrabold text-[#0F172A] font-display text-sm">
+              <div className="col-span-4 text-right font-extrabold text-[#0F172A] font-display text-[11px] sm:text-sm">
                 {formatCurrency(opt.installmentValue)}
               </div>
 
               {/* Total Cartão */}
-              <div className="col-span-3 text-right text-[#475569] font-medium text-xs">
+              <div className="col-span-4 text-right text-[#475569] font-medium text-[10px] sm:text-xs">
                 {formatCurrency(opt.totalValue)}
               </div>
 

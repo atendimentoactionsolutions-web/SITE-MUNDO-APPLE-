@@ -20,73 +20,22 @@ import {
   RefreshCw,
 } from "lucide-react";
 
-const colorMap: Record<string, string> = {
-  "Black": "#1D1D1F",
-  "Space Black": "#18181A",
-  "Midnight": "#1B212C",
-  "White": "#F5F5F7",
-  "Cloud White": "#FAFAFC",
-  "Starlight": "#F0EBE3",
-  "Silver": "#E3E4E6",
-  "Space Gray": "#535150",
-  "Natural": "#8E8B82",
-  "Natural Titanium": "#8E8B82",
-  "Black Titanium": "#1E1E20",
-  "Desert Titanium": "#C5B49E",
-  "Deep Blue": "#223854",
-  "Dark Blue": "#223854",
-  "Blue": "#3B6B96",
-  "Mist Blue": "#6E93B2",
-  "Sky Blue": "#7EA2C6",
-  "Teal": "#43828A",
-  "Ultramarine": "#38529A",
-  "Pink": "#E8B2C0",
-  "Soft Pink": "#EAC2CE",
-  "Sage": "#829383",
-  "Lavender": "#B1A1C6",
-  "Light Gold": "#E5D4B3",
-  "Gold": "#E5D4B3",
-  "Cosmic Orange": "#D85E30",
-  "Citrus": "#D9E24C",
-  "Indigo": "#3B485A",
-  "Blush": "#E8CBCB",
-  "Green": "#4C8A68",
-  "Yellow": "#F2D358",
-  "Jet Black": "#121214",
-  "Rose Gold": "#E5B09E",
-  "Orange": "#D85E30",
-  "Purple": "#A594B8",
-  "Red": "#D32F2F",
-  "Preto": "#1D1D1F",
-  "Titânio Preto": "#1E1E20",
-  "Prateado": "#E3E4E6",
-  "Titânio Natural": "#8E8B82",
-  "Bordô": "#5A1827",
-  "Burgundy": "#5A1827",
-  "Glacier": "#B5C8D5",
-  "Céu Noturno": "#1C1F26",
-  "Branco-Estrela": "#F0EBE3",
-  "Branco": "#F5F5F7",
-  "Bronze-escura": "#4A3B32",
-  "Dourada-clara": "#E5D4B3",
-  "Cinza-espacial": "#535150",
-  "Preta": "#1D1D1F",
-  "Charcoal gray": "#36454F",
-};
+import { getProductColorHex, getProductColorImage } from "@/utils/product-colors";
 
 interface ProductDetailOptionsProps {
   product: Product;
+  onImageChange?: (image: string) => void;
 }
 
-export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ product: initialProduct }) => {
+export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ product: initialProduct, onImageChange }) => {
   const product = useLiveProduct(initialProduct);
   const [isInstallmentsModalOpen, setIsInstallmentsModalOpen] = useState(false);
   const hasVariants = Boolean(product.variants && product.variants.length > 0);
 
   // 1. Available Dimensions derived safely
   const sizeList = useMemo(() => {
-    if (product.sizes && product.sizes.length > 0) return product.sizes;
-    if (product.screenSizes && product.screenSizes.length > 0) return product.screenSizes;
+    if (!hasVariants && product.sizes && product.sizes.length > 0) return product.sizes;
+    if (!hasVariants && product.screenSizes && product.screenSizes.length > 0) return product.screenSizes;
     if (!hasVariants) return [];
     const set = new Set(
       product.variants!.map((v) => v.size || v.screenSize).filter(Boolean) as string[]
@@ -102,7 +51,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
   }, [sizeList, product.category]);
 
   const chipList = useMemo(() => {
-    if (product.chips && product.chips.length > 0) return product.chips;
+    if (!hasVariants && product.chips && product.chips.length > 0) return product.chips;
     if (!hasVariants) return [];
     const set = new Set(
       product.variants!.map((v) => v.chip).filter(Boolean) as string[]
@@ -111,7 +60,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
   }, [product.chips, product.variants, hasVariants]);
 
   const ramList = useMemo(() => {
-    if (product.ramOptions && product.ramOptions.length > 0) return product.ramOptions;
+    if (!hasVariants && product.ramOptions && product.ramOptions.length > 0) return product.ramOptions;
     if (!hasVariants) return [];
     const set = new Set(
       product.variants!.map((v) => v.ram).filter(Boolean) as string[]
@@ -120,7 +69,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
   }, [product.ramOptions, product.variants, hasVariants]);
 
   const storageList = useMemo(() => {
-    if (product.storage && product.storage.length > 0) return product.storage;
+    if (!hasVariants && product.storage && product.storage.length > 0) return product.storage;
     if (!hasVariants) return [];
     const set = new Set(
       product.variants!.map((v) => v.storage).filter(Boolean) as string[]
@@ -129,7 +78,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
   }, [product.storage, product.variants, hasVariants]);
 
   const colorList = useMemo(() => {
-    if (product.colors && product.colors.length > 0) return product.colors;
+    if (!hasVariants && product.colors && product.colors.length > 0) return product.colors;
     if (!hasVariants) return [];
     const set = new Set(
       product.variants!.map((v) => v.color).filter(Boolean) as string[]
@@ -171,6 +120,10 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
     : (customStorage || storageList[0] || "");
   const currentColor = activeVariant?.color || customOptions.color || colorList[0] || product.colors?.[0] || "";
   const currentPrice = activeVariant?.price ?? product.priceFrom ?? 0;
+  const selectedImage = getProductColorImage(product, currentColor, activeVariant?.image);
+  useEffect(() => {
+    onImageChange?.(selectedImage);
+  }, [selectedImage, onImageChange]);
 
   // 3. Dynamic options filtering
   const availableChipList = useMemo(() => {
@@ -273,7 +226,13 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
   // Color Swatches data with live prices
   const displayColors = useMemo(() => {
     if (colorList.length === 0) return [];
-    return colorList.map((colorName) => {
+    return colorList.filter((colorName) => !hasVariants || product.variants?.some(v => {
+      const size = v.size || v.screenSize || "";
+      return v.color === colorName && (!currentSize || !size || size === currentSize)
+        && (!currentChip || !v.chip || v.chip === currentChip)
+        && (!currentRam || !v.ram || v.ram === currentRam)
+        && (!currentStorage || !v.storage || v.storage === currentStorage);
+    })).map((colorName) => {
       const directMatch = product.variants?.find((v) => {
         const vSize = v.size || v.screenSize || "";
         return (
@@ -289,7 +248,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         price: directMatch?.price,
       };
     });
-  }, [colorList, product.variants, currentSize, currentChip, currentRam, currentStorage]);
+  }, [colorList, hasVariants, product.variants, currentSize, currentChip, currentRam, currentStorage]);
 
   const handleWhatsAppRedirect = () => {
     let messageText = `Olá! Tenho interesse no *${product.name}*`;
@@ -502,7 +461,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
           <div className="flex items-center gap-2.5 flex-wrap">
             {displayColors.map((c) => {
               const isSelected = currentColor === c.color;
-              const bgHex = colorMap[c.color] || "#6E93B2";
+              const bgHex = getProductColorHex(c.color);
               const isWhite =
                 c.color.toLowerCase().includes("white") ||
                 c.color.toLowerCase().includes("silver") ||
@@ -527,7 +486,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
                     style={{ backgroundColor: bgHex }}
                   />
                   <span>{c.color}</span>
-                  {c.price && c.price > 0 && (
+                  {c.price !== undefined && c.price > 0 && (
                     <span className="text-[11px] opacity-80 font-normal">
                       ({formatCurrency(c.price)})
                     </span>

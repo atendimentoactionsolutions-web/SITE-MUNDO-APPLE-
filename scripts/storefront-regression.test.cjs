@@ -6,6 +6,14 @@ const vm = require('node:vm');
 const ts = require('typescript');
 const React = require('react');
 
+function loadProductColors() {
+  const module = { exports: {} };
+  const source = fs.readFileSync(path.join(__dirname, '../src/utils/product-colors.ts'), 'utf8');
+  const code = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+  vm.runInNewContext(code, { module, exports: module.exports });
+  return module.exports;
+}
+
 // Exercise client state and handlers without a browser or production data writes.
 function componentHarness(file, exportName, extra = {}) {
   const state = [];
@@ -29,6 +37,7 @@ function componentHarness(file, exportName, extra = {}) {
   const imports = {
     './LivePricesProvider': { useLiveProduct: p => p },
     '@/components/products/LivePricesProvider': { useLiveCatalog: p => p, useLivePrice: (_, p) => p },
+    '@/utils/product-colors': loadProductColors(),
     react: hooks,
     'react-dom': { createPortal: (children, target) => ({ portal: children, target }) },
     'react/jsx-runtime': require('react/jsx-runtime'),
@@ -126,3 +135,49 @@ for (const [file, name] of [
     }
   });
 }
+
+for (const name of ['ProductCard', 'ProductDetailOptions']) {
+  test(`${name}: only stored capacities and colors for the selected configuration are offered`, () => {
+    const render = componentHarness(`src/components/products/${name}.tsx`, name);
+    const tree = render({ product: { ...product, storage: ['128GB', '256GB', '512GB'], colors: ['Black', 'White', 'Red'], variants: [
+      { storage: '128GB', color: 'Black', price: 1000, available: true },
+      { storage: '256GB', color: 'White', price: 2000, available: true },
+    ] } });
+    const buttons = nodes(tree).filter(n => n.type === 'button');
+    assert.ok(buttons.some(n => n.props.children === '256GB'));
+    assert.ok(!buttons.some(n => n.props.children === '512GB'));
+    assert.ok(!buttons.some(n => n.props['aria-label'] === 'Selecionar cor White' || nodes(n.props.children).some(c => c.props?.children === 'White')));
+  });
+}
+
+test('translated finishes resolve to the same color and image without merging distinct colors', () => {
+  const { normalizeProductColor, getProductColorHex, getProductColorImage } = loadProductColors();
+  for (const [pt, en] of [['Titânio Natural', 'Natural Titanium'], ['Titânio Preto', 'Black Titanium'], ['Titânio Branco', 'White Titanium'], ['Titânio Deserto', 'Desert Titanium'], ['Bronze-escura', 'Dark Bronze']]) {
+    assert.equal(normalizeProductColor(pt), normalizeProductColor(en));
+    assert.equal(getProductColorHex(pt), getProductColorHex(en));
+    assert.equal(getProductColorImage({ image: '/default.png', colorImages: { [en]: '/finish.png' } }, pt), '/finish.png');
+  }
+  assert.notEqual(normalizeProductColor('Black'), normalizeProductColor('Space Black'));
+  assert.notEqual(normalizeProductColor('Blue'), normalizeProductColor('Sky Blue'));
+  assert.notEqual(normalizeProductColor('White'), normalizeProductColor('Star White'));
+  assert.equal(getProductColorHex('  NIGHT   SKY '), '#1C1F26');
+  assert.equal(getProductColorHex('DARK BRONZE'), '#4A3B32');
+  assert.equal(getProductColorHex('Charcoal gray'), '#36454F');
+  assert.equal(getProductColorImage({ image: '/default.png' }, 'Black', '/variant.png'), '/variant.png');
+});
+
+test('every catalog finish has a defined swatch, including inactive products', () => {
+  const { colorMap, normalizeProductColor } = loadProductColors();
+  const module = { exports: {} };
+  const source = fs.readFileSync(path.join(__dirname, '../src/data/products.ts'), 'utf8');
+  const code = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+  vm.runInNewContext(code, { module, exports: module.exports });
+  const overrides = JSON.parse(fs.readFileSync(path.join(__dirname, '../products_override.json'), 'utf8'));
+  const known = new Set(Object.keys(colorMap).map(normalizeProductColor));
+  for (const initial of module.exports.products) {
+    const product = { ...initial, ...overrides[initial.id] };
+    for (const variant of product.variants || []) {
+      if (variant.color) assert.ok(known.has(normalizeProductColor(variant.color)), `${product.id}: unmapped finish ${variant.color}`);
+    }
+  }
+});
