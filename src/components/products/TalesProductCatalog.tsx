@@ -12,7 +12,6 @@ interface TalesProductCatalogProps {
 }
 
 const CATEGORIES = [
-  { id: "todos", label: "Todos os novos" },
   { id: "iphone", label: "iPhones novos" },
   { id: "mac", label: "MacBooks e Macs" },
   { id: "ipad", label: "iPad" },
@@ -23,7 +22,7 @@ const CATEGORIES = [
 
 export const TalesProductCatalog: React.FC<TalesProductCatalogProps> = ({ products }) => {
   const showPrices = Boolean(storeConfig.showPrices);
-  const [category, setCategory] = useState<string>("todos");
+  const [category, setCategory] = useState<string>("iphone");
   const [query, setQuery] = useState<string>("");
   const [order, setOrder] = useState<string>("destaques");
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false);
@@ -34,7 +33,7 @@ export const TalesProductCatalog: React.FC<TalesProductCatalogProps> = ({ produc
     return products.filter((p) => {
       if (p.condition !== "new") return false;
 
-      if (category !== "todos") {
+      if (category) {
         const cat = p.category.toLowerCase();
         const target = category.toLowerCase();
         if (target === "accessories") {
@@ -87,7 +86,12 @@ export const TalesProductCatalog: React.FC<TalesProductCatalogProps> = ({ produc
   const availableCapacities = useMemo(() => {
     const set = new Set<string>();
     products
-      .filter((p) => p.condition === "new" && (category === "todos" || p.category.toLowerCase() === category.toLowerCase()))
+      .filter((p) => {
+        if (p.condition !== "new") return false;
+        const cat = p.category.toLowerCase();
+        const target = category.toLowerCase();
+        return target === "accessories" ? (cat === "accessories" || cat === "acessorios") : cat === target;
+      })
       .forEach((p) => {
         p.storage?.forEach((s) => set.add(s));
         p.variants?.forEach((v) => {
@@ -226,7 +230,7 @@ export const TalesProductCatalog: React.FC<TalesProductCatalogProps> = ({ produc
               onClick={clear}
               className="mt-3 text-xs font-semibold text-[#0071e3] hover:underline"
             >
-              Limpar filtros e ver todos
+              Limpar filtros
             </button>
           </div>
         )}
