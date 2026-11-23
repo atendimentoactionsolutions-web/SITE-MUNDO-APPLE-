@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
-    "@react-three/drei": "^9.115.0",
-    "@react-three/fiber": "^8.17.14",
     "@types/three": "^0.186.0",
     "@whiskeysockets/baileys": "^7.0.0-rc14",
     "clsx": "^2.1.1",
