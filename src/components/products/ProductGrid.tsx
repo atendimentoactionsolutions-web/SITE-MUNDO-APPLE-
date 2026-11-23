@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import { Product } from "@/types/product";
-import { ProductCard } from "./ProductCard";
+import { TalesProductCard } from "./TalesProductCard";
+import "./tales-catalog.css";
 
 interface ProductGridProps {
   products: Product[];
@@ -20,9 +23,9 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+    <div className="product-grid">
       {products.map((product, idx) => (
-        <ProductCard key={product.id} product={product} priority={idx < 4} />
+        <TalesProductCard key={product.id} product={product} priority={idx < 4} />
       ))}
     </div>
   );

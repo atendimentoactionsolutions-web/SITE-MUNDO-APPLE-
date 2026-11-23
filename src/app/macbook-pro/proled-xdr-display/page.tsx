@@ -61,7 +61,7 @@ export default function MacBookProProledPage() {
               rel="noopener noreferrer"
               className="px-3.5 py-1 bg-[#0071E3] hover:bg-[#0077ED] text-white rounded-full transition-colors text-[11px] font-semibold shadow-sm"
             >
-              Ver preços
+              Consultar valor
             </a>
           </div>
         </div>

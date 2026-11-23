@@ -2,7 +2,7 @@ import { getProductBySlug, getProducts } from "@/lib/data";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { ProductDetailPresentation } from "@/components/products/ProductDetailPresentation";
-import { ProductCard } from "@/components/products/ProductCard";
+import { ProductGrid } from "@/components/products/ProductGrid";
 import { ShieldCheck, Truck, Store, RefreshCw, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { storeConfig } from "@/data/storeConfig";
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps) {
     return { title: "Produto não encontrado" };
   }
 
-  const priceText = product.priceFrom > 0
+  const priceText = storeConfig.showPrices && product.priceFrom > 0
     ? ` a partir de R$ ${product.priceFrom.toLocaleString("pt-BR")}`
     : "";
 
@@ -82,7 +82,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       "@type": "Offer",
       "url": `https://mundoappledelivery.com/produtos/${product.slug}`,
       "priceCurrency": "BRL",
-      "price": product.priceFrom > 0 ? product.priceFrom : undefined,
+      "price": storeConfig.showPrices && product.priceFrom > 0 ? product.priceFrom : undefined,
       "itemCondition": product.condition === "used" ? "https://schema.org/UsedCondition" : "https://schema.org/NewCondition",
       "availability": "https://schema.org/InStock",
       "seller": {
@@ -154,11 +154,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <h2 className="text-2xl sm:text-3xl font-semibold text-apple-dark">
               Produtos Relacionados
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {relatedProducts.map((rel) => (
-                <ProductCard key={rel.id} product={rel} />
-              ))}
-            </div>
+            <ProductGrid products={relatedProducts} />
           </div>
         )}
       </Container>

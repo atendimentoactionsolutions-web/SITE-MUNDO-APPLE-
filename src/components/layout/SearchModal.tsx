@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Search, X, MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 import { useLiveCatalog } from "@/components/products/LivePricesProvider";
 import { Product } from "@/types/product";
+import { storeConfig } from "@/data/storeConfig";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
 
@@ -85,8 +86,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       )
     : storefrontProducts.filter((p) => p.featured).slice(0, 6);
 
+  const showPrices = Boolean(storeConfig.showPrices);
+
   const handleWhatsAppProduct = (productName: string, price: number) => {
-    const text = `Olá! Vi o *${productName}* no site (${price > 0 ? formatCurrency(price) : "Preço sob consulta"}) e gostaria de saber mais informações e disponibilidade!`;
+    const text =
+      showPrices && price > 0
+        ? `Olá! Vi o *${productName}* no site (${formatCurrency(price)}) e gostaria de saber mais informações e disponibilidade!`
+        : `Olá! Vi o *${productName}* no site e gostaria de consultar o valor e a disponibilidade!`;
     window.open(createWhatsAppLink(text), "_blank", "noopener,noreferrer");
   };
 
@@ -189,12 +195,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                           {product.name}
                         </Link>
                         <div className="flex flex-wrap items-center gap-x-2 text-xs">
-                          {price > 0 ? (
+                          {showPrices && price > 0 ? (
                             <span className="font-extrabold text-apple-dark">
                               {formatCurrency(price)}
                             </span>
                           ) : (
-                            <span className="text-apple-muted font-medium">Consulte condições</span>
+                            <span className="text-apple-muted font-medium">Valor sob consulta</span>
                           )}
                           <span className="text-apple-muted text-[11px]">
                             • {product.condition === "used" ? "Seminovo" : "Novo Lacrado"}
@@ -209,7 +215,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
                       className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-whatsapp-green text-white text-xs font-semibold hover:bg-emerald-600 transition-colors shadow-sm"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Comprar</span>
+                      <span className="hidden sm:inline">{showPrices ? "Comprar" : "Consultar valor"}</span>
                     </button>
                   </div>
                 );

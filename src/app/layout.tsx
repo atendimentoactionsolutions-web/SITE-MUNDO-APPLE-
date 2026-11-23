@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { GlobalMotionController } from "@/components/ui/GlobalMotionController";
 import { storeConfig } from "@/data/storeConfig";
 
 export const revalidate = 60; // Revalidação a cada 60 segundos com o buscador em tempo real
@@ -236,6 +237,7 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen">
         <GoogleAnalytics />
+        <GlobalMotionController />
         <LivePricesProvider>
           <Header />
           <main className="flex-grow">{children}</main>

@@ -1,0 +1,24 @@
+{
+  "reference": "https://www.apple.com/br/",
+  "images": {
+    "holiday-large.jpg": "https://www.apple.com/br/homepage/built/heroes/26_holiday_11/images/hero_holiday_2026_pink__bc2rstir59lu_large_2x.jpg",
+    "duo-large.jpg": "https://www.apple.com/br/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_large_2x.jpg",
+    "duo-small.jpg": "https://www.apple.com/br/homepage/built/heroes/26_iphone-duo_09/images/hero_iphone_duo_announce__fh4u8yzndpe2_small_2x.jpg",
+    "proled-large.jpg": "https://www.apple.com/v/homepage/images/macbook-pro-proled-xdr/a/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_large_2x.jpg",
+    "proled-small.jpg": "https://www.apple.com/v/homepage/images/macbook-pro-proled-xdr/a/hero_macbook_pro_proled_xdr_preorder__df38n593sxg2_small_2x.jpg",
+    "iphone-pro-large.jpg": "https://www.apple.com/v/homepage/images/iphone-18-pro/a/promo_iphone_18_pro__9nn5m4mt2bmy_large_2x.jpg",
+    "iphone-pro-small.jpg": "https://www.apple.com/v/homepage/images/iphone-18-pro/a/promo_iphone_18_pro__9nn5m4mt2bmy_small_2x.jpg",
+    "watch-large.jpg": "https://www.apple.com/br/homepage/built/promos/26_apple-watch-series-12_10/images/promo_apple_watch_series_12__gnlprtt8526a_large_2x.jpg",
+    "watch-small.jpg": "https://www.apple.com/br/homepage/built/promos/26_apple-watch-series-12_10/images/promo_apple_watch_series_12__gnlprtt8526a_small_2x.jpg",
+    "macbook-large.jpg": "https://www.apple.com/v/homepage/images/macbook-pro-m6/a/promo_macbook_pro_m6_announce__fclfe7s84xiu_large_2x.jpg",
+    "macbook-small.jpg": "https://www.apple.com/v/homepage/images/macbook-pro-m6/a/promo_macbook_pro_m6_announce__fclfe7s84xiu_small_2x.jpg",
+    "imac-large.jpg": "https://www.apple.com/v/homepage/images/imac-m6/a/promo_imac_m6_announce__fd1gdwgpg2a2_large_2x.jpg",
+    "imac-small.jpg": "https://www.apple.com/v/homepage/images/imac-m6/a/promo_imac_m6_announce__fd1gdwgpg2a2_small_2x.jpg",
+    "ipad-large.jpg": "https://www.apple.com/v/homepage/images/ipad-mini/a/promo_ipad_mini_a20_announce__efc6vmmxg58i_large_2x.jpg",
+    "ipad-small.jpg": "https://www.apple.com/v/homepage/images/ipad-mini/a/promo_ipad_mini_a20_announce__efc6vmmxg58i_small_2x.jpg",
+    "airpods-large.jpg": "https://www.apple.com/v/homepage/images/airpods-pro-3/a/promo_airpods_pro_3__e4755qofhnyq_large_2x.jpg",
+    "airpods-small.jpg": "https://www.apple.com/v/homepage/images/airpods-pro-3/a/promo_airpods_pro_3__e4755qofhnyq_small_2x.jpg",
+    "watch-logo-large.png": "https://www.apple.com/v/homepage/images/logos/apple-watch-series-12/a/promo_logo_apple_watch_series_12__eck6698frlqq_large_2x.png",
+    "ipad-logo-large.png": "https://www.apple.com/v/homepage/images/logos/ipad-mini/a/promo_logo_ipad_mini_a20__dcndmemvplea_large_2x.png"
+  }
+}

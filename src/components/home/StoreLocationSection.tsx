@@ -1,105 +1,245 @@
 import React from "react";
 import { Container } from "@/components/ui/Container";
 import { storeConfig } from "@/data/storeConfig";
-import { MapPin, Clock, Navigation, MessageCircle, Phone, Building, Sparkles } from "lucide-react";
+import {
+  MapPin,
+  Clock,
+  Navigation,
+  MessageCircle,
+  Phone,
+  ShieldCheck,
+  Truck,
+  Star,
+  Store,
+  ArrowUpRight,
+} from "lucide-react";
 import { getWhatsAppGeneralUrl } from "@/utils/whatsapp";
+
+const STORE_PILLARS = [
+  {
+    icon: Star,
+    title: "Nota 5.0 no Google",
+    subtitle: storeConfig.socialProof.googleReviewsLabel,
+    accent: "text-amber-500",
+    bg: "bg-amber-50",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Garantia Oficial Apple",
+    subtitle: "1 ano em todos os aparelhos novos lacrados",
+    accent: "text-[#0071E3]",
+    bg: "bg-blue-50",
+  },
+  {
+    icon: Truck,
+    title: "Delivery Express SP",
+    subtitle: "Motoboy próprio com pagamento na entrega",
+    accent: "text-emerald-600",
+    bg: "bg-emerald-50",
+  },
+  {
+    icon: Store,
+    title: "Loja Física em SP",
+    subtitle: "Retirada imediata no Shopping 361",
+    accent: "text-[#1D1D1F]",
+    bg: "bg-[#EFEFF4]",
+  },
+];
 
 export const StoreLocationSection: React.FC = () => {
   return (
-    <section className="py-12 sm:py-16 bg-white border-t border-[#E5E7EB]" id="localizacao">
+    <section
+      className="py-16 sm:py-24 bg-white border-t border-[#E6E6EB] overflow-x-clip scroll-mt-16"
+      id="localizacao"
+    >
       <Container size="large">
-        
+        {/* Section Header */}
+        <div
+          className="max-w-3xl mb-10 sm:mb-14 space-y-3"
+          data-reveal="up"
+        >
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] border border-[#E6E6EB] text-[11px] font-semibold uppercase tracking-[0.08em] text-[#6E6E73]">
+            <MapPin className="w-3.5 h-3.5 text-[#0071E3]" />
+            Sobre a Loja · São Paulo
+          </span>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Store Information Card */}
-          <div className="lg:col-span-5 bg-[#F5F5F7] rounded-[24px] p-8 sm:p-10 border border-[#E5E7EB] shadow-sm flex flex-col justify-between space-y-8">
-            <div className="space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="p-3 bg-blue-50 text-[#0071E3] border border-blue-100 rounded-2xl">
-                  <Building className="w-6 h-6" />
+          <h2 className="text-[28px] sm:text-[40px] lg:text-[44px] font-semibold text-[#1D1D1F] font-display tracking-[-0.035em] leading-[1.12]">
+            Conheça a {storeConfig.shortName}.{" "}
+            <span className="text-[#6E6E73] font-normal">
+              Loja física na Santa Ifigênia e entrega rápida em toda SP.
+            </span>
+          </h2>
+
+          <p className="text-sm sm:text-base text-[#6E6E73] leading-relaxed max-w-2xl">
+            Atendimento transparente, aparelhos 100% originais e lacrados com conferência presencial na hora, além de equipe dedicada no WhatsApp para tirar dúvidas e agilizar seu pedido.
+          </p>
+        </div>
+
+        {/* 4 Clean Trust Pillars */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+          {STORE_PILLARS.map((pillar, idx) => {
+            const Icon = pillar.icon;
+            return (
+              <div
+                key={pillar.title}
+                data-reveal="up"
+                data-reveal-delay={String(idx * 70)}
+                className="interactive-card bg-[#F5F5F7] rounded-[22px] p-4 sm:p-6 border border-[#E6E6EB]/90 flex flex-col justify-between gap-3"
+              >
+                <div
+                  className={`w-10 h-10 rounded-2xl ${pillar.bg} flex items-center justify-center shrink-0`}
+                >
+                  <Icon className={`w-5 h-5 ${pillar.accent}`} />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#0F172A] font-display">
-                    {storeConfig.name}
+                  <h3 className="text-sm sm:text-base font-semibold text-[#1D1D1F] tracking-[-0.02em] leading-snug">
+                    {pillar.title}
                   </h3>
-                  <span className="text-xs text-[#64748B] font-medium">
-                    {storeConfig.address.complement}
-                  </span>
+                  <p className="text-xs sm:text-[13px] text-[#6E6E73] mt-1 leading-snug">
+                    {pillar.subtitle}
+                  </p>
                 </div>
               </div>
+            );
+          })}
+        </div>
 
-              <div className="space-y-4 pt-2 text-sm text-[#0F172A]">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold block text-xs uppercase tracking-wider text-gray-500 mb-0.5">Endereço:</span>
-                    <span className="text-[#475569] text-xs leading-relaxed block font-medium">
-                      {storeConfig.address.fullAddress}
+        {/* Main 2-Column Bento: Store Details + Interactive Map */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
+          {/* Left: Store Details Card */}
+          <div
+            data-reveal="left"
+            className="interactive-card lg:col-span-5 bg-[#F5F5F7] rounded-[28px] p-6 sm:p-9 border border-[#E6E6EB] flex flex-col justify-between gap-8"
+          >
+            <div className="space-y-6">
+              <div className="flex items-center justify-between gap-3 pb-5 border-b border-[#E2E2E8]">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-[#1D1D1F] tracking-[-0.03em]">
+                    {storeConfig.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#6E6E73] mt-0.5">
+                    {storeConfig.address.complement} · {storeConfig.address.storeNumber}
+                  </p>
+                </div>
+                <span className="shrink-0 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E2E2E8] text-[11px] font-semibold text-emerald-700">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  Presencial
+                </span>
+              </div>
+
+              <div className="space-y-5">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-2xl bg-white border border-[#E6E6EB] flex items-center justify-center shrink-0">
+                    <MapPin className="w-4 h-4 text-[#1D1D1F]" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block text-[11px] font-semibold uppercase tracking-[0.06em] text-[#86868B] mb-1">
+                      Endereço
                     </span>
+                    <p className="text-sm font-medium text-[#1D1D1F] leading-snug">
+                      {storeConfig.address.street} · {storeConfig.address.storeNumber}
+                    </p>
+                    <p className="text-xs sm:text-[13px] text-[#6E6E73] mt-0.5">
+                      {storeConfig.address.complement} — {storeConfig.address.neighborhood}, {storeConfig.address.city}/{storeConfig.address.state}
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold block text-xs uppercase tracking-wider text-gray-500 mb-0.5">Horário de Funcionamento:</span>
-                    <span className="text-[#475569] text-xs block font-medium">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-2xl bg-white border border-[#E6E6EB] flex items-center justify-center shrink-0">
+                    <Clock className="w-4 h-4 text-[#1D1D1F]" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block text-[11px] font-semibold uppercase tracking-[0.06em] text-[#86868B] mb-1">
+                      Horário de Atendimento
+                    </span>
+                    <p className="text-sm font-medium text-[#1D1D1F]">
                       {storeConfig.openingHours.weekdays}
-                    </span>
-                    <span className="text-[#475569] text-xs block font-medium">
-                      {storeConfig.openingHours.saturday}
-                    </span>
+                    </p>
+                    <p className="text-xs sm:text-[13px] text-[#6E6E73] mt-0.5">
+                      {storeConfig.openingHours.saturday} · {storeConfig.openingHours.sunday}
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-[#0071E3] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold block text-xs uppercase tracking-wider text-gray-500 mb-0.5">Telefone / WhatsApp:</span>
-                    <span className="text-[#475569] text-xs block font-medium">
-                      {storeConfig.contact.whatsappFormatted}
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-2xl bg-white border border-[#E6E6EB] flex items-center justify-center shrink-0">
+                    <Phone className="w-4 h-4 text-[#1D1D1F]" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="block text-[11px] font-semibold uppercase tracking-[0.06em] text-[#86868B] mb-1">
+                      WhatsApp Direto
                     </span>
+                    <p className="text-sm font-medium text-[#1D1D1F]">
+                      {storeConfig.contact.whatsappFormatted}
+                    </p>
+                    <p className="text-xs sm:text-[13px] text-[#6E6E73] mt-0.5">
+                      Consulte disponibilidade, valores atualizados e agende sua visita
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* CTAs */}
-            <div className="pt-4 space-y-3">
+            {/* Clean Apple-style Action Buttons */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <a
                 href={storeConfig.address.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#0071E3] hover:bg-[#0077ED] text-white font-bold text-xs sm:text-sm rounded-full shadow-sm transition-all"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#1D1D1F] hover:bg-black text-white font-semibold text-xs sm:text-[13px] rounded-full"
               >
-                <Navigation className="w-4 h-4" />
-                <span>Traçar Rota no Google Maps</span>
+                <Navigation className="w-4 h-4 shrink-0" />
+                <span>Como chegar</span>
               </a>
 
               <a
                 href={getWhatsAppGeneralUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#00C853] hover:bg-[#00B048] text-white font-bold text-xs sm:text-sm rounded-full shadow-sm transition-all"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white hover:bg-[#1D1D1F] text-[#1D1D1F] hover:text-white border border-[#D2D2D7] hover:border-[#1D1D1F] font-semibold text-xs sm:text-[13px] rounded-full"
               >
-                <MessageCircle className="w-4 h-4 fill-white" />
-                <span>Falar com Vendedor no WhatsApp</span>
+                <MessageCircle className="w-4 h-4 shrink-0" />
+                <span>Falar no WhatsApp</span>
               </a>
             </div>
           </div>
 
-          {/* Interactive Map Embed */}
-          <div className="lg:col-span-7 bg-[#F5F5F7] rounded-[24px] border border-[#E5E7EB] overflow-hidden min-h-[350px] relative shadow-sm">
+          {/* Right: Interactive Map with Floating Frosted Address Bar */}
+          <div
+            data-reveal="right"
+            className="interactive-card lg:col-span-7 bg-[#F5F5F7] rounded-[28px] border border-[#E6E6EB] overflow-hidden min-h-[340px] sm:min-h-[440px] relative flex flex-col"
+          >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.652199187371!2d-46.63935292376044!3d-23.53962656100236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce58572bca534b%3A0xb366b539ef42ab54!2sR.%20Santa%20Ifig%C3%AAnia%2C%20361%20-%20Santa%20Ifig%C3%AAnia%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001207-000!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+              src="https://maps.google.com/maps?q=Rua%20Santa%20Ifigenia%20361%20Sao%20Paulo%20SP&z=18&output=embed"
               width="100%"
               height="100%"
-              style={{ border: 0, minHeight: "380px" }}
+              className="flex-1 min-h-[340px] sm:min-h-[440px]"
+              style={{ border: 0 }}
               allowFullScreen={false}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Mapa de Localização Mundo Apple Delivery"
             />
+
+            <a
+              href={storeConfig.address.googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-4 left-4 right-4 sm:right-auto bg-white/95 backdrop-blur-md border border-[#E6E6EB] rounded-2xl px-4 py-3 flex items-center justify-between gap-4 shadow-md hover:bg-white transition-all"
+            >
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm font-semibold text-[#1D1D1F] truncate">
+                  {storeConfig.address.street} · {storeConfig.address.storeNumber}
+                </p>
+                <p className="text-[11px] text-[#6E6E73] truncate">
+                  {storeConfig.address.complement} · Santa Ifigênia, SP
+                </p>
+              </div>
+              <span className="shrink-0 w-8 h-8 rounded-full bg-[#1D1D1F] text-white flex items-center justify-center">
+                <ArrowUpRight className="w-4 h-4" />
+              </span>
+            </a>
           </div>
         </div>
       </Container>

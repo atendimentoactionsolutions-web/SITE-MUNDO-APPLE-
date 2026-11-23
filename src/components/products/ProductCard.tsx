@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MessageCircle, ShieldCheck, Sparkles, CreditCard, RefreshCw } from "lucide-react";
 import { useLiveProduct } from "./LivePricesProvider";
 import { Product, ProductVariant } from "@/types/product";
+import { storeConfig } from "@/data/storeConfig";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
 import { getMaxInstallment } from "@/utils/installments";
@@ -243,12 +244,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   }, [activeVariant, currentColor, currentSize, product.colorImages, product.sizeColorImages, product.image]);
 
   const isUsed = product.condition === "used";
+  const showPrices = Boolean(storeConfig.showPrices);
+  const effectivePrice = showPrices ? currentPrice : 0;
 
   // Check if product is on pre-order or announcement
-  const isPreOrder = product.priceFrom === 0 || (!product.priceFrom && product.availability === "pre_order");
+  const isPreOrder = effectivePrice === 0 || (!product.priceFrom && product.availability === "pre_order");
 
   // Calculate 18x installment preview
-  const maxInstallment = currentPrice > 0 ? getMaxInstallment(currentPrice) : null;
+  const maxInstallment = effectivePrice > 0 ? getMaxInstallment(effectivePrice) : null;
 
   // WhatsApp formatted lead
   const handleWhatsAppRedirect = () => {
@@ -264,13 +267,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     if (details.length > 0) {
       messageText += ` (${details.join(", ")})`;
     }
-    if (currentPrice > 0) {
-      messageText += ` no valor de ${formatCurrency(currentPrice)} no PIX`;
-    } else {
-      messageText += `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado com 1 ano de garantia Apple"}\nGostaria de consultar os valores atualizados, disponibilidade e prazo de entrega.`;
-    }
-    if (currentPrice > 0) {
+    if (effectivePrice > 0) {
+      messageText += ` no valor de ${formatCurrency(effectivePrice)} no PIX`;
       messageText += `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado de fábrica"}\nGostaria de consultar disponibilidade e condições de pagamento.`;
+    } else {
+      messageText += `.\nCondição: ${isUsed ? "Seminovo certificado (100% original)" : "Novo e lacrado com 1 ano de garantia Apple"}\nGostaria de consultar o valor atualizado, disponibilidade e prazo de entrega.`;
     }
 
     const link = createWhatsAppLink(messageText);
@@ -304,8 +305,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </span>
           </div>
 
-          {/* Product Image Area with #F5F5F7 background */}
-          <div className="relative w-full aspect-[4/3] my-2 flex items-center justify-center overflow-hidden rounded-2xl bg-[#F5F5F7] group-hover:bg-[#EFEFF2] transition-colors">
+          {/* Product Image Area with clean white seamless background */}
+          <div className="relative w-full aspect-[4/3] my-2 flex items-center justify-center overflow-hidden rounded-2xl bg-white transition-colors">
             <Image
               src={displayedImage}
               alt={`${product.name} ${currentColor || ""}`}
@@ -464,7 +465,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                         key={c.color}
                         type="button"
                         onClick={() => handleSelectOption("color", c.color)}
-                        title={`${c.color}${c.price ? ` - ${formatCurrency(c.price)}` : ""}`}
+                        title={`${c.color}${showPrices && c.price ? ` - ${formatCurrency(c.price)}` : ""}`}
                         className={`group/color relative w-7 h-7 rounded-full transition-all duration-200 cursor-pointer flex items-center justify-center ${
                           isSelected
                             ? "ring-2 ring-offset-2 ring-[#0071E3] scale-110 shadow-sm"
@@ -490,27 +491,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             )}
 
             {/* Live Dynamic Price Display OR Under Consultation */}
-            {currentPrice === 0 ? (
-              <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-2">
-                <div className="flex items-baseline justify-between">
+            {effectivePrice === 0 ? (
+              <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-1.5">
+                <div className="flex items-baseline justify-between gap-2">
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-[#0071E3] block leading-none mb-1">
-                      Disponibilidade
+                    <span className="text-[10px] uppercase font-bold text-[#6E6E73] block leading-none mb-1">
+                      Atendimento direto
                     </span>
-                    <span className="text-sm sm:text-base font-bold text-[#1D1D1F] font-display tracking-[-0.02em]">
-                      Consultar valores e disponibilidade
+                    <span className="text-sm sm:text-base font-semibold text-[#1D1D1F] font-display tracking-[-0.02em]">
+                      Valor sob consulta
                     </span>
                   </div>
-                  <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/80 inline-block">
-                    Sob Consulta
-                  </span>
                 </div>
 
                 <p className="text-[11px] text-[#6E6E73] leading-tight">
-                  Consulte valores atualizados e prazo de entrega direto com nossos especialistas.
+                  Consulte valor atualizado e disponibilidade direto no WhatsApp.
                 </p>
               </div>
-            ) : currentPrice > 0 ? (
+            ) : effectivePrice > 0 ? (
               <div className="pt-3 pb-1 border-t border-[#E5E5E7] space-y-2">
                 <div className="flex items-baseline justify-between">
                   <div>
@@ -518,7 +516,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                       Valor à vista
                     </span>
                     <span className="text-xl sm:text-2xl font-bold text-[#1D1D1F] font-display tracking-[-0.025em]">
-                      {formatCurrency(currentPrice)}
+                      {formatCurrency(effectivePrice)}
                     </span>
                   </div>
                   <span className="text-[10px] text-[#0071E3] font-semibold bg-blue-50/80 px-2.5 py-1 rounded-full border border-blue-200/60 inline-block">
@@ -559,7 +557,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           >
             <MessageCircle className="w-4 h-4 fill-white shrink-0" />
             <span>
-              {currentPrice > 0 ? "Consultar Disponibilidade" : "Consultar Valores e Disponibilidade"}
+              {effectivePrice > 0 ? "Consultar Disponibilidade" : "Consultar valor"}
             </span>
           </button>
 

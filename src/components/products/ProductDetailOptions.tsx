@@ -4,6 +4,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { useLiveProduct } from "./LivePricesProvider";
 import { Product, ProductVariant } from "@/types/product";
+import { storeConfig } from "@/data/storeConfig";
 import { formatCurrency, formatConditionLabel } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
 import { getMaxInstallment } from "@/utils/installments";
@@ -250,8 +251,11 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
     });
   }, [colorList, hasVariants, product.variants, currentSize, currentChip, currentRam, currentStorage]);
 
+  const showPrices = Boolean(storeConfig.showPrices);
+  const effectivePrice = showPrices ? currentPrice : 0;
+
   const handleWhatsAppRedirect = () => {
-    let messageText = `Olá! Tenho interesse no *${product.name}*`;
+    let messageText = `Olá! Gostaria de consultar o valor e a disponibilidade do *${product.name}*`;
     const details = [
       currentSize ? `Tamanho: ${currentSize}` : "",
       currentChip ? `Versão/Chip: ${currentChip}` : "",
@@ -264,8 +268,8 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
       messageText += ` (${details.join(", ")})`;
     }
 
-    if (currentPrice > 0) {
-      messageText += ` no valor de ${formatCurrency(currentPrice)} no PIX`;
+    if (effectivePrice > 0) {
+      messageText += ` no valor de ${formatCurrency(effectivePrice)} no PIX`;
     }
 
     messageText += `. Está disponível para pronta entrega?`;
@@ -302,34 +306,48 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
         </div>
       </div>
 
-      {/* Price Block & Installments */}
+      {/* Price Block & Installments OR Consultation */}
       <div className="p-6 rounded-3xl bg-apple-gray/60 border border-apple-border/60 space-y-3">
-        <div>
-          <span className="text-xs text-apple-muted block mb-0.5">Preço à vista ou Pix</span>
-          <div className="text-3xl sm:text-4xl font-bold text-apple-dark tracking-tight">
-            {currentPrice > 0 ? formatCurrency(currentPrice) : "Sob Consulta"}
-          </div>
-        </div>
-
-        {maxInstallment && (
-          <div className="bg-white/80 rounded-2xl p-3 border border-apple-border/80 flex flex-wrap items-center justify-between gap-3">
-            <div className="text-xs text-apple-muted">
-              <span>
-                ou em até{" "}
-                <strong className="text-apple-dark font-semibold">
-                  18x de {formatCurrency(maxInstallment.installmentValue)}
-                </strong>{" "}
-                no cartão
-              </span>
+        {effectivePrice > 0 ? (
+          <>
+            <div>
+              <span className="text-xs text-apple-muted block mb-0.5">Preço à vista ou Pix</span>
+              <div className="text-3xl sm:text-4xl font-bold text-apple-dark tracking-tight">
+                {formatCurrency(effectivePrice)}
+              </div>
             </div>
-            <button
-              type="button"
-              onClick={() => setIsInstallmentsModalOpen(true)}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-apple-blue hover:underline cursor-pointer shrink-0"
-            >
-              <CreditCard className="w-3.5 h-3.5" />
-              <span>Ver parcelas</span>
-            </button>
+
+            {maxInstallment && (
+              <div className="bg-white/80 rounded-2xl p-3 border border-apple-border/80 flex flex-wrap items-center justify-between gap-3">
+                <div className="text-xs text-apple-muted">
+                  <span>
+                    ou em até{" "}
+                    <strong className="text-apple-dark font-semibold">
+                      18x de {formatCurrency(maxInstallment.installmentValue)}
+                    </strong>{" "}
+                    no cartão
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsInstallmentsModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-apple-blue hover:underline cursor-pointer shrink-0"
+                >
+                  <CreditCard className="w-3.5 h-3.5" />
+                  <span>Ver parcelas</span>
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <div>
+            <span className="text-xs text-apple-muted block mb-1">Atendimento personalizado</span>
+            <div className="text-2xl sm:text-3xl font-semibold text-apple-dark tracking-tight">
+              Consultar valor
+            </div>
+            <p className="text-xs sm:text-sm text-apple-muted mt-1.5 leading-relaxed">
+              Fale com a Mundo Apple Delivery no WhatsApp para consultar o valor atualizado e a disponibilidade desta configuração.
+            </p>
           </div>
         )}
 
@@ -486,7 +504,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
                     style={{ backgroundColor: bgHex }}
                   />
                   <span>{c.color}</span>
-                  {c.price !== undefined && c.price > 0 && (
+                  {showPrices && c.price !== undefined && c.price > 0 && (
                     <span className="text-[11px] opacity-80 font-normal">
                       ({formatCurrency(c.price)})
                     </span>
@@ -524,7 +542,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
           className="w-full font-bold shadow-md hover:shadow-lg transition-all"
           icon={<MessageCircle className="w-5 h-5" />}
         >
-          {currentPrice > 0 ? "Comprar pelo WhatsApp" : "Consultar Valores e Disponibilidade"}
+          {effectivePrice > 0 ? "Comprar pelo WhatsApp" : "Consultar valor no WhatsApp"}
         </Button>
 
         {product.condition !== "used" && (

@@ -673,17 +673,18 @@ export const TradeInCalculator: React.FC = () => {
     return labels.join(", ");
   }, [replacedPartsStatus, selectedReplacedParts]);
 
+  const showPrices = Boolean(storeConfig.showPrices);
   const tradeInValue = estimatedPrice || 0;
-  const targetPrice = selectedNewPrice || 0;
-  const differenceToPay = Math.max(0, targetPrice - tradeInValue);
+  const targetPrice = showPrices ? (selectedNewPrice || 0) : 0;
+  const differenceToPay = showPrices ? Math.max(0, targetPrice - tradeInValue) : 0;
   const installments = differenceToPay > 0 ? calculateInstallments(differenceToPay) : [];
   const maxInstallment = installments.length > 0 ? installments[installments.length - 1] : null;
 
   const whatsappTradeInUrl = () => {
     const code = quotePublicCode || "COT-AVAL";
     const val = tradeInValue > 0 ? formatCurrency(tradeInValue) : "A combinar";
-    const targetVal = targetPrice > 0 ? formatCurrency(targetPrice) : "Sob Consulta";
-    const diffVal = formatCurrency(differenceToPay);
+    const targetVal = targetPrice > 0 ? formatCurrency(targetPrice) : "Consultar valor";
+    const diffVal = differenceToPay > 0 ? formatCurrency(differenceToPay) : "Consultar valor";
     const installmentLine =
       maxInstallment && differenceToPay > 0
         ? `\n- Ou em até 18x de ${formatCurrency(maxInstallment.installmentValue)} no cartão`
@@ -879,9 +880,9 @@ Gostaria de agendar a entrega e retirada simultânea em SP!`;
                           {p.name}
                         </span>
                         <span className="text-[11px] text-[#0071E3] font-bold">
-                          {p.priceFrom > 0
+                          {showPrices && p.priceFrom > 0
                             ? `A partir de ${formatCurrency(p.priceFrom)}`
-                            : "Sob Consulta"}
+                            : "Consultar valor"}
                         </span>
                       </div>
                     </div>
@@ -952,7 +953,7 @@ Gostaria de agendar a entrega e retirada simultânea em SP!`;
                         }`}
                       >
                         <span className="block text-sm font-bold">{stg}</span>
-                        {minStgPrice > 0 && (
+                        {showPrices && minStgPrice > 0 && (
                           <span
                             className={`block text-[10px] mt-0.5 ${
                               isSel ? "text-blue-100 font-semibold" : "text-[#86868B]"
@@ -1003,7 +1004,7 @@ Gostaria de agendar a entrega e retirada simultânea em SP!`;
                         </div>
 
                         <div className="flex items-center gap-1.5 shrink-0">
-                          {colPrice && colPrice > 0 && (
+                          {showPrices && colPrice && colPrice > 0 && (
                             <span
                               className={`text-xs font-bold ${
                                 isSel ? "text-white" : "text-emerald-600"
@@ -1024,7 +1025,7 @@ Gostaria de agendar a entrega e retirada simultânea em SP!`;
             <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-200 flex items-center justify-between">
               <span className="text-xs text-[#0071E3] font-semibold">Valor do Novo Lacrado:</span>
               <span className="text-lg font-bold text-[#0071E3]">
-                {selectedNewPrice > 0 ? formatCurrency(selectedNewPrice) : "Sob Consulta"}
+                {showPrices && selectedNewPrice > 0 ? formatCurrency(selectedNewPrice) : "Consultar valor"}
               </span>
             </div>
           </div>
