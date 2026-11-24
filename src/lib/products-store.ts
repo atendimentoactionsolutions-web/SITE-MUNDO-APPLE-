@@ -95,7 +95,7 @@ function mergeBaseVariantsWithOverride(
 // Epoch marking the latest verified catalog price update baked into src/data/products.ts.
 // Older persisted overrides in /app/data/products_override.json will yield to the fresh base prices
 // until a newer admin/supplier update is saved after this timestamp.
-const CATALOG_PRICE_EPOCH = Date.parse("2026-11-24T14:20:00.000Z");
+const CATALOG_PRICE_EPOCH = Date.parse("2026-11-24T20:00:00.000Z");
 
 /**
  * Returns all products with admin overrides applied (active toggles, custom prices, variant prices).

@@ -703,7 +703,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/verified/iphone17-sage.jpg",
-    "priceFrom": 5450,
+    "priceFrom": 6299,
     "condition": "new",
     "storage": [
       "256GB",
@@ -738,7 +738,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Lavender",
-        "price": 5450,
+        "price": 6450,
         "available": true
       },
       {

@@ -524,7 +524,7 @@
   },
   "iphone-17": {
     "active": true,
-    "priceFrom": 5450,
+    "priceFrom": 6299,
     "variants": [
       {
         "storage": "256GB",
@@ -547,7 +547,7 @@
       {
         "storage": "256GB",
         "color": "Lavender",
-        "price": 5450,
+        "price": 6450,
         "available": true
       },
       {
@@ -587,7 +587,7 @@
         "available": true
       }
     ],
-    "supplierUpdatedAt": "2026-11-24T14:20:00.000Z"
+    "supplierUpdatedAt": "2026-11-24T20:00:00.000Z"
   },
   "iphone-16": {
     "active": true,
