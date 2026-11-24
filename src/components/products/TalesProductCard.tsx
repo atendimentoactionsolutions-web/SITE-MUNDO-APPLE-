@@ -8,8 +8,16 @@ import { Product, ProductVariant } from "@/types/product";
 import { storeConfig } from "@/data/storeConfig";
 import { formatCurrency } from "@/utils/formatters";
 import { createWhatsAppLink } from "@/utils/whatsapp";
+import { getMaxInstallment } from "@/utils/installments";
 import { getProductColorHex, getProductColorImage } from "@/utils/product-colors";
 import { swatchColor } from "./tales-colors";
+
+function pickDefaultVariant(variants?: ProductVariant[]): ProductVariant | undefined {
+  if (!variants || variants.length === 0) return undefined;
+  const priced = variants.filter((v) => v.price > 0);
+  if (priced.length === 0) return variants[0];
+  return priced.reduce((best, item) => (item.price < best.price ? item : best), priced[0]);
+}
 
 interface TalesProductCardProps {
   product: Product;
@@ -62,7 +70,7 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
   }, [product.colors, product.variants, hasVariants]);
 
   const [activeVariant, setActiveVariant] = useState<ProductVariant | undefined>(
-    product.variants?.[0]
+    () => pickDefaultVariant(product.variants)
   );
   const [customOptions, setCustomOptions] = useState<Partial<Record<OptionField, string>>>({});
 
@@ -76,7 +84,7 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
               (key) => v[key] === prev[key]
             )
           );
-        return matching || product.variants![0];
+        return matching || pickDefaultVariant(product.variants);
       });
     } else {
       setActiveVariant(undefined);
@@ -90,7 +98,8 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
   const currentRam = activeVariant?.ram || customOptions.ram || ramList[0] || "";
   const currentStorage = activeVariant?.storage || customOptions.storage || storageList[0] || "";
   const currentColor = activeVariant?.color || customOptions.color || colorList[0] || "";
-  const currentPrice = activeVariant?.price ?? product.priceFrom ?? 0;
+  const currentPrice = hasVariants ? (activeVariant?.price ?? 0) : (product.priceFrom ?? 0);
+  const maxInstallment = showPrices && currentPrice > 0 ? getMaxInstallment(currentPrice) : null;
 
   const isWatch =
     product.category === "watch" || sizeList.some((s) => s.toLowerCase().includes("mm"));
@@ -186,6 +195,7 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
       if (field !== "ram" && c.ram && c.ram === currentRam) score += 8;
       if (field !== "storage" && c.storage && c.storage === currentStorage) score += 4;
       if (field !== "color" && c.color && c.color === currentColor) score += 2;
+      if (c.price > 0) score += 1;
       if (score > maxScore) {
         maxScore = score;
         best = c;
@@ -385,16 +395,18 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
           </div>
         )}
 
-        {/* Consultation message OR Price (controlled by storeConfig.showPrices) */}
+        {/* Consultation message OR Price (controlled by storeConfig.showPrices & variant price) */}
         {showPrices && currentPrice > 0 ? (
           <div className="price-block">
             <small>À vista no PIX</small>
             <strong>{formatCurrency(currentPrice)}</strong>
-            <p>ou em até 18x no cartão</p>
+            {maxInstallment && (
+              <p>ou em até 18x de {formatCurrency(maxInstallment.installmentValue)} no cartão</p>
+            )}
           </div>
         ) : (
           <div className="consultation-block">
-            <p>Valor sob consulta • Novo lacrado</p>
+            <p>Sob consulta • Novo lacrado</p>
           </div>
         )}
 
@@ -403,7 +415,7 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
           className="button product-button"
           onClick={handleWhatsApp}
         >
-          Consultar valor
+          {showPrices && currentPrice > 0 ? "Consultar disponibilidade" : "Consultar valor"}
         </button>
       </div>
     </article>

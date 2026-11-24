@@ -1,5 +1,5 @@
 export const storeConfig = {
-  showPrices: false,
+  showPrices: true,
   name: "Mundo Apple Delivery",
   shortName: "Mundo Apple",
   tagline: "Seu próximo Apple está aqui.",

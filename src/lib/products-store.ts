@@ -53,6 +53,50 @@ export function saveOverrides(overrides: ProductOverrides): void {
   global.__productOverridesLastRead = Date.now();
 }
 
+function variantMergeKey(v: ProductVariant): string {
+  const norm = (s?: string) => (s || "").trim().toLowerCase();
+  return [
+    norm(v.size),
+    norm(v.screenSize),
+    norm(v.chip),
+    norm(v.ram),
+    norm(v.storage),
+    norm(v.color),
+  ].join("|");
+}
+
+function mergeBaseVariantsWithOverride(
+  baseVariants?: ProductVariant[],
+  overrideVariants?: ProductVariant[]
+): ProductVariant[] | undefined {
+  if (!overrideVariants) return baseVariants;
+  if (!baseVariants || baseVariants.length === 0) return overrideVariants;
+  const overrideMap = new Map<string, ProductVariant>();
+  for (const v of overrideVariants) {
+    overrideMap.set(variantMergeKey(v), v);
+  }
+  const seen = new Set<string>();
+  const merged: ProductVariant[] = [];
+  for (const baseV of baseVariants) {
+    const k = variantMergeKey(baseV);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    merged.push(overrideMap.get(k) || baseV);
+  }
+  for (const ovV of overrideVariants) {
+    const k = variantMergeKey(ovV);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    merged.push(ovV);
+  }
+  return merged;
+}
+
+// Epoch marking the latest verified catalog price update baked into src/data/products.ts.
+// Older persisted overrides in /app/data/products_override.json will yield to the fresh base prices
+// until a newer admin/supplier update is saved after this timestamp.
+const CATALOG_PRICE_EPOCH = Date.parse("2026-11-24T14:20:00.000Z");
+
 /**
  * Returns all products with admin overrides applied (active toggles, custom prices, variant prices).
  * Also respects global hideAllPrices setting (sets priceFrom to 0 and variant prices to 0).
@@ -64,10 +108,15 @@ export function getAllProductsWithOverrides(ignoreGlobalHidePrices = false): Pro
 
   return initialProducts.map((p) => {
     const override = overrides[p.id];
+    const overrideTs = override?.supplierUpdatedAt ? Date.parse(override.supplierUpdatedAt) : 0;
+    const useOverridePrices = Boolean(override && Number.isFinite(overrideTs) && overrideTs >= CATALOG_PRICE_EPOCH);
+
     let active = override?.active !== undefined ? override.active : p.active;
     let featured = override?.featured !== undefined ? override.featured : p.featured;
-    let priceFrom = override?.priceFrom !== undefined ? override.priceFrom : p.priceFrom;
-    let variants = override?.variants !== undefined ? override.variants : p.variants;
+    let priceFrom = useOverridePrices && override?.priceFrom !== undefined ? override.priceFrom : p.priceFrom;
+    let variants = useOverridePrices
+      ? mergeBaseVariantsWithOverride(p.variants, override?.variants)
+      : p.variants;
 
     const supplierUpdatedAt = override?.supplierUpdatedAt;
     if (shouldHidePrices) {
@@ -109,6 +158,7 @@ export function updateProductPrices(
     ...overrides[productId],
     priceFrom,
     ...(variants ? { variants } : {}),
+    supplierUpdatedAt: new Date().toISOString(),
   };
   saveOverrides(overrides);
 

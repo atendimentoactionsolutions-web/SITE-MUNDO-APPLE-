@@ -88,11 +88,18 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
   }, [product.colors, product.variants, hasVariants]);
 
   // 2. Active Variant & Fallback Custom Storage Selection
+  const defaultVariant = useMemo(() => {
+    if (!product.variants || product.variants.length === 0) return undefined;
+    const priced = product.variants.filter((v) => v.price > 0);
+    if (priced.length === 0) return product.variants[0];
+    return priced.reduce((best, item) => (item.price < best.price ? item : best), priced[0]);
+  }, [product.variants]);
+
   const [activeVariant, setActiveVariant] = useState<ProductVariant | undefined>(
-    product.variants?.[0]
+    defaultVariant
   );
   const [customStorage, setCustomStorage] = useState<string>(
-    product.variants?.[0]?.storage || product.storage?.[0] || ""
+    defaultVariant?.storage || product.storage?.[0] || ""
   );
 
   useEffect(() => {
@@ -100,15 +107,15 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
       setActiveVariant((prev) => {
         const matching = prev && product.variants!.find(v => (["storage", "color", "size", "screenSize", "chip", "ram"] as const).every(key => v[key] === prev[key]));
         if (matching) return matching;
-        return product.variants![0];
+        return defaultVariant || product.variants![0];
       });
-      setCustomStorage(product.variants[0].storage || "");
+      setCustomStorage((defaultVariant || product.variants[0]).storage || "");
     } else {
       setActiveVariant(undefined);
       setCustomStorage(product.storage?.[0] || "");
     }
     setCustomOptions({});
-  }, [product]);
+  }, [product, defaultVariant]);
 
   const [customOptions, setCustomOptions] = useState<Record<string, string>>({});
 
@@ -120,7 +127,7 @@ export const ProductDetailOptions: React.FC<ProductDetailOptionsProps> = ({ prod
     ? (activeVariant?.storage || customStorage || storageList[0] || "")
     : (customStorage || storageList[0] || "");
   const currentColor = activeVariant?.color || customOptions.color || colorList[0] || product.colors?.[0] || "";
-  const currentPrice = activeVariant?.price ?? product.priceFrom ?? 0;
+  const currentPrice = hasVariants ? (activeVariant?.price ?? 0) : (product.priceFrom ?? 0);
   const selectedImage = getProductColorImage(product, currentColor, activeVariant?.image, currentSize);
   useEffect(() => {
     onImageChange?.(selectedImage);

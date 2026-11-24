@@ -8,7 +8,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone Duo",
     "image": "/images/products/verified/iphone-duo-night-sky.jpg",
-    "priceFrom": 16150.0,
+    "priceFrom": 17270,
     "condition": "new",
     "availability": "available",
     "storage": [
@@ -25,49 +25,49 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Night Sky",
-        "price": 16150.0,
+        "price": 17300,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Star White",
-        "price": 16160.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Star White",
-        "price": 17300.0,
+        "price": 17270,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Night Sky",
-        "price": 17350.0,
+        "price": 18300,
         "available": true
       },
       {
-        "storage": "1TB",
+        "storage": "512GB",
         "color": "Star White",
-        "price": 24500.0,
+        "price": 18300,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Night Sky",
-        "price": 28499.0,
+        "price": 24190,
         "available": true
       },
       {
-        "storage": "2TB",
+        "storage": "1TB",
         "color": "Star White",
-        "price": 28100.0,
+        "price": 23700,
         "available": true
       },
       {
         "storage": "2TB",
         "color": "Night Sky",
-        "price": 30850.0,
+        "price": 28300,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Star White",
+        "price": 28300,
         "available": true
       }
     ],
@@ -93,7 +93,7 @@ export const products: Product[] = [
       "Burgundy": "/images/products/verified/iphone18-pro-max-burgundy.jpg",
       "Glacier": "/images/products/verified/iphone18-pro-max-glacier.jpg"
     },
-    "priceFrom": 9850.0,
+    "priceFrom": 10180,
     "condition": "new",
     "storage": [
       "256GB",
@@ -111,91 +111,97 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 9850.0,
+        "price": 10280,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Burgundy",
-        "price": 10150.0,
+        "price": 10340,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Glacier",
-        "price": 10150.0,
+        "price": 10250,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 10250.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Glacier",
-        "price": 11740.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Burgundy",
-        "price": 11900.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Black",
-        "price": 11950.0,
+        "price": 10180,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 12050.0,
+        "price": 11950,
         "available": true
       },
       {
-        "storage": "1TB",
+        "storage": "512GB",
+        "color": "Burgundy",
+        "price": 12000,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Glacier",
+        "price": 12000,
+        "available": true
+      },
+      {
+        "storage": "512GB",
         "color": "Black",
-        "price": 14500.0,
+        "price": 12000,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Silver",
-        "price": 14500.0,
-        "available": true
-      },
-      {
-        "storage": "1TB",
-        "color": "Glacier",
-        "price": 14500.0,
+        "price": 15800,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Burgundy",
-        "price": 15050.0,
+        "price": 14500,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Glacier",
+        "price": 14400,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Black",
+        "price": 14400,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Silver",
+        "price": 20400,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Burgundy",
+        "price": 20399,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Glacier",
+        "price": 20500,
         "available": true
       },
       {
         "storage": "2TB",
         "color": "Black",
-        "price": 19740.0,
-        "available": true
-      },
-      {
-        "storage": "2TB",
-        "color": "Burgundy",
-        "price": 19880.0,
-        "available": true
-      },
-      {
-        "storage": "2TB",
-        "color": "Glacier",
-        "price": 19900.0,
+        "price": 20500,
         "available": true
       }
     ],
@@ -217,12 +223,13 @@ export const products: Product[] = [
       "Burgundy": "/images/products/verified/iphone18-pro-burgundy.jpg",
       "Glacier": "/images/products/verified/iphone18-pro-glacier.jpg"
     },
-    "priceFrom": 9040.0,
+    "priceFrom": 9520,
     "condition": "new",
     "storage": [
       "256GB",
       "512GB",
-      "1TB"
+      "1TB",
+      "2TB"
     ],
     "colors": [
       "Burgundy",
@@ -234,67 +241,97 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Burgundy",
-        "price": 9040.0,
+        "price": 9520,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 9100.0,
+        "price": 9750,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 9100.0,
+        "price": 9550,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Glacier",
-        "price": 9180.0,
+        "price": 9550,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Burgundy",
-        "price": 9770.0,
+        "price": 10900,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 10150.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Glacier",
-        "price": 10150.0,
+        "price": 11000,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Black",
-        "price": 10150.0,
+        "price": 11150,
         "available": true
       },
       {
-        "storage": "1TB",
+        "storage": "512GB",
         "color": "Glacier",
-        "price": 12260.0,
+        "price": 11070,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Burgundy",
-        "price": 13000.0,
+        "price": 13300,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Silver",
+        "price": 14600,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Black",
-        "price": 13090.0,
+        "price": 14900,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Glacier",
+        "price": 13750,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Burgundy",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Glacier",
+        "price": 0,
         "available": true
       }
     ],
@@ -310,7 +347,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/verified/iphone17-pro-max-cosmicorange.jpg",
-    "priceFrom": 7965.0,
+    "priceFrom": 8400,
     "condition": "new",
     "storage": [
       "256GB",
@@ -327,67 +364,73 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Deep Blue",
-        "price": 7965.0,
+        "price": 8500,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
-        "price": 7975.0,
+        "price": 8400,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 8280.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Cosmic Orange",
-        "price": 9250.0,
+        "price": 8849,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Deep Blue",
-        "price": 9450.0,
+        "price": 9700,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Cosmic Orange",
+        "price": 9400,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 9550.0,
-        "available": true
-      },
-      {
-        "storage": "1TB",
-        "color": "Cosmic Orange",
-        "price": 11149.0,
-        "available": true
-      },
-      {
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 11249.0,
+        "price": 9750,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Deep Blue",
-        "price": 11349.0,
+        "price": 11849,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Cosmic Orange",
+        "price": 11849,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "color": "Deep Blue",
+        "price": 0,
         "available": true
       },
       {
         "storage": "2TB",
         "color": "Cosmic Orange",
-        "price": 12100.0,
+        "price": 12849,
         "available": true
       },
       {
         "storage": "2TB",
         "color": "Silver",
-        "price": 12850.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -407,11 +450,12 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/verified/iphone17-pro-cosmicorange.jpg",
-    "priceFrom": 7650.0,
+    "priceFrom": 8050,
     "condition": "new",
     "storage": [
       "256GB",
-      "512GB"
+      "512GB",
+      "1TB"
     ],
     "colors": [
       "Cosmic Orange",
@@ -422,37 +466,55 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Cosmic Orange",
-        "price": 7650.0,
+        "price": 8050,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Deep Blue",
-        "price": 7950.0,
+        "price": 8430,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 8000.0,
+        "price": 8750,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Cosmic Orange",
-        "price": 8950.0,
+        "price": 9350,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Deep Blue",
-        "price": 9200.0,
+        "price": 9700,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 9300.0,
+        "price": 9850,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Cosmic Orange",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Deep Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Silver",
+        "price": 0,
         "available": true
       }
     ],
@@ -472,7 +534,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/verified/iphone-air-spaceblack.jpg",
-    "priceFrom": 6150.0,
+    "priceFrom": 6550,
     "condition": "new",
     "storage": [
       "256GB",
@@ -489,73 +551,73 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Light Gold",
-        "price": 6150.0,
+        "price": 6550,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Space Black",
-        "price": 6150.0,
+        "price": 6550,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Sky Blue",
-        "price": 6200.0,
+        "price": 6550,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Cloud White",
-        "price": 6300.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Cloud White",
-        "price": 6840.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Sky Blue",
-        "price": 6840.0,
+        "price": 6700,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Light Gold",
-        "price": 6840.0,
+        "price": 7000,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "Space Black",
-        "price": 6840.0,
+        "price": 7250,
         "available": true
       },
       {
-        "storage": "1TB",
+        "storage": "512GB",
         "color": "Sky Blue",
-        "price": 7800.0,
+        "price": 7500,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Cloud White",
+        "price": 7400,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Light Gold",
-        "price": 7800.0,
-        "available": true
-      },
-      {
-        "storage": "1TB",
-        "color": "Cloud White",
-        "price": 7900.0,
+        "price": 0,
         "available": true
       },
       {
         "storage": "1TB",
         "color": "Space Black",
-        "price": 7900.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Sky Blue",
+        "price": 8649,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "color": "Cloud White",
+        "price": 8649,
         "available": true
       }
     ],
@@ -576,7 +638,7 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/verified/iphone17e-white.jpg",
-    "priceFrom": 4800.0,
+    "priceFrom": 5050,
     "condition": "new",
     "storage": [
       "256GB",
@@ -591,37 +653,37 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "White",
-        "price": 4800.0,
+        "price": 5050,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Soft Pink",
-        "price": 4850.0,
+        "price": 5200,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 4900.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Black",
-        "price": 5700.0,
-        "available": true
-      },
-      {
-        "storage": "512GB",
-        "color": "Soft Pink",
-        "price": 5700.0,
+        "price": 5449,
         "available": true
       },
       {
         "storage": "512GB",
         "color": "White",
-        "price": 5700.0,
+        "price": 5450,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Soft Pink",
+        "price": 5900,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Black",
+        "price": 6050,
         "available": true
       }
     ],
@@ -641,10 +703,11 @@ export const products: Product[] = [
     "category": "iphone",
     "subcategory": "iPhone 17 Series",
     "image": "/images/products/verified/iphone17-sage.jpg",
-    "priceFrom": 6150.0,
+    "priceFrom": 5450,
     "condition": "new",
     "storage": [
-      "256GB"
+      "256GB",
+      "512GB"
     ],
     "colors": [
       "Sage",
@@ -657,31 +720,61 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Sage",
-        "price": 6150.0,
+        "price": 6300,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Mist Blue",
-        "price": 6350.0,
+        "price": 6300,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Black",
-        "price": 6350.0,
+        "price": 6299,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "Lavender",
-        "price": 6380.0,
+        "price": 5450,
         "available": true
       },
       {
         "storage": "256GB",
         "color": "White",
-        "price": 6380.0,
+        "price": 6299,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Sage",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Mist Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Lavender",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "White",
+        "price": 0,
         "available": true
       }
     ],
@@ -710,10 +803,12 @@ export const products: Product[] = [
       "Pink": "/images/products/iphone/iphone-16-pink.png",
       "White": "/images/products/iphone/iphone-16-white.png"
     },
-    "priceFrom": 5250.0,
+    "priceFrom": 5340,
     "condition": "new",
     "storage": [
-      "128GB"
+      "128GB",
+      "256GB",
+      "512GB"
     ],
     "colors": [
       "White",
@@ -726,31 +821,91 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "White",
-        "price": 5250.0,
+        "price": 5340,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Teal",
-        "price": 5250.0,
+        "price": 5400,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 5300.0,
+        "price": 5340,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Ultramarine",
-        "price": 5340.0,
+        "price": 5450,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 5540.0,
+        "price": 5500,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "White",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Teal",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Ultramarine",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "White",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Teal",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Ultramarine",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Pink",
+        "price": 0,
         "available": true
       }
     ],
@@ -772,10 +927,12 @@ export const products: Product[] = [
       "Green": "/images/products/verified/iphone15-green.jpg",
       "Yellow": "/images/products/verified/iphone15-yellow.jpg"
     },
-    "priceFrom": 4740.0,
+    "priceFrom": 4700,
     "condition": "new",
     "storage": [
-      "128GB"
+      "128GB",
+      "256GB",
+      "512GB"
     ],
     "colors": [
       "Black",
@@ -786,19 +943,55 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Black",
-        "price": 4740.0,
+        "price": 4750,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 4748.0,
+        "price": 4700,
         "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 4900.0,
+        "price": 4850,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Pink",
+        "price": 5350,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Black",
+        "price": 5450,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Pink",
+        "price": 5550,
         "available": true
       }
     ],
@@ -817,7 +1010,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 14250.0,
+    "priceFrom": 14899,
     "condition": "new",
     "screenSizes": [
       "14\""
@@ -831,6 +1024,7 @@ export const products: Product[] = [
       "32GB"
     ],
     "storage": [
+      "512GB",
       "1TB",
       "2TB"
     ],
@@ -840,8 +1034,26 @@ export const products: Product[] = [
     ],
     "variants": [
       {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "16GB",
         "color": "Space Black",
-        "price": 14250.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 14899,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5",
@@ -850,7 +1062,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 14250.0,
+        "price": 14899,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5",
@@ -858,8 +1070,44 @@ export const products: Product[] = [
         "storage": "1TB"
       },
       {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "16GB",
         "color": "Space Black",
-        "price": 16400.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 17700,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5",
@@ -868,7 +1116,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 16599.0,
+        "price": 17700,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5",
@@ -877,25 +1125,7 @@ export const products: Product[] = [
       },
       {
         "color": "Space Black",
-        "price": 18300.0,
-        "available": true,
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "32GB",
-        "storage": "1TB"
-      },
-      {
-        "color": "Silver",
-        "price": 18700.0,
-        "available": true,
-        "screenSize": "14\"",
-        "chip": "M5",
-        "ram": "32GB",
-        "storage": "1TB"
-      },
-      {
-        "color": "Space Black",
-        "price": 20799.0,
+        "price": 21300,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5",
@@ -904,12 +1134,66 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 23100.0,
+        "price": 20700,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5",
         "ram": "24GB",
         "storage": "2TB"
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 19100,
+        "available": true,
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "storage": "1TB"
+      },
+      {
+        "color": "Silver",
+        "price": 19100,
+        "available": true,
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "storage": "1TB"
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Tela Liquid Retina XDR de 14 polegadas com ProMotion, portas Thunderbolt, HDMI e MagSafe 3. Potência incrível com o chip M5.",
@@ -928,11 +1212,11 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 17600.0,
+    "priceFrom": 18850,
     "condition": "new",
     "screenSizes": [
-      "16\"",
-      "14\""
+      "14\"",
+      "16\""
     ],
     "chips": [
       "M5 Pro"
@@ -942,8 +1226,10 @@ export const products: Product[] = [
       "48GB"
     ],
     "storage": [
+      "512GB",
       "1TB",
-      "2TB"
+      "2TB",
+      "4TB"
     ],
     "colors": [
       "Space Black",
@@ -951,44 +1237,35 @@ export const products: Product[] = [
     ],
     "variants": [
       {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
         "color": "Space Black",
-        "price": 20400.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 18950,
         "available": true,
-        "screenSize": "16\"",
+        "screenSize": "14\"",
         "chip": "M5 Pro",
         "ram": "24GB",
         "storage": "1TB"
       },
       {
         "color": "Silver",
-        "price": 20750.0,
-        "available": true,
-        "screenSize": "16\"",
-        "chip": "M5 Pro",
-        "ram": "24GB",
-        "storage": "1TB"
-      },
-      {
-        "color": "Silver",
-        "price": 27300.0,
-        "available": true,
-        "screenSize": "16\"",
-        "chip": "M5 Pro",
-        "ram": "48GB",
-        "storage": "1TB"
-      },
-      {
-        "color": "Space Black",
-        "price": 27300.0,
-        "available": true,
-        "screenSize": "16\"",
-        "chip": "M5 Pro",
-        "ram": "48GB",
-        "storage": "1TB"
-      },
-      {
-        "color": "Silver",
-        "price": 17600.0,
+        "price": 18850,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5 Pro",
@@ -997,16 +1274,7 @@ export const products: Product[] = [
       },
       {
         "color": "Space Black",
-        "price": 17900.0,
-        "available": true,
-        "screenSize": "14\"",
-        "chip": "M5 Pro",
-        "ram": "24GB",
-        "storage": "1TB"
-      },
-      {
-        "color": "Space Black",
-        "price": 19100.0,
+        "price": 21100,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5 Pro",
@@ -1015,12 +1283,246 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 20300.0,
+        "price": 21000,
         "available": true,
         "screenSize": "14\"",
         "chip": "M5 Pro",
         "ram": "24GB",
         "storage": "2TB"
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 20300,
+        "available": true,
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "storage": "1TB"
+      },
+      {
+        "color": "Silver",
+        "price": 21700,
+        "available": true,
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "storage": "1TB"
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 26500,
+        "available": true,
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "storage": "1TB"
+      },
+      {
+        "color": "Silver",
+        "price": 0,
+        "available": true,
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "storage": "1TB"
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Desempenho extremo para fluxos de trabalho profissionais pesados com o chip M5 Pro em telas de 14 ou 16 polegadas.",
@@ -1039,9 +1541,10 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 28800.0,
+    "priceFrom": 30700,
     "condition": "new",
     "screenSizes": [
+      "14\"",
       "16\""
     ],
     "chips": [
@@ -1049,10 +1552,15 @@ export const products: Product[] = [
     ],
     "ramOptions": [
       "36GB",
-      "48GB"
+      "48GB",
+      "64GB",
+      "128GB"
     ],
     "storage": [
-      "2TB"
+      "1TB",
+      "2TB",
+      "4TB",
+      "8TB"
     ],
     "colors": [
       "Space Black",
@@ -1060,8 +1568,314 @@ export const products: Product[] = [
     ],
     "variants": [
       {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
         "color": "Space Black",
-        "price": 28800.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 32699,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 30700,
         "available": true,
         "screenSize": "16\"",
         "chip": "M5 Max",
@@ -1070,7 +1884,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 28800.0,
+        "price": 30700,
         "available": true,
         "screenSize": "16\"",
         "chip": "M5 Max",
@@ -1078,13 +1892,256 @@ export const products: Product[] = [
         "storage": "2TB"
       },
       {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
         "color": "Space Black",
-        "price": 36350.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 36700,
         "available": true,
         "screenSize": "16\"",
         "chip": "M5 Max",
         "ram": "48GB",
         "storage": "2TB"
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "O ápice do poder de processamento gráfico e computacional da Apple. Chip M5 Max com até 48GB de memória unificada e arquitetura extrema para profissionais exigentes.",
@@ -1105,7 +2162,7 @@ export const products: Product[] = [
       "Silver": "/images/products/mac/macbook-air-silver.png",
       "Sky Blue": "/images/products/verified/air-sky-blue.jpg"
     },
-    "priceFrom": 8990.0,
+    "priceFrom": 9480,
     "condition": "new",
     "screenSizes": [
       "13\"",
@@ -1113,11 +2170,14 @@ export const products: Product[] = [
     ],
     "ramOptions": [
       "16GB",
-      "24GB"
+      "24GB",
+      "32GB"
     ],
     "storage": [
+      "256GB",
       "512GB",
-      "1TB"
+      "1TB",
+      "2TB"
     ],
     "colors": [
       "Sky Blue",
@@ -1127,8 +2187,44 @@ export const products: Product[] = [
     ],
     "variants": [
       {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
         "color": "Sky Blue",
-        "price": 8990.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Sky Blue",
+        "price": 9480,
         "available": true,
         "screenSize": "13\"",
         "chip": "M5",
@@ -1137,7 +2233,7 @@ export const products: Product[] = [
       },
       {
         "color": "Starlight",
-        "price": 8990.0,
+        "price": 9480,
         "available": true,
         "screenSize": "13\"",
         "chip": "M5",
@@ -1146,7 +2242,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 9000.0,
+        "price": 9480,
         "available": true,
         "screenSize": "13\"",
         "chip": "M5",
@@ -1155,7 +2251,7 @@ export const products: Product[] = [
       },
       {
         "color": "Midnight",
-        "price": 9030.0,
+        "price": 9480,
         "available": true,
         "screenSize": "13\"",
         "chip": "M5",
@@ -1164,7 +2260,7 @@ export const products: Product[] = [
       },
       {
         "color": "Sky Blue",
-        "price": 12200.0,
+        "price": 0,
         "available": true,
         "screenSize": "13\"",
         "chip": "M5",
@@ -1173,7 +2269,7 @@ export const products: Product[] = [
       },
       {
         "color": "Starlight",
-        "price": 13100.0,
+        "price": 12500,
         "available": true,
         "screenSize": "13\"",
         "chip": "M5",
@@ -1181,26 +2277,143 @@ export const products: Product[] = [
         "storage": "1TB"
       },
       {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 12500,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
         "color": "Midnight",
-        "price": 13240.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "M5",
-        "ram": "24GB",
-        "storage": "1TB"
+        "price": 12100,
+        "available": true
       },
       {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
         "color": "Starlight",
-        "price": 13250.0,
-        "available": true,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
         "screenSize": "13\"",
         "chip": "M5",
         "ram": "24GB",
-        "storage": "1TB"
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
       },
       {
         "color": "Sky Blue",
-        "price": 13250.0,
+        "price": 14050,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "storage": "1TB"
+      },
+      {
+        "color": "Starlight",
+        "price": 14050,
         "available": true,
         "screenSize": "13\"",
         "chip": "M5",
@@ -1209,7 +2422,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 13290.0,
+        "price": 14050,
         "available": true,
         "screenSize": "13\"",
         "chip": "M5",
@@ -1218,25 +2431,232 @@ export const products: Product[] = [
       },
       {
         "color": "Midnight",
-        "price": 11090.0,
+        "price": 14000,
         "available": true,
-        "screenSize": "15\"",
+        "screenSize": "13\"",
         "chip": "M5",
-        "ram": "16GB",
-        "storage": "512GB"
+        "ram": "24GB",
+        "storage": "1TB"
       },
       {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
         "color": "Silver",
-        "price": 11300.0,
-        "available": true,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
         "screenSize": "15\"",
         "chip": "M5",
         "ram": "16GB",
-        "storage": "512GB"
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
       },
       {
         "color": "Sky Blue",
-        "price": 11300.0,
+        "price": 11200,
         "available": true,
         "screenSize": "15\"",
         "chip": "M5",
@@ -1245,7 +2665,16 @@ export const products: Product[] = [
       },
       {
         "color": "Starlight",
-        "price": 11300.0,
+        "price": 11200,
+        "available": true,
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "storage": "512GB"
+      },
+      {
+        "color": "Silver",
+        "price": 11250,
         "available": true,
         "screenSize": "15\"",
         "chip": "M5",
@@ -1254,12 +2683,372 @@ export const products: Product[] = [
       },
       {
         "color": "Midnight",
-        "price": 15499.0,
+        "price": 11350,
+        "available": true,
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "storage": "512GB"
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "16GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Starlight",
+        "price": 15190,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Midnight",
+        "price": 15190,
         "available": true,
         "screenSize": "15\"",
         "chip": "M5",
         "ram": "24GB",
         "storage": "1TB"
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "24GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Sky Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "15\"",
+        "chip": "M5",
+        "ram": "32GB",
+        "color": "Midnight",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Design ultrafino e 100% silencioso com chip M5, tela Liquid Retina brilhante e bateria para até 18 horas de uso.",
@@ -1283,7 +3072,7 @@ export const products: Product[] = [
       "Indigo": "/images/products/verified/neo-indigo.jpg",
       "Silver": "/images/products/verified/neo-silver.jpg"
     },
-    "priceFrom": 6499.0,
+    "priceFrom": 6549,
     "condition": "new",
     "screenSizes": [
       "13\""
@@ -1304,7 +3093,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Citrus",
-        "price": 6499.0,
+        "price": 6549,
         "available": true,
         "screenSize": "13\"",
         "chip": "A18 Pro",
@@ -1313,7 +3102,7 @@ export const products: Product[] = [
       },
       {
         "color": "Indigo",
-        "price": 6540.0,
+        "price": 6649,
         "available": true,
         "screenSize": "13\"",
         "chip": "A18 Pro",
@@ -1322,7 +3111,7 @@ export const products: Product[] = [
       },
       {
         "color": "Blush",
-        "price": 6590.0,
+        "price": 6680,
         "available": true,
         "screenSize": "13\"",
         "chip": "A18 Pro",
@@ -1331,7 +3120,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 6850.0,
+        "price": 6849,
         "available": true,
         "screenSize": "13\"",
         "chip": "A18 Pro",
@@ -1340,7 +3129,7 @@ export const products: Product[] = [
       },
       {
         "color": "Citrus",
-        "price": 6900.0,
+        "price": 7200,
         "available": true,
         "screenSize": "13\"",
         "chip": "A18 Pro",
@@ -1349,7 +3138,7 @@ export const products: Product[] = [
       },
       {
         "color": "Indigo",
-        "price": 7140.0,
+        "price": 7500,
         "available": true,
         "screenSize": "13\"",
         "chip": "A18 Pro",
@@ -1358,7 +3147,7 @@ export const products: Product[] = [
       },
       {
         "color": "Blush",
-        "price": 7190.0,
+        "price": 7330,
         "available": true,
         "screenSize": "13\"",
         "chip": "A18 Pro",
@@ -1367,7 +3156,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 7280.0,
+        "price": 7499,
         "available": true,
         "screenSize": "13\"",
         "chip": "A18 Pro",
@@ -1390,18 +3179,21 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Design Ultracompacto • Chip M4",
     "image": "/images/products/mac/mac-mini-m4-clean.png",
-    "priceFrom": 6800.0,
+    "priceFrom": 7099,
     "condition": "new",
     "chips": [
       "M4"
     ],
     "ramOptions": [
       "16GB",
-      "24GB"
+      "24GB",
+      "32GB"
     ],
     "storage": [
       "256GB",
-      "512GB"
+      "512GB",
+      "1TB",
+      "2TB"
     ],
     "colors": [
       "Padrão"
@@ -1409,7 +3201,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 6800.0,
+        "price": 7099,
         "available": true,
         "chip": "M4",
         "ram": "16GB",
@@ -1417,19 +3209,91 @@ export const products: Product[] = [
       },
       {
         "color": "Padrão",
-        "price": 7400.0,
+        "price": 7499,
         "available": true,
         "chip": "M4",
         "ram": "16GB",
         "storage": "512GB"
       },
       {
+        "storage": "1TB",
+        "chip": "M4",
+        "ram": "16GB",
         "color": "Padrão",
-        "price": 10490.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Padrão",
+        "price": 0,
         "available": true,
         "chip": "M4",
         "ram": "24GB",
         "storage": "512GB"
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Menor, mais rápido e mais poderoso com chip M4, portas frontais USB-C e conexão Thunderbolt traseira.",
@@ -1443,16 +3307,22 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Design Ultracompacto • Chip Apple M4 Pro",
     "image": "/images/products/mac/mac-mini-m4-clean.png",
-    "priceFrom": 12500.0,
+    "priceFrom": 12500,
     "condition": "new",
     "chips": [
       "M4 Pro"
     ],
     "ramOptions": [
-      "24GB"
+      "24GB",
+      "48GB",
+      "64GB"
     ],
     "storage": [
-      "512GB"
+      "512GB",
+      "1TB",
+      "2TB",
+      "4TB",
+      "8TB"
     ],
     "colors": [
       "Padrão"
@@ -1460,11 +3330,123 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 12500.0,
+        "price": 12500,
         "available": true,
         "chip": "M4 Pro",
         "ram": "24GB",
         "storage": "512GB"
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M4 Pro",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4 Pro",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4 Pro",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M4 Pro",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M4 Pro",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Desempenho profissional inacreditável em um design de apenas 12,7 cm. Chip M4 Pro com portas Thunderbolt 5, velocidade gráfica superior e suporte a múltiplos monitores.",
@@ -1479,16 +3461,23 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Potência Extrema para Estúdios • Chip M4 Max",
     "image": "/images/products/verified/studio.jpg",
-    "priceFrom": 23200.0,
+    "priceFrom": 0,
     "condition": "new",
     "chips": [
       "M4 Max"
     ],
     "ramOptions": [
-      "36GB"
+      "36GB",
+      "48GB",
+      "64GB",
+      "128GB"
     ],
     "storage": [
-      "512GB"
+      "512GB",
+      "1TB",
+      "2TB",
+      "4TB",
+      "8TB"
     ],
     "colors": [
       "Padrão"
@@ -1496,11 +3485,163 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 23200.0,
+        "price": 0,
         "available": true,
         "chip": "M4 Max",
         "ram": "36GB",
         "storage": "512GB"
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Performance monstruosa para renderização 3D pesada, produção musical e fluxos de trabalho massivos com inteligência artificial acelerada pelo chip M4 Max.",
@@ -1521,7 +3662,7 @@ export const products: Product[] = [
       "Pink": "/images/products/mac/imac-24-pink.png",
       "Silver": "/images/products/mac/imac-24-silver.png"
     },
-    "priceFrom": 12699.0,
+    "priceFrom": 13400,
     "condition": "new",
     "screenSizes": [
       "24\""
@@ -1531,11 +3672,14 @@ export const products: Product[] = [
     ],
     "ramOptions": [
       "16GB",
-      "24GB"
+      "24GB",
+      "32GB"
     ],
     "storage": [
       "256GB",
-      "512GB"
+      "512GB",
+      "1TB",
+      "2TB"
     ],
     "colors": [
       "Green",
@@ -1546,7 +3690,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Green",
-        "price": 12699.0,
+        "price": 13400,
         "available": true,
         "screenSize": "24\"",
         "chip": "M4",
@@ -1555,7 +3699,7 @@ export const products: Product[] = [
       },
       {
         "color": "Blue",
-        "price": 12750.0,
+        "price": 13400,
         "available": true,
         "screenSize": "24\"",
         "chip": "M4",
@@ -1564,16 +3708,52 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 13000.0,
+        "price": 13900,
         "available": true,
         "screenSize": "24\"",
         "chip": "M4",
         "ram": "16GB",
         "storage": "256GB"
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Silver",
+        "price": 18499,
+        "available": true,
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "storage": "512GB"
       },
       {
         "color": "Pink",
-        "price": 18099.0,
+        "price": 18499,
         "available": true,
         "screenSize": "24\"",
         "chip": "M4",
@@ -1581,17 +3761,116 @@ export const products: Product[] = [
         "storage": "512GB"
       },
       {
-        "color": "Silver",
-        "price": 18150.0,
-        "available": true,
+        "storage": "1TB",
         "screenSize": "24\"",
         "chip": "M4",
         "ram": "16GB",
-        "storage": "512GB"
+        "color": "Green",
+        "price": 0,
+        "available": true
       },
       {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
         "color": "Silver",
-        "price": 19600.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "16GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Green",
+        "price": 19800,
         "available": true,
         "screenSize": "24\"",
         "chip": "M4",
@@ -1600,7 +3879,7 @@ export const products: Product[] = [
       },
       {
         "color": "Blue",
-        "price": 19600.0,
+        "price": 19800,
         "available": true,
         "screenSize": "24\"",
         "chip": "M4",
@@ -1608,13 +3887,238 @@ export const products: Product[] = [
         "storage": "512GB"
       },
       {
-        "color": "Green",
-        "price": 19600.0,
+        "color": "Silver",
+        "price": 19800,
         "available": true,
         "screenSize": "24\"",
         "chip": "M4",
         "ram": "24GB",
         "storage": "512GB"
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "24GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Green",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "24\"",
+        "chip": "M4",
+        "ram": "32GB",
+        "color": "Pink",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Computador tudo-em-um ultrafino com tela Retina 4.5K de 24 polegadas, câmera Center Stage de 12MP e áudio espacial.",
@@ -1632,7 +4136,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/ipad/ipad-pro-spaceblack.png",
       "Silver": "/images/products/ipad/ipad-pro-silver.png"
     },
-    "priceFrom": 7840.0,
+    "priceFrom": 8000,
     "condition": "new",
     "screenSizes": [
       "11\"",
@@ -1656,7 +4160,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Space Black",
-        "price": 7840.0,
+        "price": 8000,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -1664,7 +4168,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 7950.0,
+        "price": 8300,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -1672,79 +4176,199 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Space Black",
-        "price": 8850.0,
+        "price": 0,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
       },
       {
         "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
         "color": "Space Black",
-        "price": 10850.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Space Black",
+        "price": 11000,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi + Cellular"
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
       },
       {
         "storage": "256GB",
         "color": "Space Black",
-        "price": 9450.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi"
-      },
-      {
-        "storage": "512GB",
-        "color": "Silver",
-        "price": 9800.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi"
-      },
-      {
-        "storage": "512GB",
-        "color": "Space Black",
-        "price": 10999.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi"
-      },
-      {
-        "storage": "1TB",
-        "color": "Silver",
-        "price": 11700.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi"
-      },
-      {
-        "storage": "1TB",
-        "color": "Space Black",
-        "price": 12700.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi"
-      },
-      {
-        "storage": "2TB",
-        "color": "Space Black",
-        "price": 13000.0,
+        "price": 9950,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
       },
       {
         "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 10000,
+        "available": true
+      },
+      {
+        "storage": "512GB",
         "color": "Space Black",
-        "price": 10450.0,
+        "price": 10800,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "512GB",
+        "color": "Silver",
+        "price": 11599,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 13100,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "1TB",
+        "color": "Silver",
+        "price": 13799,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "2TB",
+        "color": "Space Black",
+        "price": 14000,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Space Black",
+        "price": 10499,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
       },
       {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
         "storage": "512GB",
         "color": "Space Black",
-        "price": 11350.0,
+        "price": 12000,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
@@ -1752,7 +4376,15 @@ export const products: Product[] = [
       {
         "storage": "512GB",
         "color": "Silver",
-        "price": 11350.0,
+        "price": 12000,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular"
+      },
+      {
+        "storage": "1TB",
+        "color": "Space Black",
+        "price": 0,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
@@ -1760,15 +4392,15 @@ export const products: Product[] = [
       {
         "storage": "1TB",
         "color": "Silver",
-        "price": 12900.0,
+        "price": 0,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
       },
       {
-        "storage": "1TB",
+        "storage": "2TB",
         "color": "Space Black",
-        "price": 13250.0,
+        "price": 14999,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
@@ -1776,15 +4408,7 @@ export const products: Product[] = [
       {
         "storage": "2TB",
         "color": "Silver",
-        "price": 13300.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi + Cellular"
-      },
-      {
-        "storage": "2TB",
-        "color": "Space Black",
-        "price": 14799.0,
+        "price": 0,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
@@ -1808,17 +4432,19 @@ export const products: Product[] = [
       "Purple": "/images/products/verified/mini7-purple.jpg",
       "Starlight": "/images/products/verified/mini7-starlight.jpg"
     },
-    "priceFrom": 4250.0,
+    "priceFrom": 0,
     "condition": "new",
     "screenSizes": [
       "8.3\""
     ],
     "chips": [
-      "Wi-Fi"
+      "Wi-Fi",
+      "Wi-Fi + Cellular"
     ],
     "storage": [
       "128GB",
-      "256GB"
+      "256GB",
+      "512GB"
     ],
     "colors": [
       "Blue",
@@ -1828,23 +4454,86 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 4250.0,
+        "price": 0,
         "available": true,
         "chip": "Wi-Fi"
       },
       {
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 4590.0,
+        "price": 0,
         "available": true,
         "chip": "Wi-Fi"
       },
       {
         "storage": "256GB",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
         "color": "Space Gray",
-        "price": 5249.0,
+        "price": 0,
         "available": true,
         "chip": "Wi-Fi"
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Superpotência compacta com chip A17 Pro e Apple Intelligence. Tela Liquid Retina de 8.3 polegadas, suporte ao Apple Pencil Pro e conexão Wi-Fi 6E ultrarrápida.",
@@ -1865,11 +4554,12 @@ export const products: Product[] = [
       "Silver": "/images/products/ipad/ipad-11-silver.png",
       "Yellow": "/images/products/ipad/ipad-11-yellow.png"
     },
-    "priceFrom": 3450.0,
+    "priceFrom": 3500,
     "condition": "new",
     "storage": [
       "128GB",
-      "256GB"
+      "256GB",
+      "512GB"
     ],
     "colors": [
       "Blue",
@@ -1881,58 +4571,170 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 3450.0,
+        "price": 3500,
         "available": true,
         "chip": "Wi-Fi"
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 3450.0,
+        "price": 3550,
         "available": true,
         "chip": "Wi-Fi"
       },
       {
         "storage": "128GB",
         "color": "Silver",
-        "price": 3500.0,
+        "price": 3550,
         "available": true,
         "chip": "Wi-Fi"
       },
       {
         "storage": "128GB",
         "color": "Yellow",
-        "price": 3550.0,
+        "price": 3500,
         "available": true,
         "chip": "Wi-Fi"
       },
       {
         "storage": "256GB",
         "color": "Blue",
-        "price": 4230.0,
+        "price": 4050,
+        "available": true,
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "256GB",
+        "color": "Pink",
+        "price": 4500,
         "available": true,
         "chip": "Wi-Fi"
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 4350.0,
+        "price": 4450,
         "available": true,
         "chip": "Wi-Fi"
       },
       {
         "storage": "256GB",
+        "chip": "Wi-Fi",
+        "color": "Yellow",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi",
         "color": "Pink",
-        "price": 4550.0,
-        "available": true,
-        "chip": "Wi-Fi"
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi",
+        "color": "Yellow",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
       },
       {
         "storage": "128GB",
         "color": "Pink",
-        "price": 4700.0,
+        "price": 4749,
         "available": true,
         "chip": "Wi-Fi + Cellular"
+      },
+      {
+        "storage": "128GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Yellow",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Yellow",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Pink",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Yellow",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Design moderno com tela Liquid Retina de 11 polegadas de ponta a ponta, suporte ao Apple Pencil, opções de 128GB e 256GB e 4 cores vibrantes.",
@@ -1954,7 +4756,7 @@ export const products: Product[] = [
       "Natural": "/images/products/verified/watch-ultra4-natural.jpg",
       "Black": "/images/products/verified/watch-ultra4-black.jpg"
     },
-    "priceFrom": 5990.0,
+    "priceFrom": 6200,
     "condition": "new",
     "availability": "available",
     "sizes": [
@@ -1968,13 +4770,13 @@ export const products: Product[] = [
       {
         "size": "49mm",
         "color": "Natural",
-        "price": 6150.0,
+        "price": 6380,
         "available": true
       },
       {
         "size": "49mm",
         "color": "Black",
-        "price": 5990.0,
+        "price": 6200,
         "available": true
       }
     ],
@@ -1990,7 +4792,7 @@ export const products: Product[] = [
     "category": "watch",
     "subcategory": "Apple Watch Series",
     "image": "/images/products/verified/watch-s12-black.jpg",
-    "priceFrom": 3580.0,
+    "priceFrom": 3590,
     "condition": "new",
     "availability": "available",
     "sizes": [
@@ -2007,43 +4809,49 @@ export const products: Product[] = [
       {
         "size": "42mm",
         "color": "Black",
-        "price": 3580.0,
+        "price": 3590,
         "available": true
       },
       {
         "size": "42mm",
         "color": "Space Gray",
-        "price": 3580.0,
+        "price": 3750,
         "available": true
       },
       {
         "size": "42mm",
         "color": "Light Gold",
-        "price": 3650.0,
+        "price": 3680,
         "available": true
       },
       {
         "size": "42mm",
         "color": "Dark Bronze",
-        "price": 3650.0,
+        "price": 3680,
         "available": true
       },
       {
         "size": "46mm",
         "color": "Black",
-        "price": 3850.0,
+        "price": 3990,
+        "available": true
+      },
+      {
+        "size": "46mm",
+        "color": "Space Gray",
+        "price": 4150,
         "available": true
       },
       {
         "size": "46mm",
         "color": "Light Gold",
-        "price": 3950.0,
+        "price": 3900,
         "available": true
       },
       {
         "size": "46mm",
         "color": "Dark Bronze",
-        "price": 4000.0,
+        "price": 3950,
         "available": true
       }
     ],
@@ -2071,11 +4879,11 @@ export const products: Product[] = [
       "Space Gray": "/images/products/verified/watch-s11-spacegray.jpg",
       "Silver": "/images/products/watch/apple-watch-s11-silver-cutout.png"
     },
-    "priceFrom": 2880.0,
+    "priceFrom": 2950,
     "condition": "new",
     "sizes": [
-      "46mm",
-      "42mm"
+      "42mm",
+      "46mm"
     ],
     "colors": [
       "Rose Gold",
@@ -2085,51 +4893,51 @@ export const products: Product[] = [
     ],
     "variants": [
       {
-        "size": "46mm",
-        "color": "Rose Gold",
-        "price": 2950.0,
-        "available": true
-      },
-      {
-        "size": "46mm",
-        "color": "Silver",
-        "price": 2990.0,
-        "available": true
-      },
-      {
-        "size": "46mm",
-        "color": "Space Gray",
-        "price": 3000.0,
-        "available": true
-      },
-      {
-        "size": "46mm",
-        "color": "Jet Black",
-        "price": 3100.0,
-        "available": true
-      },
-      {
         "size": "42mm",
         "color": "Rose Gold",
-        "price": 2880.0,
+        "price": 3050,
         "available": true
       },
       {
         "size": "42mm",
         "color": "Silver",
-        "price": 3200.0,
-        "available": true
-      },
-      {
-        "size": "42mm",
-        "color": "Jet Black",
-        "price": 3200.0,
+        "price": 3299,
         "available": true
       },
       {
         "size": "42mm",
         "color": "Space Gray",
-        "price": 3200.0,
+        "price": 3100,
+        "available": true
+      },
+      {
+        "size": "42mm",
+        "color": "Jet Black",
+        "price": 3100,
+        "available": true
+      },
+      {
+        "size": "46mm",
+        "color": "Rose Gold",
+        "price": 2950,
+        "available": true
+      },
+      {
+        "size": "46mm",
+        "color": "Silver",
+        "price": 3399,
+        "available": true
+      },
+      {
+        "size": "46mm",
+        "color": "Space Gray",
+        "price": 3399,
+        "available": true
+      },
+      {
+        "size": "46mm",
+        "color": "Jet Black",
+        "price": 3399,
         "available": true
       }
     ],
@@ -2149,7 +4957,7 @@ export const products: Product[] = [
       "Natural": "/images/products/watch/apple-watch-ultra-natural-cutout.png",
       "Black": "/images/products/watch/apple-watch-ultra-black-cutout.png"
     },
-    "priceFrom": 5350.0,
+    "priceFrom": 5350,
     "condition": "new",
     "sizes": [
       "49mm"
@@ -2162,13 +4970,13 @@ export const products: Product[] = [
       {
         "size": "49mm",
         "color": "Natural",
-        "price": 5449.0,
+        "price": 5400,
         "available": true
       },
       {
         "size": "49mm",
         "color": "Black",
-        "price": 5350.0,
+        "price": 5350,
         "available": true
       }
     ],
@@ -2188,11 +4996,11 @@ export const products: Product[] = [
       "Midnight": "/images/products/watch/apple-watch-se-midnight.png",
       "Starlight": "/images/products/watch/apple-watch-se-starlight.png"
     },
-    "priceFrom": 2250.0,
+    "priceFrom": 2260,
     "condition": "new",
     "sizes": [
-      "44mm",
-      "40mm"
+      "40mm",
+      "44mm"
     ],
     "colors": [
       "Midnight",
@@ -2200,58 +5008,58 @@ export const products: Product[] = [
     ],
     "variants": [
       {
-        "size": "44mm",
-        "color": "Midnight",
-        "price": 2400.0,
-        "available": true,
-        "chip": "GPS"
-      },
-      {
-        "size": "44mm",
-        "color": "Starlight",
-        "price": 3150.0,
-        "available": true,
-        "chip": "GPS"
-      },
-      {
         "size": "40mm",
         "color": "Midnight",
-        "price": 2250.0,
+        "price": 2270,
         "available": true,
         "chip": "GPS"
       },
       {
         "size": "40mm",
         "color": "Starlight",
-        "price": 2330.0,
+        "price": 2260,
         "available": true,
         "chip": "GPS"
       },
       {
         "size": "40mm",
         "color": "Midnight",
-        "price": 2450.0,
+        "price": 0,
         "available": true,
         "chip": "GPS + Cellular"
       },
       {
         "size": "40mm",
         "color": "Starlight",
-        "price": 2500.0,
+        "price": 2799,
         "available": true,
         "chip": "GPS + Cellular"
       },
       {
         "size": "44mm",
         "color": "Midnight",
-        "price": 2630.0,
+        "price": 2450,
+        "available": true,
+        "chip": "GPS"
+      },
+      {
+        "size": "44mm",
+        "color": "Starlight",
+        "price": 2420,
+        "available": true,
+        "chip": "GPS"
+      },
+      {
+        "size": "44mm",
+        "color": "Midnight",
+        "price": 0,
         "available": true,
         "chip": "GPS + Cellular"
       },
       {
         "size": "44mm",
         "color": "Starlight",
-        "price": 2850.0,
+        "price": 0,
         "available": true,
         "chip": "GPS + Cellular"
       }
@@ -2271,7 +5079,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/airpods/airpods-5.png",
-    "priceFrom": 1440.0,
+    "priceFrom": 1330,
     "condition": "new",
     "availability": "available",
     "description": "Nova engenharia acústica com graves profundos e agudos cristalinos, Áudio Espacial Personalizado com rastreamento dinâmico e cancelamento ativo de ruído.",
@@ -2281,7 +5089,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1440.0,
+        "price": 1330,
         "available": true
       }
     ],
@@ -2296,7 +5104,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/verified/airpods4.jpg",
-    "priceFrom": 1190.0,
+    "priceFrom": 1099,
     "condition": "new",
     "description": "Áudio Espacial Personalizado com rastreamento dinâmico da cabeça, estojo de recarga USB-C e até 30 horas de áudio.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2304,7 +5112,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1190.0,
+        "price": 1099,
         "available": true
       }
     ],
@@ -2319,7 +5127,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/verified/airpods4.jpg",
-    "priceFrom": 1379.0,
+    "priceFrom": 1280,
     "condition": "new",
     "description": "Cancelamento Ativo de Ruído de última geração, Modo Ambiente, Áudio Adaptativo e estojo com alto-falante integrado para o recurso Buscar.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2327,7 +5135,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1379.0,
+        "price": 1280,
         "available": true
       }
     ],
@@ -2342,7 +5150,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods Pro",
     "image": "/images/products/airpods/airpods-pro-3.png",
-    "priceFrom": 1850.0,
+    "priceFrom": 1800,
     "condition": "new",
     "description": "Cancelamento de ruído profissional avançado, isolamento acústico aprimorado com pontas de silicone e estojo MagSafe USB-C.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2350,7 +5158,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1850.0,
+        "price": 1800,
         "available": true
       }
     ],
@@ -2372,7 +5180,7 @@ export const products: Product[] = [
       "Purple": "/images/products/airpods/airpods-max-purple.png",
       "Orange": "/images/products/airpods/airpods-max-orange.png"
     },
-    "priceFrom": 3290.0,
+    "priceFrom": 3190,
     "condition": "new",
     "colors": [
       "Purple",
@@ -2384,27 +5192,27 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Purple",
-        "price": 3290.0,
+        "price": 3190,
         "available": true
       },
       {
         "color": "Orange",
-        "price": 3290.0,
+        "price": 3190,
         "available": true
       },
       {
         "color": "Starlight",
-        "price": 3350.0,
+        "price": 3600,
         "available": true
       },
       {
         "color": "Midnight",
-        "price": 3350.0,
+        "price": 3600,
         "available": true
       },
       {
         "color": "Blue",
-        "price": 3350.0,
+        "price": 3799,
         "available": true
       }
     ],
@@ -2423,7 +5231,7 @@ export const products: Product[] = [
       "White": "/images/products/accessories/magic-mouse-white.png",
       "Black": "/images/products/verified/magic-mouse-usbc-black.jpg"
     },
-    "priceFrom": 1020.0,
+    "priceFrom": 980,
     "condition": "new",
     "colors": [
       "White",
@@ -2432,12 +5240,12 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "White",
-        "price": 1020.0,
+        "price": 980,
         "available": true
       },
       {
         "color": "Black",
-        "price": 1129.0,
+        "price": 1080,
         "available": true
       }
     ],
@@ -2457,7 +5265,7 @@ export const products: Product[] = [
       "White": "/images/products/accessories/magic-mouse-white.png",
       "Black": "/images/products/accessories/magic-mouse-black.png"
     },
-    "priceFrom": 1060.0,
+    "priceFrom": 1030,
     "condition": "new",
     "colors": [
       "White",
@@ -2466,12 +5274,12 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "White",
-        "price": 1060.0,
+        "price": 1080,
         "available": true
       },
       {
         "color": "Black",
-        "price": 1120.0,
+        "price": 1030,
         "available": true
       }
     ],
@@ -2486,7 +5294,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-pro.png",
-    "priceFrom": 1000.0,
+    "priceFrom": 940,
     "condition": "new",
     "description": "Sensor de apertar inovador, resposta tátil precisa, giroscópio para controle de rotação e suporte ao recurso Buscar.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2495,7 +5303,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1000.0,
+        "price": 940,
         "available": true
       }
     ],
@@ -2510,7 +5318,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-2.png",
-    "priceFrom": 800.0,
+    "priceFrom": 700,
     "condition": "new",
     "description": "Precisão absoluta com fixação e recarga magnética na lateral do iPad, sensível à inclinação e pressão.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2518,7 +5326,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 800.0,
+        "price": 700,
         "available": true
       }
     ],
@@ -2533,7 +5341,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/accessories/apple-pencil-usbc.png",
-    "priceFrom": 760.0,
+    "priceFrom": 749,
     "condition": "new",
     "description": "Emparelhamento e recarga prática via porta USB-C retrátil, fixação magnética e precisão de pixel perfeito.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2541,7 +5349,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 760.0,
+        "price": 749,
         "available": true
       }
     ],
@@ -2556,7 +5364,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "AirTag",
     "image": "/images/products/accessories/airtag-1pack.png",
-    "priceFrom": 325.0,
+    "priceFrom": 290,
     "condition": "new",
     "description": "Rastreie suas chaves, carteira, mala e pertences com máxima precisão pelo app Buscar na rede Apple.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2565,7 +5373,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 325.0,
+        "price": 290,
         "available": true
       }
     ],
@@ -2580,7 +5388,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "AirTag",
     "image": "/images/products/accessories/airtag-4pack.png",
-    "priceFrom": 920.0,
+    "priceFrom": 890,
     "condition": "new",
     "description": "Pacote com 4 unidades do AirTag de 1ª Geração para manter todos os seus itens protegidos e localizáveis.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2588,7 +5396,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 920.0,
+        "price": 890,
         "available": true
       }
     ],
@@ -2624,7 +5432,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "AirTag",
     "image": "/images/products/accessories/airtag-4pack.png",
-    "priceFrom": 1100.0,
+    "priceFrom": 1000,
     "condition": "new",
     "description": "Pacote com 4 unidades para proteger todos os seus itens mais importantes com a rede Buscar da Apple.",
     "warranty": "1 ano de garantia oficial Apple",
@@ -2632,7 +5440,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1100.0,
+        "price": 1000,
         "available": true
       }
     ],
@@ -2814,7 +5622,7 @@ export const products: Product[] = [
     "category": "ipad",
     "subcategory": "iPad Air",
     "image": "/images/products/verified/air-11-spacegray.jpg",
-    "priceFrom": 5700.0,
+    "priceFrom": 5950,
     "condition": "new",
     "availability": "available",
     "screenSizes": [
@@ -2827,7 +5635,9 @@ export const products: Product[] = [
     ],
     "storage": [
       "128GB",
-      "256GB"
+      "256GB",
+      "512GB",
+      "1TB"
     ],
     "colors": [
       "Space Gray",
@@ -2839,7 +5649,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 5700.0,
+        "price": 5950,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -2847,7 +5657,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Purple",
-        "price": 5700.0,
+        "price": 5950,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -2855,7 +5665,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 5700.0,
+        "price": 5950,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -2863,15 +5673,15 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Starlight",
-        "price": 6249.0,
+        "price": 6030,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
       },
       {
         "storage": "256GB",
-        "color": "Blue",
-        "price": 6650.0,
+        "color": "Space Gray",
+        "price": 7500,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -2879,15 +5689,15 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Purple",
-        "price": 6750.0,
+        "price": 7500,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
       },
       {
         "storage": "256GB",
-        "color": "Space Gray",
-        "price": 6940.0,
+        "color": "Blue",
+        "price": 7500,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -2895,39 +5705,207 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Starlight",
-        "price": 7100.0,
+        "price": 7500,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
       },
       {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 7450.0,
+        "price": 0,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi + Cellular"
       },
       {
         "storage": "128GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
         "color": "Blue",
-        "price": 7450.0,
+        "price": 7649,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi + Cellular"
       },
       {
         "storage": "128GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
         "color": "Space Gray",
-        "price": 6850.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi"
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
       },
       {
         "storage": "128GB",
-        "color": "Blue",
-        "price": 7650.0,
+        "color": "Space Gray",
+        "price": 7750,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
@@ -2935,7 +5913,15 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Purple",
-        "price": 7650.0,
+        "price": 7750,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 8249,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
@@ -2943,15 +5929,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Starlight",
-        "price": 8249.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi"
-      },
-      {
-        "storage": "256GB",
-        "color": "Starlight",
-        "price": 8849.0,
+        "price": 8249,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
@@ -2959,7 +5937,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Space Gray",
-        "price": 8849.0,
+        "price": 9049,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
@@ -2967,7 +5945,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Purple",
-        "price": 8849.0,
+        "price": 9049,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
@@ -2975,31 +5953,87 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Blue",
-        "price": 8849.0,
+        "price": 9049,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
+      },
+      {
+        "storage": "256GB",
+        "color": "Starlight",
+        "price": 9049,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
       },
       {
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 8249.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi + Cellular"
-      },
-      {
-        "storage": "128GB",
-        "color": "Blue",
-        "price": 8249.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi + Cellular"
-      },
-      {
-        "storage": "128GB",
-        "color": "Starlight",
-        "price": 8249.0,
+        "price": 8749,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
@@ -3007,18 +6041,122 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Purple",
-        "price": 9450.0,
+        "price": 0,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular"
+      },
+      {
+        "storage": "128GB",
+        "color": "Blue",
+        "price": 0,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular"
+      },
+      {
+        "storage": "128GB",
+        "color": "Starlight",
+        "price": 0,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
       },
       {
         "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
         "color": "Starlight",
-        "price": 9450.0,
+        "price": 9250,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Equipado com o potente chip Apple M4, disponível nos tamanhos de 11 e 13 polegadas, compatível com Apple Pencil Pro e Magic Keyboard.",
@@ -3053,7 +6191,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/verified/airpods-pro2-usbc.jpg",
-    "priceFrom": 1800.0,
+    "priceFrom": 0,
     "condition": "new",
     "availability": "available",
     "description": "Cancelamento Ativo de Ruído até 2x mais potente, modo Transparência Adaptativa, Áudio Espacial com rastreamento e estojo MagSafe USB-C.",
@@ -3063,7 +6201,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1800.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -3082,11 +6220,11 @@ export const products: Product[] = [
       "Space Black": "/images/products/mac/macbook-pro-space-black.png",
       "Silver": "/images/products/mac/macbook-pro-silver.png"
     },
-    "priceFrom": 15150.0,
+    "priceFrom": 16999,
     "condition": "new",
     "screenSizes": [
-      "16\"",
-      "14\""
+      "14\"",
+      "16\""
     ],
     "chips": [
       "M4 Pro"
@@ -3097,7 +6235,9 @@ export const products: Product[] = [
     ],
     "storage": [
       "512GB",
-      "1TB"
+      "1TB",
+      "2TB",
+      "4TB"
     ],
     "colors": [
       "Space Black",
@@ -3106,7 +6246,151 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Space Black",
-        "price": 16240.0,
+        "price": 16999,
+        "available": true,
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "storage": "512GB"
+      },
+      {
+        "color": "Silver",
+        "price": 0,
+        "available": true,
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "storage": "512GB"
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 17150,
         "available": true,
         "screenSize": "16\"",
         "chip": "M4 Pro",
@@ -3115,7 +6399,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 16550.0,
+        "price": 0,
         "available": true,
         "screenSize": "16\"",
         "chip": "M4 Pro",
@@ -3123,8 +6407,80 @@ export const products: Product[] = [
         "storage": "512GB"
       },
       {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
         "color": "Space Black",
-        "price": 31799.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "24GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 31499,
         "available": true,
         "screenSize": "16\"",
         "chip": "M4 Pro",
@@ -3132,22 +6488,49 @@ export const products: Product[] = [
         "storage": "1TB"
       },
       {
-        "color": "Space Black",
-        "price": 15150.0,
-        "available": true,
-        "screenSize": "14\"",
+        "storage": "1TB",
+        "screenSize": "16\"",
         "chip": "M4 Pro",
-        "ram": "24GB",
-        "storage": "512GB"
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
       },
       {
-        "color": "Silver",
-        "price": 15150.0,
-        "available": true,
-        "screenSize": "14\"",
+        "storage": "2TB",
+        "screenSize": "16\"",
         "chip": "M4 Pro",
-        "ram": "24GB",
-        "storage": "512GB"
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Pro",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Potência profissional com o chip Apple M4 Pro, tela Liquid Retina XDR de ponta a ponta e portas Thunderbolt 5 de altíssima velocidade.",
@@ -3165,32 +6548,607 @@ export const products: Product[] = [
     "colorImages": {
       "Space Black": "/images/products/mac/macbook-pro-space-black.png"
     },
-    "priceFrom": 24000.0,
+    "priceFrom": 0,
     "condition": "new",
     "screenSizes": [
+      "14\"",
       "16\""
     ],
     "chips": [
       "M4 Max"
     ],
     "ramOptions": [
-      "36GB"
+      "36GB",
+      "48GB",
+      "64GB",
+      "128GB"
     ],
     "storage": [
-      "1TB"
+      "1TB",
+      "2TB",
+      "4TB",
+      "8TB"
     ],
     "colors": [
-      "Space Black"
+      "Space Black",
+      "Silver"
     ],
     "variants": [
       {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
         "color": "Space Black",
-        "price": 24000.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "14\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "color": "Space Black",
+        "price": 0,
         "available": true,
         "screenSize": "16\"",
         "chip": "M4 Max",
         "ram": "36GB",
         "storage": "1TB"
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "36GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "48GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "64GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "screenSize": "16\"",
+        "chip": "M4 Max",
+        "ram": "128GB",
+        "color": "Silver",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Desempenho extremo para fluxos de trabalho 3D e renderização pesada com o poder do chip Apple M4 Max.",
@@ -3211,7 +7169,7 @@ export const products: Product[] = [
       "Sky Blue": "/images/products/verified/air-sky-blue.jpg",
       "Silver": "/images/products/mac/macbook-air-silver.png"
     },
-    "priceFrom": 9340.0,
+    "priceFrom": 9340,
     "condition": "new",
     "screenSizes": [
       "13\"",
@@ -3235,7 +7193,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Silver",
-        "price": 9900.0,
+        "price": 9900,
         "available": true,
         "screenSize": "13\"",
         "chip": "M4",
@@ -3244,7 +7202,7 @@ export const products: Product[] = [
       },
       {
         "color": "Sky Blue",
-        "price": 9340.0,
+        "price": 9340,
         "available": true,
         "screenSize": "13\"",
         "chip": "M4",
@@ -3253,7 +7211,7 @@ export const products: Product[] = [
       },
       {
         "color": "Silver",
-        "price": 9390.0,
+        "price": 9390,
         "available": true,
         "screenSize": "13\"",
         "chip": "M4",
@@ -3262,7 +7220,7 @@ export const products: Product[] = [
       },
       {
         "color": "Sky Blue",
-        "price": 10350.0,
+        "price": 10350,
         "available": true,
         "screenSize": "15\"",
         "chip": "M4",
@@ -3271,7 +7229,7 @@ export const products: Product[] = [
       },
       {
         "color": "Midnight",
-        "price": 9790.0,
+        "price": 9790,
         "available": true,
         "screenSize": "15\"",
         "chip": "M4",
@@ -3280,7 +7238,7 @@ export const products: Product[] = [
       },
       {
         "color": "Sky Blue",
-        "price": 10390.0,
+        "price": 10390,
         "available": true,
         "screenSize": "15\"",
         "chip": "M4",
@@ -3289,7 +7247,7 @@ export const products: Product[] = [
       },
       {
         "color": "Starlight",
-        "price": 11840.0,
+        "price": 11840,
         "available": true,
         "screenSize": "15\"",
         "chip": "M4",
@@ -3316,7 +7274,7 @@ export const products: Product[] = [
       "Space Black": "/images/products/ipad/ipad-pro-spaceblack.png",
       "Silver": "/images/products/ipad/ipad-pro-silver.png"
     },
-    "priceFrom": 8200.0,
+    "priceFrom": 8200,
     "condition": "new",
     "screenSizes": [
       "11\"",
@@ -3328,7 +7286,9 @@ export const products: Product[] = [
     ],
     "storage": [
       "256GB",
-      "512GB"
+      "512GB",
+      "1TB",
+      "2TB"
     ],
     "colors": [
       "Space Black",
@@ -3338,7 +7298,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Space Black",
-        "price": 8200.0,
+        "price": 8200,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -3346,42 +7306,250 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 8200.0,
+        "price": 8200,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
       },
       {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
         "storage": "256GB",
         "color": "Space Black",
-        "price": 9200.0,
+        "price": 0,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "color": "Space Black",
+        "price": 0,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
       },
       {
         "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
         "color": "Space Black",
-        "price": 9999.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Space Black",
+        "price": 0,
         "available": true,
         "screenSize": "13\"",
-        "chip": "Wi-Fi"
+        "chip": "Wi-Fi + Cellular"
       },
       {
         "storage": "256GB",
         "color": "Silver",
-        "price": 8940.0,
+        "price": 0,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi + Cellular"
       },
       {
-        "storage": "256GB",
-        "color": "Space Black",
-        "price": 9040.0,
-        "available": true,
+        "storage": "512GB",
         "screenSize": "13\"",
-        "chip": "Wi-Fi + Cellular"
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Black",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Silver",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Design incrivelmente fino com o inovador display Ultra Retina XDR Tandem OLED e chip Apple M4.",
@@ -3402,7 +7570,7 @@ export const products: Product[] = [
       "Purple": "/images/products/verified/air-11-purple.jpg",
       "Starlight": "/images/products/verified/air-11-starlight.jpg"
     },
-    "priceFrom": 5100.0,
+    "priceFrom": 5550,
     "condition": "new",
     "screenSizes": [
       "11\"",
@@ -3414,7 +7582,9 @@ export const products: Product[] = [
     ],
     "storage": [
       "128GB",
-      "256GB"
+      "256GB",
+      "512GB",
+      "1TB"
     ],
     "colors": [
       "Space Gray",
@@ -3426,7 +7596,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 5100.0,
+        "price": 5550,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -3434,7 +7604,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 5500.0,
+        "price": 5550,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -3442,7 +7612,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Purple",
-        "price": 5750.0,
+        "price": 5550,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -3450,7 +7620,7 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Starlight",
-        "price": 5750.0,
+        "price": 5550,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -3458,7 +7628,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Space Gray",
-        "price": 5590.0,
+        "price": 5900,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -3466,15 +7636,7 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Blue",
-        "price": 6600.0,
-        "available": true,
-        "screenSize": "11\"",
-        "chip": "Wi-Fi"
-      },
-      {
-        "storage": "256GB",
-        "color": "Starlight",
-        "price": 6650.0,
+        "price": 6749,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
@@ -3482,31 +7644,215 @@ export const products: Product[] = [
       {
         "storage": "256GB",
         "color": "Purple",
-        "price": 6650.0,
+        "price": 6749,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi"
       },
       {
+        "storage": "256GB",
+        "color": "Starlight",
+        "price": 6749,
+        "available": true,
+        "screenSize": "11\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
         "storage": "128GB",
         "color": "Blue",
-        "price": 6150.0,
+        "price": 5950,
         "available": true,
         "screenSize": "11\"",
         "chip": "Wi-Fi + Cellular"
       },
       {
         "storage": "128GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
         "color": "Purple",
-        "price": 5840.0,
-        "available": true,
-        "screenSize": "13\"",
-        "chip": "Wi-Fi"
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "11\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
       },
       {
         "storage": "128GB",
         "color": "Space Gray",
-        "price": 6050.0,
+        "price": 7049,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
@@ -3514,18 +7860,250 @@ export const products: Product[] = [
       {
         "storage": "128GB",
         "color": "Blue",
-        "price": 7100.0,
+        "price": 0,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "128GB",
+        "color": "Purple",
+        "price": 0,
+        "available": true,
+        "screenSize": "13\"",
+        "chip": "Wi-Fi"
+      },
+      {
+        "storage": "128GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "color": "Space Gray",
+        "price": 8349,
         "available": true,
         "screenSize": "13\"",
         "chip": "Wi-Fi"
       },
       {
         "storage": "256GB",
-        "color": "Space Gray",
-        "price": 8249.0,
-        "available": true,
         "screenSize": "13\"",
-        "chip": "Wi-Fi"
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "128GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Space Gray",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Blue",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Purple",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "screenSize": "13\"",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Leve, potente e versátil com chip Apple M3, tela Liquid Retina brilhante e suporte completo ao Apple Pencil.",
@@ -3594,7 +8172,7 @@ export const products: Product[] = [
     "colorImages": {
       "Charcoal Gray": "/images/products/verified/smart-folio-air-13.jpg"
     },
-    "priceFrom": 1430.0,
+    "priceFrom": 0,
     "condition": "new",
     "colors": [
       "Charcoal Gray"
@@ -3602,7 +8180,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Charcoal Gray",
-        "price": 1430.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -3620,15 +8198,17 @@ export const products: Product[] = [
     "colorImages": {
       "Starlight": "/images/products/verified/mini6-starlight.jpg"
     },
-    "priceFrom": 3740.0,
+    "priceFrom": 0,
     "condition": "new",
     "screenSizes": [
       "8.3\""
     ],
     "chips": [
-      "Wi-Fi"
+      "Wi-Fi",
+      "Wi-Fi + Cellular"
     ],
     "storage": [
+      "64GB",
       "256GB"
     ],
     "colors": [
@@ -3636,11 +8216,32 @@ export const products: Product[] = [
     ],
     "variants": [
       {
+        "storage": "64GB",
+        "chip": "Wi-Fi",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
         "storage": "256GB",
         "color": "Starlight",
-        "price": 3740.0,
+        "price": 0,
         "available": true,
         "chip": "Wi-Fi"
+      },
+      {
+        "storage": "64GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "Wi-Fi + Cellular",
+        "color": "Starlight",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Design compacto de 8.3 polegadas, chip A15 Bionic e suporte ao Apple Pencil de 2ª geração.",
@@ -3658,7 +8259,7 @@ export const products: Product[] = [
       "Black": "/images/products/watch/apple-watch-ultra-black.png",
       "Natural": "/images/products/watch/apple-watch-ultra-natural.png"
     },
-    "priceFrom": 5049.0,
+    "priceFrom": 5300,
     "condition": "new",
     "sizes": [
       "49mm"
@@ -3671,13 +8272,13 @@ export const products: Product[] = [
       {
         "size": "49mm",
         "color": "Natural",
-        "price": 5049.0,
+        "price": 5300,
         "available": true
       },
       {
         "size": "49mm",
         "color": "Black",
-        "price": 5250.0,
+        "price": 5300,
         "available": true
       }
     ],
@@ -3696,9 +8297,10 @@ export const products: Product[] = [
       "Rose Gold": "/images/products/watch/apple-watch-s11-rosegold.png",
       "Jet Black": "/images/products/watch/apple-watch-s11-black.png"
     },
-    "priceFrom": 2700.0,
+    "priceFrom": 2850,
     "condition": "new",
     "sizes": [
+      "42mm",
       "46mm"
     ],
     "colors": [
@@ -3707,15 +8309,27 @@ export const products: Product[] = [
     ],
     "variants": [
       {
+        "size": "42mm",
+        "color": "Rose Gold",
+        "price": 0,
+        "available": true
+      },
+      {
+        "size": "42mm",
+        "color": "Jet Black",
+        "price": 0,
+        "available": true
+      },
+      {
         "size": "46mm",
         "color": "Rose Gold",
-        "price": 2700.0,
+        "price": 2850,
         "available": true
       },
       {
         "size": "46mm",
         "color": "Jet Black",
-        "price": 3150.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -3816,11 +8430,11 @@ export const products: Product[] = [
       "Midnight": "/images/products/watch/apple-watch-se-midnight.png",
       "Starlight": "/images/products/watch/apple-watch-se-starlight.png"
     },
-    "priceFrom": 2040.0,
+    "priceFrom": 2075,
     "condition": "new",
     "sizes": [
-      "44mm",
-      "40mm"
+      "40mm",
+      "44mm"
     ],
     "chips": [
       "GPS",
@@ -3831,23 +8445,30 @@ export const products: Product[] = [
     ],
     "variants": [
       {
-        "size": "44mm",
+        "size": "40mm",
         "color": "Midnight",
-        "price": 2040.0,
+        "price": 2075,
         "available": true,
         "chip": "GPS"
       },
       {
         "size": "40mm",
+        "chip": "GPS + Cellular",
         "color": "Midnight",
-        "price": 2120.0,
+        "price": 0,
+        "available": true
+      },
+      {
+        "size": "44mm",
+        "color": "Midnight",
+        "price": 2199,
         "available": true,
         "chip": "GPS"
       },
       {
         "size": "44mm",
         "color": "Midnight",
-        "price": 2150.0,
+        "price": 2250,
         "available": true,
         "chip": "GPS + Cellular"
       }
@@ -3870,7 +8491,7 @@ export const products: Product[] = [
       "Midnight": "/images/products/airpods/airpods-max-midnight.png",
       "Starlight": "/images/products/airpods/airpods-max-starlight.png"
     },
-    "priceFrom": 3130.0,
+    "priceFrom": 2950,
     "condition": "new",
     "colors": [
       "Midnight",
@@ -3882,27 +8503,27 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Midnight",
-        "price": 3130.0,
+        "price": 3149,
         "available": true
       },
       {
         "color": "Starlight",
-        "price": 3130.0,
+        "price": 2950,
         "available": true
       },
       {
         "color": "Blue",
-        "price": 3400.0,
+        "price": 2950,
         "available": true
       },
       {
         "color": "Purple",
-        "price": 3650.0,
+        "price": 2950,
         "available": true
       },
       {
         "color": "Orange",
-        "price": 3650.0,
+        "price": 2950,
         "available": true
       }
     ],
@@ -3917,7 +8538,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods Pro",
     "image": "/images/products/verified/airpods-pro2-lightning.jpg",
-    "priceFrom": 1260.0,
+    "priceFrom": 0,
     "condition": "new",
     "colors": [
       "Padrão"
@@ -3925,7 +8546,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1260.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -3940,7 +8561,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/verified/airpods3.jpg",
-    "priceFrom": 1090.0,
+    "priceFrom": 1190,
     "condition": "new",
     "colors": [
       "Padrão"
@@ -3948,7 +8569,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1090.0,
+        "price": 1190,
         "available": true
       }
     ],
@@ -3963,7 +8584,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods",
     "image": "/images/products/verified/airpods2.jpg",
-    "priceFrom": 1300.0,
+    "priceFrom": 0,
     "condition": "new",
     "colors": [
       "Padrão"
@@ -3971,7 +8592,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1300.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -3986,7 +8607,7 @@ export const products: Product[] = [
     "category": "airpods",
     "subcategory": "AirPods 5",
     "image": "/images/products/airpods/airpods-5.png",
-    "priceFrom": 1460.0,
+    "priceFrom": 1480,
     "condition": "new",
     "colors": [
       "Padrão"
@@ -3994,7 +8615,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1460.0,
+        "price": 1480,
         "available": true
       }
     ],
@@ -4009,7 +8630,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple Pencil",
     "image": "/images/products/verified/pencil-firstgen.jpg",
-    "priceFrom": 900.0,
+    "priceFrom": 790,
     "condition": "new",
     "colors": [
       "Padrão"
@@ -4017,7 +8638,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 900.0,
+        "price": 790,
         "available": true
       }
     ],
@@ -4040,7 +8661,7 @@ export const products: Product[] = [
       "Black": "/images/products/verified/keyboard-ipad-11-black.jpg",
       "White": "/images/products/verified/keyboard-ipad-11-white.jpg"
     },
-    "priceFrom": 2690.0,
+    "priceFrom": 2450,
     "condition": "new",
     "sizes": [
       "11\""
@@ -4052,12 +8673,12 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Black",
-        "price": 2690.0,
+        "price": 2750,
         "available": true
       },
       {
         "color": "White",
-        "price": 3050.0,
+        "price": 2450,
         "available": true
       }
     ],
@@ -4072,7 +8693,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Teclados",
     "image": "/images/products/verified/keyboard-ipad-12-9-black.jpg",
-    "priceFrom": 1389.0,
+    "priceFrom": 0,
     "condition": "new",
     "sizes": [
       "12.9\""
@@ -4083,7 +8704,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Black",
-        "price": 1389.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -4102,7 +8723,7 @@ export const products: Product[] = [
       "Black": "/images/products/verified/keyboard-ipad-13-black.jpg",
       "White": "/images/products/verified/keyboard-ipad-13-white.jpg"
     },
-    "priceFrom": 3400.0,
+    "priceFrom": 3399,
     "condition": "new",
     "sizes": [
       "13\""
@@ -4114,12 +8735,12 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "White",
-        "price": 3400.0,
+        "price": 3399,
         "available": true
       },
       {
         "color": "Black",
-        "price": 3850.0,
+        "price": 3399,
         "available": true
       }
     ],
@@ -4157,7 +8778,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Teclados Mac",
     "image": "/images/products/verified/keyboard-touchid-white.jpg",
-    "priceFrom": 1740.0,
+    "priceFrom": 1750,
     "condition": "new",
     "colors": [
       "White"
@@ -4165,7 +8786,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "White",
-        "price": 1740.0,
+        "price": 1750,
         "available": true
       }
     ],
@@ -4184,7 +8805,7 @@ export const products: Product[] = [
       "White": "/images/products/verified/keyboard-numeric-white.jpg",
       "Black": "/images/products/verified/keyboard-numeric-black.jpg"
     },
-    "priceFrom": 2000.0,
+    "priceFrom": 1950,
     "condition": "new",
     "colors": [
       "Black",
@@ -4193,12 +8814,12 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Black",
-        "price": 2000.0,
+        "price": 1950,
         "available": true
       },
       {
         "color": "White",
-        "price": 2699.0,
+        "price": 2699,
         "available": true
       }
     ],
@@ -4217,7 +8838,7 @@ export const products: Product[] = [
       "White": "/images/products/verified/trackpad-white.jpg",
       "Black": "/images/products/verified/trackpad-black.jpg"
     },
-    "priceFrom": 1120.0,
+    "priceFrom": 1100,
     "condition": "new",
     "colors": [
       "White",
@@ -4226,12 +8847,12 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "White",
-        "price": 1120.0,
+        "price": 1100,
         "available": true
       },
       {
         "color": "Black",
-        "price": 1220.0,
+        "price": 1300,
         "available": true
       }
     ],
@@ -4246,7 +8867,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple TV",
     "image": "/images/products/verified/tv-4k.jpg",
-    "priceFrom": 1999.0,
+    "priceFrom": 0,
     "condition": "new",
     "storage": [
       "64GB"
@@ -4257,7 +8878,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1999.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -4272,7 +8893,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Apple TV",
     "image": "/images/products/verified/tv-4k.jpg",
-    "priceFrom": 2099.0,
+    "priceFrom": 0,
     "condition": "new",
     "storage": [
       "128GB"
@@ -4283,7 +8904,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 2099.0,
+        "price": 0,
         "available": true
       }
     ],
@@ -4298,7 +8919,7 @@ export const products: Product[] = [
     "category": "accessories",
     "subcategory": "Teclados",
     "image": "/images/products/verified/smart-keyboard.jpg",
-    "priceFrom": 1240.0,
+    "priceFrom": 1240,
     "condition": "new",
     "colors": [
       "Padrão"
@@ -4306,7 +8927,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 1240.0,
+        "price": 1240,
         "available": true
       }
     ],
@@ -4480,16 +9101,23 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Potência Extrema para Estúdios • Chip M5 Max",
     "image": "/images/products/verified/studio.jpg",
-    "priceFrom": 24700.0,
+    "priceFrom": 24600,
     "condition": "new",
     "chips": [
       "M5 Max"
     ],
     "ramOptions": [
-      "36GB"
+      "36GB",
+      "48GB",
+      "64GB",
+      "128GB"
     ],
     "storage": [
-      "512GB"
+      "512GB",
+      "1TB",
+      "2TB",
+      "4TB",
+      "8TB"
     ],
     "colors": [
       "Padrão"
@@ -4497,11 +9125,163 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 24700.0,
+        "price": 24600,
         "available": true,
         "chip": "M5 Max",
         "ram": "36GB",
         "storage": "512GB"
+      },
+      {
+        "storage": "1TB",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M5 Max",
+        "ram": "36GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M5 Max",
+        "ram": "48GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M5 Max",
+        "ram": "64GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "4TB",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "8TB",
+        "chip": "M5 Max",
+        "ram": "128GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Performance de ponta para profissionais criativos com chip Apple M5 Max.",
@@ -4516,17 +9296,21 @@ export const products: Product[] = [
     "category": "mac",
     "subcategory": "Design Ultracompacto • Chip M6",
     "image": "/images/products/mac/mac-mini-m4-clean.png",
-    "priceFrom": 7300.0,
+    "priceFrom": 7750,
     "condition": "new",
     "chips": [
       "M6"
     ],
     "ramOptions": [
-      "16GB"
+      "16GB",
+      "24GB",
+      "32GB"
     ],
     "storage": [
       "256GB",
-      "512GB"
+      "512GB",
+      "1TB",
+      "2TB"
     ],
     "colors": [
       "Padrão"
@@ -4534,7 +9318,7 @@ export const products: Product[] = [
     "variants": [
       {
         "color": "Padrão",
-        "price": 7300.0,
+        "price": 7750,
         "available": true,
         "chip": "M6",
         "ram": "16GB",
@@ -4542,11 +9326,91 @@ export const products: Product[] = [
       },
       {
         "color": "Padrão",
-        "price": 8450.0,
+        "price": 9300,
         "available": true,
         "chip": "M6",
         "ram": "16GB",
         "storage": "512GB"
+      },
+      {
+        "storage": "1TB",
+        "chip": "M6",
+        "ram": "16GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M6",
+        "ram": "16GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "M6",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M6",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M6",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M6",
+        "ram": "24GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "256GB",
+        "chip": "M6",
+        "ram": "32GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "512GB",
+        "chip": "M6",
+        "ram": "32GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "1TB",
+        "chip": "M6",
+        "ram": "32GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
+      },
+      {
+        "storage": "2TB",
+        "chip": "M6",
+        "ram": "32GB",
+        "color": "Padrão",
+        "price": 0,
+        "available": true
       }
     ],
     "description": "Nova geração de performance compacta com chip Apple M6.",
