@@ -26,7 +26,7 @@ export const metadata = {
 
 export default function TradeInPage() {
   return (
-    <div className="pt-20 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-24 sm:pt-28 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
         
 

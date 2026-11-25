@@ -11,7 +11,7 @@ export function AppleOfficialHeroSection({ duoPrice: initialDuoPrice = 0 }: { du
   const duoPrice = useLivePrice("iphone-duo", initialDuoPrice);
   const showPrices = Boolean(storeConfig.showPrices);
   return (
-    <section aria-label="Destaques Mundo Apple" className="flex w-full flex-col gap-3 bg-white pt-11 sm:pt-12">
+    <section aria-label="Destaques Mundo Apple" className="flex w-full flex-col gap-3 bg-white pt-0">
       <article className="relative isolate flex h-[540px] flex-col items-center justify-end overflow-hidden bg-[#55112d] px-5 pb-10 text-center text-white sm:h-[650px] sm:pb-12 lg:h-[692px]">
         <img src="/apple-official/home/holiday-large.jpg" alt="Produtos Apple para presentear, com laço branco e detalhes em vermelho e magenta" fetchPriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover" />
         <h1 className="font-display text-[36px] font-semibold leading-tight tracking-tight sm:text-[56px]">Presentes para amar</h1>

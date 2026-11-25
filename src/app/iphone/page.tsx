@@ -37,7 +37,7 @@ export default async function IPhoneCategoryPage() {
   });
 
   return (
-    <div className="pt-20 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-24 sm:pt-28 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
 
         <ProductGrid products={sortedProducts} />
