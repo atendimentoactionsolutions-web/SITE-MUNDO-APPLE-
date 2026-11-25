@@ -100,40 +100,46 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      {/* ── Fixed Clean White Capsule Header Container ── */}
-      <header className="fixed top-3 sm:top-5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none flex justify-center">
+      {/* ── Compact Floating White Capsule Header ── */}
+      <header className="fixed top-2.5 sm:top-3.5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none flex justify-center">
         <div
-          className={`pointer-events-auto w-full max-w-[1220px] h-[64px] sm:h-[68px] bg-white/90 backdrop-blur-xl border border-[#D2D2D7]/80 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.06)] transition-all duration-300 px-4 sm:px-6 flex items-center justify-between ${
-            scrolled ? "shadow-[0_10px_32px_rgba(0,0,0,0.10)] bg-white/95 border-[#D2D2D7]" : ""
+          className={`pointer-events-auto w-full max-w-[1120px] h-[48px] sm:h-[54px] rounded-full border transition-all duration-300 px-3.5 sm:px-5 flex items-center justify-between ${
+            mobileMenuOpen
+              ? "bg-white border-[#E5E5EA] shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
+              : scrolled
+                ? "bg-white/95 backdrop-blur-xl border-[#D2D2D7] shadow-[0_8px_28px_rgba(0,0,0,0.09)]"
+                : "bg-white/90 backdrop-blur-xl border-[#D2D2D7]/80 shadow-[0_4px_16px_rgba(0,0,0,0.05)]"
           }`}
         >
           {/* Logo Mundo Apple Delivery (Left) */}
           <Link
             href="/"
             aria-label="Mundo Apple Delivery — Página inicial"
-            className="flex items-center gap-2.5 group transition-opacity hover:opacity-85 select-none shrink-0"
+            className="flex items-center gap-2 group transition-opacity hover:opacity-85 select-none shrink-0"
           >
             <img
-              src="/images/brand/logo-icon.png"
+              src="/images/brand/logo-icon.png?v=2"
               alt="Mundo Apple Delivery"
-              className="w-8 h-8 rounded-xl object-contain shrink-0"
+              className="w-7 h-7 sm:w-8 sm:h-8 object-contain shrink-0"
             />
             <div className="flex flex-col leading-none">
-              <span className="font-bold text-sm sm:text-base text-[#1D1D1F] tracking-tight font-display">
+              <span className="font-bold text-[13px] sm:text-[15px] text-[#1D1D1F] tracking-tight font-display">
                 MUNDO APPLE
               </span>
-              <span className="text-[8px] sm:text-[9px] text-[#86868B] font-semibold tracking-widest uppercase">
+              <span className="text-[7.5px] sm:text-[8.5px] text-[#86868B] font-semibold tracking-[0.14em] uppercase mt-0.5">
                 DELIVERY
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links (Center) */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 text-xs xl:text-sm font-semibold text-[#1D1D1F]">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-[13px] font-medium text-[#1D1D1F]">
             <Link
               href="/"
-              className={`px-3 py-1.5 rounded-full transition-colors ${
-                pathname === "/" ? "text-[#0071E3] bg-[#F5F5F7]" : "hover:text-[#0071E3] hover:bg-[#F5F5F7]"
+              className={`px-3 py-1 rounded-full transition-colors ${
+                pathname === "/"
+                  ? "text-[#0071E3] bg-[#F5F5F7] font-semibold"
+                  : "hover:text-[#0071E3] hover:bg-[#F5F5F7]"
               }`}
             >
               Home
@@ -145,9 +151,9 @@ export const Header: React.FC = () => {
                 type="button"
                 onClick={() => setCatalogDropdownOpen(!catalogDropdownOpen)}
                 aria-expanded={catalogDropdownOpen}
-                className={`px-3 py-1.5 rounded-full transition-colors inline-flex items-center gap-1 cursor-pointer ${
+                className={`px-3 py-1 rounded-full transition-colors inline-flex items-center gap-1 cursor-pointer ${
                   isCatalogRoute
-                    ? "text-[#0071E3] bg-[#F5F5F7]"
+                    ? "text-[#0071E3] bg-[#F5F5F7] font-semibold"
                     : "hover:text-[#0071E3] hover:bg-[#F5F5F7]"
                 }`}
               >
@@ -189,9 +195,9 @@ export const Header: React.FC = () => {
 
             <Link
               href="/vender"
-              className={`px-3 py-1.5 rounded-full transition-colors ${
+              className={`px-3 py-1 rounded-full transition-colors ${
                 pathname === "/vender"
-                  ? "text-emerald-700 bg-emerald-50 font-bold"
+                  ? "text-emerald-700 bg-emerald-50 font-semibold"
                   : "hover:text-emerald-700 hover:bg-emerald-50"
               }`}
             >
@@ -200,9 +206,9 @@ export const Header: React.FC = () => {
 
             <Link
               href="/troca"
-              className={`px-3 py-1.5 rounded-full transition-colors ${
+              className={`px-3 py-1 rounded-full transition-colors ${
                 pathname === "/troca"
-                  ? "text-[#0071E3] bg-blue-50 font-bold"
+                  ? "text-[#0071E3] bg-blue-50 font-semibold"
                   : "hover:text-[#0071E3] hover:bg-blue-50"
               }`}
             >
@@ -211,9 +217,9 @@ export const Header: React.FC = () => {
 
             <Link
               href="/sobre"
-              className={`px-3 py-1.5 rounded-full transition-colors ${
+              className={`px-3 py-1 rounded-full transition-colors ${
                 pathname === "/sobre"
-                  ? "text-[#0071E3] bg-[#F5F5F7]"
+                  ? "text-[#0071E3] bg-[#F5F5F7] font-semibold"
                   : "hover:text-[#0071E3] hover:bg-[#F5F5F7]"
               }`}
             >
@@ -222,16 +228,16 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Right Action Area */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1 sm:gap-2">
             {/* Search Trigger */}
             <button
               type="button"
               onClick={() => setSearchModalOpen(true)}
-              className="p-2 text-[#6E6E73] hover:text-[#1D1D1F] hover:bg-[#F5F5F7] rounded-full transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
+              className="p-1.5 sm:p-2 text-[#6E6E73] hover:text-[#1D1D1F] hover:bg-[#F5F5F7] rounded-full transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
               aria-label="Pesquisar produtos"
             >
               <Search className="w-4 h-4" />
-              <span className="hidden xl:inline text-[11px] text-[#86868B] bg-[#F5F5F7] border border-[#D2D2D7]/80 px-1.5 py-0.5 rounded-md">
+              <span className="hidden xl:inline text-[10px] text-[#86868B] bg-[#F5F5F7] border border-[#D2D2D7]/80 px-1.5 py-0.5 rounded-md">
                 ⌘K
               </span>
             </button>
@@ -240,7 +246,7 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-[#1D1D1F] hover:bg-[#F5F5F7] rounded-full transition-colors cursor-pointer"
+              className="lg:hidden p-1.5 text-[#1D1D1F] hover:bg-[#F5F5F7] rounded-full transition-colors cursor-pointer"
               aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
               aria-expanded={mobileMenuOpen}
             >
@@ -250,78 +256,84 @@ export const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* ── Mobile Menu Modal Overlay (Clean White) ── */}
+      {/* ── Mobile Menu Full-Screen Overlay (Solid Clean Pure White) ── */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl pt-24 px-6 pb-8 flex flex-col justify-between overflow-y-auto animate-in fade-in duration-200">
-          <div className="space-y-4">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">
-              Navegação
+        <div
+          className="fixed inset-0 z-40 bg-white pt-20 px-5 pb-7 flex flex-col justify-between overflow-y-auto animate-in fade-in duration-200"
+          style={{ backgroundColor: "#ffffff" }}
+        >
+          <div className="space-y-5">
+            <div>
+              <div className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#86868B] mb-2">
+                Navegação
+              </div>
+              <nav className="flex flex-col divide-y divide-[#EFEFF4]">
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-3 text-[17px] font-semibold text-[#1D1D1F] flex items-center justify-between"
+                >
+                  <span>Home</span>
+                  <ArrowRight className="w-4 h-4 text-[#86868B]" />
+                </Link>
+                <Link
+                  href="/vender"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-3 text-[17px] font-semibold text-emerald-700 flex items-center justify-between"
+                >
+                  <span>Vender Produto Apple</span>
+                  <ArrowRight className="w-4 h-4 text-emerald-700" />
+                </Link>
+                <Link
+                  href="/troca"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-3 text-[17px] font-semibold text-[#0071E3] flex items-center justify-between"
+                >
+                  <span>Upgrade / Troca</span>
+                  <ArrowRight className="w-4 h-4 text-[#0071E3]" />
+                </Link>
+                <Link
+                  href="/sobre"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-3 text-[17px] font-semibold text-[#1D1D1F] flex items-center justify-between"
+                >
+                  <span>Sobre nós</span>
+                  <ArrowRight className="w-4 h-4 text-[#86868B]" />
+                </Link>
+              </nav>
             </div>
-            <nav className="flex flex-col space-y-2">
-              <Link
-                href="/"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
-              >
-                <span>Home</span>
-                <ArrowRight className="w-4 h-4 text-gray-400" />
-              </Link>
-              <Link
-                href="/vender"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-lg font-bold text-emerald-700 border-b border-slate-100 flex items-center justify-between"
-              >
-                <span>Vender Produto Apple</span>
-                <ArrowRight className="w-4 h-4 text-emerald-700" />
-              </Link>
-              <Link
-                href="/troca"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-lg font-bold text-[#0071E3] border-b border-slate-100 flex items-center justify-between"
-              >
-                <span>Upgrade / Troca</span>
-                <ArrowRight className="w-4 h-4 text-[#0071E3]" />
-              </Link>
-              <Link
-                href="/sobre"
-                onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 text-lg font-bold text-[#1D1D1F] border-b border-slate-100 flex items-center justify-between"
-              >
-                <span>Sobre nós</span>
-                <ArrowRight className="w-4 h-4 text-gray-400" />
-              </Link>
-            </nav>
 
-            <div className="pt-4">
-              <div className="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-3">
+            <div>
+              <div className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#86868B] mb-3">
                 Categorias de Produtos
               </div>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2.5">
                 {catalogCategories.map((cat) => (
                   <Link
                     key={cat.label}
                     href={cat.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-3 bg-[#F5F5F7] border border-[#E5E7EB] rounded-2xl text-xs font-bold text-[#1D1D1F] hover:bg-slate-200 transition-colors"
+                    className="px-3.5 py-3 bg-[#F5F5F7] border border-[#E6E6EB] rounded-2xl text-[13px] font-semibold text-[#1D1D1F] hover:bg-[#E8E8ED] transition-colors flex items-center justify-between"
                   >
-                    {cat.label}
+                    <span>{cat.label}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#86868B]" />
                   </Link>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="pt-6 border-t border-slate-100 space-y-3">
+          <div className="pt-5 mt-6 border-t border-[#EFEFF4] space-y-3">
             <a
               href={getWhatsAppGeneralUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 bg-[#00C853] text-white font-bold rounded-2xl text-sm shadow-md"
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 bg-[#16A34A] hover:bg-[#15803D] text-white font-semibold rounded-full text-sm shadow-sm transition-colors"
             >
               <MessageCircle className="w-4 h-4 fill-white" />
               <span>Chamar no WhatsApp ({storeConfig.contact.whatsappFormatted})</span>
             </a>
-            <p className="text-center text-[11px] text-gray-500">
+            <p className="text-center text-[11px] text-[#6E6E73]">
               {storeConfig.address.fullAddress}
             </p>
           </div>
