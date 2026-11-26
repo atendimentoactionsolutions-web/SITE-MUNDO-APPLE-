@@ -73,6 +73,8 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
     () => pickDefaultVariant(product.variants)
   );
   const [customOptions, setCustomOptions] = useState<Partial<Record<OptionField, string>>>({});
+  const [hasSwappedPhoto, setHasSwappedPhoto] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     if (product.variants && product.variants.length > 0) {
@@ -168,6 +170,10 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
   }, [hasVariants, product.variants, currentSize, currentChip, currentRam, currentStorage, colorList]);
 
   const handleSelectField = (field: OptionField, value: string) => {
+    setHasInteracted(true);
+    if (field === "color" || field === "size") {
+      setHasSwappedPhoto(true);
+    }
     if (!hasVariants || !product.variants) {
       setCustomOptions((prev) => ({ ...prev, [field]: value }));
       return;
@@ -246,9 +252,11 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
       <div className="product-picture">
         <Link href={productHref} aria-label={`Ver ${product.name} ${currentStorage}`}>
           <img
+            key={hasSwappedPhoto ? displayedImage : "initial"}
             src={displayedImage}
             alt={`${product.name} ${currentColor}`.trim()}
             loading={priority ? "eager" : "lazy"}
+            className={hasSwappedPhoto ? "animate-photo-swap" : undefined}
           />
         </Link>
       </div>
@@ -399,7 +407,12 @@ export const TalesProductCard: React.FC<TalesProductCardProps> = ({
         {showPrices && currentPrice > 0 ? (
           <div className="price-block">
             <small>À vista no PIX</small>
-            <strong>{formatCurrency(currentPrice)}</strong>
+            <strong
+              key={hasInteracted ? currentPrice : "initial"}
+              className={hasInteracted ? "animate-price-pop" : undefined}
+            >
+              {formatCurrency(currentPrice)}
+            </strong>
             {maxInstallment && (
               <p>ou em até 18x de {formatCurrency(maxInstallment.installmentValue)} no cartão</p>
             )}

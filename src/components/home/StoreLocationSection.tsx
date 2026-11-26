@@ -53,37 +53,45 @@ export const StoreLocationSection: React.FC = () => {
       id="localizacao"
     >
       <Container size="large">
-        {/* Section Header */}
-        <div
-          className="max-w-3xl mb-10 sm:mb-14 space-y-3"
-          data-reveal="up"
-        >
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] border border-[#E6E6EB] text-[11px] font-semibold uppercase tracking-[0.08em] text-[#6E6E73]">
+        {/* Section Header — Choreographed Lead / Support / Decoration */}
+        <div className="max-w-3xl mb-10 sm:mb-14 space-y-3">
+          <span
+            data-reveal="fade"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5F5F7] border border-[#E6E6EB] text-[11px] font-semibold uppercase tracking-[0.08em] text-[#6E6E73]"
+          >
             <MapPin className="w-3.5 h-3.5 text-[#0071E3]" />
             Sobre a Loja · São Paulo
           </span>
 
-          <h2 className="text-[28px] sm:text-[40px] lg:text-[44px] font-semibold text-[#1D1D1F] font-display tracking-[-0.035em] leading-[1.12]">
+          <h2
+            data-reveal="lead"
+            className="text-[28px] sm:text-[40px] lg:text-[44px] font-semibold text-[#1D1D1F] font-display tracking-[-0.035em] leading-[1.12]"
+          >
             Conheça a {storeConfig.shortName}.{" "}
             <span className="text-[#6E6E73] font-normal">
               Loja física na Santa Ifigênia e entrega rápida em toda SP.
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-[#6E6E73] leading-relaxed max-w-2xl">
+          <p
+            data-reveal="support"
+            data-reveal-delay="75"
+            className="text-sm sm:text-base text-[#6E6E73] leading-relaxed max-w-2xl"
+          >
             Atendimento transparente, aparelhos 100% originais e lacrados com conferência presencial na hora, além de equipe dedicada no WhatsApp para tirar dúvidas e agilizar seu pedido.
           </p>
         </div>
 
-        {/* 4 Clean Trust Pillars */}
+        {/* 4 Clean Trust Pillars (shrinking organic stagger: 0, 55, 100, 135ms) */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
           {STORE_PILLARS.map((pillar, idx) => {
             const Icon = pillar.icon;
+            const shrinkingDelays = ["0", "55", "100", "135"];
             return (
               <div
                 key={pillar.title}
-                data-reveal="up"
-                data-reveal-delay={String(idx * 70)}
+                data-reveal="support"
+                data-reveal-delay={shrinkingDelays[idx] ?? "135"}
                 className="interactive-card bg-[#F5F5F7] rounded-[22px] p-4 sm:p-6 border border-[#E6E6EB]/90 flex flex-col justify-between gap-3"
               >
                 <div

@@ -1,5 +1,5 @@
 import { LivePricesProvider } from "@/components/products/LivePricesProvider";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -8,6 +8,13 @@ import { GlobalMotionController } from "@/components/ui/GlobalMotionController";
 import { storeConfig } from "@/data/storeConfig";
 
 export const revalidate = 60; // Revalidação a cada 60 segundos com o buscador em tempo real
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#ffffff",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mundoappledelivery.com"),

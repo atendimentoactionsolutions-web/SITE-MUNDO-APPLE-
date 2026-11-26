@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -9,11 +9,13 @@ import {
   MessageCircle,
   Loader2,
   BatteryCharging,
-  Cpu,
   Lock,
   RotateCcw,
   ShieldCheck,
   AlertCircle,
+  X,
+  Smartphone,
+  Sparkles,
 } from "lucide-react";
 import { storeConfig } from "@/data/storeConfig";
 import { formatCurrency } from "@/utils/formatters";
@@ -41,11 +43,42 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
   // 8 etapas de triagem + Etapa 9 de Resultado/Dados
   const totalQuestionSteps = 8;
   const [step, setStep] = useState(1);
+  const [stepDirection, setStepDirection] = useState<1 | -1>(1);
+  const [hasNavigated, setHasNavigated] = useState(false);
+  const advanceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 1. Catálogo
   const [models, setModels] = useState<ModelOption[]>([]);
   const [loadingCatalog, setLoadingCatalog] = useState(true);
   const [modelSearch, setModelSearch] = useState("");
+  const [selectedFamilyFilter, setSelectedFamilyFilter] = useState<string>("all");
+
+  const clearPendingAdvance = () => {
+    if (advanceTimerRef.current) {
+      clearTimeout(advanceTimerRef.current);
+      advanceTimerRef.current = null;
+    }
+  };
+
+  useEffect(() => () => clearPendingAdvance(), []);
+
+  const goToStep = (nextStep: number) => {
+    clearPendingAdvance();
+    setStepDirection(nextStep >= step ? 1 : -1);
+    setHasNavigated(true);
+    setStep(nextStep);
+  };
+
+  // Show tactile selection confirmation (155ms beat) before gliding to the next step
+  const advanceWithBeat = (nextStep: number) => {
+    clearPendingAdvance();
+    advanceTimerRef.current = setTimeout(() => {
+      setStepDirection(1);
+      setHasNavigated(true);
+      setStep(nextStep);
+      advanceTimerRef.current = null;
+    }, 155);
+  };
 
   const [storageOptions, setStorageOptions] = useState<StorageOption[]>([]);
   const [loadingStorages, setLoadingStorages] = useState(false);
@@ -284,11 +317,32 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
     setCustomerWhatsapp(formatted);
   };
 
+  const modelGenerations = useMemo(() => {
+    const gens = new Set<string>();
+    for (const m of models) {
+      const match = m.name.match(/iPhone\s+(\d+|SE|X[RS]?|Air)/i);
+      if (match) gens.add(match[1].toUpperCase());
+    }
+    return Array.from(gens).sort((a, b) => {
+      const na = parseInt(a, 10);
+      const nb = parseInt(b, 10);
+      if (!Number.isNaN(na) && !Number.isNaN(nb)) return nb - na;
+      if (!Number.isNaN(na)) return -1;
+      if (!Number.isNaN(nb)) return 1;
+      return a.localeCompare(b);
+    });
+  }, [models]);
+
   const filteredModels = useMemo(() => {
-    if (!modelSearch.trim()) return models;
-    const q = modelSearch.toLowerCase();
+    let list = models;
+    if (selectedFamilyFilter !== "all" && !modelSearch.trim()) {
+      const re = new RegExp(`iPhone\\s+${selectedFamilyFilter}(?:\\b|\\s|$)`, "i");
+      list = list.filter((m) => re.test(m.name));
+    }
+    if (!modelSearch.trim()) return list;
+    const q = modelSearch.toLowerCase().trim();
     return models.filter((m) => m.name.toLowerCase().includes(q));
-  }, [models, modelSearch]);
+  }, [models, modelSearch, selectedFamilyFilter]);
 
   // Validação por etapa
   const isStepValid = useMemo(() => {
@@ -524,7 +578,12 @@ Gostaria de agendar a avaliação e retirada em SP!`;
   };
 
   const restart = () => {
+    clearPendingAdvance();
+    setStepDirection(-1);
+    setHasNavigated(true);
     setStep(1);
+    setSelectedFamilyFilter("all");
+    setModelSearch("");
     setSelectedModel(null);
     setSelectedStorage(null);
     setBatteryHealth("");
@@ -540,96 +599,306 @@ Gostaria de agendar a avaliação e retirada em SP!`;
     setQuoteSuccess(false);
   };
 
+  const stepMeta = [
+    { num: 1, label: "Modelo" },
+    { num: 2, label: "Armazenamento" },
+    { num: 3, label: "Saúde da Bateria" },
+    { num: 4, label: "Tela" },
+    { num: 5, label: "Traseira" },
+    { num: 6, label: "Laterais" },
+    { num: 7, label: "Peças Trocadas" },
+    { num: 8, label: "Procedência" },
+  ];
+
+  const currentStepTitle = stepMeta[step - 1]?.label ?? "";
+  const stepAnimClass = !hasNavigated
+    ? ""
+    : stepDirection > 0
+      ? "animate-step-forward"
+      : "animate-step-backward";
+
+  const selectedChips = useMemo(() => {
+    const items: Array<{ targetStep: number; label: string }> = [];
+    if (selectedModel) items.push({ targetStep: 1, label: selectedModel.name });
+    if (selectedStorage) items.push({ targetStep: 2, label: selectedStorage.displayName });
+    if (batteryHealth) {
+      const shortMap: Record<string, string> = {
+        "90_plus": "Bat. 90%+",
+        "85_89": "Bat. 85–89%",
+        "80_84": "Bat. 80–84%",
+        below_80: "Bat. <80%",
+      };
+      items.push({ targetStep: 3, label: shortMap[batteryHealth] || batteryHealth });
+    }
+    if (screenCondition) {
+      const shortMap: Record<string, string> = {
+        perfect: "Tela impecável",
+        light_scratches: "Tela riscos leves",
+        deep_scratches: "Tela riscos prof.",
+        cracked: "Tela trincada",
+        display_damaged: "Display danif.",
+      };
+      items.push({ targetStep: 4, label: shortMap[screenCondition] || screenCondition });
+    }
+    if (backCondition) {
+      const shortMap: Record<string, string> = {
+        perfect: "Traseira impecável",
+        light_marks: "Traseira marcas leves",
+        cracked: "Traseira trincada",
+        camera_broken: "Lente danif.",
+      };
+      items.push({ targetStep: 5, label: shortMap[backCondition] || backCondition });
+    }
+    if (sidesCondition) {
+      const shortMap: Record<string, string> = {
+        perfect: "Bordas impecáveis",
+        light_scratches: "Bordas marcas leves",
+        dents: "Bordas amassadas",
+      };
+      items.push({ targetStep: 6, label: shortMap[sidesCondition] || sidesCondition });
+    }
+    if (replacedPartsStatus) {
+      items.push({
+        targetStep: 7,
+        label:
+          replacedPartsStatus === "no"
+            ? "100% Original"
+            : `${selectedReplacedParts.length} peça${selectedReplacedParts.length === 1 ? "" : "s"} trocada${selectedReplacedParts.length === 1 ? "" : "s"}`,
+      });
+    }
+    return items;
+  }, [
+    selectedModel,
+    selectedStorage,
+    batteryHealth,
+    screenCondition,
+    backCondition,
+    sidesCondition,
+    replacedPartsStatus,
+    selectedReplacedParts.length,
+  ]);
+
   return (
     <div className="max-w-3xl mx-auto">
-      {/* ── Card Principal Interativo ── */}
-      <div className="bg-white rounded-3xl border border-[#E5E5E7] p-5 sm:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] relative">
-        {/* Barra de Progresso Superior (Passos 1 a 8) */}
+      {/* ── Card Principal Interativo (Apple / Emil Design-Eng) ── */}
+      <div className="bg-white rounded-[28px] border border-[#E5E5EA] p-5 sm:p-8 shadow-[0_18px_50px_-24px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.03)] relative overflow-hidden">
+        {/* Barra de Progresso Segmentada Interativa (Passos 1 a 8) */}
         {step <= totalQuestionSteps && (
-          <div className="mb-6 sm:mb-8">
-            <div className="flex items-center justify-between text-xs font-semibold text-[#86868B] mb-2">
-              <span className="uppercase tracking-wider">
+          <div className="mb-6 sm:mb-7">
+            <div className="flex items-center justify-between text-xs font-semibold text-[#86868B] mb-2.5">
+              <span className="uppercase tracking-[0.08em] tabular-nums">
                 Etapa {step} de {totalQuestionSteps}
               </span>
-              <span className="text-[#0071E3] font-bold">
-                {step === 1 && "1. Modelo"}
-                {step === 2 && "2. Armazenamento"}
-                {step === 3 && "3. Saúde da Bateria"}
-                {step === 4 && "4. Tela"}
-                {step === 5 && "5. Traseira"}
-                {step === 6 && "6. Laterais"}
-                {step === 7 && "7. Peças Trocadas"}
-                {step === 8 && "8. Bloqueios e Procedência"}
+              <span
+                key={`step-label-${step}`}
+                className="text-[#0071E3] font-semibold animate-chip-in"
+              >
+                {step}. {currentStepTitle}
               </span>
             </div>
-            <div className="w-full bg-[#F5F5F7] h-2 rounded-full overflow-hidden">
-              <div
-                className="bg-[#0071E3] h-full rounded-full transition-all duration-300 ease-out"
-                style={{ width: `${(step / totalQuestionSteps) * 100}%` }}
-              />
+
+            {/* 8-segment GPU scaleX progress bar (tap any completed step to jump back) */}
+            <div
+              className="grid grid-cols-8 gap-1.5"
+              role="progressbar"
+              aria-valuenow={step}
+              aria-valuemin={1}
+              aria-valuemax={totalQuestionSteps}
+              aria-label={`Etapa ${step} de ${totalQuestionSteps}: ${currentStepTitle}`}
+            >
+              {stepMeta.map((s) => {
+                const isCompleted = s.num < step;
+                const isCurrent = s.num === step;
+                const canJump = isCompleted;
+                return (
+                  <button
+                    key={s.num}
+                    type="button"
+                    disabled={!canJump}
+                    onClick={() => canJump && goToStep(s.num)}
+                    title={canJump ? `Voltar para ${s.num}. ${s.label}` : `${s.num}. ${s.label}`}
+                    aria-label={`${s.num}. ${s.label}`}
+                    className={`group relative h-2 rounded-full bg-[#EFEFF4] overflow-hidden ${
+                      canJump ? "cursor-pointer" : "cursor-default"
+                    }`}
+                  >
+                    <span
+                      className={`absolute inset-0 rounded-full origin-left transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                        isCompleted
+                          ? "bg-[#0071E3] scale-x-100"
+                          : isCurrent
+                            ? "bg-[#0071E3] scale-x-100 opacity-90"
+                            : "bg-[#0071E3] scale-x-0"
+                      }`}
+                    />
+                  </button>
+                );
+              })}
             </div>
+
+            {/* Live Spec Breadcrumb Pills (Spatial Continuity + 1-tap edit) */}
+            {selectedChips.length > 0 && step > 1 && (
+              <div className="flex flex-wrap items-center gap-1.5 mt-3.5 pt-3.5 border-t border-[#F2F2F7]">
+                {selectedChips.map((chip) => (
+                  <button
+                    key={`${chip.targetStep}-${chip.label}`}
+                    type="button"
+                    onClick={() => goToStep(chip.targetStep)}
+                    title="Clique para alterar"
+                    className="animate-chip-in inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#F5F5F7] hover:bg-[#E8E8ED] border border-[#E5E5EA] text-[11px] font-semibold text-[#1D1D1F] transition-[background-color,border-color,transform] duration-150 active:scale-95 cursor-pointer"
+                  >
+                    <span>{chip.label}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
-        {/* ── ETAPA 1: MODELO (SEM GERAÇÃO) ── */}
+        {/* ── ETAPA 1: MODELO ── */}
         {step === 1 && (
-          <div className="space-y-5 animate-in fade-in duration-200">
+          <div key="step-1" className={`space-y-4 ${stepAnimClass}`}>
             <div className="text-left">
-              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+              <h2 className="font-display text-xl sm:text-[24px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight">
                 Qual é o modelo do seu iPhone?
               </h2>
-              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
-                Selecione o modelo do seu aparelho abaixo.
+              <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
+                Filtre pela linha ou busque pelo nome do aparelho.
               </p>
             </div>
 
-            {/* Campo de Busca */}
+            {/* Campo de Busca (Mobile-Native: sem zoom no Safari + botão limpar) */}
             <div className="relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#86868B]" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#86868B] pointer-events-none" />
               <input
-                type="text"
+                type="search"
+                inputMode="search"
+                enterKeyHint="search"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck={false}
                 value={modelSearch}
                 onChange={(e) => setModelSearch(e.target.value)}
-                placeholder="Buscar modelo (ex: iPhone 15, iPhone 14 Pro, iPhone 11...)"
-                className="w-full pl-10 pr-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white outline-none transition-all"
+                placeholder="Buscar modelo (ex: iPhone 15 Pro, iPhone 14, iPhone 13...)"
+                className="w-full pl-10 pr-10 py-3 bg-[#F5F5F7] rounded-2xl text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white focus:shadow-[0_0_0_3px_rgba(0,113,227,0.12)] outline-none transition-[background-color,border-color,box-shadow] duration-200"
               />
+              {modelSearch && (
+                <button
+                  type="button"
+                  onClick={() => setModelSearch("")}
+                  aria-label="Limpar busca"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-[#86868B] hover:text-[#1D1D1F] hover:bg-[#E5E5EA] transition-colors cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
 
-            {/* Grid de Modelos sem "Geração" */}
+            {/* Pílulas Rápidas de Geração (evita rolagem longa) */}
+            {!loadingCatalog && modelGenerations.length > 1 && !modelSearch.trim() && (
+              <div
+                className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5"
+                style={{ overscrollBehaviorX: "contain", touchAction: "pan-x" }}
+                role="tablist"
+                aria-label="Filtrar por geração"
+              >
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={selectedFamilyFilter === "all"}
+                  onClick={() => setSelectedFamilyFilter("all")}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-[background-color,color,border-color,transform] duration-150 active:scale-95 cursor-pointer border ${
+                    selectedFamilyFilter === "all"
+                      ? "bg-[#1D1D1F] text-white border-[#1D1D1F]"
+                      : "bg-[#F5F5F7] text-[#6E6E73] border-[#E5E5EA] hover:text-[#1D1D1F]"
+                  }`}
+                >
+                  Todos ({models.length})
+                </button>
+                {modelGenerations.map((gen) => {
+                  const active = selectedFamilyFilter === gen;
+                  return (
+                    <button
+                      key={gen}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      onClick={() => setSelectedFamilyFilter(gen)}
+                      className={`px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-[background-color,color,border-color,transform] duration-150 active:scale-95 cursor-pointer border ${
+                        active
+                          ? "bg-[#1D1D1F] text-white border-[#1D1D1F]"
+                          : "bg-[#F5F5F7] text-[#6E6E73] border-[#E5E5EA] hover:text-[#1D1D1F]"
+                      }`}
+                    >
+                      iPhone {gen}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Grid de Modelos com Fade Mask Suave (sem corte brusco) */}
             {loadingCatalog ? (
-              <div className="py-12 flex flex-col items-center justify-center gap-2 text-[#86868B]">
+              <div className="py-14 flex flex-col items-center justify-center gap-2.5 text-[#86868B]">
                 <Loader2 className="w-6 h-6 animate-spin text-[#0071E3]" />
-                <span className="text-xs font-semibold">Carregando catálogo de iPhones...</span>
+                <span className="text-xs font-medium">Carregando catálogo de iPhones...</span>
+              </div>
+            ) : filteredModels.length === 0 ? (
+              <div className="py-12 px-4 rounded-2xl bg-[#F5F5F7] border border-dashed border-[#D2D2D7] text-center space-y-2.5">
+                <Smartphone className="w-6 h-6 text-[#86868B] mx-auto" />
+                <p className="text-sm font-semibold text-[#1D1D1F]">
+                  Nenhum modelo encontrado para &ldquo;{modelSearch}&rdquo;
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setModelSearch("");
+                    setSelectedFamilyFilter("all");
+                  }}
+                  className="px-4 py-2 rounded-full bg-white border border-[#D2D2D7] text-xs font-semibold text-[#0071E3] hover:bg-[#FAFAFA] transition-colors cursor-pointer"
+                >
+                  Mostrar todos os modelos
+                </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
-                {filteredModels.map((m) => {
+              <div
+                className={`grid grid-cols-2 sm:grid-cols-3 gap-2.5 ${
+                  filteredModels.length > 9 ? "max-h-[368px] overflow-y-auto pr-1.5 pb-8 wizard-scroll-mask" : "pb-1"
+                }`}
+              >
+                {filteredModels.map((m, idx) => {
                   const isSelected = selectedModel?.id === m.id;
+                  const delayMs = Math.min(idx, 7) * 18;
                   return (
                     <button
                       key={m.id}
                       type="button"
+                      style={{ animationDelay: `${delayMs}ms` }}
                       onClick={() => {
                         setSelectedModel(m);
-                        setStep(2);
+                        advanceWithBeat(2);
                       }}
-                      className={`p-4 rounded-2xl border text-left transition-all flex items-center justify-between min-h-[64px] cursor-pointer ${
+                      className={`wizard-option animate-wizard-item p-3.5 sm:p-4 rounded-2xl border text-left flex items-center justify-between min-h-[60px] cursor-pointer ${
                         isSelected
-                          ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]"
-                          : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7]"
+                          ? "bg-[#0071E3]/[0.06] border-[#0071E3] ring-1 ring-[#0071E3] shadow-[0_6px_18px_-10px_rgba(0,113,227,0.4)]"
+                          : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
                       }`}
                     >
-                      <span className="font-bold text-xs sm:text-sm text-[#1D1D1F] leading-tight">
+                      <span
+                        className={`font-semibold text-xs sm:text-[13.5px] leading-snug tracking-[-0.01em] ${
+                          isSelected ? "text-[#0071E3]" : "text-[#1D1D1F]"
+                        }`}
+                      >
                         {m.name}
                       </span>
                       <div
-                        className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ml-2 ${
+                        className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 ml-2 transition-[background-color,border-color] duration-150 ${
                           isSelected
                             ? "bg-[#0071E3] border-[#0071E3] text-white"
-                            : "border-[#D2D2D7]"
+                            : "border-[#D2D2D7] bg-[#F5F5F7]"
                         }`}
                       >
-                        {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                        {isSelected && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
                       </div>
                     </button>
                   );
@@ -641,43 +910,54 @@ Gostaria de agendar a avaliação e retirada em SP!`;
 
         {/* ── ETAPA 2: ARMAZENAMENTO (GB) ── */}
         {step === 2 && (
-          <div className="space-y-5 animate-in fade-in duration-200">
+          <div key="step-2" className={`space-y-5 ${stepAnimClass}`}>
             <div className="text-left">
-              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+              <h2 className="font-display text-xl sm:text-[24px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight">
                 Qual a capacidade de armazenamento?
               </h2>
-              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
-                Consulte em Ajustes &gt; Geral &gt; Sobre no seu {selectedModel?.name}.
+              <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
+                Consulte em <span className="font-medium text-[#1D1D1F]">Ajustes &gt; Geral &gt; Sobre</span> no seu {selectedModel?.name}.
               </p>
             </div>
 
             {loadingStorages ? (
-              <div className="py-12 flex flex-col items-center justify-center gap-2 text-[#86868B]">
+              <div className="py-12 flex flex-col items-center justify-center gap-2.5 text-[#86868B]">
                 <Loader2 className="w-6 h-6 animate-spin text-[#0071E3]" />
-                <span className="text-xs font-semibold">Carregando capacidades...</span>
+                <span className="text-xs font-medium">Carregando capacidades...</span>
               </div>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {storageOptions.map((stg) => {
+                {storageOptions.map((stg, idx) => {
                   const isSelected = selectedStorage?.id === stg.id;
+                  const delays = [0, 26, 48, 66, 80];
                   return (
                     <button
                       key={stg.id}
                       type="button"
+                      style={{ animationDelay: `${delays[Math.min(idx, delays.length - 1)]}ms` }}
                       onClick={() => {
                         setSelectedStorage(stg);
-                        setStep(3);
+                        advanceWithBeat(3);
                       }}
-                      className={`p-4 rounded-2xl border text-center transition-all cursor-pointer ${
+                      className={`wizard-option animate-wizard-item relative p-5 rounded-2xl border text-center cursor-pointer min-h-[82px] flex flex-col items-center justify-center ${
                         isSelected
-                          ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]"
-                          : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7]"
+                          ? "bg-[#0071E3]/[0.06] border-[#0071E3] ring-1 ring-[#0071E3] shadow-[0_6px_18px_-10px_rgba(0,113,227,0.4)]"
+                          : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
                       }`}
                     >
-                      <span className="block text-base sm:text-lg font-bold text-[#1D1D1F]">
+                      {isSelected && (
+                        <span className="absolute top-2.5 right-2.5 w-4 h-4 rounded-full bg-[#0071E3] text-white flex items-center justify-center animate-check-pop">
+                          <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        </span>
+                      )}
+                      <span
+                        className={`block text-lg sm:text-xl font-bold tracking-tight tabular-nums ${
+                          isSelected ? "text-[#0071E3]" : "text-[#1D1D1F]"
+                        }`}
+                      >
                         {stg.displayName}
                       </span>
-                      <span className="text-[11px] text-[#86868B] font-medium">Capacidade</span>
+                      <span className="text-[11px] text-[#86868B] font-medium mt-0.5">Capacidade</span>
                     </button>
                   );
                 })}
@@ -688,14 +968,14 @@ Gostaria de agendar a avaliação e retirada em SP!`;
 
         {/* ── ETAPA 3: PORCENTAGEM DA BATERIA ── */}
         {step === 3 && (
-          <div className="space-y-5 animate-in fade-in duration-200">
+          <div key="step-3" className={`space-y-5 ${stepAnimClass}`}>
             <div className="text-left">
-              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight flex items-center gap-2">
-                <BatteryCharging className="w-5 h-5 text-[#0071E3]" />
+              <h2 className="font-display text-xl sm:text-[24px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight flex items-center gap-2">
+                <BatteryCharging className="w-5 h-5 text-[#0071E3] shrink-0" />
                 <span>Qual a saúde da bateria?</span>
               </h2>
-              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
-                Consulte em <strong>Ajustes &gt; Bateria &gt; Saúde da Bateria</strong>.
+              <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
+                Consulte em <strong className="font-medium text-[#1D1D1F]">Ajustes &gt; Bateria &gt; Saúde da Bateria</strong>.
               </p>
             </div>
 
@@ -703,53 +983,69 @@ Gostaria de agendar a avaliação e retirada em SP!`;
               {[
                 {
                   key: "90_plus",
-                  title: "90% a 100% (Excelente)",
+                  title: "90% a 100%",
+                  badge: "Excelente",
+                  dot: "bg-emerald-500",
                   desc: "Bateria original com alta capacidade e autonomia máxima.",
                 },
                 {
                   key: "85_89",
-                  title: "85% a 89% (Boa)",
+                  title: "85% a 89%",
+                  badge: "Boa",
+                  dot: "bg-[#0071E3]",
                   desc: "Autonomia padrão para o uso diário regular.",
                 },
                 {
                   key: "80_84",
-                  title: "80% a 84% (Moderada)",
+                  title: "80% a 84%",
+                  badge: "Moderada",
+                  dot: "bg-amber-500",
                   desc: "Desgaste natural decorrente do tempo de uso.",
                 },
                 {
                   key: "below_80",
-                  title: "Abaixo de 80% ou Aviso de Manutenção",
-                  desc: "Bateria degradada com aviso de manutenção do sistema.",
+                  title: "Abaixo de 80%",
+                  badge: "Manutenção",
+                  dot: "bg-rose-500",
+                  desc: "Bateria degradada ou com aviso de manutenção do sistema.",
                 },
-              ].map((opt) => {
+              ].map((opt, idx) => {
                 const isSelected = batteryHealth === opt.key;
+                const delays = [0, 26, 48, 66];
                 return (
                   <button
                     key={opt.key}
                     type="button"
+                    style={{ animationDelay: `${delays[idx]}ms` }}
                     onClick={() => {
                       setBatteryHealth(opt.key);
-                      setStep(4);
+                      advanceWithBeat(4);
                     }}
-                    className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between cursor-pointer ${
+                    className={`wizard-option animate-wizard-item p-4 rounded-2xl border text-left flex flex-col justify-between cursor-pointer ${
                       isSelected
-                        ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]"
-                        : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7]"
+                        ? "bg-[#0071E3]/[0.06] border-[#0071E3] ring-1 ring-[#0071E3] shadow-[0_6px_18px_-10px_rgba(0,113,227,0.4)]"
+                        : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-2 mb-1">
-                      <span className="font-bold text-xs sm:text-sm text-[#1D1D1F]">
-                        {opt.title}
-                      </span>
+                    <div className="flex items-start justify-between gap-2 mb-1.5">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className={`w-2 h-2 rounded-full shrink-0 ${opt.dot}`} aria-hidden="true" />
+                        <span className="font-bold text-sm text-[#1D1D1F] tabular-nums">
+                          {opt.title}
+                        </span>
+                        <span className="text-[11px] font-semibold text-[#6E6E73] bg-[#F5F5F7] px-2 py-0.5 rounded-full">
+                          {opt.badge}
+                        </span>
+                      </div>
                       <div
-                        className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                          isSelected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7]"
+                        className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                          isSelected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7] bg-[#F5F5F7]"
                         }`}
                       >
-                        {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                        {isSelected && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
                       </div>
                     </div>
-                    <p className="text-[11px] text-[#6E6E73] leading-relaxed">{opt.desc}</p>
+                    <p className="text-xs text-[#6E6E73] leading-relaxed">{opt.desc}</p>
                   </button>
                 );
               })}
@@ -759,12 +1055,12 @@ Gostaria de agendar a avaliação e retirada em SP!`;
 
         {/* ── ETAPA 4: COMO ESTÁ A TELA? ── */}
         {step === 4 && (
-          <div className="space-y-5 animate-in fade-in duration-200">
+          <div key="step-4" className={`space-y-5 ${stepAnimClass}`}>
             <div className="text-left">
-              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+              <h2 className="font-display text-xl sm:text-[24px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight">
                 Como está a tela do seu iPhone?
               </h2>
-              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+              <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
                 Avalie o vidro frontal e o painel de exibição (display).
               </p>
             </div>
@@ -773,57 +1069,67 @@ Gostaria de agendar a avaliação e retirada em SP!`;
               {[
                 {
                   key: "perfect",
+                  dot: "bg-emerald-500",
                   title: "Impecável / Sem riscos",
                   desc: "Vidro perfeito sem arranhões e exibição de imagem 100% nítida.",
                 },
                 {
                   key: "light_scratches",
+                  dot: "bg-[#0071E3]",
                   title: "Riscos leves superficiais",
                   desc: "Marcas sutis de uso comum, imperceptíveis com a tela ligada.",
                 },
                 {
                   key: "deep_scratches",
+                  dot: "bg-amber-500",
                   title: "Riscos profundos",
                   desc: "Arranhões fortes perceptíveis ao toque ou ao passar a unha.",
                 },
                 {
                   key: "cracked",
+                  dot: "bg-orange-500",
                   title: "Vidro trincado ou quebrado",
                   desc: "Vidro frontal rachado, porém touch e imagem funcionando perfeitamente.",
                 },
                 {
                   key: "display_damaged",
+                  dot: "bg-rose-500",
                   title: "Display danificado / Manchas ou listras",
                   desc: "Manchas pretas, linhas coloridas, falha no touch ou tela sem imagem.",
                 },
-              ].map((opt) => {
+              ].map((opt, idx) => {
                 const isSelected = screenCondition === opt.key;
+                const delays = [0, 22, 40, 55, 68];
                 return (
                   <button
                     key={opt.key}
                     type="button"
+                    style={{ animationDelay: `${delays[idx]}ms` }}
                     onClick={() => {
                       setScreenCondition(opt.key);
-                      setStep(5);
+                      advanceWithBeat(5);
                     }}
-                    className={`w-full p-4 rounded-2xl border text-left transition-all flex items-center justify-between gap-3 cursor-pointer ${
+                    className={`wizard-option animate-wizard-item w-full p-4 rounded-2xl border text-left flex items-center justify-between gap-3 cursor-pointer ${
                       isSelected
-                        ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]"
-                        : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7]"
+                        ? "bg-[#0071E3]/[0.06] border-[#0071E3] ring-1 ring-[#0071E3] shadow-[0_6px_18px_-10px_rgba(0,113,227,0.4)]"
+                        : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
                     }`}
                   >
-                    <div>
-                      <span className="block text-xs sm:text-sm font-bold text-[#1D1D1F]">
-                        {opt.title}
-                      </span>
-                      <span className="block text-[11px] text-[#6E6E73] mt-0.5">{opt.desc}</span>
+                    <div className="flex items-start gap-3">
+                      <span className={`w-2 h-2 rounded-full shrink-0 mt-1.5 ${opt.dot}`} aria-hidden="true" />
+                      <div>
+                        <span className="block text-sm font-semibold text-[#1D1D1F]">
+                          {opt.title}
+                        </span>
+                        <span className="block text-xs text-[#6E6E73] mt-0.5 leading-relaxed">{opt.desc}</span>
+                      </div>
                     </div>
                     <div
-                      className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                        isSelected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7]"
+                      className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                        isSelected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7] bg-[#F5F5F7]"
                       }`}
                     >
-                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
                     </div>
                   </button>
                 );
@@ -834,12 +1140,12 @@ Gostaria de agendar a avaliação e retirada em SP!`;
 
         {/* ── ETAPA 5: COMO ESTÁ A TRASEIRA? ── */}
         {step === 5 && (
-          <div className="space-y-5 animate-in fade-in duration-200">
+          <div key="step-5" className={`space-y-5 ${stepAnimClass}`}>
             <div className="text-left">
-              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+              <h2 className="font-display text-xl sm:text-[24px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight">
                 Como está a traseira e as lentes?
               </h2>
-              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+              <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
                 Avalie o vidro traseiro e as lentes externas das câmeras.
               </p>
             </div>
@@ -848,52 +1154,61 @@ Gostaria de agendar a avaliação e retirada em SP!`;
               {[
                 {
                   key: "perfect",
+                  dot: "bg-emerald-500",
                   title: "Impecável / Sem marcas",
                   desc: "Vidro traseiro e lentes sem nenhum arranhão ou detalhe.",
                 },
                 {
                   key: "light_marks",
+                  dot: "bg-[#0071E3]",
                   title: "Riscos leves / Marcas de capinha",
                   desc: "Marcas sutis causadas por poeira ou atrito com a capa de proteção.",
                 },
                 {
                   key: "cracked",
+                  dot: "bg-orange-500",
                   title: "Vidro traseiro trincado ou quebrado",
                   desc: "Trincas, rachaduras ou estilhaçamento no vidro traseiro.",
                 },
                 {
                   key: "camera_broken",
+                  dot: "bg-rose-500",
                   title: "Lente da câmera trincada ou arranhada",
                   desc: "Vidro protetor de alguma das câmeras danificado.",
                 },
-              ].map((opt) => {
+              ].map((opt, idx) => {
                 const isSelected = backCondition === opt.key;
+                const delays = [0, 22, 40, 55];
                 return (
                   <button
                     key={opt.key}
                     type="button"
+                    style={{ animationDelay: `${delays[idx]}ms` }}
                     onClick={() => {
                       setBackCondition(opt.key);
-                      setStep(6);
+                      advanceWithBeat(6);
                     }}
-                    className={`w-full p-4 rounded-2xl border text-left transition-all flex items-center justify-between gap-3 cursor-pointer ${
+                    className={`wizard-option animate-wizard-item w-full p-4 rounded-2xl border text-left flex items-center justify-between gap-3 cursor-pointer ${
                       isSelected
-                        ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]"
-                        : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7]"
+                        ? "bg-[#0071E3]/[0.06] border-[#0071E3] ring-1 ring-[#0071E3] shadow-[0_6px_18px_-10px_rgba(0,113,227,0.4)]"
+                        : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
                     }`}
                   >
-                    <div>
-                      <span className="block text-xs sm:text-sm font-bold text-[#1D1D1F]">
-                        {opt.title}
-                      </span>
-                      <span className="block text-[11px] text-[#6E6E73] mt-0.5">{opt.desc}</span>
+                    <div className="flex items-start gap-3">
+                      <span className={`w-2 h-2 rounded-full shrink-0 mt-1.5 ${opt.dot}`} aria-hidden="true" />
+                      <div>
+                        <span className="block text-sm font-semibold text-[#1D1D1F]">
+                          {opt.title}
+                        </span>
+                        <span className="block text-xs text-[#6E6E73] mt-0.5 leading-relaxed">{opt.desc}</span>
+                      </div>
                     </div>
                     <div
-                      className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                        isSelected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7]"
+                      className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                        isSelected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7] bg-[#F5F5F7]"
                       }`}
                     >
-                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
                     </div>
                   </button>
                 );
@@ -904,12 +1219,12 @@ Gostaria de agendar a avaliação e retirada em SP!`;
 
         {/* ── ETAPA 6: COMO ESTÃO AS LATERAIS? ── */}
         {step === 6 && (
-          <div className="space-y-5 animate-in fade-in duration-200">
+          <div key="step-6" className={`space-y-5 ${stepAnimClass}`}>
             <div className="text-left">
-              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+              <h2 className="font-display text-xl sm:text-[24px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight">
                 Como estão as laterais e bordas?
               </h2>
-              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+              <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
                 Estrutura de alumínio, aço ou titânio do chassi do aparelho.
               </p>
             </div>
@@ -918,47 +1233,55 @@ Gostaria de agendar a avaliação e retirada em SP!`;
               {[
                 {
                   key: "perfect",
+                  dot: "bg-emerald-500",
                   title: "Impecáveis / Sem detalhes",
                   desc: "Bordas perfeitas, sem batidas, marcas de impacto ou amassados.",
                 },
                 {
                   key: "light_scratches",
+                  dot: "bg-[#0071E3]",
                   title: "Marcas leves de uso",
                   desc: "Pequenos arranhões ou desgaste suave na pintura das quinas.",
                 },
                 {
                   key: "dents",
+                  dot: "bg-orange-500",
                   title: "Amassados, batidas ou marcas de queda",
                   desc: "Quinas batidas, amassados no aro ou marcas fortes de impacto.",
                 },
-              ].map((opt) => {
+              ].map((opt, idx) => {
                 const isSelected = sidesCondition === opt.key;
+                const delays = [0, 24, 44];
                 return (
                   <button
                     key={opt.key}
                     type="button"
+                    style={{ animationDelay: `${delays[idx]}ms` }}
                     onClick={() => {
                       setSidesCondition(opt.key);
-                      setStep(7);
+                      advanceWithBeat(7);
                     }}
-                    className={`w-full p-4 rounded-2xl border text-left transition-all flex items-center justify-between gap-3 cursor-pointer ${
+                    className={`wizard-option animate-wizard-item w-full p-4 rounded-2xl border text-left flex items-center justify-between gap-3 cursor-pointer ${
                       isSelected
-                        ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]"
-                        : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7]"
+                        ? "bg-[#0071E3]/[0.06] border-[#0071E3] ring-1 ring-[#0071E3] shadow-[0_6px_18px_-10px_rgba(0,113,227,0.4)]"
+                        : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
                     }`}
                   >
-                    <div>
-                      <span className="block text-xs sm:text-sm font-bold text-[#1D1D1F]">
-                        {opt.title}
-                      </span>
-                      <span className="block text-[11px] text-[#6E6E73] mt-0.5">{opt.desc}</span>
+                    <div className="flex items-start gap-3">
+                      <span className={`w-2 h-2 rounded-full shrink-0 mt-1.5 ${opt.dot}`} aria-hidden="true" />
+                      <div>
+                        <span className="block text-sm font-semibold text-[#1D1D1F]">
+                          {opt.title}
+                        </span>
+                        <span className="block text-xs text-[#6E6E73] mt-0.5 leading-relaxed">{opt.desc}</span>
+                      </div>
                     </div>
                     <div
-                      className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                        isSelected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7]"
+                      className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                        isSelected ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7] bg-[#F5F5F7]"
                       }`}
                     >
-                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                      {isSelected && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
                     </div>
                   </button>
                 );
@@ -969,12 +1292,12 @@ Gostaria de agendar a avaliação e retirada em SP!`;
 
         {/* ── ETAPA 7: PEÇAS TROCADAS (SELEÇÃO AMPLA E DIRETA DE PEÇAS) ── */}
         {step === 7 && (
-          <div className="space-y-6 animate-in fade-in duration-200">
+          <div key="step-7" className={`space-y-5 ${stepAnimClass}`}>
             <div className="text-left">
-              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+              <h2 className="font-display text-xl sm:text-[24px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight">
                 Alguma peça já foi substituída ou o aparelho já foi aberto?
               </h2>
-              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
+              <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
                 Selecione abaixo se o seu iPhone já passou por alguma troca de componente.
               </p>
             </div>
@@ -986,117 +1309,146 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                 onClick={() => {
                   setReplacedPartsStatus("no");
                   setSelectedReplacedParts([]);
-                  setStep(8);
+                  advanceWithBeat(8);
                 }}
-                className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                className={`wizard-option animate-wizard-item p-4 rounded-2xl border text-left cursor-pointer ${
                   replacedPartsStatus === "no"
-                    ? "bg-emerald-50 border-emerald-500 shadow-xs ring-1 ring-emerald-500/30"
-                    : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7]"
+                    ? "bg-emerald-50/80 border-emerald-500 ring-1 ring-emerald-500/40 shadow-[0_6px_18px_-10px_rgba(16,185,129,0.35)]"
+                    : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-bold text-xs sm:text-sm text-[#1D1D1F]">
+                  <span className="font-semibold text-sm text-[#1D1D1F]">
                     Não, 100% original de fábrica
                   </span>
-                  {replacedPartsStatus === "no" && <Check className="w-4 h-4 text-emerald-600 shrink-0" />}
+                  <div
+                    className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                      replacedPartsStatus === "no"
+                        ? "bg-emerald-600 border-emerald-600 text-white"
+                        : "border-[#D2D2D7] bg-[#F5F5F7]"
+                    }`}
+                  >
+                    {replacedPartsStatus === "no" && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
+                  </div>
                 </div>
-                <p className="text-[11px] text-[#6E6E73] mt-1">
+                <p className="text-xs text-[#6E6E73] mt-1.5 leading-relaxed">
                   Aparelho nunca foi aberto; todas as peças são originais de fábrica.
                 </p>
               </button>
 
               <button
                 type="button"
+                style={{ animationDelay: "28ms" }}
                 onClick={() => setReplacedPartsStatus("yes")}
-                className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                className={`wizard-option animate-wizard-item p-4 rounded-2xl border text-left cursor-pointer ${
                   replacedPartsStatus === "yes"
-                    ? "bg-blue-50/80 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]"
-                    : "bg-[#F5F5F7] hover:bg-[#EAEAEA] border-[#E5E5E7]"
+                    ? "bg-[#0071E3]/[0.06] border-[#0071E3] ring-1 ring-[#0071E3] shadow-[0_6px_18px_-10px_rgba(0,113,227,0.4)]"
+                    : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <span className="font-bold text-xs sm:text-sm text-[#1D1D1F]">
+                  <span className="font-semibold text-sm text-[#1D1D1F]">
                     Sim, já foi trocada peça
                   </span>
-                  {replacedPartsStatus === "yes" && <Check className="w-4 h-4 text-[#0071E3] shrink-0" />}
+                  <div
+                    className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                      replacedPartsStatus === "yes"
+                        ? "bg-[#0071E3] border-[#0071E3] text-white"
+                        : "border-[#D2D2D7] bg-[#F5F5F7]"
+                    }`}
+                  >
+                    {replacedPartsStatus === "yes" && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
+                  </div>
                 </div>
-                <p className="text-[11px] text-[#6E6E73] mt-1">
+                <p className="text-xs text-[#6E6E73] mt-1.5 leading-relaxed">
                   Já passou por troca de tela, bateria, tampa ou outros componentes.
                 </p>
               </button>
             </div>
 
-            {/* SE "SIM", GRID COMPLETO DE PEÇAS SELECIONÁVEIS */}
-            {replacedPartsStatus === "yes" && (
-              <div className="p-4 sm:p-5 bg-blue-50/40 rounded-2xl border border-blue-200/80 space-y-4 animate-in fade-in duration-200 text-left">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#1D1D1F]">
-                    Selecione quais peças foram trocadas (seleção múltipla):
-                  </span>
-                  {selectedReplacedParts.length > 0 && (
-                    <span className="text-[11px] font-semibold text-[#0071E3]">
-                      {selectedReplacedParts.length} {selectedReplacedParts.length === 1 ? "peça selecionada" : "peças selecionadas"}
+            {/* SE "SIM", PAINEL DE PEÇAS EXPANDINDO SUAVEMENTE */}
+            <div
+              className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                replacedPartsStatus === "yes" ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none"
+              }`}
+              aria-hidden={replacedPartsStatus !== "yes"}
+            >
+              <div className="overflow-hidden">
+                <div className="p-4 sm:p-5 bg-[#F5F5F7] rounded-2xl border border-[#E5E5EA] space-y-4 text-left">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <span className="text-xs font-semibold text-[#1D1D1F]">
+                      Selecione quais peças foram trocadas:
                     </span>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {availablePartsList.map((item) => {
-                    const isChecked = selectedReplacedParts.includes(item.key);
-                    return (
-                      <button
-                        key={item.key}
-                        type="button"
-                        onClick={() => togglePartSelection(item.key)}
-                        className={`p-3.5 rounded-xl border text-left transition-all flex items-center justify-between gap-2 cursor-pointer ${
-                          isChecked
-                            ? "bg-blue-50/90 border-[#0071E3] shadow-xs ring-1 ring-[#0071E3]"
-                            : "bg-white hover:bg-[#FAFAFA] border-[#D2D2D7]"
-                        }`}
+                    {selectedReplacedParts.length > 0 && (
+                      <span
+                        key={selectedReplacedParts.length}
+                        className="animate-price-pop text-[11px] font-semibold text-[#0071E3] bg-white px-2.5 py-0.5 rounded-full border border-[#0071E3]/25 tabular-nums"
                       >
-                        <div>
-                          <span className={`block text-xs font-bold ${isChecked ? "text-[#0071E3]" : "text-[#1D1D1F]"}`}>
-                            {item.label}
-                          </span>
-                          <span className="block text-[11px] text-[#6E6E73] mt-0.5">
-                            {item.desc}
-                          </span>
-                        </div>
-                        <div
-                          className={`w-4 h-4 rounded-md border flex items-center justify-center shrink-0 ${
-                            isChecked ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7] bg-white"
+                        {selectedReplacedParts.length}{" "}
+                        {selectedReplacedParts.length === 1 ? "peça selecionada" : "peças selecionadas"}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {availablePartsList.map((item) => {
+                      const isChecked = selectedReplacedParts.includes(item.key);
+                      return (
+                        <button
+                          key={item.key}
+                          type="button"
+                          tabIndex={replacedPartsStatus === "yes" ? 0 : -1}
+                          onClick={() => togglePartSelection(item.key)}
+                          className={`wizard-option p-3.5 rounded-xl border text-left flex items-center justify-between gap-2 cursor-pointer ${
+                            isChecked
+                              ? "bg-[#0071E3]/[0.07] border-[#0071E3] ring-1 ring-[#0071E3]"
+                              : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA]"
                           }`}
                         >
-                          {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
-                        </div>
-                      </button>
-                    );
-                  })}
+                          <div>
+                            <span className={`block text-xs font-semibold ${isChecked ? "text-[#0071E3]" : "text-[#1D1D1F]"}`}>
+                              {item.label}
+                            </span>
+                            <span className="block text-[11px] text-[#6E6E73] mt-0.5">
+                              {item.desc}
+                            </span>
+                          </div>
+                          <div
+                            className={`w-[18px] h-[18px] rounded-md border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                              isChecked ? "bg-[#0071E3] border-[#0071E3] text-white" : "border-[#D2D2D7] bg-[#F5F5F7]"
+                            }`}
+                          >
+                            {isChecked && <Check className="w-3 h-3 stroke-[3] animate-check-pop" />}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         )}
 
-        {/* ── ETAPA 8: TRIAGEM CRÍTICA DE PLACA-MÃE & ICLOUD (ANTI-BUCHA) ── */}
+        {/* ── ETAPA 8: TRIAGEM CRÍTICA DE PROCEDÊNCIA & ICLOUD ── */}
         {step === 8 && (
-          <div className="space-y-6 animate-in fade-in duration-200 text-left">
+          <div key="step-8" className={`space-y-5 text-left ${stepAnimClass}`}>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-red-700 bg-red-50 px-2.5 py-1 rounded-full border border-red-200 inline-block mb-1">
-                Filtro Obrigatório de Procedência
+              <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-[#0071E3] bg-[#0071E3]/10 px-2.5 py-1 rounded-full inline-block mb-2">
+                Verificação de Procedência
               </span>
-              <h2 className="text-lg sm:text-xl font-bold text-[#1D1D1F] tracking-tight">
+              <h2 className="font-display text-xl sm:text-[24px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight">
                 Triagem de Segurança e Procedência
               </h2>
-              <p className="text-xs sm:text-sm text-[#86868B] mt-0.5">
-                A Mundo Apple <strong>não compra</strong> aparelhos com bloqueio de ativação ou restrição de operadora/IMEI.
+              <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
+                A Mundo Apple <strong className="font-semibold text-[#1D1D1F]">não compra</strong> aparelhos com bloqueio de ativação ou restrição de operadora/IMEI.
               </p>
             </div>
 
             {/* Pergunta: iCloud e IMEI */}
-            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-[#E5E5E7] space-y-3">
-              <label className="text-xs sm:text-sm font-bold text-[#1D1D1F] flex items-center gap-1.5">
-                <Lock className="w-4 h-4 text-[#0071E3]" />
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#F5F5F7] border border-[#E5E5EA] space-y-3.5">
+              <label className="text-xs sm:text-sm font-semibold text-[#1D1D1F] flex items-center gap-2">
+                <Lock className="w-4 h-4 text-[#0071E3] shrink-0" />
                 <span>O iCloud está livre para remoção no ato e o IMEI totalmente limpo?</span>
               </label>
 
@@ -1104,17 +1456,25 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                 <button
                   type="button"
                   onClick={() => setIcloudStatus("unlocked")}
-                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                  className={`wizard-option p-4 rounded-xl border text-left cursor-pointer ${
                     icloudStatus === "unlocked"
-                      ? "bg-emerald-50 border-emerald-500 ring-1 ring-emerald-500/30 text-emerald-900"
-                      : "bg-white border-[#D2D2D7] hover:bg-[#FAFAFA] text-[#1D1D1F]"
+                      ? "bg-emerald-50 border-emerald-500 ring-1 ring-emerald-500/40 text-emerald-950"
+                      : "bg-white border-[#E5E5EA] hover:border-[#C7C7CC] text-[#1D1D1F]"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold">Sim, 100% Livre</span>
-                    {icloudStatus === "unlocked" && <Check className="w-4 h-4 text-emerald-600" />}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-semibold">Sim, 100% Livre</span>
+                    <div
+                      className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                        icloudStatus === "unlocked"
+                          ? "bg-emerald-600 border-emerald-600 text-white"
+                          : "border-[#D2D2D7] bg-[#F5F5F7]"
+                      }`}
+                    >
+                      {icloudStatus === "unlocked" && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
+                    </div>
                   </div>
-                  <span className="block text-[11px] text-[#6E6E73] mt-0.5">
+                  <span className="block text-xs text-[#6E6E73] mt-1 leading-relaxed">
                     Sem vínculo, pronto para formatar e IMEI nacional regular.
                   </span>
                 </button>
@@ -1122,46 +1482,60 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                 <button
                   type="button"
                   onClick={() => setIcloudStatus("locked")}
-                  className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                  className={`wizard-option p-4 rounded-xl border text-left cursor-pointer ${
                     icloudStatus === "locked"
-                      ? "bg-red-50 border-red-500 ring-1 ring-red-500/30 text-red-900"
-                      : "bg-white border-[#D2D2D7] hover:bg-[#FAFAFA] text-[#1D1D1F]"
+                      ? "bg-red-50 border-red-500 ring-1 ring-red-500/40 text-red-950"
+                      : "bg-white border-[#E5E5EA] hover:border-[#C7C7CC] text-[#1D1D1F]"
                   }`}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-red-700">Não, possui bloqueio</span>
-                    {icloudStatus === "locked" && <Check className="w-4 h-4 text-red-600" />}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-sm font-semibold text-red-700">Não, possui bloqueio</span>
+                    <div
+                      className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 transition-[background-color,border-color] duration-150 ${
+                        icloudStatus === "locked"
+                          ? "bg-red-600 border-red-600 text-white"
+                          : "border-[#D2D2D7] bg-[#F5F5F7]"
+                      }`}
+                    >
+                      {icloudStatus === "locked" && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
+                    </div>
                   </div>
-                  <span className="block text-[11px] text-red-600 mt-0.5">
+                  <span className="block text-xs text-red-600/90 mt-1 leading-relaxed">
                     iCloud preso, senha esquecida ou restrição de operadora.
                   </span>
                 </button>
               </div>
 
-              {/* BLOQUEIO DE ICLOUD */}
-              {icloudStatus === "locked" && (
-                <div className="p-4 bg-red-100 border border-red-300 rounded-2xl flex items-start gap-3 text-red-900 animate-in fade-in duration-200">
-                  <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
-                  <div className="text-xs space-y-1">
-                    <span className="font-extrabold block text-sm text-red-800">
-                      Aparelho com Bloqueio de Ativação
-                    </span>
-                    <p className="leading-relaxed">
-                      Não adquirimos sob nenhuma hipótese aparelhos vinculados ao iCloud ou com restrições de operadora/IMEI.
-                    </p>
+              {/* BLOQUEIO DE ICLOUD (expansão suave) */}
+              <div
+                className={`grid transition-[grid-template-rows,opacity] duration-250 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  icloudStatus === "locked" ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0 pointer-events-none"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start gap-3 text-red-900">
+                    <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                    <div className="text-xs space-y-1">
+                      <span className="font-bold block text-sm text-red-800">
+                        Aparelho com Bloqueio de Ativação
+                      </span>
+                      <p className="leading-relaxed">
+                        Não adquirimos sob nenhuma hipótese aparelhos vinculados ao iCloud ou com restrições de operadora/IMEI.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         )}
 
         {/* ── ETAPA 9: RESULTADO & DADOS DO CLIENTE ── */}
         {step === 9 && (
-          <div className="space-y-6 animate-in fade-in duration-200">
+          <div key="step-9" className={`space-y-6 ${stepAnimClass}`}>
             {quoteSuccess ? (
-              /* RESULTADO FINAL */
-              <div className="space-y-6 animate-in fade-in duration-300">
+              /* RESULTADO FINAL (Delight Tier — Rare / Celebration) */
+              <div className="space-y-5 animate-result-reveal">
                 {/* Banner de confirmação WhatsApp */}
                 <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-3 text-xs text-emerald-800 text-left">
                   <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
@@ -1171,11 +1545,12 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                   </span>
                 </div>
 
-                <div className="p-6 sm:p-8 rounded-3xl bg-blue-50/70 border border-blue-200 text-center space-y-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#0071E3] block">
-                    Valor Pré-Avaliado do seu iPhone:
+                <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#0071E3]/[0.07] to-[#0071E3]/[0.02] border border-[#0071E3]/20 text-center space-y-3">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#0071E3]/20 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0071E3]">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Valor Pré-Avaliado do seu iPhone
                   </span>
-                  <div className="text-3xl sm:text-5xl font-extrabold text-[#1D1D1F] tracking-tight font-display">
+                  <div className="text-3xl sm:text-5xl font-bold text-[#1D1D1F] tracking-[-0.03em] font-display tabular-nums">
                     {estimatedPrice && estimatedPrice > 0 ? (
                       formatCurrency(estimatedPrice)
                     ) : calculating ? (
@@ -1195,28 +1570,28 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                 </div>
 
                 {/* Resumo da Ficha */}
-                <div className="p-4 bg-[#F5F5F7] rounded-2xl border border-[#E5E5E7] text-left space-y-2 text-xs">
-                  <span className="font-bold text-[#1D1D1F] block text-xs uppercase tracking-wider">
-                    Resumo da Avaliação Registrada:
+                <div className="p-4 sm:p-5 bg-[#F5F5F7] rounded-2xl border border-[#E5E5EA] text-left space-y-2.5 text-xs">
+                  <span className="font-semibold text-[#1D1D1F] block text-[11px] uppercase tracking-[0.08em]">
+                    Resumo da Avaliação Registrada
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[#6E6E73]">
-                    <div>- <strong>Aparelho:</strong> {selectedModel?.name} {selectedStorage?.displayName}</div>
-                    <div>- <strong>Bateria:</strong> {batteryHealthText}</div>
-                    <div>- <strong>Tela:</strong> {screenConditionText}</div>
-                    <div>- <strong>Traseira:</strong> {backConditionText}</div>
-                    <div>- <strong>Laterais:</strong> {sidesConditionText}</div>
-                    <div>- <strong>Peças Trocadas:</strong> {replacedPartsSummaryText}</div>
-                    <div>- <strong>iCloud e IMEI:</strong> 100% Liberados</div>
+                    <div>• <strong className="text-[#1D1D1F]">Aparelho:</strong> {selectedModel?.name} {selectedStorage?.displayName}</div>
+                    <div>• <strong className="text-[#1D1D1F]">Bateria:</strong> {batteryHealthText}</div>
+                    <div>• <strong className="text-[#1D1D1F]">Tela:</strong> {screenConditionText}</div>
+                    <div>• <strong className="text-[#1D1D1F]">Traseira:</strong> {backConditionText}</div>
+                    <div>• <strong className="text-[#1D1D1F]">Laterais:</strong> {sidesConditionText}</div>
+                    <div>• <strong className="text-[#1D1D1F]">Peças:</strong> {replacedPartsSummaryText}</div>
+                    <div>• <strong className="text-[#1D1D1F]">iCloud e IMEI:</strong> 100% Liberados</div>
                   </div>
                 </div>
 
                 {/* Botão de Agendamento */}
-                <div className="space-y-3 pt-2 text-center">
+                <div className="space-y-3 pt-1 text-center">
                   <a
                     href={whatsappSaleUrl()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-4 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-sm sm:text-base rounded-full shadow-lg hover:shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-[#16A34A] hover:bg-[#15803D] text-white font-semibold text-sm sm:text-base rounded-full shadow-[0_10px_24px_-10px_rgba(22,163,74,0.55)] transition-[background-color,transform,box-shadow] duration-200 flex items-center justify-center gap-2"
                   >
                     <MessageCircle className="w-5 h-5" />
                     <span>Agendar Retirada e Receber no PIX</span>
@@ -1228,7 +1603,7 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3 bg-[#F5F5F7] hover:bg-[#E8E8ED] text-[#1D1D1F] border border-[#D2D2D7] font-bold text-xs sm:text-sm rounded-full transition-all flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-[#F5F5F7] hover:bg-[#E8E8ED] text-[#1D1D1F] border border-[#D2D2D7] font-semibold text-xs sm:text-sm rounded-full transition-[background-color,transform] duration-200 flex items-center justify-center gap-2"
                   >
                     <span>Compartilhar simulador com um amigo no WhatsApp</span>
                   </a>
@@ -1245,12 +1620,12 @@ Gostaria de agendar a avaliação e retirada em SP!`;
               </div>
             ) : (
               /* FORMULÁRIO DE CAPTURA */
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <div className="text-left space-y-1">
-                  <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider block">
-                    Etapa Final: Seus Dados
+                  <span className="text-[11px] font-semibold text-emerald-600 uppercase tracking-[0.08em] block">
+                    Etapa Final · Quase lá
                   </span>
-                  <h2 className="text-xl sm:text-2xl font-extrabold text-[#1D1D1F] tracking-tight">
+                  <h2 className="font-display text-xl sm:text-[26px] font-semibold text-[#1D1D1F] tracking-[-0.03em] leading-tight">
                     Para onde enviamos a sua avaliação?
                   </h2>
                   <p className="text-xs sm:text-sm text-[#6E6E73]">
@@ -1259,80 +1634,89 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                 </div>
 
                 {/* Ficha Resumo dos Dados Coletados */}
-                <div className="p-4 bg-[#F5F5F7] rounded-2xl border border-[#E5E5E7] text-left space-y-2">
+                <div className="p-4 bg-[#F5F5F7] rounded-2xl border border-[#E5E5EA] text-left space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-[#1D1D1F] uppercase tracking-wider">
-                      Ficha Técnica Declarada:
+                    <span className="text-[11px] font-semibold text-[#6E6E73] uppercase tracking-[0.08em]">
+                      Ficha Técnica Declarada
                     </span>
                     <button
                       type="button"
-                      onClick={() => setStep(4)}
-                      className="text-[11px] text-[#0071E3] font-semibold hover:underline"
+                      onClick={() => goToStep(1)}
+                      className="text-xs text-[#0071E3] font-semibold hover:underline cursor-pointer"
                     >
                       Editar respostas
                     </button>
                   </div>
                   <div className="flex flex-wrap gap-1.5 text-[11px] font-semibold text-[#1D1D1F]">
-                    <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    <span className="px-2.5 py-1 bg-white rounded-full border border-[#E5E5EA]">
                       {selectedModel?.name} {selectedStorage?.displayName}
                     </span>
-                    <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    <span className="px-2.5 py-1 bg-white rounded-full border border-[#E5E5EA]">
                       Bateria: {batteryHealthText}
                     </span>
-                    <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    <span className="px-2.5 py-1 bg-white rounded-full border border-[#E5E5EA]">
                       Tela: {screenConditionText}
                     </span>
-                    <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    <span className="px-2.5 py-1 bg-white rounded-full border border-[#E5E5EA]">
                       Traseira: {backConditionText}
                     </span>
-                    <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    <span className="px-2.5 py-1 bg-white rounded-full border border-[#E5E5EA]">
                       Laterais: {sidesConditionText}
                     </span>
-                    <span className="px-2.5 py-1 bg-white rounded-lg border border-[#D2D2D7]">
+                    <span className="px-2.5 py-1 bg-white rounded-full border border-[#E5E5EA]">
                       {replacedPartsSummaryText}
                     </span>
-                    <span className="px-2.5 py-1 bg-emerald-50 text-emerald-800 rounded-lg border border-emerald-200">
+                    <span className="px-2.5 py-1 bg-emerald-50 text-emerald-800 rounded-full border border-emerald-200">
                       iCloud e IMEI OK
                     </span>
                   </div>
                 </div>
 
                 {/* Formulário */}
-                <div className="p-6 rounded-3xl bg-white border border-[#E5E5E7] shadow-xs space-y-4 text-left">
+                <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#E5E5EA] space-y-4 text-left">
                   <form onSubmit={handleFinalSubmit} className="space-y-4">
-                    {submitError && <p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-700">{submitError}</p>}
+                    {submitError && (
+                      <p role="alert" className="rounded-2xl bg-red-50 border border-red-200 p-3 text-xs sm:text-sm text-red-700">
+                        {submitError}
+                      </p>
+                    )}
                     <div>
-                      <label className="block text-xs font-bold text-[#1D1D1F] mb-1.5">
-                        Nome Completo: <span className="text-red-500">*</span>
+                      <label className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
+                        Nome Completo <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
                         required
+                        autoComplete="name"
+                        enterKeyHint="next"
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
                         placeholder="Ex: Carlos Eduardo"
-                        className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-[#D2D2D7] focus:border-[#0071E3] focus:bg-white outline-none transition-all"
+                        className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white focus:shadow-[0_0_0_3px_rgba(0,113,227,0.12)] outline-none transition-[background-color,border-color,box-shadow] duration-200"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#1D1D1F] mb-1.5">
-                        WhatsApp com DDD: <span className="text-red-500">*</span>
+                      <label className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
+                        WhatsApp com DDD <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="tel"
+                        inputMode="tel"
+                        autoComplete="tel"
+                        enterKeyHint="done"
                         required
                         value={customerWhatsapp}
                         onChange={handlePhoneChange}
                         placeholder="(11) 99999-9999"
-                        className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-xs sm:text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-[#D2D2D7] focus:border-[#0071E3] focus:bg-white outline-none transition-all"
+                        className="w-full px-4 py-3 bg-[#F5F5F7] rounded-2xl text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white focus:shadow-[0_0_0_3px_rgba(0,113,227,0.12)] outline-none transition-[background-color,border-color,box-shadow] duration-200 tabular-nums"
                       />
                     </div>
 
                     <div className="flex items-center justify-between gap-3 pt-2">
                       <button
                         type="button"
-                        onClick={() => setStep(8)}
+                        onClick={() => goToStep(8)}
                         className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-[#6E6E73] hover:text-[#1D1D1F] rounded-full hover:bg-[#F5F5F7] transition-colors cursor-pointer"
                       >
                         <ArrowLeft className="w-3.5 h-3.5" />
@@ -1342,7 +1726,7 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                       <button
                         type="submit"
                         disabled={!isStepValid || submitting}
-                        className="flex-1 py-3.5 bg-[#00C853] hover:bg-[#00B048] disabled:opacity-50 text-white font-extrabold text-sm rounded-full shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                        className="flex-1 py-3.5 bg-[#16A34A] hover:bg-[#15803D] disabled:opacity-45 text-white font-semibold text-sm rounded-full shadow-[0_10px_24px_-12px_rgba(22,163,74,0.55)] active:scale-[0.98] transition-[background-color,transform,opacity,box-shadow] duration-200 flex items-center justify-center gap-2 cursor-pointer"
                       >
                         {submitting ? (
                           <>
@@ -1363,10 +1747,10 @@ Gostaria de agendar a avaliação e retirada em SP!`;
             )}
 
             {/* Aviso de Validação Presencial */}
-            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-[#E5E5E7] text-left flex items-start gap-2.5">
+            <div className="p-4 rounded-2xl bg-[#F5F5F7] border border-[#E5E5EA] text-left flex items-start gap-2.5">
               <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-              <p className="text-[11px] text-[#86868B] leading-relaxed">
-                <strong>Garantia &amp; Segurança:</strong> O valor apresentado é uma pré-avaliação garantida com base nas informações fornecidas. O pagamento no PIX é concluído após conferência presencial no ato da entrega pelo nosso técnico credenciado.
+              <p className="text-[11px] text-[#6E6E73] leading-relaxed">
+                <strong className="text-[#1D1D1F]">Garantia &amp; Segurança:</strong> O valor apresentado é uma pré-avaliação garantida com base nas informações fornecidas. O pagamento no PIX é concluído após conferência presencial no ato da entrega pelo nosso técnico credenciado.
               </p>
             </div>
           </div>
@@ -1374,25 +1758,28 @@ Gostaria de agendar a avaliação e retirada em SP!`;
 
         {/* ── Barra de Navegação Inferior (Etapas 1 a 8) ── */}
         {step <= totalQuestionSteps && (
-          <div className="flex items-center justify-between pt-6 mt-6 border-t border-[#E5E5E7]">
+          <div className="flex items-center justify-between pt-5 mt-6 border-t border-[#F0F0F5]">
             {step > 1 ? (
               <button
                 type="button"
-                onClick={() => setStep((s) => Math.max(1, s - 1))}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-[#6E6E73] hover:text-[#1D1D1F] rounded-full hover:bg-[#F5F5F7] transition-colors cursor-pointer"
+                onClick={() => goToStep(Math.max(1, step - 1))}
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-[#6E6E73] hover:text-[#1D1D1F] rounded-full hover:bg-[#F5F5F7] active:scale-95 transition-[background-color,color,transform] duration-150 cursor-pointer"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>Voltar</span>
               </button>
             ) : (
-              <div />
+              <span className="text-[11px] font-medium text-[#86868B] flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                Avaliação gratuita e sem compromisso
+              </span>
             )}
 
             {isStepValid && (
               <button
                 type="button"
-                onClick={() => setStep((s) => Math.min(9, s + 1))}
-                className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs sm:text-sm font-semibold rounded-full shadow-xs active:scale-95 transition-all cursor-pointer"
+                onClick={() => goToStep(Math.min(9, step + 1))}
+                className="animate-chip-in inline-flex items-center gap-2 px-6 py-2.5 bg-[#0071E3] hover:bg-[#0077ED] text-white text-xs sm:text-sm font-semibold rounded-full shadow-[0_8px_18px_-8px_rgba(0,113,227,0.5)] active:scale-95 transition-[background-color,transform,box-shadow] duration-150 cursor-pointer"
               >
                 <span>{step === totalQuestionSteps ? "Ver Avaliação" : "Continuar"}</span>
                 <ArrowRight className="w-3.5 h-3.5" />

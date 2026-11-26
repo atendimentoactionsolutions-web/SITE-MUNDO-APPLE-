@@ -102,7 +102,7 @@ export const FAQSection: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className={`interactive-card rounded-[20px] border transition-all duration-200 overflow-hidden ${
+                  className={`interactive-card rounded-[20px] border transition-[border-color,box-shadow,transform] duration-200 overflow-hidden ${
                     isOpen
                       ? "bg-white border-[#C8C8D2] shadow-xs"
                       : "bg-white border-[#E6E6EB] hover:border-[#C8C8D2]"
@@ -116,7 +116,7 @@ export const FAQSection: React.FC = () => {
                   >
                     <span>{faq.question}</span>
                     <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[transform,background-color,color] duration-200 ${
                         isOpen ? "bg-[#1D1D1F] text-white rotate-180" : "bg-[#F5F5F7] text-[#6E6E73]"
                       }`}
                     >
@@ -125,7 +125,7 @@ export const FAQSection: React.FC = () => {
                   </button>
 
                   <div
-                    className={`grid transition-all duration-300 ease-out ${
+                    className={`grid transition-[grid-template-rows,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                       isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >

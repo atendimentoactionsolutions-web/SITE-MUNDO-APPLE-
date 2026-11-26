@@ -29,8 +29,19 @@ export const metadata: Metadata = {
 
 export default function SellPage() {
   return (
-    <div className="pt-24 sm:pt-28 pb-20 bg-apple-gray/30 min-h-screen">
+    <div className="pt-20 sm:pt-24 pb-20 bg-[#F5F5F7] min-h-screen">
       <Container size="default">
+        <div className="max-w-3xl mx-auto text-center mb-6 sm:mb-8 px-2">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#E5E5EA] text-[11px] font-semibold uppercase tracking-[0.08em] text-[#0071E3] shadow-[0_1px_2px_rgba(0,0,0,0.03)] mb-3">
+            Avaliação Online Instantânea
+          </span>
+          <h1 className="font-display text-[26px] sm:text-[36px] font-semibold text-[#1D1D1F] tracking-[-0.035em] leading-[1.12]">
+            Venda seu iPhone com PIX na hora.
+          </h1>
+          <p className="text-xs sm:text-sm text-[#6E6E73] mt-2 max-w-lg mx-auto leading-relaxed">
+            Responda 8 perguntas rápidas e descubra o valor do seu aparelho em menos de 1 minuto.
+          </p>
+        </div>
         <SellWizard />
       </Container>
     </div>

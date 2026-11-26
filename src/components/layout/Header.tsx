@@ -101,14 +101,14 @@ export const Header: React.FC = () => {
   return (
     <>
       {/* ── Compact Floating White Capsule Header ── */}
-      <header className="fixed top-2.5 sm:top-3.5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none flex justify-center">
+      <header className="fixed top-[max(0.625rem,env(safe-area-inset-top))] sm:top-3.5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none flex justify-center">
         <div
-          className={`pointer-events-auto w-full max-w-[1120px] h-[48px] sm:h-[54px] rounded-full border transition-all duration-300 px-3.5 sm:px-5 flex items-center justify-between ${
+          className={`pointer-events-auto w-full max-w-[1120px] h-[48px] sm:h-[54px] rounded-full border transition-[background-color,border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] px-3.5 sm:px-5 flex items-center justify-between ${
             mobileMenuOpen
-              ? "bg-white border-[#E5E5EA] shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
+              ? "bg-white border-[#E5E5EA] shadow-[0_4px_20px_rgba(0,0,0,0.06)] scale-100"
               : scrolled
-                ? "bg-white/95 backdrop-blur-xl border-[#D2D2D7] shadow-[0_8px_28px_rgba(0,0,0,0.09)]"
-                : "bg-white/90 backdrop-blur-xl border-[#D2D2D7]/80 shadow-[0_4px_16px_rgba(0,0,0,0.05)]"
+                ? "bg-white/95 backdrop-blur-2xl border-[#D2D2D7] shadow-[0_12px_34px_rgba(0,0,0,0.11)] sm:scale-[0.985]"
+                : "bg-white/88 backdrop-blur-xl border-[#D2D2D7]/70 shadow-[0_4px_16px_rgba(0,0,0,0.05)] scale-100"
           }`}
         >
           {/* Logo Mundo Apple Delivery (Left) */}
@@ -165,9 +165,9 @@ export const Header: React.FC = () => {
                 />
               </button>
 
-              {/* Solid White Dropdown Menu */}
+              {/* Solid White Dropdown Menu (origin-aware popover-in) */}
               {catalogDropdownOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 bg-white border border-[#D2D2D7]/80 rounded-3xl p-3 shadow-[0_12px_40px_rgba(0,0,0,0.14)] space-y-1 animate-in fade-in zoom-in-95 duration-150 z-[9999]">
+                <div className="animate-popover-in absolute top-full left-1/2 mt-3 w-72 bg-white border border-[#D2D2D7]/80 rounded-3xl p-3 shadow-[0_12px_40px_rgba(0,0,0,0.14)] space-y-1 z-[9999]">
                   <div className="px-3 py-1.5 text-[10px] uppercase tracking-wider text-[#86868B] font-semibold border-b border-[#E5E5E7] mb-1">
                     Linha Apple Completa
                   </div>
@@ -256,10 +256,10 @@ export const Header: React.FC = () => {
         </div>
       </header>
 
-      {/* ── Mobile Menu Full-Screen Overlay (Solid Clean Pure White) ── */}
+      {/* ── Mobile Menu Full-Screen Overlay (Solid Clean Pure White, 100dvh + safe-area) ── */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-white pt-20 px-5 pb-7 flex flex-col justify-between overflow-y-auto animate-in fade-in duration-200"
+          className="animate-sheet-in fixed inset-0 z-40 h-[100dvh] bg-white pt-[calc(4.75rem+env(safe-area-inset-top))] px-5 pb-[max(1.75rem,env(safe-area-inset-bottom))] flex flex-col justify-between overflow-y-auto overscroll-contain"
           style={{ backgroundColor: "#ffffff" }}
         >
           <div className="space-y-5">
@@ -271,7 +271,8 @@ export const Header: React.FC = () => {
                 <Link
                   href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-3 text-[17px] font-semibold text-[#1D1D1F] flex items-center justify-between"
+                  style={{ animationDelay: "35ms" }}
+                  className="animate-menu-item py-3 text-[17px] font-semibold text-[#1D1D1F] flex items-center justify-between"
                 >
                   <span>Home</span>
                   <ArrowRight className="w-4 h-4 text-[#86868B]" />
@@ -279,7 +280,8 @@ export const Header: React.FC = () => {
                 <Link
                   href="/vender"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-3 text-[17px] font-semibold text-emerald-700 flex items-center justify-between"
+                  style={{ animationDelay: "65ms" }}
+                  className="animate-menu-item py-3 text-[17px] font-semibold text-emerald-700 flex items-center justify-between"
                 >
                   <span>Vender Produto Apple</span>
                   <ArrowRight className="w-4 h-4 text-emerald-700" />
@@ -287,7 +289,8 @@ export const Header: React.FC = () => {
                 <Link
                   href="/troca"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-3 text-[17px] font-semibold text-[#0071E3] flex items-center justify-between"
+                  style={{ animationDelay: "90ms" }}
+                  className="animate-menu-item py-3 text-[17px] font-semibold text-[#0071E3] flex items-center justify-between"
                 >
                   <span>Upgrade / Troca</span>
                   <ArrowRight className="w-4 h-4 text-[#0071E3]" />
@@ -295,7 +298,8 @@ export const Header: React.FC = () => {
                 <Link
                   href="/sobre"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="py-3 text-[17px] font-semibold text-[#1D1D1F] flex items-center justify-between"
+                  style={{ animationDelay: "110ms" }}
+                  className="animate-menu-item py-3 text-[17px] font-semibold text-[#1D1D1F] flex items-center justify-between"
                 >
                   <span>Sobre nós</span>
                   <ArrowRight className="w-4 h-4 text-[#86868B]" />
@@ -308,12 +312,13 @@ export const Header: React.FC = () => {
                 Categorias de Produtos
               </div>
               <div className="grid grid-cols-2 gap-2.5">
-                {catalogCategories.map((cat) => (
+                {catalogCategories.map((cat, idx) => (
                   <Link
                     key={cat.label}
                     href={cat.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="px-3.5 py-3 bg-[#F5F5F7] border border-[#E6E6EB] rounded-2xl text-[13px] font-semibold text-[#1D1D1F] hover:bg-[#E8E8ED] transition-colors flex items-center justify-between"
+                    style={{ animationDelay: `${130 + Math.min(idx, 5) * 22}ms` }}
+                    className="animate-menu-item px-3.5 py-3 bg-[#F5F5F7] border border-[#E6E6EB] rounded-2xl text-[13px] font-semibold text-[#1D1D1F] hover:bg-[#E8E8ED] transition-colors flex items-center justify-between"
                   >
                     <span>{cat.label}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#86868B]" />

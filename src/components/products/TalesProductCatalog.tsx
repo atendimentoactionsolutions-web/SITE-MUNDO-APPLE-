@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useLayoutEffect, useEffect } from "react";
 import { Product } from "@/types/product";
 import { storeConfig } from "@/data/storeConfig";
 import { TalesProductCard } from "./TalesProductCard";
@@ -27,6 +27,53 @@ export const TalesProductCatalog: React.FC<TalesProductCatalogProps> = ({ produc
   const [order, setOrder] = useState<string>("destaques");
   const [filtersOpen, setFiltersOpen] = useState<boolean>(false);
   const [capacity, setCapacity] = useState<string>("todas");
+  const [hasSwitchedCategory, setHasSwitchedCategory] = useState<boolean>(false);
+
+  // Emil Kowalski sliding pill indicator state for category tabs
+  const tabsTrackRef = useRef<HTMLDivElement>(null);
+  const tabButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [pillStyle, setPillStyle] = useState<{ left: number; width: number; ready: boolean; animate: boolean }>({
+    left: 0,
+    width: 0,
+    ready: false,
+    animate: false,
+  });
+
+  useLayoutEffect(() => {
+    const updatePill = (animate: boolean) => {
+      const btn = tabButtonRefs.current[category];
+      if (!btn) return;
+      setPillStyle({
+        left: btn.offsetLeft,
+        width: btn.offsetWidth,
+        ready: true,
+        animate,
+      });
+    };
+
+    updatePill(hasSwitchedCategory);
+
+    const handleResize = () => updatePill(false);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [category, hasSwitchedCategory]);
+
+  useEffect(() => {
+    const track = tabsTrackRef.current;
+    if (!track || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver(() => {
+      const btn = tabButtonRefs.current[category];
+      if (!btn) return;
+      setPillStyle((prev) => ({
+        left: btn.offsetLeft,
+        width: btn.offsetWidth,
+        ready: true,
+        animate: prev.ready ? prev.animate : false,
+      }));
+    });
+    ro.observe(track);
+    return () => ro.disconnect();
+  }, [category]);
 
   // Filter ONLY new products (Seminovos 100% removed)
   const scopedProducts = useMemo(() => {
@@ -115,30 +162,54 @@ export const TalesProductCatalog: React.FC<TalesProductCatalogProps> = ({ produc
       <div className="max-w-[1280px] mx-auto px-3 sm:px-6 lg:px-8">
         <div className="section-heading">
           <h2>Novos lacrados.</h2>
-          <span className="result-count">
+          <span
+            key={hasSwitchedCategory ? `${category}-${sortedProducts.length}` : "initial"}
+            className={`result-count ${hasSwitchedCategory ? "animate-price-pop" : ""}`}
+          >
             {sortedProducts.length} {sortedProducts.length === 1 ? "produto" : "produtos"}
           </span>
         </div>
 
         <div className="catalog-toolbar">
           <div className="catalog-tabs" aria-label="Categorias">
-            {CATEGORIES.map((tab) => {
-              const active = category === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  className={active ? "active" : ""}
-                  aria-pressed={active}
-                  onClick={() => {
-                    setCategory(tab.id);
-                    setCapacity("todas");
-                  }}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
+            <div className="catalog-tabs-track" ref={tabsTrackRef}>
+              <span
+                aria-hidden="true"
+                className="catalog-tab-indicator"
+                data-animated={pillStyle.animate ? "true" : "false"}
+                style={{
+                  transform: `translate3d(${pillStyle.left}px, 0, 0)`,
+                  width: `${pillStyle.width}px`,
+                  opacity: pillStyle.ready ? 1 : 0,
+                }}
+              />
+              {CATEGORIES.map((tab) => {
+                const active = category === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    ref={(el) => {
+                      tabButtonRefs.current[tab.id] = el;
+                    }}
+                    type="button"
+                    className={active ? "active" : ""}
+                    aria-pressed={active}
+                    onClick={(e) => {
+                      setHasSwitchedCategory(true);
+                      setCategory(tab.id);
+                      setCapacity("todas");
+                      e.currentTarget.scrollIntoView({
+                        behavior: "smooth",
+                        inline: "center",
+                        block: "nearest",
+                      });
+                    }}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           <div className="catalog-tools">
@@ -168,38 +239,50 @@ export const TalesProductCatalog: React.FC<TalesProductCatalogProps> = ({ produc
           </div>
         </div>
 
-        {filtersOpen && (
-          <div className="filter-panel">
-            <label>
-              {category === "watch" ? "Tamanho da caixa" : "Capacidade"}
-              <select
-                value={capacity}
-                onChange={(e) => setCapacity(e.target.value)}
+        <div
+          className={`filter-panel-wrap ${filtersOpen ? "is-open" : ""}`}
+          aria-hidden={!filtersOpen}
+        >
+          <div className="filter-panel-inner">
+            <div className="filter-panel">
+              <label>
+                {category === "watch" ? "Tamanho da caixa" : "Capacidade"}
+                <select
+                  value={capacity}
+                  onChange={(e) => setCapacity(e.target.value)}
+                  tabIndex={filtersOpen ? 0 : -1}
+                >
+                  <option value="todas">Todas as opções</option>
+                  {availableCapacities.map((v) => (
+                    <option key={v} value={v}>
+                      {v}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label>
+                Buscar por modelo
+                <input
+                  type="text"
+                  placeholder="Ex: Pro Max, Air, Ultra..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  tabIndex={filtersOpen ? 0 : -1}
+                />
+              </label>
+
+              <button
+                type="button"
+                className="text-button"
+                onClick={clear}
+                tabIndex={filtersOpen ? 0 : -1}
               >
-                <option value="todas">Todas as opções</option>
-                {availableCapacities.map((v) => (
-                  <option key={v} value={v}>
-                    {v}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              Buscar por modelo
-              <input
-                type="text"
-                placeholder="Ex: Pro Max, Air, Ultra..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-            </label>
-
-            <button type="button" className="text-button" onClick={clear}>
-              Limpar filtros
-            </button>
+                Limpar filtros
+              </button>
+            </div>
           </div>
-        )}
+        </div>
 
         {query.trim() && (
           <div className="search-result">

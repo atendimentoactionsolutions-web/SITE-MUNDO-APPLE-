@@ -2,12 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Shared Emil Kowalski / Apple Fluid Motion Tokens */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring-subtle: cubic-bezier(0.34, 1.45, 0.64, 1);
+  --duration-press: 100ms;
+  --duration-ui: 220ms;
+  --duration-reveal: 560ms;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
     overflow-x: clip;
     width: 100%;
     background-color: #f5f5f7;
@@ -19,10 +32,32 @@
     color: #1d1d1f;
     font-family: 'SF Pro Text', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     letter-spacing: -0.011em;
+    overscroll-behavior-y: none;
     overflow-x: clip;
     width: 100%;
     position: relative;
     touch-action: manipulation;
+  }
+
+  button,
+  a,
+  [role="button"] {
+    touch-action: manipulation;
+  }
+
+  button,
+  [role="button"] {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Prevent iOS Safari zoom on input focus without disabling user pinch zoom */
+  @media (pointer: coarse) {
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
   }
 
   ::selection {
@@ -58,41 +93,482 @@
   }
 }
 
-/* ── Global Scroll Reveal System (Smooth 60/120fps GPU Transitions) ── */
+/* ── Choreographed Popover / Sheet / Image Entrances (Composite-Only) ── */
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: translate3d(-50%, -6px, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0) scale(1);
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes photo-swap {
+  from {
+    opacity: 0.35;
+    transform: translate3d(0, 5px, 0) scale(0.955);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes price-pop {
+  from {
+    opacity: 0.35;
+    transform: translate3d(0, 5px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-image-settle {
+  from {
+    transform: scale(1.065);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-cta-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes step-forward-in {
+  from {
+    opacity: 0;
+    transform: translate3d(20px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes step-backward-in {
+  from {
+    opacity: 0;
+    transform: translate3d(-20px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes wizard-item-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes check-pop {
+  from {
+    opacity: 0.4;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translate3d(-6px, 0, 0) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes result-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* ── Brand Intro Splash Choreography (Lead -> Wordmark -> Line -> Subtitle -> Curtain Lift) ── */
+@keyframes intro-scooter-in {
+  from {
+    opacity: 0;
+    transform: translate3d(-34px, 0, 0) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes intro-wordmark-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 108%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes intro-line-in {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes intro-subtitle-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.intro-scooter {
+  animation: intro-scooter-in 480ms var(--ease-out) 0ms both;
+}
+
+.intro-wordmark {
+  animation: intro-wordmark-in 440ms var(--ease-out) 140ms both;
+}
+
+.intro-line {
+  transform-origin: left center;
+  animation: intro-line-in 380ms var(--ease-out) 200ms both;
+}
+
+.intro-subtitle {
+  animation: intro-subtitle-in 360ms var(--ease-out) 240ms both;
+}
+
+.intro-lockup {
+  transition:
+    opacity 220ms var(--ease-out),
+    transform 240ms var(--ease-out);
+}
+
+.intro-lockup.is-exiting {
+  opacity: 0;
+  transform: translate3d(0, -14px, 0) scale(0.97);
+}
+
+.intro-curtain {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  transition:
+    transform 420ms var(--ease-in-out) 50ms,
+    box-shadow 420ms var(--ease-in-out) 50ms;
+}
+
+.intro-curtain.is-exiting {
+  transform: translate3d(0, -100%, 0);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.08);
+}
+
+.animate-popover-in {
+  transform-origin: top center;
+  animation: popover-in 190ms var(--ease-out) both;
+}
+
+.animate-modal-in {
+  transform-origin: top center;
+  animation: modal-in 170ms var(--ease-out) both;
+}
+
+.animate-sheet-in {
+  animation: sheet-in 260ms var(--ease-drawer) both;
+}
+
+.animate-photo-swap {
+  animation: photo-swap 300ms var(--ease-out) both;
+}
+
+.animate-price-pop {
+  animation: price-pop 240ms var(--ease-out) both;
+}
+
+.animate-hero-image {
+  animation: hero-image-settle 950ms var(--ease-out) backwards;
+}
+
+.animate-hero-title {
+  animation: hero-copy-in 620ms var(--ease-out) 60ms both;
+}
+
+.animate-hero-subtitle {
+  animation: hero-copy-in 560ms var(--ease-out) 145ms both;
+}
+
+.animate-hero-cta {
+  animation: hero-cta-in 500ms var(--ease-out) 225ms both;
+}
+
+.animate-menu-item {
+  animation: menu-item-in 280ms var(--ease-out) both;
+}
+
+.animate-step-forward {
+  animation: step-forward-in 250ms var(--ease-out) both;
+}
+
+.animate-step-backward {
+  animation: step-backward-in 250ms var(--ease-out) both;
+}
+
+.animate-wizard-item {
+  animation: wizard-item-in 260ms var(--ease-out) both;
+}
+
+.animate-check-pop {
+  animation: check-pop 200ms var(--ease-spring-subtle) both;
+}
+
+.animate-chip-in {
+  animation: chip-in 220ms var(--ease-out) both;
+}
+
+.animate-result-reveal {
+  animation: result-reveal 440ms var(--ease-out) both;
+}
+
+/* Smooth Apple-style scrollable list with bottom fade mask and thin subtle thumb */
+.wizard-scroll-mask {
+  mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%);
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(134, 134, 139, 0.35) transparent;
+}
+
+.wizard-scroll-mask::-webkit-scrollbar {
+  width: 5px;
+}
+
+.wizard-scroll-mask::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wizard-scroll-mask::-webkit-scrollbar-thumb {
+  background: rgba(134, 134, 139, 0.32);
+  border-radius: 9999px;
+}
+
+.wizard-option {
+  transition:
+    transform var(--duration-press) var(--ease-out),
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 200ms var(--ease-out);
+}
+
+.wizard-option:active {
+  transform: scale(0.975);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .wizard-option:hover {
+    transform: translateY(-1.5px);
+    box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.16);
+  }
+
+  .wizard-option:active {
+    transform: translateY(0) scale(0.975);
+  }
+}
+
+/* ── Apple Banner Choreographed Scroll Reveal + Hover Depth ── */
+.apple-banner {
+  --banner-ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.apple-banner .apple-banner-img {
+  transition: transform 850ms var(--banner-ease);
+  transform: scale(1);
+}
+
+.apple-banner[data-scroll-state="hidden"] {
+  opacity: 0.001;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 540ms var(--banner-ease),
+    transform 620ms var(--banner-ease);
+}
+
+.apple-banner[data-scroll-state="hidden"] .apple-banner-img {
+  transform: scale(1.07);
+}
+
+.apple-banner[data-scroll-state="hidden"] .apple-banner-title,
+.apple-banner[data-scroll-state="hidden"] .apple-banner-subtitle,
+.apple-banner[data-scroll-state="hidden"] .apple-banner-meta,
+.apple-banner[data-scroll-state="hidden"] .apple-banner-ctas {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+}
+
+.apple-banner[data-scroll-state="visible"] .apple-banner-title {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 580ms var(--banner-ease) 50ms,
+    transform 640ms var(--banner-ease) 50ms;
+}
+
+.apple-banner[data-scroll-state="visible"] .apple-banner-subtitle {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 540ms var(--banner-ease) 130ms,
+    transform 600ms var(--banner-ease) 130ms;
+}
+
+.apple-banner[data-scroll-state="visible"] .apple-banner-meta {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 500ms var(--banner-ease) 195ms,
+    transform 540ms var(--banner-ease) 195ms;
+}
+
+.apple-banner[data-scroll-state="visible"] .apple-banner-ctas {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 500ms var(--banner-ease) 245ms,
+    transform 540ms var(--banner-ease) 245ms;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .apple-banner[data-scroll-state="visible"]:hover .apple-banner-img {
+    transform: scale(1.038);
+    transition: transform 720ms var(--banner-ease);
+  }
+}
+
+/* ── Choreographed Scroll Reveal System (Lead / Support / Decoration Roles) ── */
 [data-scroll-state="hidden"] {
   opacity: 0;
   will-change: transform, opacity;
   transition:
-    opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 740ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out);
 }
 
+[data-scroll-state="hidden"][data-reveal="lead"] {
+  transform: translate3d(0, 22px, 0);
+}
+
+[data-scroll-state="hidden"][data-reveal="support"],
 [data-scroll-state="hidden"][data-reveal="up"] {
-  transform: translate3d(0, 32px, 0);
+  transform: translate3d(0, 14px, 0);
+}
+
+/* Decoration (pills/badges) fades in place with zero travel */
+[data-scroll-state="hidden"][data-reveal="fade"] {
+  transform: none;
 }
 
 [data-scroll-state="hidden"][data-reveal="left"] {
-  transform: translate3d(-44px, 0, 0);
+  transform: translate3d(-28px, 0, 0);
 }
 
 [data-scroll-state="hidden"][data-reveal="right"] {
-  transform: translate3d(44px, 0, 0);
+  transform: translate3d(28px, 0, 0);
 }
 
 [data-scroll-state="hidden"][data-reveal="scale"] {
-  transform: translate3d(0, 22px, 0) scale(0.975);
+  transform: translate3d(0, 16px, 0) scale(0.975);
 }
 
 [data-scroll-state="visible"] {
   opacity: 1;
   transform: none;
+  will-change: auto;
   transition:
-    opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 740ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 260ms ease,
-    border-color 200ms ease,
-    background-color 200ms ease,
-    color 200ms ease;
+    opacity var(--duration-reveal) var(--ease-out),
+    transform var(--duration-reveal) var(--ease-out),
+    box-shadow var(--duration-ui) var(--ease-out),
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
 /* ── Lateral Product Card Entrance ── */
@@ -113,129 +589,161 @@
   will-change: transform, opacity;
 }
 
+/* Collapse choreography under reduced-motion: keep opacity, drop delays and travel */
 @media (prefers-reduced-motion: reduce) {
   [data-scroll-state],
-  .product-card[data-card-reveal] {
+  .product-card[data-card-reveal],
+  .animate-popover-in,
+  .animate-modal-in,
+  .animate-sheet-in,
+  .animate-photo-swap,
+  .animate-price-pop,
+  .animate-hero-image,
+  .animate-hero-title,
+  .animate-hero-subtitle,
+  .animate-hero-cta,
+  .animate-menu-item,
+  .animate-step-forward,
+  .animate-step-backward,
+  .animate-wizard-item,
+  .animate-check-pop,
+  .animate-chip-in,
+  .animate-result-reveal,
+  .intro-scooter,
+  .intro-wordmark,
+  .intro-line,
+  .intro-subtitle,
+  .intro-lockup,
+  .intro-curtain,
+  .apple-banner,
+  .apple-banner * {
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     will-change: auto !important;
   }
 }
 
-/* ── Tactile Press Feedback (Desktop + Mobile) ── */
+/* ── Instant Tactile Press Feedback (Pointer-Down / Touch & Mouse) ── */
 @media (prefers-reduced-motion: no-preference) {
   a[class*="rounded-full"]:active,
-  .product-button:active,
+  .product-card .product-button:active,
   .configuration-chip:active,
   .catalog-tabs button:active,
-  .filter-button:active {
-    transform: scale(0.975);
+  .filter-button:active,
+  .color-swatch-button:active {
+    transform: scale(0.97);
+    transition: transform var(--duration-press) var(--ease-out);
   }
 }
 
-/* ── Apple-Grade Professional Hover Micro-Animations (Pointer / Desktop Only) ── */
+/* ── Refined Hover Micro-Interactions (Hover-Capable Pointer Devices Only) ── */
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  /* Product cards: confident floating lift + smooth photo zoom */
   .product-card {
     transition:
-      transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 220ms ease;
+      transform 260ms var(--ease-out),
+      box-shadow 260ms var(--ease-out),
+      border-color 180ms ease;
   }
 
   .product-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 20px 42px -14px rgba(0, 0, 0, 0.11), 0 4px 12px -4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 22px 42px -16px rgba(0, 0, 0, 0.12), 0 6px 14px -6px rgba(0, 0, 0, 0.05);
     border-color: #c2c2cc;
   }
 
   .product-card:hover .product-picture img {
-    transform: scale(1.05) translateY(-2px);
+    transform: scale(1.06) translateY(-4px);
   }
 
-  /* Buttons, Pill CTAs, Filter & Category Tabs */
   a[class*="rounded-full"],
   .product-card .product-button,
-  .catalog-tabs button,
   .filter-button,
   .configuration-chip {
     transition:
-      transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 180ms ease,
-      border-color 180ms ease,
-      color 180ms ease;
+      transform var(--duration-ui) var(--ease-out),
+      box-shadow var(--duration-ui) var(--ease-out),
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease;
   }
 
   a[class*="rounded-full"]:hover,
   .product-card .product-button:hover,
   .filter-button:hover {
-    transform: translateY(-2.5px);
-    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.16);
-  }
-
-  .catalog-tabs button:hover,
-  .configuration-chip:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.15);
   }
 
-  /* Color Swatches: crisp spring pop */
+  .configuration-chip:hover {
+    transform: translateY(-1.5px);
+  }
+
+  /* Keep active press feeling responsive even while hovering */
+  a[class*="rounded-full"]:active,
+  .product-card .product-button:active,
+  .configuration-chip:active,
+  .catalog-tabs button:active,
+  .filter-button:active {
+    transform: translateY(0) scale(0.97);
+    transition-duration: var(--duration-press);
+  }
+
   .color-swatch-button {
     transition:
-      transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      border-color 180ms ease;
+      transform 220ms var(--ease-spring-subtle),
+      border-color 160ms ease,
+      box-shadow 180ms ease;
   }
 
   .color-swatch-button:hover {
-    transform: scale(1.13) translateY(-1px);
+    transform: scale(1.15);
   }
 
-  /* Home Hero & Promo Banners: subtle editorial lift + photography zoom */
-  main section article:not(.product-card) {
-    transition:
-      transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  .color-swatch-button:active {
+    transform: scale(0.94);
+    transition-duration: var(--duration-press);
   }
 
+  /* Home Hero & Promo Banners: subtle editorial photo zoom on hover */
   main section article:not(.product-card) > picture img,
   main section article:not(.product-card) > img {
-    transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 650ms var(--ease-out);
   }
 
   main section article:not(.product-card):hover > picture img,
   main section article:not(.product-card):hover > img {
-    transform: scale(1.03);
+    transform: scale(1.025);
   }
 
   /* Store Pillars, Bento Cards & FAQ Cards */
   .interactive-card {
     transition:
-      transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 220ms ease;
+      transform 260ms var(--ease-out),
+      box-shadow 260ms var(--ease-out),
+      border-color 180ms ease;
   }
 
   .interactive-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 36px -14px rgba(0, 0, 0, 0.09);
+    transform: translateY(-3.5px);
+    box-shadow: 0 16px 32px -14px rgba(0, 0, 0, 0.09);
     border-color: #c8c8d0;
   }
 
-  /* Header & Footer navigation links: micro float */
   header nav a,
   footer ul a {
     display: inline-flex;
     transition:
-      transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
-      color 180ms ease,
-      opacity 180ms ease;
+      transform 180ms var(--ease-out),
+      color 160ms ease,
+      background-color 160ms ease;
   }
 
   header nav a:hover,
   footer ul a:hover {
-    transform: translateY(-1.5px);
+    transform: translateY(-1px);
   }
 }
 

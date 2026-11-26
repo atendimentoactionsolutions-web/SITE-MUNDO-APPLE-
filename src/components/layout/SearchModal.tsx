@@ -102,13 +102,18 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       <div className="absolute inset-0" onClick={onClose} />
 
       {/* Modal Container */}
-      <div role="dialog" aria-modal="true" aria-label="Busca de produtos" className="relative z-10 w-full min-w-0 max-w-2xl bg-white rounded-3xl shadow-2xl border border-apple-border overflow-hidden flex flex-col max-h-[calc(100dvh-5rem)] sm:max-h-[80dvh] animate-in zoom-in-95 duration-200">
+      <div role="dialog" aria-modal="true" aria-label="Busca de produtos" className="animate-modal-in relative z-10 w-full min-w-0 max-w-2xl bg-white rounded-3xl shadow-2xl border border-apple-border overflow-hidden flex flex-col max-h-[calc(100dvh-5rem)] sm:max-h-[80dvh]">
         {/* Search Header */}
         <div className="shrink-0 flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-4 border-b border-apple-border/70 bg-apple-gray/30">
           <Search className="w-5 h-5 text-apple-muted shrink-0" />
           <input
             ref={inputRef}
-            type="text"
+            type="search"
+            inputMode="search"
+            enterKeyHint="search"
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck={false}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar iPhone, MacBook, iPad, AirPods, Watch..."
@@ -140,7 +145,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
         </div>
 
         {/* Results List */}
-        <div className="min-h-0 flex-1 overflow-y-auto p-4 space-y-2">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 space-y-2">
           <div className="px-2 py-1 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-apple-muted">
             <span>{query.trim() ? "Resultados da busca" : "Modelos em destaque"}</span>
             <span className="text-[11px] font-normal lowercase">

@@ -36,15 +36,21 @@ export function GlobalMotionController() {
           const el = entry.target as HTMLElement;
           if (entry.isIntersecting || entry.boundingClientRect.bottom < 0) {
             const delay = el.dataset.revealDelay;
-            if (delay) {
+            if (delay && entry.isIntersecting) {
               el.style.transitionDelay = `${delay}ms`;
+              // Clear delay once reveal finishes so subsequent hovers/presses have 0ms latency
+              const clearDelay = () => {
+                el.style.transitionDelay = "";
+                el.removeEventListener("transitionend", clearDelay);
+              };
+              el.addEventListener("transitionend", clearDelay, { once: true });
             }
             el.dataset.scrollState = "visible";
             observer.unobserve(el);
           }
         }
       },
-      { rootMargin: "0px 0px -36px 0px", threshold: 0.04 }
+      { rootMargin: "0px 0px -32px 0px", threshold: 0.04 }
     );
 
     const registerElements = () => {
@@ -54,6 +60,9 @@ export function GlobalMotionController() {
         if (el.closest(".product-card")) return;
         if (el.closest("[data-no-reveal]")) return;
 
+        // Choreograph Hard Rule 1: never double-animate a child inside an animated container
+        if (el.parentElement?.closest("[data-reveal]")) return;
+
         // Keep the very first hero immediately visible for crisp LCP
         if (el === firstHeroArticle) {
           el.dataset.scrollState = "visible";
@@ -61,7 +70,7 @@ export function GlobalMotionController() {
           return;
         }
 
-        // If already in the top portion of viewport on initial paint, gently reveal without hiding
+        // If already in viewport on initial paint, reveal immediately without hiding
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0 && window.scrollY < 40) {
           el.dataset.scrollState = "visible";
@@ -88,6 +97,7 @@ export function GlobalMotionController() {
     const onReduceChange = () => {
       if (prefersReduced.matches) {
         document.querySelectorAll<HTMLElement>("[data-scroll-state]").forEach((el) => {
+          el.style.transitionDelay = "";
           el.dataset.scrollState = "visible";
         });
       }

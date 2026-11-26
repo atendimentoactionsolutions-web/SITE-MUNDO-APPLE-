@@ -5,6 +5,10 @@ const cards = new Map<HTMLElement, Entrance>();
 let observer: IntersectionObserver | undefined;
 let motion: MediaQueryList | undefined;
 
+// Non-uniform shrinking stagger (organic wave, never robotic metronome)
+const SHRINKING_DELAYS_DESKTOP = [0, 65, 115, 150];
+const SHRINKING_DELAYS_MOBILE = [0, 75];
+
 function showCard(card: HTMLElement) {
   const state = cards.get(card);
   if (!state) return;
@@ -30,24 +34,27 @@ function animateCardIn(element: HTMLElement, state: Entrance) {
   const column = index % Math.max(1, columns);
   const direction = column < columns / 2 ? -1 : 1;
 
-  // Responsive travel distance: smooth and crisp on both phones and desktops
   const isMobile = window.innerWidth <= 767;
+  // Smooth physical travel so cards glide in unmistakably without feeling noisy
   const distance = isMobile
-    ? Math.min(48, Math.max(28, window.innerWidth * 0.1))
-    : Math.min(88, Math.max(44, window.innerWidth * 0.065));
+    ? Math.min(46, Math.max(28, window.innerWidth * 0.1))
+    : Math.min(76, Math.max(48, window.innerWidth * 0.055));
 
-  // Subtle stagger within the same row for an effortless Apple-like cascade
-  const distanceFromEdge = direction < 0 ? column : Math.max(0, columns - 1 - column);
-  const delay = Math.min(180, distanceFromEdge * (isMobile ? 65 : 70));
+  const distanceFromEdge =
+    direction < 0 ? column : Math.max(0, columns - 1 - column);
+  const schedule = isMobile ? SHRINKING_DELAYS_MOBILE : SHRINKING_DELAYS_DESKTOP;
+  const delay = schedule[Math.min(distanceFromEdge, schedule.length - 1)] ?? 0;
 
   state.revealed = true;
   element.dataset.cardReveal = "entering";
   observer?.unobserve(element);
 
+  // Cancel any stale animation to stay 100% interruptible
+  state.animation?.cancel();
   state.animation = element.animate(
     [
       {
-        transform: `translate3d(${direction * distance}px, 14px, 0) scale(0.985)`,
+        transform: `translate3d(${direction * distance}px, 18px, 0) scale(0.97)`,
         opacity: 0,
       },
       {
@@ -56,10 +63,10 @@ function animateCardIn(element: HTMLElement, state: Entrance) {
       },
     ],
     {
-      duration: isMobile ? 620 : 740,
+      duration: isMobile ? 500 : 580,
       delay,
       fill: "both",
-      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+      easing: "cubic-bezier(0.23, 1, 0.32, 1)",
     }
   );
 
@@ -94,7 +101,6 @@ function observeCard(card: HTMLElement) {
             continue;
           }
           if (!entry.isIntersecting) {
-            // If the user already scrolled past it, show it immediately
             if (entry.boundingClientRect.bottom < 0) {
               showCard(element);
             } else {
@@ -109,7 +115,7 @@ function observeCard(card: HTMLElement) {
           animateCardIn(element, state);
         }
       },
-      { rootMargin: "0px 0px -24px 0px", threshold: 0.02 }
+      { rootMargin: "0px 0px -20px 0px", threshold: 0.02 }
     );
   }
 
