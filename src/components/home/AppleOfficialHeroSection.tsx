@@ -12,11 +12,11 @@ export function AppleOfficialHeroSection({ duoPrice: initialDuoPrice = 0 }: { du
   const showPrices = Boolean(storeConfig.showPrices);
   return (
     <section aria-label="Destaques Mundo Apple" className="flex w-full flex-col gap-3 bg-white pt-0">
-      <article className="apple-banner relative isolate flex h-[540px] flex-col items-center justify-end overflow-hidden bg-[#55112d] px-5 pb-10 text-center text-white sm:h-[650px] sm:pb-12 lg:h-[692px]" data-scroll-state="visible">
-        <img src="/apple-official/home/holiday-large.jpg" alt="Produtos Apple para presentear, com laço branco e detalhes em vermelho e magenta" fetchPriority="high" className="animate-hero-image apple-banner-img absolute inset-0 -z-10 h-full w-full object-cover" />
-        <h1 className="animate-hero-title font-display text-[36px] font-semibold leading-tight tracking-tight sm:text-[56px]">Presentes para amar</h1>
-        <p className="animate-hero-subtitle mt-2 text-xl sm:text-[28px]">Encontre a escolha perfeita do Natal.</p>
-        <Link href="#catalogo" className="animate-hero-cta mt-5 rounded-full bg-[#0071e3] px-6 py-3 text-base text-white transition-colors hover:bg-[#0077ed]">Ver catálogo</Link>
+      <article className="relative isolate flex h-[540px] flex-col items-center justify-end overflow-hidden bg-[#55112d] px-5 pb-10 text-center text-white sm:h-[650px] sm:pb-12 lg:h-[692px]">
+        <img src="/apple-official/home/holiday-large.jpg" alt="Produtos Apple para presentear, com laço branco e detalhes em vermelho e magenta" fetchPriority="high" className="absolute inset-0 -z-10 h-full w-full object-cover" />
+        <h1 className="font-display text-[36px] font-semibold leading-tight tracking-tight sm:text-[56px]">Presentes para amar</h1>
+        <p className="mt-2 text-xl sm:text-[28px]">Encontre a escolha perfeita do Natal.</p>
+        <Link href="#catalogo" className="mt-5 rounded-full bg-[#0071e3] px-6 py-3 text-base text-white transition-colors hover:bg-[#0077ed]">Ver catálogo</Link>
       </article>
       <AppleHomeBanner image="duo" title="iPhone Duo" subtitle="Alô. Olá." href="/iphone" hero
         availability={!showPrices}

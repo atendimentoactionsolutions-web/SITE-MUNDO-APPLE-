@@ -38,11 +38,14 @@ export async function GET(request: NextRequest) {
       const storage = variant
         ? db.storageOptions.find((so) => so.id === variant.storageOptionId)
         : null;
+      const customAnswers = !model ? db.quoteAnswers.filter((a) => a.quoteId === q.id) : [];
+      const customModel = customAnswers.find((a) => a.questionCode === "customModel")?.answer;
+      const customCategory = customAnswers.find((a) => a.questionCode === "customCategory")?.answer;
 
       return {
         ...q,
         customer,
-        deviceName: model?.name || "iPhone",
+        deviceName: model?.name || (customModel ? `${customCategory ? `${customCategory}: ` : ""}${customModel}` : "iPhone"),
         storageName: storage?.displayName || "",
       };
     });

@@ -2,9 +2,7 @@ import { getProducts } from "@/lib/data";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductGrid } from "@/components/products/ProductGrid";
-import { HeartPulse, Compass, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-
 
 interface PageProps {
   searchParams: Promise<{
@@ -13,19 +11,20 @@ interface PageProps {
 }
 
 export const metadata = {
-  title: "Apple Watch Series 11, Ultra 3 e SE 3 | Mundo Apple Delivery",
-  description: "Linha completa de Apple Watch Series 11, Ultra 3 de titânio e SE 3 novos lacrados com garantia oficial Apple.",
+  title: "Apple Watch Series 12, Ultra 4 e SE 3 | Mundo Apple Delivery",
+  description: "Linha completa de Apple Watch Series 12, Series 11, Ultra 4 de titânio e SE 3 novos lacrados com garantia oficial Apple.",
 };
 
 export default async function WatchCategoryPage({ searchParams }: PageProps) {
   const params = await searchParams;
-  const subcategoryFilter = params.subcategoria;
+  const subcategoryFilter = params?.subcategoria;
 
-  let products = await getProducts({ category: "watch" });
+  let products = await getProducts({ category: "watch", condition: "new" });
 
   if (subcategoryFilter) {
+    const q = subcategoryFilter.toLowerCase();
     products = products.filter((p) =>
-      p.subcategory?.toLowerCase().includes(subcategoryFilter.toLowerCase())
+      `${p.name} ${p.subcategory || ""}`.toLowerCase().includes(q)
     );
   }
 
@@ -41,9 +40,11 @@ export default async function WatchCategoryPage({ searchParams }: PageProps) {
   return (
     <div className="pt-24 sm:pt-28 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
-        
-
-        
+        <SectionHeading
+          eyebrow="Wearables"
+          title="Apple Watch"
+          subtitle="Series 12, Ultra 4 de titânio e linha SE novos lacrados com 1 ano de garantia Apple."
+        />
 
         {/* Subcategory Filter Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-8 no-scrollbar">
@@ -58,7 +59,7 @@ export default async function WatchCategoryPage({ searchParams }: PageProps) {
               <Link
                 key={sub.label}
                 href={href}
-                className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
                   isSelected
                     ? "bg-apple-dark text-white shadow"
                     : "bg-white text-apple-dark border border-apple-border hover:bg-gray-100"

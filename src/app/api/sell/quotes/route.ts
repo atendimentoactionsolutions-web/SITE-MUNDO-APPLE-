@@ -15,7 +15,105 @@ function generatePublicCode(): string {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { deviceModelId, storageOptionId, answers, customer } = body;
+    const { deviceModelId, storageOptionId, answers, customer, customDevice } = body;
+
+    // 0. Custom Apple Device Quote (MacBook / Mac, iPad, Apple Watch, AirPods & Outros)
+    if (customDevice && typeof customDevice === "object") {
+      const custName = (customer?.name || "").trim();
+      const custWhatsapp = (customer?.whatsapp || "").trim();
+      const modelLabel = String(customDevice.model || "").trim();
+      const categoryLabel = String(customDevice.categoryLabel || "Produto Apple").trim();
+      const categoryId = String(customDevice.category || "apple").trim();
+      const detailLines: Array<{ label: string; value: string }> = Array.isArray(customDevice.details)
+        ? customDevice.details.filter((d: any) => d && d.label && d.value)
+        : [];
+
+      if (!modelLabel || !custName || !custWhatsapp) {
+        return NextResponse.json(
+          { success: false, error: "Informe os dados do aparelho, seu nome e seu WhatsApp." },
+          { status: 400 }
+        );
+      }
+
+      const now = new Date();
+      const expiresAt = new Date(now.getTime() + 48 * 60 * 60 * 1000).toISOString();
+      const quoteId = `quote-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const publicCode = generatePublicCode();
+
+      const newCustomer: Customer = {
+        id: `customer-${Date.now()}`,
+        name: custName,
+        whatsapp: custWhatsapp,
+        email: "",
+        cep: "",
+        city: "",
+        state: "",
+        consentLgpd: true,
+        createdAt: now.toISOString(),
+        updatedAt: now.toISOString(),
+      };
+      db.customers.push(newCustomer);
+
+      const newQuote: SellQuote = {
+        id: quoteId,
+        publicCode,
+        customerId: newCustomer.id,
+        deviceVariantId: `custom-${categoryId}`,
+        priceBookId: "pb-main",
+        basePriceSnapshot: 0,
+        discountSnapshot: 0,
+        percentageDiscountTotal: 0,
+        fixedDiscountTotal: 0,
+        calculatedPrice: 0,
+        finalPrice: 0,
+        status: "MANUAL_REVIEW",
+        manualReview: true,
+        expiresAt,
+        createdAt: now.toISOString(),
+        updatedAt: now.toISOString(),
+      };
+      db.sellQuotes.push(newQuote);
+
+      const customEntries: Array<[string, string]> = [
+        ["customCategory", categoryLabel],
+        ["customModel", modelLabel],
+        ...detailLines.map((d): [string, string] => [String(d.label), String(d.value)]),
+      ];
+
+      customEntries.forEach(([key, value]) => {
+        db.quoteAnswers.push({
+          id: `answer-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          quoteId,
+          questionCode: key,
+          answer: value,
+          createdAt: now.toISOString(),
+        });
+      });
+
+      const formattedDetailsBlock = [
+        `- Produto: ${categoryLabel}`,
+        `- Modelo: ${modelLabel}`,
+        ...detailLines.map((d) => `- ${d.label}: ${d.value}`),
+      ].join("\n");
+
+      const autoMessage = `Olá ${custName}!\n\nRecebemos sua avaliação para venda do seu ${categoryLabel} na Mundo Apple!\n\nCódigo da Cotação: ${publicCode}\n\nDADOS DO APARELHO:\n${formattedDetailsBlock}\n\nDADOS DO CLIENTE:\n- Nome: ${custName}\n- WhatsApp: ${custWhatsapp}\n\nNossa equipe já recebeu os detalhes da sua cotação e em instantes enviará a melhor proposta no PIX!`;
+
+      let waResult: any = null;
+      try {
+        const { sendWhatsAppMessage } = await import("@/lib/whatsapp/whatsapp-service");
+        waResult = await sendWhatsAppMessage(custWhatsapp, autoMessage);
+        console.log("[CUSTOM DISPATCH RESULT]:", waResult);
+      } catch (err: any) {
+        console.error("Erro no disparo automático WhatsApp (custom):", err);
+        waResult = { success: false, error: err?.message };
+      }
+
+      return NextResponse.json({
+        success: true,
+        quote: newQuote,
+        whatsappDispatched: waResult,
+      });
+    }
 
     if (!deviceModelId || !storageOptionId || !answers) {
       return NextResponse.json(

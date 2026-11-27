@@ -103,12 +103,12 @@ export const Header: React.FC = () => {
       {/* ── Compact Floating White Capsule Header ── */}
       <header className="fixed top-[max(0.625rem,env(safe-area-inset-top))] sm:top-3.5 left-0 right-0 z-50 px-3 sm:px-6 pointer-events-none flex justify-center">
         <div
-          className={`pointer-events-auto w-full max-w-[1120px] h-[48px] sm:h-[54px] rounded-full border transition-[background-color,border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] px-3.5 sm:px-5 flex items-center justify-between ${
+          className={`pointer-events-auto w-full max-w-[1120px] h-[48px] sm:h-[54px] rounded-full border transition-[background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] px-3.5 sm:px-5 flex items-center justify-between ${
             mobileMenuOpen
-              ? "bg-white border-[#E5E5EA] shadow-[0_4px_20px_rgba(0,0,0,0.06)] scale-100"
+              ? "bg-white border-[#E5E5EA] shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
               : scrolled
-                ? "bg-white/95 backdrop-blur-2xl border-[#D2D2D7] shadow-[0_12px_34px_rgba(0,0,0,0.11)] sm:scale-[0.985]"
-                : "bg-white/88 backdrop-blur-xl border-[#D2D2D7]/70 shadow-[0_4px_16px_rgba(0,0,0,0.05)] scale-100"
+                ? "bg-white/95 backdrop-blur-md border-[#D2D2D7] shadow-[0_10px_28px_rgba(0,0,0,0.09)]"
+                : "bg-white/90 backdrop-blur-md border-[#D2D2D7]/75 shadow-[0_4px_16px_rgba(0,0,0,0.05)]"
           }`}
         >
           {/* Logo Mundo Apple Delivery (Left) */}
@@ -201,7 +201,7 @@ export const Header: React.FC = () => {
                   : "hover:text-emerald-700 hover:bg-emerald-50"
               }`}
             >
-              Vender Produto Apple
+              Vender meu Produto Apple
             </Link>
 
             <Link
@@ -283,7 +283,7 @@ export const Header: React.FC = () => {
                   style={{ animationDelay: "65ms" }}
                   className="animate-menu-item py-3 text-[17px] font-semibold text-emerald-700 flex items-center justify-between"
                 >
-                  <span>Vender Produto Apple</span>
+                  <span>Vender meu Produto Apple</span>
                   <ArrowRight className="w-4 h-4 text-emerald-700" />
                 </Link>
                 <Link

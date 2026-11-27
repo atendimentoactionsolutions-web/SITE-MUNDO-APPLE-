@@ -49,12 +49,11 @@ export function BrandIntroSplash() {
       setPhase("exiting");
       unmountTimerRef.current = setTimeout(() => {
         setPhase("done");
-      }, 490);
+      }, 340);
     };
 
-    // Choreographed beat: scooter (0-480ms) -> wordmark (140-580ms) -> subtitle (240-600ms)
-    // Short 240ms settle beat -> exit begins at 840ms, curtain sweeps clear by ~1.31s
-    exitTimerRef.current = setTimeout(startExit, 840);
+    // Fast choreographed beat: scooter -> wordmark -> subtitle -> lift curtain by ~0.88s total
+    exitTimerRef.current = setTimeout(startExit, 540);
 
     const handleEarlyDismiss = () => startExit();
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -86,7 +85,7 @@ export function BrandIntroSplash() {
     setPhase("exiting");
     unmountTimerRef.current = setTimeout(() => {
       setPhase("done");
-    }, 490);
+    }, 340);
   };
 
   if (phase === "idle" || phase === "done") return null;

@@ -24,7 +24,7 @@ export default function SobrePage() {
           <div className="space-y-4 text-apple-dark leading-relaxed">
             <h3 className="text-2xl font-semibold">Nossa Missão</h3>
             <p className="text-apple-muted">
-              A **Mundo Apple Delivery** nasceu com o objetivo de transformar a experiência de compra e manutenção de produtos Apple no Brasil. Localizada estrategicamente no polo tecnológico da Santa Ifigênia, em São Paulo, oferecemos atendimento humanizado, transparência absoluta e os melhores preços em aparelhos lacrados e seminovos selecionados.
+              A <strong className="font-semibold text-apple-dark">Mundo Apple Delivery</strong> nasceu com o objetivo de transformar a experiência de compra e manutenção de produtos Apple no Brasil. Localizada estrategicamente no polo tecnológico da Santa Ifigênia, em São Paulo, oferecemos atendimento humanizado, transparência absoluta e os melhores preços em aparelhos lacrados e seminovos selecionados.
             </p>
           </div>
 

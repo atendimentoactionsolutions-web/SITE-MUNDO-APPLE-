@@ -22,7 +22,6 @@ export function AppleHomeBanner({ image, title, subtitle, href, dark = false,
   const whatsapp = createWhatsAppLink(`Olá! Vim pelo site da Mundo Apple Delivery e quero consultar valores e disponibilidade do ${title}. Pode me atender?`);
   return (
     <article
-      data-reveal="banner"
       className={`apple-banner relative isolate overflow-hidden text-center ${hero ? "h-[540px] sm:h-[650px] lg:h-[692px]" : "h-[500px] sm:h-[580px]"} ${dark ? "bg-black text-white" : "bg-[#f5f5f7] text-[#1d1d1f]"}`}
     >
       <picture className="absolute inset-0 -z-10 block">

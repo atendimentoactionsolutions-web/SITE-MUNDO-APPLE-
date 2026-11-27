@@ -3,10 +3,9 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProductGrid } from "@/components/products/ProductGrid";
 
-
 export const metadata = {
   title: "iPhones Novos e Lacrados | Mundo Apple Delivery",
-  description: "Confira a linha completa de lançamentos e modelos lacrados com 1 ano de garantia oficial Apple.",
+  description: "Confira a linha completa de lançamentos iPhone Duo, iPhone 18 Pro, iPhone 17 e modelos lacrados com 1 ano de garantia oficial Apple.",
 };
 
 const iphoneOrder = [
@@ -39,7 +38,11 @@ export default async function IPhoneCategoryPage() {
   return (
     <div className="pt-24 sm:pt-28 pb-20 bg-apple-gray/30 min-h-screen">
       <Container>
-
+        <SectionHeading
+          eyebrow="Novos Lacrados"
+          title="iPhones"
+          subtitle="Toda a linha Apple lacrada de fábrica com 1 ano de garantia oficial e entrega expressa em SP."
+        />
         <ProductGrid products={sortedProducts} />
       </Container>
     </div>

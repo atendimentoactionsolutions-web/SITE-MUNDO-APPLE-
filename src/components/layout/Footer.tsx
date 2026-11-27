@@ -105,7 +105,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-[#6E6E73] text-xs font-medium">
               <li>
                 <Link href="/iphone" className="hover:text-[#0071E3] transition-colors">
-                  iPhones Novos & Seminovos
+                  iPhones Novos Lacrados
                 </Link>
               </li>
               <li>
@@ -150,7 +150,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/vender" className="hover:text-emerald-700 transition-colors text-emerald-700 font-bold flex items-center gap-1.5">
                   <Zap className="w-3.5 h-3.5 fill-emerald-700" />
-                  <span>Vender meu iPhone (PIX na Hora)</span>
+                  <span>Vender meu Produto Apple (PIX na Hora)</span>
                 </Link>
               </li>
               <li>

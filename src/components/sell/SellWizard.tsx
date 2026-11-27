@@ -5,7 +5,6 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
-  Search,
   MessageCircle,
   Loader2,
   BatteryCharging,
@@ -13,12 +12,11 @@ import {
   RotateCcw,
   ShieldCheck,
   AlertCircle,
-  X,
-  Smartphone,
   Sparkles,
 } from "lucide-react";
 import { storeConfig } from "@/data/storeConfig";
 import { formatCurrency } from "@/utils/formatters";
+import { trackGoogleAdsContatoConversion } from "@/utils/analytics";
 
 interface ModelOption {
   id: string;
@@ -50,8 +48,6 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
   // 1. Catálogo
   const [models, setModels] = useState<ModelOption[]>([]);
   const [loadingCatalog, setLoadingCatalog] = useState(true);
-  const [modelSearch, setModelSearch] = useState("");
-  const [selectedFamilyFilter, setSelectedFamilyFilter] = useState<string>("all");
 
   const clearPendingAdvance = () => {
     if (advanceTimerRef.current) {
@@ -111,6 +107,12 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
   const [submitError, setSubmitError] = useState("");
   const [quoteSuccess, setQuoteSuccess] = useState(false);
   const [quotePublicCode, setQuotePublicCode] = useState("");
+
+  useEffect(() => {
+    if (quoteSuccess) {
+      trackGoogleAdsContatoConversion();
+    }
+  }, [quoteSuccess]);
 
   // Lista ampliada de peças selecionáveis
   const availablePartsList = [
@@ -316,33 +318,6 @@ export const SellWizard: React.FC<SellWizardProps> = () => {
 
     setCustomerWhatsapp(formatted);
   };
-
-  const modelGenerations = useMemo(() => {
-    const gens = new Set<string>();
-    for (const m of models) {
-      const match = m.name.match(/iPhone\s+(\d+|SE|X[RS]?|Air)/i);
-      if (match) gens.add(match[1].toUpperCase());
-    }
-    return Array.from(gens).sort((a, b) => {
-      const na = parseInt(a, 10);
-      const nb = parseInt(b, 10);
-      if (!Number.isNaN(na) && !Number.isNaN(nb)) return nb - na;
-      if (!Number.isNaN(na)) return -1;
-      if (!Number.isNaN(nb)) return 1;
-      return a.localeCompare(b);
-    });
-  }, [models]);
-
-  const filteredModels = useMemo(() => {
-    let list = models;
-    if (selectedFamilyFilter !== "all" && !modelSearch.trim()) {
-      const re = new RegExp(`iPhone\\s+${selectedFamilyFilter}(?:\\b|\\s|$)`, "i");
-      list = list.filter((m) => re.test(m.name));
-    }
-    if (!modelSearch.trim()) return list;
-    const q = modelSearch.toLowerCase().trim();
-    return models.filter((m) => m.name.toLowerCase().includes(q));
-  }, [models, modelSearch, selectedFamilyFilter]);
 
   // Validação por etapa
   const isStepValid = useMemo(() => {
@@ -582,8 +557,6 @@ Gostaria de agendar a avaliação e retirada em SP!`;
     setStepDirection(-1);
     setHasNavigated(true);
     setStep(1);
-    setSelectedFamilyFilter("all");
-    setModelSearch("");
     setSelectedModel(null);
     setSelectedStorage(null);
     setBatteryHealth("");
@@ -755,7 +728,7 @@ Gostaria de agendar a avaliação e retirada em SP!`;
           </div>
         )}
 
-        {/* ── ETAPA 1: MODELO ── */}
+        {/* ── ETAPA 1: MODELO (Seleção limpa do banco de dados, sem poluição) ── */}
         {step === 1 && (
           <div key="step-1" className={`space-y-4 ${stepAnimClass}`}>
             <div className="text-left">
@@ -763,147 +736,34 @@ Gostaria de agendar a avaliação e retirada em SP!`;
                 Qual é o modelo do seu iPhone?
               </h2>
               <p className="text-xs sm:text-sm text-[#6E6E73] mt-1">
-                Filtre pela linha ou busque pelo nome do aparelho.
+                Selecione o modelo do seu aparelho na lista abaixo para continuar.
               </p>
             </div>
 
-            {/* Campo de Busca (Mobile-Native: sem zoom no Safari + botão limpar) */}
-            <div className="relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#86868B] pointer-events-none" />
-              <input
-                type="search"
-                inputMode="search"
-                enterKeyHint="search"
-                autoComplete="off"
-                autoCorrect="off"
-                spellCheck={false}
-                value={modelSearch}
-                onChange={(e) => setModelSearch(e.target.value)}
-                placeholder="Buscar modelo (ex: iPhone 15 Pro, iPhone 14, iPhone 13...)"
-                className="w-full pl-10 pr-10 py-3 bg-[#F5F5F7] rounded-2xl text-sm text-[#1D1D1F] placeholder:text-[#86868B] border border-transparent focus:border-[#0071E3] focus:bg-white focus:shadow-[0_0_0_3px_rgba(0,113,227,0.12)] outline-none transition-[background-color,border-color,box-shadow] duration-200"
-              />
-              {modelSearch && (
-                <button
-                  type="button"
-                  onClick={() => setModelSearch("")}
-                  aria-label="Limpar busca"
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-[#86868B] hover:text-[#1D1D1F] hover:bg-[#E5E5EA] transition-colors cursor-pointer"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-
-            {/* Pílulas Rápidas de Geração (evita rolagem longa) */}
-            {!loadingCatalog && modelGenerations.length > 1 && !modelSearch.trim() && (
-              <div
-                className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5"
-                style={{ overscrollBehaviorX: "contain", touchAction: "pan-x" }}
-                role="tablist"
-                aria-label="Filtrar por geração"
-              >
-                <button
-                  type="button"
-                  role="tab"
-                  aria-selected={selectedFamilyFilter === "all"}
-                  onClick={() => setSelectedFamilyFilter("all")}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-[background-color,color,border-color,transform] duration-150 active:scale-95 cursor-pointer border ${
-                    selectedFamilyFilter === "all"
-                      ? "bg-[#1D1D1F] text-white border-[#1D1D1F]"
-                      : "bg-[#F5F5F7] text-[#6E6E73] border-[#E5E5EA] hover:text-[#1D1D1F]"
-                  }`}
-                >
-                  Todos ({models.length})
-                </button>
-                {modelGenerations.map((gen) => {
-                  const active = selectedFamilyFilter === gen;
-                  return (
-                    <button
-                      key={gen}
-                      type="button"
-                      role="tab"
-                      aria-selected={active}
-                      onClick={() => setSelectedFamilyFilter(gen)}
-                      className={`px-3 py-1.5 rounded-full text-xs font-semibold shrink-0 transition-[background-color,color,border-color,transform] duration-150 active:scale-95 cursor-pointer border ${
-                        active
-                          ? "bg-[#1D1D1F] text-white border-[#1D1D1F]"
-                          : "bg-[#F5F5F7] text-[#6E6E73] border-[#E5E5EA] hover:text-[#1D1D1F]"
-                      }`}
-                    >
-                      iPhone {gen}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* Grid de Modelos com Fade Mask Suave (sem corte brusco) */}
             {loadingCatalog ? (
-              <div className="py-14 flex flex-col items-center justify-center gap-2.5 text-[#86868B]">
+              <div className="py-10 flex flex-col items-center justify-center gap-2.5 text-[#86868B]">
                 <Loader2 className="w-6 h-6 animate-spin text-[#0071E3]" />
-                <span className="text-xs font-medium">Carregando catálogo de iPhones...</span>
-              </div>
-            ) : filteredModels.length === 0 ? (
-              <div className="py-12 px-4 rounded-2xl bg-[#F5F5F7] border border-dashed border-[#D2D2D7] text-center space-y-2.5">
-                <Smartphone className="w-6 h-6 text-[#86868B] mx-auto" />
-                <p className="text-sm font-semibold text-[#1D1D1F]">
-                  Nenhum modelo encontrado para &ldquo;{modelSearch}&rdquo;
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setModelSearch("");
-                    setSelectedFamilyFilter("all");
-                  }}
-                  className="px-4 py-2 rounded-full bg-white border border-[#D2D2D7] text-xs font-semibold text-[#0071E3] hover:bg-[#FAFAFA] transition-colors cursor-pointer"
-                >
-                  Mostrar todos os modelos
-                </button>
+                <span className="text-xs font-medium">Carregando modelos...</span>
               </div>
             ) : (
-              <div
-                className={`grid grid-cols-2 sm:grid-cols-3 gap-2.5 ${
-                  filteredModels.length > 9 ? "max-h-[368px] overflow-y-auto pr-1.5 pb-8 wizard-scroll-mask" : "pb-1"
+              <select
+                aria-label="Modelo do iPhone"
+                value={selectedModel?.id || ""}
+                onChange={(e) => {
+                  const chosen = models.find((m) => m.id === e.target.value) || null;
+                  setSelectedModel(chosen);
+                }}
+                className={`w-full px-4 py-3.5 bg-[#F5F5F7] rounded-2xl text-sm border border-transparent focus:border-[#0071E3] focus:bg-white focus:shadow-[0_0_0_3px_rgba(0,113,227,0.12)] outline-none transition-[background-color,border-color,box-shadow] duration-200 cursor-pointer ${
+                  selectedModel ? "text-[#1D1D1F] font-semibold" : "text-[#86868B]"
                 }`}
               >
-                {filteredModels.map((m, idx) => {
-                  const isSelected = selectedModel?.id === m.id;
-                  const delayMs = Math.min(idx, 7) * 18;
-                  return (
-                    <button
-                      key={m.id}
-                      type="button"
-                      style={{ animationDelay: `${delayMs}ms` }}
-                      onClick={() => {
-                        setSelectedModel(m);
-                        advanceWithBeat(2);
-                      }}
-                      className={`wizard-option animate-wizard-item p-3.5 sm:p-4 rounded-2xl border text-left flex items-center justify-between min-h-[60px] cursor-pointer ${
-                        isSelected
-                          ? "bg-[#0071E3]/[0.06] border-[#0071E3] ring-1 ring-[#0071E3] shadow-[0_6px_18px_-10px_rgba(0,113,227,0.4)]"
-                          : "bg-white hover:bg-[#FAFAFC] border-[#E5E5EA] hover:border-[#C7C7CC]"
-                      }`}
-                    >
-                      <span
-                        className={`font-semibold text-xs sm:text-[13.5px] leading-snug tracking-[-0.01em] ${
-                          isSelected ? "text-[#0071E3]" : "text-[#1D1D1F]"
-                        }`}
-                      >
-                        {m.name}
-                      </span>
-                      <div
-                        className={`w-[18px] h-[18px] rounded-full border flex items-center justify-center shrink-0 ml-2 transition-[background-color,border-color] duration-150 ${
-                          isSelected
-                            ? "bg-[#0071E3] border-[#0071E3] text-white"
-                            : "border-[#D2D2D7] bg-[#F5F5F7]"
-                        }`}
-                      >
-                        {isSelected && <Check className="w-2.5 h-2.5 stroke-[3] animate-check-pop" />}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
+                <option value="">Selecione o modelo do seu iPhone...</option>
+                {models.map((m) => (
+                  <option key={m.id} value={m.id} className="text-[#1D1D1F]">
+                    {m.name}
+                  </option>
+                ))}
+              </select>
             )}
           </div>
         )}

@@ -5,10 +5,8 @@ import { usePathname } from "next/navigation";
 
 const AUTO_REVEAL_SELECTOR = [
   "[data-reveal]",
-  "main section article:not(.product-card)",
   ".catalog-section .section-heading",
   ".catalog-section .catalog-toolbar",
-  "footer > div",
 ].join(", ");
 
 export function GlobalMotionController() {
@@ -26,9 +24,6 @@ export function GlobalMotionController() {
     }
 
     const observed = new WeakSet<HTMLElement>();
-    const firstHeroArticle = document.querySelector<HTMLElement>(
-      "main section:first-of-type article:first-of-type"
-    );
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -38,7 +33,6 @@ export function GlobalMotionController() {
             const delay = el.dataset.revealDelay;
             if (delay && entry.isIntersecting) {
               el.style.transitionDelay = `${delay}ms`;
-              // Clear delay once reveal finishes so subsequent hovers/presses have 0ms latency
               const clearDelay = () => {
                 el.style.transitionDelay = "";
                 el.removeEventListener("transitionend", clearDelay);
@@ -50,7 +44,7 @@ export function GlobalMotionController() {
           }
         }
       },
-      { rootMargin: "0px 0px -32px 0px", threshold: 0.04 }
+      { rootMargin: "0px 0px -24px 0px", threshold: 0.02 }
     );
 
     const registerElements = () => {
@@ -63,16 +57,9 @@ export function GlobalMotionController() {
         // Choreograph Hard Rule 1: never double-animate a child inside an animated container
         if (el.parentElement?.closest("[data-reveal]")) return;
 
-        // Keep the very first hero immediately visible for crisp LCP
-        if (el === firstHeroArticle) {
-          el.dataset.scrollState = "visible";
-          observed.add(el);
-          return;
-        }
-
         // If already in viewport on initial paint, reveal immediately without hiding
         const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0 && window.scrollY < 40) {
+        if (rect.top < window.innerHeight * 0.94 && rect.bottom > 0 && window.scrollY < 40) {
           el.dataset.scrollState = "visible";
           observed.add(el);
           return;
@@ -89,10 +76,16 @@ export function GlobalMotionController() {
 
     registerElements();
 
+    let scanRaf = 0;
     const mutationObserver = new MutationObserver(() => {
-      registerElements();
+      if (scanRaf) return;
+      scanRaf = window.requestAnimationFrame(() => {
+        scanRaf = 0;
+        registerElements();
+      });
     });
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
+    const rootTarget = document.querySelector("main") || document.body;
+    mutationObserver.observe(rootTarget, { childList: true, subtree: true });
 
     const onReduceChange = () => {
       if (prefersReduced.matches) {
@@ -105,6 +98,7 @@ export function GlobalMotionController() {
     prefersReduced.addEventListener("change", onReduceChange);
 
     return () => {
+      if (scanRaf) window.cancelAnimationFrame(scanRaf);
       observer.disconnect();
       mutationObserver.disconnect();
       prefersReduced.removeEventListener("change", onReduceChange);
